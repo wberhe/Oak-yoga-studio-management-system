@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" 
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/util 
+       http://www.springframework.org/schema/util/spring-util-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+    
+    <aop:aspectj-autoproxy/>
+
+ 
+   
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+     	
+
+    <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" 
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="hibernateProperties" ref="hibernateProperties" />
+        <!-- OR mapping files. -->
+        <property name="packagesToScan" value="com.oak_yoga_studio.domain"/>        
+    </bean>
+
+    <bean id="beanValidationEventListener" class="org.hibernate.cfg.beanvalidation.BeanValidationEventListener">  
+        <constructor-arg index="0" ref="validator" />  
+        <constructor-arg index="1">  
+            <props/>  
+        </constructor-arg>  
+    </bean>  
+
+    <!-- the datasource -->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost/yoga_studio" />
+        <property name="username" value="root" />
+        <property name="password" value="weldu" />
+    </bean>
+
+    <!-- hibernate Properties -->
+    <bean id="hibernateProperties"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect
+                </prop>
+                <prop key="connection.pool_size">1</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <!--http://davidmarquis.wordpress.com/2010/11/25/using-hibernate-event-based-validation-with-c/-->
+                <!--                to allow us to use hibernate custom validator with injection. 
+                on form submit, the vlidator is created using Spring's validator factory==> injection work
+                on transaction commit, hibernate will create validators using its own validator factory==> injections does not work
+                ==> we will get null pointer execption
+                solution: disable hibernate's on commit validation, only use the on form commit Don't practice on reall world, it will create concurency problem.-->
+                <prop key="javax.persistence.validation.mode">none</prop>
+            </props>
+        </property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager" />
+    
+    <bean id="txManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    
+    
+    <!-- UserService injection -->
+    
+    
+    
+<!--    Security
+    
+    <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+    <sec:global-method-security secured-annotations="enabled"/>
+    <sec:http >
+        <sec:intercept-url pattern="/SpringLoginPage.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/LoginFailure.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/addCredential" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/addUser" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/loginFail" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/REST/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/gohome" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/viewPost/*" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>
+        <sec:intercept-url pattern="/j_spring_security_check" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>
+        
+        <sec:intercept-url pattern="/**" access="ROLE_CUSTOMER,ROLE_ADMIN,ROLE_FACULTY"/>
+        
+        <sec:form-login login-page="/login" default-target-url="/blog" authentication-failure-url="/loginFail"/>
+        <sec:logout delete-cookies="true" invalidate-session="true" logout-success-url="/"/>
+    </sec:http>
+    <sec:authentication-manager>
+        <sec:authentication-provider>
+            <sec:user-service>
+                <sec:user name="test" password="test" authorities="ROLE_BLOGGER"/>
+            </sec:user-service>
+        </sec:authentication-provider>
+        <sec:authentication-provider >
+            <sec:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select username,password, isnull(blocked)=0 enabled from credential where username=?" authorities-by-username-query="select username, previledge as authority from credential where username=?"/>
+        </sec:authentication-provider>
+    </sec:authentication-manager>-->
+    
+    
+    
+</beans>
