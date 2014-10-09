@@ -71,6 +71,14 @@ public class Course {
     public void setId(int id) {
         this.id = id;
     }
+    //Add a single Section
+    public void addSection(Section section)
+    {
+        if(section.getCourse()==null){
+            //
+        }
+        this.sections.add(section);
+    }
 
     public List<Section> getSections() {
         return sections;

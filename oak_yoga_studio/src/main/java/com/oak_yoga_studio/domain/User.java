@@ -119,6 +119,11 @@ public class User {
             credential.setUser(this);
         }
     }
+    
+    public void addAddress(Address add)
+    {
+        getAddress().add(add);
+    }
 
     public List<Address> getAddress() {
         return address;
