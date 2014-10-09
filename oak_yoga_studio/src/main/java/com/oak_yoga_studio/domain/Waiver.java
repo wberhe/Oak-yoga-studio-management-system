@@ -9,6 +9,8 @@ package com.oak_yoga_studio.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -22,40 +24,26 @@ public class Waiver {
     @Id
     @GeneratedValue
     private int id;
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + (this.requestReason != null ? this.requestReason.hashCode() : 0);
-        hash = 89 * hash + (this.remarks != null ? this.remarks.hashCode() : 0);
-        hash = 89 * hash + (this.status != null ? this.status.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Waiver other = (Waiver) obj;
-        if ((this.requestReason == null) ? (other.requestReason != null) : !this.requestReason.equals(other.requestReason)) {
-            return false;
-        }
-        if ((this.remarks == null) ? (other.remarks != null) : !this.remarks.equals(other.remarks)) {
-            return false;
-        }
-        if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
-            return false;
-        }
-        return true;
-    }
     
     private String requestReason;
     
     private String remarks;
+    
+    private String status;
+    
+    @ManyToOne
+    @JoinColumn(name="customer_id")
+    private Customer customer;
+    
+    @ManyToOne
+    @JoinColumn(name="waiverCourse_id")
+    private Course waiverCourse;
+    
+//TODO......
+//    @ManyToOne
+//    @JoinColumn(name="faculty_id")
+//    private Faculty faculty;
+    
 
     public int getId() {
         return id;
@@ -88,6 +76,52 @@ public class Waiver {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Course getWaiverCourse() {
+        return waiverCourse;
+    }
+
+    public void setWaiverCourse(Course waiverCourse) {
+        this.waiverCourse = waiverCourse;
+    }
     
-    private String status;
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + (this.requestReason != null ? this.requestReason.hashCode() : 0);
+        hash = 89 * hash + (this.remarks != null ? this.remarks.hashCode() : 0);
+        hash = 89 * hash + (this.status != null ? this.status.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Waiver other = (Waiver) obj;
+        if ((this.requestReason == null) ? (other.requestReason != null) : !this.requestReason.equals(other.requestReason)) {
+            return false;
+        }
+        if ((this.remarks == null) ? (other.remarks != null) : !this.remarks.equals(other.remarks)) {
+            return false;
+        }
+        if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

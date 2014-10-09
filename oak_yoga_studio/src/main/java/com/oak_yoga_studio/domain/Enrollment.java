@@ -11,6 +11,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,15 +31,16 @@ public class Enrollment {
     private int id;
     
     private String status;
-    private List<Enrollment> enrollments;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date enrollmentDate;
+    
+    @ManyToOne
+    @JoinColumn(name="customer_id")
+    private Customer customer;
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + (this.status != null ? this.status.hashCode() : 0);
-        hash = 83 * hash + (this.enrollmentDate != null ? this.enrollmentDate.hashCode() : 0);
-        return hash;
-    }
+    
 
     public int getId() {
         return id;
@@ -63,6 +66,22 @@ public class Enrollment {
         this.enrollmentDate = enrollmentDate;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + (this.status != null ? this.status.hashCode() : 0);
+        hash = 83 * hash + (this.enrollmentDate != null ? this.enrollmentDate.hashCode() : 0);
+        return hash;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -81,9 +100,7 @@ public class Enrollment {
         return true;
     }
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
-    private Date enrollmentDate;
+    
     
     
 }

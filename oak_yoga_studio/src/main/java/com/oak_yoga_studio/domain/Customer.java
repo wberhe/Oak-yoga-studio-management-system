@@ -7,11 +7,13 @@
 package com.oak_yoga_studio.domain;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -30,8 +32,10 @@ public class Customer extends User{
     @JoinColumn(name = "advisor_id")
     private Faculty advisor;
     
-    private List<Enrollment> enrollment;
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private List<Enrollment> enrollments;
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Waiver> waivers;
     
     private List<Order> orders;

@@ -34,6 +34,10 @@ public class Faculty extends User {
     
     @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
     private List<Section> sections;
+    
+    //TODO??
+//    @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL)
+//    private List<Waiver> waivers;
    
     public int getId() {
         return id;

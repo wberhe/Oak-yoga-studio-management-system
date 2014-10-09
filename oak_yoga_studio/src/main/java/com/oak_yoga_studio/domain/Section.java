@@ -32,6 +32,10 @@ public class Section {
     private int availableSeat;
     
     @ManyToOne
+    @JoinColumn(name="course_id")
+    private Course course;
+    
+    @ManyToOne
     @JoinColumn(name="professor_id")
     private Faculty professor;
     
@@ -56,6 +60,45 @@ public class Section {
         return capacity;
     }
 
+    
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public int getAvailableSeat() {
+        return availableSeat;
+    }
+
+    public void setAvailableSeat(int availableSeat) {
+        this.availableSeat = availableSeat;
+    }
+
+    public Faculty getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Faculty professor) {
+        this.professor = professor;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -89,34 +132,4 @@ public class Section {
         }
         return true;
     }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public int getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public int getAvailableSeat() {
-        return availableSeat;
-    }
-
-    public void setAvailableSeat(int availableSeat) {
-        this.availableSeat = availableSeat;
-    }
-
-    public Faculty getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Faculty professor) {
-        this.professor = professor;
-    }
-    
-    
 }

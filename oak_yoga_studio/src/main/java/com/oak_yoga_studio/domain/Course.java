@@ -6,9 +6,12 @@
 
 package com.oak_yoga_studio.domain;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -27,7 +30,16 @@ public class Course {
     private String courseName;
     
     private String description;
-
+    
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<Section> sections;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Course>  prerequisites;
+    
+    @OneToMany(mappedBy = "waiverCourse", cascade = CascadeType.ALL)
+    private List<Waiver> waivers;
+    
     public String getCourseNumber() {
         return courseNumber;
     }
@@ -51,6 +63,39 @@ public class Course {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
+    }
+
+    public List<Course> getPrerequisites() {
+        return prerequisites;
+    }
+
+    public void setPrerequisites(List<Course> prerequisites) {
+        this.prerequisites = prerequisites;
+    }
+
+    public List<Waiver> getWaivers() {
+        return waivers;
+    }
+
+    public void setWaivers(List<Waiver> waivers) {
+        this.waivers = waivers;
+    }
+    
 
     @Override
     public int hashCode() {
