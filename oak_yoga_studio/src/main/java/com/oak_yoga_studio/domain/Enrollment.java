@@ -7,6 +7,7 @@
 package com.oak_yoga_studio.domain;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -28,6 +29,7 @@ public class Enrollment {
     private int id;
     
     private String status;
+    private List<Enrollment> enrollments;
 
     @Override
     public int hashCode() {

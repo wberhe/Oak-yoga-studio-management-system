@@ -6,9 +6,12 @@
 
 package com.oak_yoga_studio.domain;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,7 +24,17 @@ public class Faculty extends User {
     @Id
     @GeneratedValue
     private int id;
-
+    
+    private String status;
+    
+   
+    @OneToMany(mappedBy = "advisor",cascade =CascadeType.ALL )
+    private List<Customer> advisees;
+    
+    
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
+    private List<Section> sections;
+   
     public int getId() {
         return id;
     }
@@ -59,7 +72,24 @@ public class Faculty extends User {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public List<Customer> getAdvisees() {
+        return advisees;
+    }
+
+    public void setAdvisees(List<Customer> advisees) {
+        this.advisees = advisees;
+    }
+
+    public List<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
+    }
     
-    private String status;
+    
+    
     
 }

@@ -9,6 +9,8 @@ package com.oak_yoga_studio.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -21,6 +23,18 @@ public class Section {
     @Id
     @GeneratedValue
     private int id;
+    private String sectionName;
+    
+    private int capacity;
+    
+    private int roomNumber;
+    
+    private int availableSeat;
+    
+    @ManyToOne
+    @JoinColumn(name="professor_id")
+    private Faculty professor;
+    
 
     public int getId() {
         return id;
@@ -95,12 +109,14 @@ public class Section {
     public void setAvailableSeat(int availableSeat) {
         this.availableSeat = availableSeat;
     }
+
+    public Faculty getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Faculty professor) {
+        this.professor = professor;
+    }
     
-    private String sectionName;
     
-    private int capacity;
-    
-    private int roomNumber;
-    
-    private int availableSeat;
 }
