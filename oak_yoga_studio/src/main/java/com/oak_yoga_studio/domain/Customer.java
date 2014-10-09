@@ -22,11 +22,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Customer extends User {
 
-
     @ManyToOne
     @JoinColumn(name = "advisor_id")
     private Faculty advisor;
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Enrollment> enrollments;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
@@ -38,7 +38,6 @@ public class Customer extends User {
     @OneToOne
     @JoinColumn(name = "shoppingCart_id")
     private ShoppingCart shoppingCart;
-
     
 
     public Faculty getAdvisor() {
@@ -49,13 +48,14 @@ public class Customer extends User {
         this.advisor = advisor;
     }
 
-    public List<Enrollment> getEnrollment() {
+    public List<Enrollment> getEnrollments() {
         return enrollments;
     }
 
-    public void setEnrollment(List<Enrollment> enrollment) {
-        this.enrollments = enrollment;
+    public void setEnrollments(List<Enrollment> enrollments) {
+        this.enrollments = enrollments;
     }
+    
 
     public List<Waiver> getWaivers() {
         return waivers;
