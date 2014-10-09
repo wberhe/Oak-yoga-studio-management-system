@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -34,11 +36,14 @@ public class Customer extends User{
 
     private List<Waiver> waivers;
     
+    @OneToMany(mappedBy = "customer")
     private List<Order> orders;
     
+    @OneToOne
+    @JoinColumn(name="shoppingCart_id" )
     private ShoppingCart shoppingCart;
     
-    
+        
     
     
     public int getId() {

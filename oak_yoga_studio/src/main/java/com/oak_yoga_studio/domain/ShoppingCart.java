@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -19,6 +20,10 @@ public class ShoppingCart {
     
     @OneToMany(mappedBy = "shoppingCart")
     private List<ShoppingCartItem> shoppingCartItems;
+    
+    @OneToOne(mappedBy = "shoppingCart")
+    private Customer customer;
+    
 
     public int getId() {
         return id;
