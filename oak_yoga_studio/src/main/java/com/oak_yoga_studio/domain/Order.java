@@ -2,6 +2,7 @@ package com.oak_yoga_studio.domain;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class Order {
 
     private double totalPrice;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade=CascadeType.ALL)
     private List<OrderItem> orderItems;
 
     @ManyToOne
@@ -69,6 +70,12 @@ public class Order {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+    
+    public void addOrderItem(OrderItem orderItem)
+    {
+        orderItem.setOrder(this);
+        this.orderItems.add(orderItem);
     }
 
     public List<OrderItem> getOrderItems() {

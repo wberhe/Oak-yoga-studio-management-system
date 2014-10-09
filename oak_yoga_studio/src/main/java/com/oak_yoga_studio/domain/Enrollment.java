@@ -39,6 +39,10 @@ public class Enrollment {
     @ManyToOne
     @JoinColumn(name="customer_id")
     private Customer customer;
+    
+    @ManyToOne
+    @JoinColumn(name="section_id")
+    private Section section;
 
     
 
@@ -73,6 +77,15 @@ public class Enrollment {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+    
     
     @Override
     public int hashCode() {

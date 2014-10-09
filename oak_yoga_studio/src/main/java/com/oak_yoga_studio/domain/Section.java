@@ -6,11 +6,14 @@
 
 package com.oak_yoga_studio.domain;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -39,7 +42,10 @@ public class Section {
     @JoinColumn(name="professor_id")
     private Faculty professor;
     
-
+    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
+    private List<Enrollment> enrollements;
+    
+    
     public int getId() {
         return id;
     }
@@ -96,6 +102,19 @@ public class Section {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+    public void addEnrollment(Enrollment enrollment)
+    {
+        enrollment.setSection(this);
+        this.enrollements.add(enrollment);
+    }
+
+    public List<Enrollment> getEnrollements() {
+        return enrollements;
+    }
+
+    public void setEnrollements(List<Enrollment> enrollements) {
+        this.enrollements = enrollements;
     }
     
     

@@ -32,7 +32,7 @@ public class Customer extends User {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Waiver> waivers;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<Order> orders;
 
     @OneToOne
@@ -48,10 +48,12 @@ public class Customer extends User {
         this.advisor = advisor;
         
     }
+    
     //Add Enrollment
     public void addEnrollment(Enrollment enrollment)
     {
         this.enrollments.add(enrollment);
+       enrollment.setCustomer(this);
     }
 
     public List<Enrollment> getEnrollments() {
@@ -66,6 +68,7 @@ public class Customer extends User {
     public void addWaiver(Waiver waiver)
     {
         this.waivers.add(waiver);
+        waiver.setCustomer(this);
     }
 
     public List<Waiver> getWaivers() {

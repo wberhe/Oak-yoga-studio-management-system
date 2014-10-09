@@ -1,6 +1,7 @@
 package com.oak_yoga_studio.domain;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class ShoppingCart {
     @GeneratedValue
     private int id;
 
-    @OneToMany(mappedBy = "shoppingCart")
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
     private List<ShoppingCartItem> shoppingCartItems;
 
     @OneToOne(mappedBy = "shoppingCart")
@@ -31,7 +32,19 @@ public class ShoppingCart {
     public void setId(int id) {
         this.id = id;
     }
-
+    //add and remove items from cart
+    public void addItem(ShoppingCartItem item)
+            
+    {
+        this.shoppingCartItems.add(item);
+        item.setShoppingCart(this);
+    }
+    
+    public void removeItem(ShoppingCartItem item)
+    {
+        item.setShoppingCart(null);
+        this.shoppingCartItems.remove(item);
+    }
     public List<ShoppingCartItem> getShoppingCartItems() {
         return shoppingCartItems;
     }

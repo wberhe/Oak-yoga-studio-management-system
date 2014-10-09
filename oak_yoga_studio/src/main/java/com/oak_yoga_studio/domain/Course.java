@@ -40,6 +40,7 @@ public class Course {
     @OneToMany(mappedBy = "waiverCourse", cascade = CascadeType.ALL)
     private List<Waiver> waivers;
     
+    
     public String getCourseNumber() {
         return courseNumber;
     }
@@ -75,9 +76,15 @@ public class Course {
     public void addSection(Section section)
     {
         if(section.getCourse()==null){
-            //
+            section.setCourse(this);
         }
         this.sections.add(section);
+    }
+    public void removeSection(Section section){
+        if(section.getCourse()!=null){
+            section.setCourse(null);
+        }
+        this.sections.remove(section);
     }
 
     public List<Section> getSections() {
@@ -87,7 +94,11 @@ public class Course {
     public void setSections(List<Section> sections) {
         this.sections = sections;
     }
-
+    //add prerequisite
+    public void addPrerequiste(Course course)
+    {
+        this.prerequisites.add(course);
+    }
     public List<Course> getPrerequisites() {
         return prerequisites;
     }
@@ -95,7 +106,11 @@ public class Course {
     public void setPrerequisites(List<Course> prerequisites) {
         this.prerequisites = prerequisites;
     }
-
+    public void addWaiver(Waiver waiver){
+        waiver.setWaiverCourse(this);
+        this.waivers.add(waiver);
+        
+    }
     public List<Waiver> getWaivers() {
         return waivers;
     }
