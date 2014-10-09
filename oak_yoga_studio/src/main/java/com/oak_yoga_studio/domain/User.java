@@ -6,6 +6,7 @@
 
 package com.oak_yoga_studio.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +39,8 @@ public class User {
     private String firstName;
     
     private String lastName;
+    
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
@@ -111,6 +114,10 @@ public class User {
 
     public void setCredential(Credential credential) {
         this.credential = credential;
+        if(credential.getUser()==null)
+        {
+            credential.setUser(this);
+        }
     }
 
     public List<Address> getAddress() {
@@ -120,7 +127,6 @@ public class User {
     public void setAddress(List<Address> address) {
         this.address = address;
     }
-    
     
 
     @Override
@@ -160,8 +166,5 @@ public class User {
         }
         return true;
     }
-    
-    
-    
     
 }

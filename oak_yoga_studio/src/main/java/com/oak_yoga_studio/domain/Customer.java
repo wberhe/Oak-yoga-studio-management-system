@@ -46,6 +46,12 @@ public class Customer extends User {
 
     public void setAdvisor(Faculty advisor) {
         this.advisor = advisor;
+        
+    }
+    //Add Enrollment
+    public void addEnrollment(Enrollment enrollment)
+    {
+        this.enrollments.add(enrollment);
     }
 
     public List<Enrollment> getEnrollments() {
@@ -56,6 +62,11 @@ public class Customer extends User {
         this.enrollments = enrollments;
     }
     
+    //Add waiver
+    public void addWaiver(Waiver waiver)
+    {
+        this.waivers.add(waiver);
+    }
 
     public List<Waiver> getWaivers() {
         return waivers;
@@ -64,7 +75,12 @@ public class Customer extends User {
     public void setWaivers(List<Waiver> waivers) {
         this.waivers = waivers;
     }
-
+    
+    //Add Order
+    public void addOrder(Order order)
+    {
+        this.orders.add(order);
+    }
     public List<Order> getOrders() {
         return orders;
     }
@@ -72,13 +88,16 @@ public class Customer extends User {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-
+    
     public ShoppingCart getShoppingCart() {
         return shoppingCart;
     }
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
+        if(shoppingCart.getCustomer()==null){
+            shoppingCart.setCustomer(this);
+        }
     }
 
 }

@@ -66,6 +66,11 @@ public class Faculty extends User {
     public void setStatus(String status) {
         this.status = status;
     }
+    //Add advisee
+    public void addAdvisee(Customer customer)
+    {
+       this.advisees.add(customer);
+    }
 
     public List<Customer> getAdvisees() {
         return advisees;
@@ -73,6 +78,16 @@ public class Faculty extends User {
 
     public void setAdvisees(List<Customer> advisees) {
         this.advisees = advisees;
+    }
+    //Add and Remove Section
+    public void addSection(Section section)
+    {
+        this.sections.add(section);
+    }
+    public void removeSection(Section section)
+    {
+        //this.sections.remove(section);
+        getSections().remove(section);
     }
 
     public List<Section> getSections() {
