@@ -19,28 +19,26 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 public class Order {
-    
+
     @Id
     @GeneratedValue
     private int id;
-    
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date orderDate;
-    
+
     private String email;
-    
+
     private double totalPrice;
-    
+
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
-    
-//    private Customer customer_id;
 
     @ManyToOne
-    @JoinColumn(name="customer_id")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
-    
+
     public int getId() {
         return id;
     }
@@ -80,6 +78,13 @@ public class Order {
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
-    
-    
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
 }

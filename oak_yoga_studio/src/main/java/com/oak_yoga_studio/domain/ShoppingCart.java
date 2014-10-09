@@ -17,13 +17,12 @@ public class ShoppingCart {
     @Id
     @GeneratedValue
     private int id;
-    
+
     @OneToMany(mappedBy = "shoppingCart")
     private List<ShoppingCartItem> shoppingCartItems;
-    
+
     @OneToOne(mappedBy = "shoppingCart")
     private Customer customer;
-    
 
     public int getId() {
         return id;
@@ -40,8 +39,13 @@ public class ShoppingCart {
     public void setShoppingCartItems(List<ShoppingCartItem> shoppingCartItems) {
         this.shoppingCartItems = shoppingCartItems;
     }
-    
-    
-    
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
 }
