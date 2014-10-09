@@ -21,10 +21,6 @@ import javax.persistence.OneToMany;
 public class Faculty extends User {
     
     
-    @Id
-    @GeneratedValue
-    private int id;
-    
     private String status;
     
    
@@ -39,9 +35,6 @@ public class Faculty extends User {
 //    @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL)
 //    private List<Waiver> waivers;
    
-    public int getId() {
-        return id;
-    }
 
     @Override
     public int hashCode() {
@@ -65,10 +58,7 @@ public class Faculty extends User {
         return true;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+   
     public String getStatus() {
         return status;
     }
