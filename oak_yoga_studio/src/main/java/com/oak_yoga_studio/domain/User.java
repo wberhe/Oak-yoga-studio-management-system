@@ -8,10 +8,17 @@ package com.oak_yoga_studio.domain;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,12 +28,12 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author Weldino
  */
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
     
     @Id
     @GeneratedValue
     private int id;
-    
     
     private String firstName;
     
@@ -40,6 +47,15 @@ public class User {
     
     @Column(name="profilepic",columnDefinition="longblob")
     private byte[] profilePicture;
+    
+    @OneToMany
+    @JoinColumn(name="user_id")
+    private List<Address> address;
+    
+   
+    
+    @OneToOne(mappedBy = "user")
+    private Credential credential;
 
     public int getId() {
         return id;
@@ -88,6 +104,24 @@ public class User {
     public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
+
+    public Credential getCredential() {
+        return credential;
+    }
+
+    public void setCredential(Credential credential) {
+        this.credential = credential;
+    }
+
+    public List<Address> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
+    }
+    
+    
 
     @Override
     public int hashCode() {
