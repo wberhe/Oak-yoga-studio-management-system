@@ -26,8 +26,7 @@ public class Customer extends User {
     @ManyToOne
     @JoinColumn(name = "advisor_id")
     private Faculty advisor;
-    
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+
     private List<Enrollment> enrollments;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
