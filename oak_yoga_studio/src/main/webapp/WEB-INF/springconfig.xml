@@ -54,7 +54,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost/yoga_studio" />
         <property name="username" value="root" />
-        <property name="password" value="weldu" />
+        <property name="password" value="Pass@deliver" />
     </bean>
 
     <!-- hibernate Properties -->
