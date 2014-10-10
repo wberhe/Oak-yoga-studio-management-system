@@ -18,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Fetiya
+ * @author Weldino
  */
 
-public class CustomerDAOImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
     
     private SessionFactory sf;
 
@@ -57,7 +57,7 @@ public class CustomerDAOImpl implements UserDAO {
      */
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAllCustomers() {
         List<User> customers=new ArrayList<User>();
         
         Query query= sf.getCurrentSession().createQuery("from User u where u.class=Customer");
@@ -66,4 +66,18 @@ public class CustomerDAOImpl implements UserDAO {
        return customers;
     }
     
+    /**
+     * 
+     * @returns all faculty users
+     */
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<User> getAllFaculties() {
+        List<User> faculties=new ArrayList<User>();
+        
+        Query query= sf.getCurrentSession().createQuery("from User u where u.class=Faculty and u.status=ACTIVE");
+        faculties= query.list();
+        
+       return faculties;
+    }
 }
