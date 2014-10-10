@@ -96,10 +96,23 @@
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
+    <bean id="CourseDAO" class="com.oak_yoga_studio.dao.impl.CourseDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+        <bean id="SectionDAO" class="com.oak_yoga_studio.dao.impl.SectionDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="WaiverDAO" class="com.oak_yoga_studio.dao.impl.WaiverDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    
+       <bean id="EnrollmentDAO" class="com.oak_yoga_studio.dao.impl.EnrollmentDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
     
     <!-- Service injections -->
-    
-    
+  
     
 <!--    Security
     
