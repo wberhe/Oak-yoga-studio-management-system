@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Fetiya
+ * @author weldino
  */
 public interface UserDAO {
     
@@ -21,6 +21,8 @@ public interface UserDAO {
      
      public User getUser(int id);
      
-     public List<User> getAllUsers();
+     public List<User> getAllCustomers();
+     
+     public List<User> getAllFaculties();
      
 }

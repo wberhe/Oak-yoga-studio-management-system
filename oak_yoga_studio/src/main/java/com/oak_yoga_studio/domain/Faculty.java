@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author Fetiya
+ * @author weldino
  */
 @Entity
 public class Faculty extends User {

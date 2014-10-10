@@ -8,6 +8,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello Oak!</h1>
+        <h1>Welcome to Oak Yoga Studio!!</h1>
     </body>
 </html>
