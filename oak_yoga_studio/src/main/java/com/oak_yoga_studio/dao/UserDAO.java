@@ -6,10 +6,21 @@
 
 package com.oak_yoga_studio.dao;
 
+import com.oak_yoga_studio.domain.User;
+import java.util.List;
+
 /**
  *
  * @author Fetiya
  */
 public interface UserDAO {
     
+     public void addUser(User user);
+     
+     public void updateUser(User user);
+     
+     public User getUser(int id);
+     
+     public List<User> getAllUsers();
+     
 }
