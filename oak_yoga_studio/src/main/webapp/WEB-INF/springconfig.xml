@@ -105,7 +105,7 @@
     
     <bean id="waiverDAO" class="com.oak_yoga_studio.dao.impl.WaiverDAOImpl">
         <property name="sf" ref="sessionFactory"/>
-    </beane
+    </bean>
     
     <bean id="enrollmentDAO" class="com.oak_yoga_studio.dao.impl.EnrollmentDAOImpl">
         <property name="sf" ref="sessionFactory"/>
