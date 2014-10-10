@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 
 /**
@@ -18,12 +21,15 @@ public class Product {
     @GeneratedValue
     private int id;
         
+    @NotBlank
+    @SafeHtml
     private String name;
     
     private double price;
            
     private String image;
     
+    @Min(1)
     private int quantity;
     
     private String status;
