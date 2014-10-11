@@ -2,6 +2,7 @@ package com.oak_yoga_studio.domain;
 
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,6 +18,7 @@ import org.hibernate.validator.constraints.SafeHtml;
  */
 @Entity
 public class Product {
+    
     @Id
     @GeneratedValue
     private int id;
@@ -25,13 +27,16 @@ public class Product {
     @SafeHtml
     private String name;
     
+    @Min(0)
     private double price;
-           
-    private String image;
+     
+    @Column(name="image",columnDefinition="longblob")
+    private byte[] image;
     
     @Min(1)
     private int quantity;
     
+    @NotBlank
     private String status;
 
     
@@ -63,13 +68,14 @@ public class Product {
         this.price = price;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
+
 
     public int getQuantity() {
         return quantity;

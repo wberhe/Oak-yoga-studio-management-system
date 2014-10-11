@@ -31,34 +31,11 @@ public class Faculty extends User {
     @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
     private List<Section> sections;
     
-    //TODO??
-//    @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL)
-//    private List<Waiver> waivers;
-   
+    
+    @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL)
+    private List<Waiver> waivers;
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + (this.status != null ? this.status.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Faculty other = (Faculty) obj;
-        if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
-            return false;
-        }
-        return true;
-    }
-
-   
+    
     public String getStatus() {
         return status;
     }
@@ -98,7 +75,42 @@ public class Faculty extends User {
         this.sections = sections;
     }
     
+    public void addWaiver(Waiver waiver)
+    {
+      this.waivers.add(waiver);
+      waiver.setFaculty(this);
+    }
+    public List<Waiver> getWaivers() {
+        return waivers;
+    }
+
+    public void setWaivers(List<Waiver> waivers) {
+        this.waivers = waivers;
+    }
     
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + (this.status != null ? this.status.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Faculty other = (Faculty) obj;
+        if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
+            return false;
+        }
+        return true;
+    }
+
+   
     
     
 }

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -22,11 +23,13 @@ public class Address {
     @GeneratedValue
     private int id;
     
+    @NotBlank
     private String street;
-   
+    
     private String state;
     
     private String city;
+    
     @Pattern(regexp = "\\d{5}", message = "Zip code must be numeric and either 5 characters.")
     private String zipCode;
 
@@ -69,13 +72,14 @@ public class Address {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + (this.street != null ? this.street.hashCode() : 0);
-        hash = 71 * hash + (this.state != null ? this.state.hashCode() : 0);
-        hash = 71 * hash + (this.city != null ? this.city.hashCode() : 0);
+        int hash = 7;
+        hash = 43 * hash + (this.street != null ? this.street.hashCode() : 0);
+        hash = 43 * hash + (this.state != null ? this.state.hashCode() : 0);
+        hash = 43 * hash + (this.city != null ? this.city.hashCode() : 0);
+        hash = 43 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
         return hash;
     }
 
@@ -97,8 +101,13 @@ public class Address {
         if ((this.city == null) ? (other.city != null) : !this.city.equals(other.city)) {
             return false;
         }
+        if ((this.zipCode == null) ? (other.zipCode != null) : !this.zipCode.equals(other.zipCode)) {
+            return false;
+        }
         return true;
     }
+    
+    
     
     
 }

@@ -25,10 +25,13 @@ public class Waiver {
     @Id
     @GeneratedValue
     private int id;
+    
     @NotBlank
     private String requestReason;
+    
     @NotBlank
     private String remarks;
+    
     @NotBlank
     private String status;
     
@@ -40,10 +43,10 @@ public class Waiver {
     @JoinColumn(name="waiverCourse_id")
     private Course waiverCourse;
     
-//TODO......
-//    @ManyToOne
-//    @JoinColumn(name="faculty_id")
-//    private Faculty faculty;
+
+    @ManyToOne
+    @JoinColumn(name="faculty_id")
+    private Faculty faculty;
     
 
     public int getId() {
@@ -93,6 +96,16 @@ public class Waiver {
     public void setWaiverCourse(Course waiverCourse) {
         this.waiverCourse = waiverCourse;
     }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+    
+    
     
     @Override
     public int hashCode() {

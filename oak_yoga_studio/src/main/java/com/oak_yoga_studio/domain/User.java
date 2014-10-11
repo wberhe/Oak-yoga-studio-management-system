@@ -48,7 +48,7 @@ public class User {
     @SafeHtml
     private String lastName;
     
-    @Past
+    
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     
     @Past
