@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author weldino
+ * @author weldu
  */
 public interface UserDAO {
     

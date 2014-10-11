@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Weldino
+ * @author weldu
  */
 
 public class CustomerDAOImpl implements UserDAO {

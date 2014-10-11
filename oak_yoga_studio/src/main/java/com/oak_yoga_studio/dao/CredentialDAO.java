@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Weldino
+ * @author weldu
  */
 public interface CredentialDAO {
     

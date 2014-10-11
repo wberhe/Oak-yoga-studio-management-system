@@ -30,7 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
- * @author Weldino
+ * @author weldu
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
- * @author Weldino
+ * @author Weldu
  */
 @Entity
 public class Address {
