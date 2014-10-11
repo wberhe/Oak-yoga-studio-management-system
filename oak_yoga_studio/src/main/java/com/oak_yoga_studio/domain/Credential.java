@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 /**
  *
@@ -24,10 +27,15 @@ public class Credential {
     @GeneratedValue
     private int id;
     
+    @NotBlank
     private String role;
     
+    @NotBlank
+    @SafeHtml
+    //@UniqueUserName(message = "Username must be unique")
     private String userName;
-    
+    @NotBlank    
+    @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")
     private String password;
     
     @Transient

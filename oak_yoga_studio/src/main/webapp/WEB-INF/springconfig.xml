@@ -101,10 +101,42 @@
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
+    <bean id="courseDAO" class="com.oak_yoga_studio.dao.impl.CourseDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    <bean id="sectionDAO" class="com.oak_yoga_studio.dao.impl.SectionDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
     
+    <bean id="waiverDAO" class="com.oak_yoga_studio.dao.impl.WaiverDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="enrollmentDAO" class="com.oak_yoga_studio.dao.impl.EnrollmentDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="orderDAO" class="com.oak_yoga_studio.dao.impl.OrderDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="orderItemDAO" class="com.oak_yoga_studio.dao.impl.OrderITemDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="shoppingCartDAO" class="com.oak_yoga_studio.dao.impl.ShoppingCartDAOImpl >
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="shoppingCartItemDAO" class="com.oak_yoga_studio.dao.impl.ShoppingCartItemDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="productDAO" class="com.oak_yoga_studio.dao.impl.productDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
     <!-- Service injections -->
-    
-    
+  
     
 <!--    Security
     

@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -24,11 +25,11 @@ public class Waiver {
     @Id
     @GeneratedValue
     private int id;
-    
+    @NotBlank
     private String requestReason;
-    
+    @NotBlank
     private String remarks;
-    
+    @NotBlank
     private String status;
     
     @ManyToOne

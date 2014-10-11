@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -24,9 +25,9 @@ public class Course {
     @Id
     @GeneratedValue
     private int id;
-    
+    @NotBlank
     private String courseNumber;
-    
+    @NotBlank
     private String courseName;
     
     private String description;

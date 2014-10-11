@@ -48,6 +48,7 @@ public class User {
     @SafeHtml
     private String lastName;
     
+    @Past
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     
     @Past
@@ -56,6 +57,7 @@ public class User {
     private Date dateOfBirth;
     
     @NotBlank
+    @SafeHtml
     @Email
     private String email;
     

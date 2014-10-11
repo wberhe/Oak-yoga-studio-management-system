@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 /**
  *
@@ -32,6 +34,8 @@ public class Section {
     
     private int roomNumber;
     
+    @Min(1)
+    @Max(15)
     private int availableSeat;
     
     @ManyToOne

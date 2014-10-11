@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -29,6 +32,9 @@ public class Order {
     @Temporal(TemporalType.DATE)
     private Date orderDate;
 
+    @NotBlank
+    @SafeHtml
+    @Email
     private String email;
 
     private double totalPrice;

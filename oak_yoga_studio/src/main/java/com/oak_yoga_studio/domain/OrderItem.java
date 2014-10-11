@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
 
 /**
  *
@@ -18,6 +19,7 @@ public class OrderItem {
         
     private double price;
            
+    @Min(1)
     private int quantity;
     
     @ManyToOne

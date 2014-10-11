@@ -9,6 +9,7 @@ package com.oak_yoga_studio.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -26,6 +27,8 @@ public class Address {
     private String state;
     
     private String city;
+    @Pattern(regexp = "\\d{5}", message = "Zip code must be numeric and either 5 characters.")
+    private String zipCode;
 
     public int getId() {
         return id;
@@ -59,6 +62,14 @@ public class Address {
         this.city = city;
     }
 
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;
