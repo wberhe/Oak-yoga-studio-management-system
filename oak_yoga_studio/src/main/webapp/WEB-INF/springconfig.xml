@@ -120,11 +120,11 @@
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
-    <bean id="orderItemDAO" class="com.oak_yoga_studio.dao.impl.OrderITemDAOImpl">
+    <bean id="orderItemDAO" class="com.oak_yoga_studio.dao.impl.OrderItemDAOImpl">
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
-    <bean id="shoppingCartDAO" class="com.oak_yoga_studio.dao.impl.ShoppingCartDAOImpl >
+    <bean id="shoppingCartDAO" class="com.oak_yoga_studio.dao.impl.ShoppingCartDAOImpl">
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
@@ -132,7 +132,7 @@
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
-    <bean id="productDAO" class="com.oak_yoga_studio.dao.impl.productDAOImpl">
+    <bean id="productDAO" class="com.oak_yoga_studio.dao.impl.ProductDAOImpl">
         <property name="sf" ref="sessionFactory"/>
     </bean>
     <!-- Service injections -->
