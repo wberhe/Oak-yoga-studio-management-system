@@ -6,14 +6,46 @@
 
 package com.oak_yoga_studio.testing;
 
+import com.oak_yoga_studio.dao.UserDAO;
+import com.oak_yoga_studio.domain.Credential;
+import com.oak_yoga_studio.domain.Customer;
+import com.oak_yoga_studio.domain.User;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 /**
  *
  * @author Weldino
  */
 public class Test {
-    public static void main(String[] args){
-        
-      
-    }
+
+	public static void main(String[] args) {
+		
+//		ConfigurableApplicationContext context=new ClassPathXmlApplicationContext("springconfig.xml");
+                ApplicationContext context = new ClassPathXmlApplicationContext("springconfig.xml");
+		UserDAO u =context.getBean("customerDAO",UserDAO.class);
+		// create 2 users;
+                Credential c= new Credential();
+                c.setRole("ROLE_ADMIN");
+                c.setUserName("senai");
+                c.setPassword("senai222");
+                
+                
+                
+		User customer= new Customer();
+                customer.setFirstName("Senai");
+                customer.setEmail("Addagish");
+                customer.setEmail("senai@adagish.com");
+                customer.setCredential(c);
+                
+                u.addUser(customer);
+		
+		
+		
+	}
+	
+
 }
+
