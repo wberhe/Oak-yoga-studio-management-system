@@ -24,7 +24,6 @@
        http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     
     <aop:aspectj-autoproxy/>
-
  
    
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
@@ -86,7 +85,13 @@
     </bean>
     
     <!-- DAO's setter injections -->
-    <bean id="userDAO" class="com.oak_yoga_studio.dao.impl.UserDAOImpl">
+    <bean id="customerDAO" class="com.oak_yoga_studio.dao.impl.CustomerDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    <bean id="facultyDAO" class="com.oak_yoga_studio.dao.impl.FacultyDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    <bean id="adminDAO" class="com.oak_yoga_studio.dao.impl.AdminDAOImpl">
         <property name="sf" ref="sessionFactory"/>
     </bean>
     <bean id="credentialDAO" class="com.oak_yoga_studio.dao.impl.CredentialDAOImpl">

@@ -21,8 +21,6 @@ public interface UserDAO {
      
      public User getUser(int id);
      
-     public List<User> getAllCustomers();
-     
-     public List<User> getAllFaculties();
+     public List<User> getAllUsers();
      
 }

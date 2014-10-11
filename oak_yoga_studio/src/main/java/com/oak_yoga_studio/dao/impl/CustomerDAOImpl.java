@@ -6,9 +6,9 @@
 
 package com.oak_yoga_studio.dao.impl;
 
-import com.oak_yoga_studio.dao.SectionDAO;
-import com.oak_yoga_studio.domain.Section;
-import java.util.ArrayList;
+import com.oak_yoga_studio.dao.UserDAO;
+import com.oak_yoga_studio.domain.Customer;
+import com.oak_yoga_studio.domain.User;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -17,55 +17,51 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Fetiya
+ * @author Weldino
  */
-public class SectionDAOImpl implements SectionDAO {
 
+public class CustomerDAOImpl implements UserDAO {
     
-    SessionFactory sf;
+    private SessionFactory sf;
 
     public void setSf(SessionFactory sf) {
         this.sf = sf;
     }
     
     
+    @Transactional(propagation = Propagation.MANDATORY)
+    @Override
+    public void addUser(User customer) {
+        sf.getCurrentSession().save(customer);
+    }
+    
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void addUseSection(Section section) {
-             
-        sf.getCurrentSession().save(section);
+    public void updateUser(User customer) {
+        sf.getCurrentSession().saveOrUpdate(customer);
     }
-
     
-    @Transactional(propagation = Propagation.MANDATORY)
-    @Override
-    public void updateSection(Section section) {
-       
-        sf.getCurrentSession().saveOrUpdate(section);
-    }
-
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public Section getSection(int id) {
+    public User getUser(int id) {
         
-        Section section=(Section) sf.getCurrentSession().get(Section.class, id);
-        
-        return section;
-    }
-
+        Customer customer= (Customer) sf.getCurrentSession().get(Customer.class,id);
+        return customer;    
+            
+     }
+    /**
+     * 
+     * @returns only Customer users
+     */
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public List<Section> getAllSections() {
+    public List<User> getAllUsers() {
+        List<User> customers;        
+        Query query= sf.getCurrentSession().createQuery("from Customer");
+        customers= query.list();
         
-        List<Section> sections= new ArrayList<Section>();
-    
-        Query query= sf.getCurrentSession().createQuery("from Section");
-    
-        sections=query.list();
-    
-        return sections;
-        
+       return customers;
     }
     
 }

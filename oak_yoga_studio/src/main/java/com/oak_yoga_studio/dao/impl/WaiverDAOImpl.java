@@ -58,7 +58,7 @@ public class WaiverDAOImpl implements WaiverDAO{
        
          List<Waiver> waivers=new ArrayList<Waiver>();
         
-        Query query= sf.getCurrentSession().createQuery("from Waiver  w where w.class=Waiver");
+        Query query= sf.getCurrentSession().createQuery("from Waiver");
         waivers= query.list();
         
        return waivers;

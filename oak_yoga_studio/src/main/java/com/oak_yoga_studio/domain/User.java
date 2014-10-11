@@ -22,6 +22,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Past;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -36,16 +40,23 @@ public class User {
     @GeneratedValue
     private int id;
     
+    @NotBlank
+    @SafeHtml
     private String firstName;
     
+    @NotBlank
+    @SafeHtml
     private String lastName;
     
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     
+    @Past
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
     
+    @NotBlank
+    @Email
     private String email;
     
     @Column(name="profilepic",columnDefinition="longblob")

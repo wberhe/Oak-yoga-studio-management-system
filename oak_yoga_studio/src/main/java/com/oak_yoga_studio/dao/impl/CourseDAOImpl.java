@@ -31,7 +31,7 @@ public class CourseDAOImpl implements CourseDAO {
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void addCourse(CourseDAO course) {
+    public void addCourse(Course course) {
   
     sf.getCurrentSession().save(course);
     }
@@ -39,7 +39,7 @@ public class CourseDAOImpl implements CourseDAO {
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void updateCourse(CourseDAO course) {
+    public void updateCourse(Course course) {
   
         sf.getCurrentSession().saveOrUpdate(course);
     }
@@ -48,7 +48,7 @@ public class CourseDAOImpl implements CourseDAO {
     @Override
     public Course getCourse(int id) {
      
-        Course course=(Course)sf.getCurrentSession().get(Course.class  ,id);
+        Course course=(Course)sf.getCurrentSession().get(Course.class,id);
         return course;
      
     }
@@ -58,7 +58,7 @@ public class CourseDAOImpl implements CourseDAO {
     @Override
     public List<Course> getAllCourses() {
       
-        List<Course> courses=new ArrayList<Course>();
+        List<Course> courses;
         
         Query query= sf.getCurrentSession().createQuery("from Course");
         courses= query.list();

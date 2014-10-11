@@ -26,6 +26,7 @@
     </bean>
     <bean id="uniqueName" class="cs544.wamp_blog_engine.validators.UniqueUserNameValidator">
     </bean>-->
+    
     <mvc:annotation-driven />
     <context:component-scan base-package="com" />
     <tx:annotation-driven transaction-manager="txManager" />

@@ -6,9 +6,9 @@
 
 package com.oak_yoga_studio.dao.impl;
 
-import com.oak_yoga_studio.dao.SectionDAO;
-import com.oak_yoga_studio.domain.Section;
-import java.util.ArrayList;
+import com.oak_yoga_studio.dao.UserDAO;
+import com.oak_yoga_studio.domain.Admin;
+import com.oak_yoga_studio.domain.User;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -17,55 +17,49 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Fetiya
+ * @author Weldino
  */
-public class SectionDAOImpl implements SectionDAO {
-
+public class AdminDAOImpl implements UserDAO {
     
-    SessionFactory sf;
+    private SessionFactory sf;
 
     public void setSf(SessionFactory sf) {
         this.sf = sf;
     }
     
     
+    @Transactional(propagation = Propagation.MANDATORY)
+    @Override
+    public void addUser(User admin) {
+        sf.getCurrentSession().save(admin);
+    }
+    
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void addUseSection(Section section) {
-             
-        sf.getCurrentSession().save(section);
+    public void updateUser(User admin) {
+        sf.getCurrentSession().saveOrUpdate(admin);
     }
-
     
-    @Transactional(propagation = Propagation.MANDATORY)
-    @Override
-    public void updateSection(Section section) {
-       
-        sf.getCurrentSession().saveOrUpdate(section);
-    }
-
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public Section getSection(int id) {
+    public User getUser(int id) {
         
-        Section section=(Section) sf.getCurrentSession().get(Section.class, id);
-        
-        return section;
-    }
-
+        Admin admin= (Admin) sf.getCurrentSession().get(Admin.class,id);
+        return admin;    
+            
+     }
+    /**
+     * 
+     * @returns only Admins users
+     */
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public List<Section> getAllSections() {
+    public List<User> getAllUsers() {
+        List<User> admins;        
+        Query query= sf.getCurrentSession().createQuery("from Admin");
+        admins= query.list();
         
-        List<Section> sections= new ArrayList<Section>();
-    
-        Query query= sf.getCurrentSession().createQuery("from Section");
-    
-        sections=query.list();
-    
-        return sections;
-        
+       return admins;
     }
-    
 }
