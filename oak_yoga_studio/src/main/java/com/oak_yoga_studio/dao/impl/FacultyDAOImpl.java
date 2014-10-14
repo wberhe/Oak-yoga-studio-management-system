@@ -6,7 +6,8 @@
 
 package com.oak_yoga_studio.dao.impl;
 
-import com.oak_yoga_studio.dao.UserDAO;
+import com.oak_yoga_studio.dao.CustomerDAO;
+import com.oak_yoga_studio.dao.FacultyDAO;
 import com.oak_yoga_studio.domain.Faculty;
 import com.oak_yoga_studio.domain.User;
 import java.util.List;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author weldu
  */
-public class FacultyDAOImpl implements UserDAO {
+public class FacultyDAOImpl implements FacultyDAO {
 
         private SessionFactory sf;
 
@@ -30,20 +31,20 @@ public class FacultyDAOImpl implements UserDAO {
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void addUser(User faculty) {
+    public void addFaculty(Faculty faculty) {
         sf.getCurrentSession().save(faculty);
     }
     
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void updateUser(User faculty) {
+    public void updateFaculty(Faculty faculty) {
         sf.getCurrentSession().saveOrUpdate(faculty);
     }
     
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public User getUser(int id) {
+    public Faculty getFaculty(int id) {
         
         Faculty faculty= (Faculty) sf.getCurrentSession().get(Faculty.class,id);
         return faculty;    
@@ -55,8 +56,8 @@ public class FacultyDAOImpl implements UserDAO {
      */
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public List<User> getAllUsers() {
-        List<User> faculties;        
+    public List<Faculty> getAllFaculties() {
+        List<Faculty> faculties;        
         Query query= sf.getCurrentSession().createQuery("from Faculty");
         faculties= query.list();
         

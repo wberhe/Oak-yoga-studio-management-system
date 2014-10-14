@@ -6,21 +6,21 @@
 
 package com.oak_yoga_studio.dao;
 
-import com.oak_yoga_studio.domain.User;
+import com.oak_yoga_studio.domain.Customer;
 import java.util.List;
 
 /**
  *
  * @author weldu
  */
-public interface UserDAO {
+public interface CustomerDAO {
     
-     public void addUser(User user);
+     public void addCustomer(Customer customer);
      
-     public void updateUser(User user);
+     public void updateCustomer(Customer customer);
      
-     public User getUser(int id);
+     public Customer getCustomer(int id);
      
-     public List<User> getAllUsers();
+     public List<Customer> getAllCustomers();
      
 }

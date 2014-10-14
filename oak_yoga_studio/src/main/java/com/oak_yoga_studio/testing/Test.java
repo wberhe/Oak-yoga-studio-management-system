@@ -6,7 +6,7 @@
 
 package com.oak_yoga_studio.testing;
 
-import com.oak_yoga_studio.dao.UserDAO;
+import com.oak_yoga_studio.dao.CustomerDAO;
 import com.oak_yoga_studio.domain.Credential;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.User;
@@ -25,7 +25,7 @@ public class Test {
 		
 //		ConfigurableApplicationContext context=new ClassPathXmlApplicationContext("springconfig.xml");
                 ApplicationContext context = new ClassPathXmlApplicationContext("springconfig.xml");
-		UserDAO u =context.getBean("customerDAO",UserDAO.class);
+		CustomerDAO u =context.getBean("customerDAO",CustomerDAO.class);
 		// create 2 users;
                 Credential c= new Credential();
                 c.setRole("ROLE_ADMIN");
@@ -40,7 +40,7 @@ public class Test {
                 customer.setEmail("senai@adagish.com");
                 customer.setCredential(c);
                 
-                u.addUser(customer);
+                //u.addCustomer(customer);
 		
 		
 		
