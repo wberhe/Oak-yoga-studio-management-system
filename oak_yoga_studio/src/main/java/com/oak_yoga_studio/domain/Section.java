@@ -52,6 +52,21 @@ public class Section {
     
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
     private List<Enrollment> enrollements;
+
+    public Section() {
+    }
+
+    public Section(String sectionName, int capacity, int roomNumber, int availableSeat, Course course, Faculty professor, List<Enrollment> enrollements) {
+        this.sectionName = sectionName;
+        this.capacity = capacity;
+        this.roomNumber = roomNumber;
+        this.availableSeat = availableSeat;
+        this.course = course;
+        this.professor = professor;
+        this.enrollements = enrollements;
+    }
+    
+    
     
     
     public int getId() {
