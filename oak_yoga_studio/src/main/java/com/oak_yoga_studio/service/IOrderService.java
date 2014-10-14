@@ -6,17 +6,18 @@
 
 package com.oak_yoga_studio.service;
 
-import com.oak_yoga_studio.domain.Product;
-import java.util.List;
+import com.oak_yoga_studio.domain.Address;
+import com.oak_yoga_studio.domain.User;
 
 /**
  *
  * @author Somayeh
  */
-public interface IProductService {
+public interface IOrderService {
     
-    public List<Product> searchProductByName(String pname);
+    public void fillingShippingAddress(Address address);
     
-    public Product getProductDetailInfo(int id);
+    public void fillingPaymentInfo(User userInfo);
+    
 
 }

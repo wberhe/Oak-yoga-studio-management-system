@@ -6,9 +6,9 @@
 
 package com.oak_yoga_studio.service.impl;
 
-import com.oak_yoga_studio.dao.ProductDAO;
 import com.oak_yoga_studio.domain.Product;
-import com.oak_yoga_studio.service.IProductService;
+import com.oak_yoga_studio.domain.ShoppingCartItem;
+import com.oak_yoga_studio.service.IShoppingCartService;
 import java.util.List;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,31 +17,28 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Somayeh
  */
-public class ProductServiceImpl implements IProductService {
-    
-    
-    private ProductDAO productDAO;
+public class ShoppingCartServiceImpl implements IShoppingCartService{
 
-    public ProductServiceImpl() {
-    }
-
-    public ProductServiceImpl(ProductDAO productDAO) {
-        this.productDAO = productDAO;
-    }
-     
     @Transactional(propagation = Propagation.REQUIRED)
     
     @Override
-    public List<Product> searchProductByName(String pname) {
-        //TODO
-        return null;
-    }
-
-    @Override
-    public Product getProductDetailInfo(int id) {
+    public List<ShoppingCartItem> getShoppingCartItems() {
         //TODO
         return null;
     }
     
+        @Override
+        public double calculateTotalPrice(Product prdct) {
+                double totalPrice = prdct.getPrice();
+                double sum =+ totalPrice;
+        return sum;
+       
+    }
+
+    @Override
+    public void addToShoppingCart(int customerId, int productId) {
+        //TODO
+    }
+   
 
 }
