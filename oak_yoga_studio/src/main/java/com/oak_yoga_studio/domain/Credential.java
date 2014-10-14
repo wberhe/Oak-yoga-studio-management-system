@@ -27,6 +27,8 @@ public class Credential {
     @GeneratedValue
     private int id;
     
+    private boolean active;
+    
     @NotBlank
     private String role;
     
@@ -34,6 +36,7 @@ public class Credential {
     @SafeHtml
     //@UniqueUserName(message = "Username must be unique")
     private String userName;
+    
     @NotBlank    
     @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")
     private String password;
@@ -42,18 +45,37 @@ public class Credential {
     private String confirmPassword;
     
     
-    
-    
     @OneToOne
     @JoinColumn(name="user_id")
     private User user;
 
+    public Credential() {
+    }
+
+    public Credential(boolean blocked, String role, String userName, String password, String confirmPassword, User user) {
+        this.active = blocked;
+        this.role = role;
+        this.userName = userName;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.user = user;
+    }
+    
+    
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getRole() {

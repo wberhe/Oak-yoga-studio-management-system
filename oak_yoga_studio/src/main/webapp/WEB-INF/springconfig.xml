@@ -77,7 +77,7 @@
         </property>
     </bean>
     
-    <!-- Trnsuction Manager -->
+    <!-- Transuction Manager -->
     <tx:annotation-driven transaction-manager="txManager" />
     <bean id="txManager"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -133,12 +133,20 @@
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
-    <!-- Service injections -->    
+    <!-- Service injections -->  
+    
+    <bean id="customerService" class="com.oak_yoga_studio.service.impl.CustomerServiceImpl">
+        <constructor-arg ref="customerDAO"/>
+        <constructor-arg ref="credentialDAO" />
+        <constructor-arg ref="notificationService"/>
+    </bean> 
+     
     <bean id="notificationService" class="com.oak_yoga_studio.service.impl.NotificationService">
         <property name="javaMailSender" ref="javaMailSender"/>
         <property name="toAdminTemplate" ref="toAdminTemplate"/> 
         <property name="toFacultiesTemplate" ref="toFacultiesTemplate"/>        
-    </bean>    
+    </bean> 
+      
     
     <!--Email Service--> 
     <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

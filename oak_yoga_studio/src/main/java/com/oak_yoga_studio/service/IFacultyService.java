@@ -32,8 +32,6 @@ public interface IFacultyService {
 
     public void updateWaiverRequest(Waiver waiver);
 
-    public Faculty assignAdvisor();
-
     public List<Customer> facultyAdvisees(Faculty faculty);
     
 }

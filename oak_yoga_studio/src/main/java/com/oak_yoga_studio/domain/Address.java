@@ -33,6 +33,18 @@ public class Address {
     @Pattern(regexp = "\\d{5}", message = "Zip code must be numeric and either 5 characters.")
     private String zipCode;
 
+    public Address() {
+    }
+
+    public Address(String street, String state, String city, String zipCode) {
+        this.street = street;
+        this.state = state;
+        this.city = city;
+        this.zipCode = zipCode;
+    }
+    
+    
+
     public int getId() {
         return id;
     }

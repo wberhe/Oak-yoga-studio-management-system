@@ -28,6 +28,18 @@ public class ShoppingCartItem {
     @JoinColumn(name="product_id")
     private Product product;
 
+    public ShoppingCartItem() {
+    }
+
+    public ShoppingCartItem(int quantity, ShoppingCart shoppingCart, Product product) {
+        this.quantity = quantity;
+        this.shoppingCart = shoppingCart;
+        this.product = product;
+    }
+
+    
+    
+    
     public int getId() {
         return id;
     }

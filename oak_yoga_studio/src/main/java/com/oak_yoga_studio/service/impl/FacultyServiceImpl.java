@@ -78,12 +78,7 @@ public class FacultyServiceImpl implements IFacultyService{
          //TODO
     }
 
-    @Override
-    public Faculty assignAdvisor() {
-        //TODO
-        return null;
-    }
-
+    
     @Override
     public List<Customer> facultyAdvisees(Faculty faculty) {
         //TODO

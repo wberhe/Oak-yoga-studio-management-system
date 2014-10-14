@@ -20,7 +20,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
  *
  * @author Weldu
  */
-public class NotificationService implements INotificationService {
+public class NotificationServiceImpl implements INotificationService {
     
     private SimpleMailMessage toFacultiesTemplate;
     private SimpleMailMessage toCustomersTemplate;
@@ -101,6 +101,11 @@ public class NotificationService implements INotificationService {
      * @param message 
      */
 
+    /**
+     * Notify customer
+     * @param customer
+     * @param message
+     */
     @Override
     public void notifyCustomer(Customer customer, String message) {
         SimpleMailMessage template=getToCustomersTemplate();

@@ -47,6 +47,21 @@ public class Waiver {
     @ManyToOne
     @JoinColumn(name="faculty_id")
     private Faculty faculty;
+
+    public Waiver() {
+    }
+
+    public Waiver(String requestReason, String remarks, String status, Customer customer, Course waiverCourse, Faculty faculty) {
+        this.requestReason = requestReason;
+        this.remarks = remarks;
+        this.status = status;
+        this.customer = customer;
+        this.waiverCourse = waiverCourse;
+        this.faculty = faculty;
+    }
+    
+    
+    
     
 
     public int getId() {

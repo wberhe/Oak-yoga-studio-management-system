@@ -25,6 +25,17 @@ public class ShoppingCart {
     @OneToOne(mappedBy = "shoppingCart")
     private Customer customer;
 
+    public ShoppingCart() {
+    }
+
+    public ShoppingCart(List<ShoppingCartItem> shoppingCartItems, Customer customer) {
+        this.shoppingCartItems = shoppingCartItems;
+        this.customer = customer;
+    }
+
+    
+    
+    
     public int getId() {
         return id;
     }
