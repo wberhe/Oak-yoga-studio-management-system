@@ -6,20 +6,19 @@
 
 package com.oak_yoga_studio.dao;
 
-import com.oak_yoga_studio.domain.Course;
+import com.oak_yoga_studio.domain.Faculty;
 import java.util.List;
 
 /**
  *
- * @author Fetiya
+ * @author Weldino
  */
-public interface CourseDAO {
-    
-      public void addCourse(Course course);
+public interface FacultyDAO {
+     public void addFaculty(Faculty faculty);
      
-     public void updateCourse(Course course);
+     public void updateFaculty(Faculty faculty);
      
-     public Course getCourse(int id);
+     public Faculty getFaculty(int id);
      
-     public List<Course> getAllCourses();
+     public List<Faculty> getAllFaculties();
 }

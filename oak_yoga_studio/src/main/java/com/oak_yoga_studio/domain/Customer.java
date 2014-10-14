@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author Weldino
+ * @author Weldu
  */
 @Entity
 public class Customer extends User {

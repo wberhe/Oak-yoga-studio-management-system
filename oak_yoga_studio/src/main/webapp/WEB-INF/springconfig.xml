@@ -24,7 +24,6 @@
        http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     
     <aop:aspectj-autoproxy/>
-
  
    
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
@@ -86,7 +85,10 @@
     </bean>
     
     <!-- DAO's setter injections -->
-    <bean id="userDAO" class="com.oak_yoga_studio.dao.impl.UserDAOImpl">
+    <bean id="customerDAO" class="com.oak_yoga_studio.dao.impl.CustomerDAOImpl">
+        <property name="sf" ref="sessionFactory"/>
+    </bean>
+    <bean id="facultyDAO" class="com.oak_yoga_studio.dao.impl.FacultyDAOImpl">
         <property name="sf" ref="sessionFactory"/>
     </bean>
     <bean id="credentialDAO" class="com.oak_yoga_studio.dao.impl.CredentialDAOImpl">
@@ -115,11 +117,11 @@
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
-    <bean id="orderItemDAO" class="com.oak_yoga_studio.dao.impl.OrderITemDAOImpl">
+    <bean id="orderItemDAO" class="com.oak_yoga_studio.dao.impl.OrderItemDAOImpl">
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
-    <bean id="shoppingCartDAO" class="com.oak_yoga_studio.dao.impl.ShoppingCartDAOImpl >
+    <bean id="shoppingCartDAO" class="com.oak_yoga_studio.dao.impl.ShoppingCartDAOImpl">
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
@@ -127,10 +129,114 @@
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
-    <bean id="productDAO" class="com.oak_yoga_studio.dao.impl.productDAOImpl">
+    <bean id="productDAO" class="com.oak_yoga_studio.dao.impl.ProductDAOImpl">
         <property name="sf" ref="sessionFactory"/>
     </bean>
-    <!-- Service injections -->
+    
+    <!-- Service injections -->    
+    <bean id="notificationService" class="com.oak_yoga_studio.service.impl.NotificationService">
+        <property name="javaMailSender" ref="javaMailSender"/>
+        <property name="toAdminTemplate" ref="toAdminTemplate"/> 
+        <property name="toFacultiesTemplate" ref="toFacultiesTemplate"/>        
+    </bean>    
+    
+    <!--Email Service--> 
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="mum.ea.project@gmail.com" />
+        <property name="password" value="mum.ea.project@2014" /> 
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>                                
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
+    </bean>
+  
+    <bean id="toCustomerTemplate"
+          class="org.springframework.mail.SimpleMailMessage"> 
+        <property name="from" value="mum.ea.project@gmail.com" />
+        <property name="to" value="wel.berhe@gmail.com" />
+        <property name="subject" value="OAK Yoga Studio: Notification" />
+        <property name="text">
+            <value>
+		<![CDATA[
+Dear %1$s,
+
+%2$s
+
+Regards,
+Oak Yoga Studio
+Tel - (111)111-2222
+Administrator @AK.
+		]]>
+            </value>
+        </property>
+    </bean>
+    <bean id="toAdminTemplate"
+          class="org.springframework.mail.SimpleMailMessage"> 
+        <property name="from" value="mum.ea.project@gmail.com" />
+        <property name="to" value="wel.berhe@gmail.com" />
+        <property name="subject" value="Oak Yoga Studio: Support" />
+        <property name="text">
+            <value>
+		<![CDATA[
+Dear Administrator,
+
+%1$s
+
+Regards,
+Oak Yoga Studio
+Tel -(111)111-2222 
+%2s.
+		]]>
+            </value>
+        </property>
+    </bean>
+    <bean id="toFacultiesTemplate"
+          class="org.springframework.mail.SimpleMailMessage"> 
+        <property name="from" value="mum.ea.project@gmail.com" />
+        <property name="to" value="wel.berhe@gmail.com" />
+        <property name="subject" value="OAK Yoga Studio: Notification from Admin" />
+        <property name="text">
+            <value>
+		<![CDATA[
+Dear %1$s,
+
+%2$s 
+
+Regards,
+
+Oak Yoga Studio
+Tel - (111)111-2222
+Administrator @AK
+		]]>
+            </value>
+        </property>
+    </bean>
+    <bean id="toAdvisorTemplate"
+          class="org.springframework.mail.SimpleMailMessage"> 
+        <property name="from" value="mum.ea.project@gmail.com" />
+        <property name="to" value="wel.berhe@gmail.com" />
+        <property name="subject" value="OAK Yoga Studio: New Advisee is assigned" />
+        <property name="text">
+            <value>
+		<![CDATA[
+Dear %1$s,
+
+
+A new advisee is added.
+
+Regards,
+Administrator.
+		]]>
+            </value>
+        </property>
+    </bean>
+
+    <!--Email Service-->
   
     
 <!--    Security

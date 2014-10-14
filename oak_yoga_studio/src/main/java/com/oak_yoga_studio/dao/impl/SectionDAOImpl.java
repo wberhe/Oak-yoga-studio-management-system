@@ -32,7 +32,7 @@ public class SectionDAOImpl implements SectionDAO {
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void addUseSection(SectionDAO section) {
+    public void addUseSection(Section section) {
              
         sf.getCurrentSession().save(section);
     }
@@ -40,7 +40,7 @@ public class SectionDAOImpl implements SectionDAO {
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void updateSection(SectionDAO section) {
+    public void updateSection(Section section) {
        
         sf.getCurrentSession().saveOrUpdate(section);
     }

@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -30,8 +32,10 @@ public class Section {
     private int id;
     private String sectionName;
     
+    @Size(min=1, max = 15)
     private int capacity;
     
+    @NotEmpty
     private int roomNumber;
     
     @Min(1)

@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 
 /**
  *
- * @author Weldino
+ * @author Weldu
  */
 @Entity
 public class Credential {

@@ -8,7 +8,7 @@ package com.oak_yoga_studio.service;
 
 /**
  *
- * @author Weldino
+ * @author Weldu
  */
 public interface IEnrollmentService {
     

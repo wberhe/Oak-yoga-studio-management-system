@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author Weldino
+ * @author Weldu
  */
 @Entity
 public class Admin extends User{

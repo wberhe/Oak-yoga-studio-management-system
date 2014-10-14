@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Weldino
+ * @author Weldu
  */
 public class AddressDAOImpl implements AddressDAO {
 
@@ -37,14 +37,14 @@ public class AddressDAOImpl implements AddressDAO {
         sf.getCurrentSession().saveOrUpdate(address);
     }
 
-    @Transactional(propagation = Propagation.MANDATORY)
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Address getAddress(int id) {
         Address address = (Address) sf.getCurrentSession().get(Address.class, id);
         return address;
     }
 
-    @Transactional(propagation = Propagation.MANDATORY)
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Address> getAllAddresses() {
         Query q = sf.getCurrentSession().createQuery("from Address");

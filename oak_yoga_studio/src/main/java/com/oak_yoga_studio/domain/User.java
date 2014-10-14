@@ -30,7 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
- * @author Weldino
+ * @author weldu
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -48,9 +48,10 @@ public class User {
     @SafeHtml
     private String lastName;
     
-    @Past
+    
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     
+    @Past
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
