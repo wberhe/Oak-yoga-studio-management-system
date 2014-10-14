@@ -73,6 +73,20 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Credential credential;
 
+    public User() {
+    }
+
+    public User(String firstName, String lastName, Date dateOfBirth, String email, byte[] profilePicture, List<Address> address, Credential credential) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.profilePicture = profilePicture;
+        this.address = address;
+        this.credential = credential;
+    }
+
+    
     public int getId() {
         return id;
     }
