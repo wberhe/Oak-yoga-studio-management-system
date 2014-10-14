@@ -44,6 +44,18 @@ public class Enrollment {
     @JoinColumn(name="section_id")
     private Section section;
 
+    public Enrollment() {
+    }   
+
+    public Enrollment(String status, Date enrollmentDate, Customer customer, Section section) {
+        this.status = status;
+        this.enrollmentDate = enrollmentDate;
+        this.customer = customer;
+        this.section = section;
+    }
+
+       
+    
     
 
     public int getId() {

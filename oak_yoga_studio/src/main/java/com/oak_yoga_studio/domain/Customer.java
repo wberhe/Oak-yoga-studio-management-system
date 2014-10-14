@@ -38,8 +38,19 @@ public class Customer extends User {
     @OneToOne
     @JoinColumn(name = "shoppingCart_id")
     private ShoppingCart shoppingCart;
-    
 
+    public Customer() {
+    }
+
+    public Customer(List<Enrollment> enrollments, List<Waiver> waivers, List<Order> orders, ShoppingCart shoppingCart) {
+        this.enrollments = enrollments;
+        this.waivers = waivers;
+        this.orders = orders;
+        this.shoppingCart = shoppingCart;
+    }
+    
+   
+    
     public Faculty getAdvisor() {
         return advisor;
     }

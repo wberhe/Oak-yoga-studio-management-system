@@ -32,6 +32,19 @@ public class OrderItem {
     @ManyToOne
     private Product product;
 
+    public OrderItem() {
+    }
+
+    public OrderItem(double price, int quantity, Order order, Product product) {
+        this.price = price;
+        this.quantity = quantity;
+        this.order = order;
+        this.product = product;
+    }
+
+    
+    
+    
     public int getId() {
         return id;
     }

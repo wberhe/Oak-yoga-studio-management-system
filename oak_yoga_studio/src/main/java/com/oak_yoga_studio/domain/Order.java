@@ -46,6 +46,21 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    public Order() {
+    }
+
+    public Order(Date orderDate, String email, double totalPrice, List<OrderItem> orderItems, Customer customer) {
+        this.orderDate = orderDate;
+        this.email = email;
+        this.totalPrice = totalPrice;
+        this.orderItems = orderItems;
+        this.customer = customer;
+    }
+    
+    
+    
+    
+
     public int getId() {
         return id;
     }

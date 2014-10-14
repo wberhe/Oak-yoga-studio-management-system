@@ -35,6 +35,18 @@ public class Faculty extends User {
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL)
     private List<Waiver> waivers;
 
+    public Faculty() {
+    }
+
+    public Faculty(String status, List<Customer> advisees, List<Section> sections, List<Waiver> waivers) {
+        this.status = status;
+        this.advisees = advisees;
+        this.sections = sections;
+        this.waivers = waivers;
+    }
+   
+    
+    
     
     public String getStatus() {
         return status;

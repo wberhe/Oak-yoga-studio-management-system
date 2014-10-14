@@ -42,7 +42,21 @@ public class Product {
     
     @OneToMany(mappedBy = "product")
     private List<ShoppingCartItem> shoppingCartItems;
+
+    public Product() {
+    }
+
+    public Product(String name, double price, byte[] image, int quantity, String status, List<ShoppingCartItem> shoppingCartItems) {
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.quantity = quantity;
+        this.status = status;
+        this.shoppingCartItems = shoppingCartItems;
+    }
         
+    
+    
         
     public int getId() {
         return id;
