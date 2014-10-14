@@ -6,7 +6,7 @@
 
 package com.oak_yoga_studio.dao.impl;
 
-import com.oak_yoga_studio.dao.UserDAO;
+import com.oak_yoga_studio.dao.CustomerDAO;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.User;
 import java.util.List;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author weldu
  */
 
-public class CustomerDAOImpl implements UserDAO {
+public class CustomerDAOImpl implements CustomerDAO {
     
     private SessionFactory sf;
 
@@ -31,20 +31,20 @@ public class CustomerDAOImpl implements UserDAO {
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void addUser(User customer) {
+    public void addCustomer(Customer customer) {
         sf.getCurrentSession().save(customer);
     }
     
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void updateUser(User customer) {
+    public void updateCustomer(Customer customer) {
         sf.getCurrentSession().saveOrUpdate(customer);
     }
     
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public User getUser(int id) {
+    public Customer getCustomer(int id) {
         
         Customer customer= (Customer) sf.getCurrentSession().get(Customer.class,id);
         return customer;    
@@ -56,8 +56,8 @@ public class CustomerDAOImpl implements UserDAO {
      */
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public List<User> getAllUsers() {
-        List<User> customers;        
+    public List<Customer> getAllCustomers() {
+        List<Customer> customers;        
         Query query= sf.getCurrentSession().createQuery("from Customer");
         customers= query.list();
         

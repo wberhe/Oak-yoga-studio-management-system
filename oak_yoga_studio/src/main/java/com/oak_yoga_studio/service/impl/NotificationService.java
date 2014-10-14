@@ -66,7 +66,7 @@ public class NotificationService implements INotificationService {
     }
     
    /**
-    * Begin email sending implementation
+    * Begin email sending implementation, notify advisor
     * @param faculty
     * @param message 
     */ 
@@ -74,18 +74,25 @@ public class NotificationService implements INotificationService {
     @Override
     public void notifyAdvisor(Faculty faculty, String message) {
         
-       //TODO
+        SimpleMailMessage template= getToAdvisorTemplate();
+        String emailMessage = String.format(template.getText(),message, faculty.getFirstName() + " " + faculty.getLastName());
+        sendMail(faculty.getEmail(), template.getFrom(), template.getSubject(), emailMessage);
+       
         
     }
     /**
-     * notfiy all Faculties by admin
+     * Notify all Faculties by administrator
      * @param faculties
      * @param message 
      */
     @Override
     public void notifyFaculties(List<Faculty> faculties, String message) {
         
-        //TODO
+         SimpleMailMessage template = getToFacultiesTemplate();
+        for (Faculty faculty : faculties) {
+            String emailMessage = String.format(template.getText(), faculty.getFirstName() + " " + faculty.getLastName(),message);
+            sendMail(template.getFrom(), faculty.getEmail(), template.getSubject(), emailMessage);
+        }
         
     }
     /**
@@ -96,19 +103,21 @@ public class NotificationService implements INotificationService {
 
     @Override
     public void notifyCustomer(Customer customer, String message) {
-        
-        //TODO
+        SimpleMailMessage template=getToCustomersTemplate();
+            String emailMessage = String.format(template.getText(), customer.getFirstName() + " " + customer.getLastName(),message);
+            sendMail(template.getFrom(), customer.getEmail(), template.getSubject(), emailMessage);
         
     }
     /**
-     * Contact admin
+     * Contact administrator
      * @param faculty
      * @param message 
      */
     @Override
     public void contactAdmin(Faculty faculty, String message) {
-        
-        //TODO
+        SimpleMailMessage template=getToAdminTemplate();
+        String emailMessage = String.format(template.getText(), faculty.getFirstName() + " " + faculty.getLastName(),message);
+        sendMail(template.getFrom(), faculty.getEmail(), template.getSubject(), emailMessage);
  
     }
     
