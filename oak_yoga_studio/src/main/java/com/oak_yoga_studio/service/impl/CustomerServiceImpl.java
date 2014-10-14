@@ -21,88 +21,107 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Weldu
  */
 public class CustomerServiceImpl implements ICustomerService {
-
+    
     private CustomerDAO customerDAO;
     private CredentialDAO credentialDAO;
     private INotificationService notificationService;
-
+    
     public CustomerServiceImpl(CustomerDAO customerDAO, CredentialDAO credentialDAO,
             INotificationService notificationService) {
         this.customerDAO = customerDAO;
         this.credentialDAO = credentialDAO;
         this.notificationService = notificationService;
     }
-
+    
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void addCustomer(Customer customer) {
         try {
             customerDAO.addCustomer(customer);
         } catch (Exception e) {
-
+            
         }
     }
-
+    
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Customer getCustomerById(int id) {
-        try{
+        try {
             return this.customerDAO.getCustomer(id);
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
         
     }
-
+    
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public List<Customer> getAllCustomers() {
         
-        try{
+        try {
             List<Customer> customers;
-            customers=this.customerDAO.getAllCustomers();
+            customers = this.customerDAO.getAllCustomers();
             return customers;
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
         
     }
-
-    @Override
-    public void disableCustomer(Customer customer) {
-        
-       //TODO
-    }
-
+    
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void updateCustomer(int id,Customer customer) {
+    public void disableCustomer(Customer customer) {
+        try {
+            if (customer.getCredential().isActive() == true) {
+                customer.getCredential().setActive(false);
+                customerDAO.updateCustomer(customer);
+            } else {
+                customer.getCredential().setActive(true);
+                customerDAO.updateCustomer(customer);
+                
+            }
+        } catch (Exception e) {
+            
+        }
+    }
+    
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void updateCustomer(int id, Customer customer) {
         
-        Customer c=customerDAO.getCustomer(id);
+        Customer c = customerDAO.getCustomer(id);
         c.setFirstName(customer.getFirstName());
         c.setLastName(customer.getLastName());
         c.setDateOfBirth(customer.getDateOfBirth());
         c.setEmail(customer.getEmail());
         c.setProfilePicture(customer.getProfilePicture());
-        c.getCredential().setBlocked(customer.getCredential().isBlocked());
+        c.getCredential().setActive(customer.getCredential().isActive());
     }
     
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void notifyCustomer(Customer customer, String message){
+        notificationService.notifyCustomer(customer, message);
+    }
+    
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
     public boolean checkUserName(String userName) {
-        if(credentialDAO.getCredentialByUserName(userName)!=null){
+        if (credentialDAO.getCredentialByUserName(userName) != null) {
             return true;
         }
         return false;
     }
-
     
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public User getUserByUsername(String username){
+    public User getUserByUsername(String username) {
         Credential cr = credentialDAO.getCredentialByUserName(username);
         
         User user = null;
-        if(cr!=null) {
+        if (cr != null) {
             user = cr.getUser();
-           
+            
         }
         return user;
     }
