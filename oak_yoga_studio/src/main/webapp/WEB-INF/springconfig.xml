@@ -136,11 +136,11 @@
     <!-- Service injections -->  
     
     <bean id="customerService" class="com.oak_yoga_studio.service.impl.CustomerServiceImpl">
-        <constructor-arg ref="courseDAO"/>
-        <constructor-arg ref="courseDAO" />
-        <constructor-arg ref="sectionDAO"/>
-        <constructor-arg ref="facultyDAO"/>
-        <constructor-arg ref="enrollmentDAO"/>
+   
+        
+         <constructor-arg ref="customerDAO"/>
+        <constructor-arg ref="credentialDAO" />
+        <constructor-arg ref="notificationService"/>
      </bean> 
      
     <bean id="notificationService" class="com.oak_yoga_studio.service.impl.NotificationServiceImpl">
@@ -148,14 +148,17 @@
         <property name="toAdminTemplate" ref="toAdminTemplate"/> 
         <property name="toFacultiesTemplate" ref="toFacultiesTemplate"/> 
         <property name="toCustomersTemplate" ref="toCustomersTemplate"/>  
-        <property name="toAdvisorTemplate" ref="toAdvisorTemplate"/>     
+        <property name="toAdvisorTemplate" ref="toAdvisorTemplate"/>    
+         
     </bean> 
       
       
-      <bean id="EnrollentService" class="com.oak_yoga_studio.service.impl.EnrollmentServiceImpl">
-        <constructor-arg ref="customerDAO"/>
-        <constructor-arg ref="credentialDAO" />
-        <constructor-arg ref="notificationService"/>
+      <bean id="EnrollmentService" class="com.oak_yoga_studio.service.impl.EnrollmentServiceImpl">
+            <constructor-arg ref="customerDAO"/>
+        <constructor-arg ref="courseDAO" />
+        <constructor-arg ref="sectionDAO"/>
+        <constructor-arg ref="facultyDAO"/>
+        <constructor-arg ref="enrollmentDAO"/>
     </bean> 
       
       
