@@ -11,6 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class CreditCartServiceImpl implements ICreditCartService {
 
+    public CreditCartServiceImpl() {
+    }
+
+    
     @Transactional(propagation = Propagation.REQUIRED)
     
     @Override

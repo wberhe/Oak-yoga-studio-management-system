@@ -19,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class ShoppingCartServiceImpl implements IShoppingCartService{
 
+    public ShoppingCartServiceImpl() {
+    }
+    
     @Transactional(propagation = Propagation.REQUIRED)
     
     @Override
