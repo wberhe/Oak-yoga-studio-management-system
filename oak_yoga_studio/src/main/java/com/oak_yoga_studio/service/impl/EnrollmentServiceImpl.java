@@ -132,6 +132,16 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
     @Override
     public List<Section> getSections(Course course) {
         
+            try
+       {
+        
+          // return enrollmentDAO.getEnrollmentsByCustomerID(customerID);
+            return null;
+       }
+       catch(Exception e)
+       {
+           return null;
+       }
     
     }
  
