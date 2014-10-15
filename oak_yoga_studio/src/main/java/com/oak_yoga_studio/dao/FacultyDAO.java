@@ -23,4 +23,6 @@ public interface FacultyDAO {
      public List<Faculty> getAllActiveFaculties();
      
      public List<Faculty> getAllFaculties();
+     
+      public Faculty getAvailableAdvisor();
 }

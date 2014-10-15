@@ -22,5 +22,8 @@ public interface SectionDAO {
      public Section getSection(int id);
      
      public List<Section> getAllSections();
+      
+   
+     
     
 }
