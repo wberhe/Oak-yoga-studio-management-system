@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author Weldino
+ * @author Senai
  */
 public interface IFacultyService {
 
