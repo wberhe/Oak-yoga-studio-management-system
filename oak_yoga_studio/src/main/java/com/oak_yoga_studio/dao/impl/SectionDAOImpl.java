@@ -7,6 +7,7 @@
 package com.oak_yoga_studio.dao.impl;
 
 import com.oak_yoga_studio.dao.SectionDAO;
+import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Section;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,14 @@ public class SectionDAOImpl implements SectionDAO {
     
         return sections;
         
+    }
+
+    @Override
+    public List<Section> getCourseSections(Course course) {
+        List<Section> sections;
+        Query q=sf.getCurrentSession().createQuery("Select distinct s from Section s join s.course c where c=course");
+        sections=q.list();
+        return sections;
     }
     
 }

@@ -61,7 +61,7 @@
           class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="properties">
             <props>
-                <!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect
                 </prop>
                 <prop key="connection.pool_size">1</prop>
@@ -161,8 +161,11 @@
             <constructor-arg ref="facultyDAO"/>
             <constructor-arg ref="enrollmentDAO"/>
       </bean> 
-      
-      
+      <!-- Course service injections -->
+     <bean id="courseService" class="com.oak_yoga_studio.service.impl.CourseServiceImpl">
+        <constructor-arg ref="courseDAO"/>
+        <constructor-arg ref="sectionDAO" />
+     </bean> 
     
     <!--Email Service--> 
     <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

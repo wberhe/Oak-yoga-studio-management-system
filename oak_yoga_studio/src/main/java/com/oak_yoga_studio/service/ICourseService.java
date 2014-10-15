@@ -7,6 +7,7 @@
 package com.oak_yoga_studio.service;
 
 import com.oak_yoga_studio.domain.Course;
+import com.oak_yoga_studio.domain.Section;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ import java.util.List;
  * @author Senai
  */
 public interface ICourseService {
+    
     public void addCourse(Course course);
 
     public void updateCourse(Course course);
@@ -25,5 +27,7 @@ public interface ICourseService {
     public List<Course> getListOfActiveCourses();
     
     public List<Course> getListOfCourses();
+    
+    public List<Section> getCourseSections(Course course);
 
 }

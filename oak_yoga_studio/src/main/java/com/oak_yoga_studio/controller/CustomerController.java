@@ -47,7 +47,7 @@ public class CustomerController {
     
     @RequestMapping("/")
     public String redirectRoot() {
-        return "redirect:/addCredential";
+        return "redirect:/index";
     }
 
     
@@ -68,7 +68,7 @@ public class CustomerController {
     @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
     public String add(@Valid Customer customer, BindingResult result, HttpSession session, RedirectAttributes flashAttr, @RequestParam("file") MultipartFile file) {
         String view = "redirect:/";
-        System.out.println("customerController Add");
+        //System.out.println("customerController Add");
 
         if (!result.hasErrors()) {
             try {

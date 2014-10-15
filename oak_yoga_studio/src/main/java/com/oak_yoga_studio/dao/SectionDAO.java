@@ -6,6 +6,7 @@
 
 package com.oak_yoga_studio.dao;
 
+import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Section;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public interface SectionDAO {
      public Section getSection(int id);
      
      public List<Section> getAllSections();
+     
+     public List<Section> getCourseSections(Course course);
       
    
      

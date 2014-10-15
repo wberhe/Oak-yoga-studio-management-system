@@ -103,7 +103,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
         
     List<Section> sections=new ArrayList<Section>();
         
-        Query query= sf.getCurrentSession().createQuery("select distinct s from Section s join  s.course =course ");
+        Query query= sf.getCurrentSession().createQuery("select distinct s from Section s join  s.course  c where c=course");
         
         sections= query.list();
         

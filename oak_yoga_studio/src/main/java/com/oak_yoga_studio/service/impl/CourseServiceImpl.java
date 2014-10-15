@@ -6,10 +6,14 @@
 package com.oak_yoga_studio.service.impl;
 
 import com.oak_yoga_studio.dao.CourseDAO;
+import com.oak_yoga_studio.dao.SectionDAO;
 import com.oak_yoga_studio.domain.Course;
+import com.oak_yoga_studio.domain.Section;
 import com.oak_yoga_studio.service.ICourseService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -17,12 +21,15 @@ import java.util.List;
  */
 public class CourseServiceImpl implements ICourseService {
 
-    CourseDAO courseDAO;
+    private CourseDAO courseDAO;
+    private SectionDAO sectionDAO;
 
-    public CourseServiceImpl(CourseDAO courseDAO) {
+    public CourseServiceImpl(CourseDAO courseDAO, SectionDAO sectionDAO) {
         this.courseDAO = courseDAO;
+        this.sectionDAO = sectionDAO;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void addCourse(Course course) {
         try {
@@ -32,6 +39,7 @@ public class CourseServiceImpl implements ICourseService {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateCourse(Course course) {
         try {
@@ -41,6 +49,7 @@ public class CourseServiceImpl implements ICourseService {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Course getCourseById(int Id) {
         try {
@@ -50,6 +59,7 @@ public class CourseServiceImpl implements ICourseService {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void enableOrdisableCourse(Course course) {
         try {
@@ -65,6 +75,7 @@ public class CourseServiceImpl implements ICourseService {
 
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<Course> searchCoursesbyName(String courseName) {
         try {
             return courseDAO.getCoursesWith(courseName);
@@ -72,7 +83,8 @@ public class CourseServiceImpl implements ICourseService {
             return new ArrayList();
         }
     }
-    
+
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public List<Course> getListOfActiveCourses() {
         try {
@@ -81,7 +93,8 @@ public class CourseServiceImpl implements ICourseService {
             return new ArrayList();
         }
     }
-    
+
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public List<Course> getListOfCourses() {
         try {
@@ -91,4 +104,13 @@ public class CourseServiceImpl implements ICourseService {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public List<Section> getCourseSections(Course course) {
+        try {
+            return sectionDAO.getCourseSections(course);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

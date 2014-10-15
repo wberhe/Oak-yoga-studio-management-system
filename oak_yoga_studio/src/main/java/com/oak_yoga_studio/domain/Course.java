@@ -45,14 +45,17 @@ public class Course {
     public Course() {
     }
 
-    public Course(String courseNumber, String courseName, String description, List<Section> sections, List<Course> prerequisites, List<Waiver> waivers) {
+    public Course(String courseNumber, String courseName, boolean active, String description, List<Section> sections, List<Course> prerequisites, List<Waiver> waivers) {
         this.courseNumber = courseNumber;
         this.courseName = courseName;
+        this.active = active;
         this.description = description;
         this.sections = sections;
         this.prerequisites = prerequisites;
         this.waivers = waivers;
     }
+
+    
 
     public String getCourseNumber() {
         return courseNumber;
