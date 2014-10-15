@@ -7,7 +7,9 @@
 package com.oak_yoga_studio.service;
 
 import com.oak_yoga_studio.domain.Address;
+import com.oak_yoga_studio.domain.Order;
 import com.oak_yoga_studio.domain.User;
+import java.util.List;
 
 /**
  *
@@ -18,6 +20,8 @@ public interface IOrderService {
     public void fillingShippingAddress(Address address);
     
     public void fillingPaymentInfo(User userInfo);
+    
+    public List<Order> placeOrder(Order orderList);
     
 
 }
