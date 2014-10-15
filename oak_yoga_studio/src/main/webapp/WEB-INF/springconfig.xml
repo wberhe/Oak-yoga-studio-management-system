@@ -133,33 +133,34 @@
         <property name="sf" ref="sessionFactory"/>
     </bean>
     
-    <!-- Service injections -->  
+    <!-- Email Service injections --> 
+    <bean id="emailAdvice" class="com.oak_yoga_studio.aop.EmailAdvice">
+        <property name="notificationService" ref="notificationService"/>
+    </bean> 
     
-    <bean id="customerService" class="com.oak_yoga_studio.service.impl.CustomerServiceImpl">
-        <constructor-arg ref="customerDAO"/>
-        <constructor-arg ref="credentialDAO" />
-        <constructor-arg ref="notificationService"/>
-     </bean> 
-     
     <bean id="notificationService" class="com.oak_yoga_studio.service.impl.NotificationServiceImpl">
         <property name="javaMailSender" ref="javaMailSender"/>
         <property name="toAdminTemplate" ref="toAdminTemplate"/> 
         <property name="toFacultiesTemplate" ref="toFacultiesTemplate"/> 
         <property name="toCustomersTemplate" ref="toCustomersTemplate"/>  
-        <property name="toAdvisorTemplate" ref="toAdvisorTemplate"/>    
-         
+        <property name="toAdvisorTemplate" ref="toAdvisorTemplate"/> 
     </bean> 
+    
+    <!-- customer service injections --> 
+    <bean id="customerService" class="com.oak_yoga_studio.service.impl.CustomerServiceImpl">
+        <constructor-arg ref="customerDAO"/>
+        <constructor-arg ref="credentialDAO" />
+        <constructor-arg ref="notificationService"/>
+     </bean> 
       
-      
+      <!-- enrollment service injections --> 
       <bean id="EnrollmentService" class="com.oak_yoga_studio.service.impl.EnrollmentServiceImpl">
             <constructor-arg ref="customerDAO"/>
             <constructor-arg ref="courseDAO" />
             <constructor-arg ref="sectionDAO"/>
             <constructor-arg ref="facultyDAO"/>
             <constructor-arg ref="enrollmentDAO"/>
-    </bean> 
-      
-      
+      </bean> 
       
       
     

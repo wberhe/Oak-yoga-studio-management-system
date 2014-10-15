@@ -33,6 +33,11 @@ public class NotificationServiceImpl implements INotificationService {
         this.javaMailSender = javaMailSender;
     }
 
+    public JavaMailSenderImpl getJavaMailSender() {
+        return javaMailSender;
+    }
+    
+
     public SimpleMailMessage getToFacultiesTemplate() {
         return toFacultiesTemplate;
     }
@@ -109,7 +114,7 @@ public class NotificationServiceImpl implements INotificationService {
     @Override
     public void notifyCustomer(Customer customer, String message) {
         SimpleMailMessage template=getToCustomersTemplate();
-            String emailMessage = String.format(template.getText(), customer.getFirstName() + " " + customer.getLastName(),message);
+            String emailMessage = String.format(template.getText(), customer.getFirstName()+ " " + customer.getLastName(),message);
             sendMail(template.getFrom(), customer.getEmail(), template.getSubject(), emailMessage);
         
     }
