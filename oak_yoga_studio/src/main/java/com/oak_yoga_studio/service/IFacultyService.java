@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.oak_yoga_studio.service;
 
 import com.oak_yoga_studio.domain.Customer;
@@ -17,8 +16,10 @@ import java.util.List;
  * @author Weldino
  */
 public interface IFacultyService {
-    
+
     public void addFaculty(Faculty faculty);
+
+    public List<Faculty> getListOfActiveFaculty();
 
     public List<Faculty> getListOfFaculty();
 
@@ -33,5 +34,5 @@ public interface IFacultyService {
     public void updateWaiverRequest(Waiver waiver);
 
     public List<Customer> facultyAdvisees(Faculty faculty);
-    
+
 }
