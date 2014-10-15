@@ -1,5 +1,6 @@
 package com.oak_yoga_studio.service.impl;
 
+import com.oak_yoga_studio.dao.ShoppingCartDAO;
 import com.oak_yoga_studio.domain.Address;
 import com.oak_yoga_studio.domain.Order;
 import com.oak_yoga_studio.domain.User;
@@ -13,7 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Somayeh
  */
 public class OrderServiceImpl implements IOrderService{
+    private ShoppingCartDAO shoppingCartDao;
+
+    public OrderServiceImpl() {
+    }
     
+    public OrderServiceImpl(ShoppingCartDAO shoppingCartDao) {
+        this.shoppingCartDao = shoppingCartDao;
+    }
     
     @Transactional(propagation = Propagation.REQUIRED)
 
