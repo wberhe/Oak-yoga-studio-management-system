@@ -136,16 +136,27 @@
     <!-- Service injections -->  
     
     <bean id="customerService" class="com.oak_yoga_studio.service.impl.CustomerServiceImpl">
-        <constructor-arg ref="customerDAO"/>
-        <constructor-arg ref="credentialDAO" />
-        <constructor-arg ref="notificationService"/>
-    </bean> 
+        <constructor-arg ref="courseDAO"/>
+        <constructor-arg ref="courseDAO" />
+        <constructor-arg ref="sectionDAO"/>
+        <constructor-arg ref="facultyDAO"/>
+        <constructor-arg ref="enrollmentDAO"/>
+     </bean> 
      
     <bean id="notificationService" class="com.oak_yoga_studio.service.impl.NotificationService">
         <property name="javaMailSender" ref="javaMailSender"/>
         <property name="toAdminTemplate" ref="toAdminTemplate"/> 
         <property name="toFacultiesTemplate" ref="toFacultiesTemplate"/>        
     </bean> 
+      
+      
+      <bean id="EnrollentService" class="com.oak_yoga_studio.service.impl.EnrollmentServiceImpl">
+        <constructor-arg ref="customerDAO"/>
+        <constructor-arg ref="credentialDAO" />
+        <constructor-arg ref="notificationService"/>
+    </bean> 
+      
+      
       
     
     <!--Email Service--> 

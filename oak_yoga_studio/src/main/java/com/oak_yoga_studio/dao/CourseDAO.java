@@ -7,6 +7,7 @@
 package com.oak_yoga_studio.dao;
 
 import com.oak_yoga_studio.domain.Course;
+import com.oak_yoga_studio.domain.Customer;
 import java.util.List;
 
 /**
@@ -22,4 +23,6 @@ public interface CourseDAO {
      public Course getCourse(int id);
      
      public List<Course> getAllCourses();
+     
+      public List<Course> getWaivers(Customer customerID);
 }

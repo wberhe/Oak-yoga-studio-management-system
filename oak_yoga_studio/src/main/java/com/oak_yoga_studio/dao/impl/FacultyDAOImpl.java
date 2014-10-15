@@ -77,4 +77,17 @@ public class FacultyDAOImpl implements FacultyDAO {
        return faculties;
     }
     
+    
+    @Override
+    public Faculty getAvailableAdvisor() {
+        //decide first on what basis an advisor should be chosen
+        Faculty faculty;        
+        Query query= sf.getCurrentSession().createQuery("select top 1 f from Faculty  f ");
+        
+        faculty=(Faculty) query.uniqueResult();
+        
+        return faculty;
+        
+    }
+    
 }

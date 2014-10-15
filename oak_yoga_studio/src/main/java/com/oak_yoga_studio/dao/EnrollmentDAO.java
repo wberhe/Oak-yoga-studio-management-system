@@ -38,15 +38,9 @@ public interface EnrollmentDAO {
      public List<Course> getAllCourses();
      
      public void saveEnrollment(Enrollment enrollment);
-     
-     public void saveSection(Section section);
-
-     public Faculty getAvailableAdvisor();
-     
+         
      public void addWaitingListEnrollment(Enrollment enrollment);
-     
-     public List<Course> getWaivers(Customer customerID);
-     
+             
      public List<Course> getCoursesTaken(int customerID);
      
      public void withdraw(Customer customer, Section section);

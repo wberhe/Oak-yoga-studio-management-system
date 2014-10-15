@@ -143,46 +143,76 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
 
     @Override
     public void saveEnrollment(Enrollment enrollment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        sf.getCurrentSession().saveOrUpdate(enrollment);
     }
 
-    @Override
-    public void saveSection(Section section) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 
-    @Override
-    public Faculty getAvailableAdvisor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
     @Override
     public void addWaitingListEnrollment(Enrollment enrollment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+             
+             enrollment.setStatus("Waiting");
+             sf.getCurrentSession().save(enrollment);
     }
 
-    @Override
-    public List<Course> getWaivers(Customer customerID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
     @Override
     public List<Course> getCoursesTaken(int customerID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+     List<Course> courses=new ArrayList<Course>();
+        
+     // change this SQL QUERY TO CORRECT HQL......
+     
+        Query query= sf.getCurrentSession().createQuery("select c from Course c JOIIN Section s on s.course_Id="
+                + "c.Id JOIN Enrollment e ON e.section_Id= s.Id "
+                + "where e.status ='Completed' AND e.customer_id="+ customerID);
+        courses= query.list();
+        
+       return courses;
     }
 
     @Override
     public void withdraw(Customer customer, Section section) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        
+        // verify query's correctness
+        
+        Enrollment enrollment ;
+        Query query= sf.getCurrentSession().createQuery("select e from Enrollment e  Join e.customer cu" +
+        "   join e.section where e.section=" + section +  " and e.customer=" + customer );
+        enrollment= (Enrollment)query.uniqueResult();
+        
+                   
+        sf.getCurrentSession().saveOrUpdate(enrollment);
+         
+    
     }
 
     @Override
     public Enrollment getTopWaitingList(int sectionId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+              // verify query's correctness
+        
+        Enrollment enrollment ;
+        Query query= sf.getCurrentSession().createQuery("select top 1 e from Enrollment e join e.section s"
+                + "where s.id=" + sectionId + " and e.status='Waiting'" );
+        enrollment= (Enrollment)query.uniqueResult();
+        
+        return enrollment;
     }
 
     @Override
     public void changeEnrollmentStatus(String status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        
+       // ??add enrollment parama
+        
+        //should do setEnrollmentStatus(status)
+        // and update Enrollment
+    
     }
 }

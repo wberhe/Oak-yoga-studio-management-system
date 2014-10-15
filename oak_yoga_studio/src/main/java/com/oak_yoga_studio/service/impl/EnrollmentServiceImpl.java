@@ -134,8 +134,7 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
         
             try
        {
-        
-          // return enrollmentDAO.getEnrollmentsByCustomerID(customerID);
+            enrollmentDAO.getSections(course);
             return null;
        }
        catch(Exception e)
@@ -149,67 +148,166 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public boolean checkSeatAvailablity(int sectionID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+     
+        try
+       {
+        
+        return  enrollmentDAO.checkSeatAvailablity(sectionID);
+       }
+       catch(Exception e)
+       {
+           return false;
+           
+       }  
     }
 
      @Transactional(propagation = Propagation.REQUIRED)
      @Override
-    public List<Course> getAllCourses() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      public List<Course> getAllCourses() {
+            
+       try
+       {
+        
+        return courseDAO.getAllCourses();
+       }
+       catch(Exception e)
+       {
+           return null;
+           
+       }
     }
 
      @Transactional(propagation = Propagation.REQUIRED)
      @Override
     public void saveEnrollment(Enrollment enrollment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+          
+      try
+       {
+        
+      enrollmentDAO.saveEnrollment(enrollment);
+       }
+       catch(Exception e)
+       {
+           
+           
+       }
     }
 
      @Transactional(propagation = Propagation.REQUIRED)
      @Override
     public void saveSection(Section section) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+      try
+        {
+        
+            sectionDAO.updateSection(section);
+        }
+       catch(Exception e)
+       {
+           
+           
+       }
     }
 
      @Transactional(propagation = Propagation.REQUIRED)
      @Override
     public Faculty getAvailableAdvisor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          try
+        {
+        
+           return facultyDAO.getAvailableAdvisor();
+        }
+        catch(Exception e)
+       {
+       
+          return null;
+       }
     }
 
      @Transactional(propagation = Propagation.REQUIRED)
      @Override
     public void addWaitingListEnrollment(Enrollment enrollment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
     }
 
      @Transactional(propagation = Propagation.REQUIRED)
      @Override
     public List<Course> getWaivers(Customer customerID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+       try
+       {
+             
+         return courseDAO.getWaivers(customerID);
+       }
+       catch(Exception e)
+       {
+           return null;
+           
+       }
+        
     }
 
      @Transactional(propagation = Propagation.REQUIRED)
      @Override
     public List<Course> getCoursesTaken(int customerID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         
+         try
+       {
+             
+         return enrollmentDAO.getCoursesTaken(customerID);
+       }
+       catch(Exception e)
+       {
+           return null;
+           
+       }
     }
 
      @Transactional(propagation = Propagation.REQUIRED)
      @Override
     public void withdraw(Customer customer, Section section) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+       try
+       {
+             
+         enrollmentDAO.withdraw(customer, section);
+       }
+       catch(Exception e)
+       {
+                
+       }
     }
 
      @Transactional(propagation = Propagation.REQUIRED)
      @Override
     public Enrollment getTopWaitingList(int sectionId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try
+       {
+             
+          return enrollmentDAO.getTopWaitingList(sectionId);
+       }
+       catch(Exception e)
+       {
+             return null;   
+       }
     }
 
      @Transactional(propagation = Propagation.REQUIRED)
      @Override
     public void changeEnrollmentStatus(String status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+      try
+       {
+             
+         enrollmentDAO.changeEnrollmentStatus(status);
+       }
+       catch(Exception e)
+       {
+             
+       }
     }
   
     

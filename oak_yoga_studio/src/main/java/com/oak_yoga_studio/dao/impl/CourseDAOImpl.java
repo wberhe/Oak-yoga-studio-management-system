@@ -8,6 +8,7 @@ package com.oak_yoga_studio.dao.impl;
 
 import com.oak_yoga_studio.dao.CourseDAO;
 import com.oak_yoga_studio.domain.Course;
+import com.oak_yoga_studio.domain.Customer;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
@@ -66,4 +67,16 @@ public class CourseDAOImpl implements CourseDAO {
        return courses;
     }
     
+    
+        @Override
+    public List<Course> getWaivers(Customer customerID) {
+        
+        List<Course> courses=new ArrayList<Course>();
+        
+        Query query= sf.getCurrentSession().createQuery("select distinct c from Course c JOIN Waiver w on"
+                + "w.course_id= c.id where w.customer_id="+ customerID);
+        courses= query.list();
+        
+       return courses;
+    }
 }
