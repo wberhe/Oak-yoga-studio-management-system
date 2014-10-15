@@ -20,5 +20,7 @@ public interface FacultyDAO {
      
      public Faculty getFaculty(int id);
      
+     public List<Faculty> getAllActiveFaculties();
+     
      public List<Faculty> getAllFaculties();
 }

@@ -87,7 +87,7 @@ public class CustomerServiceImpl implements ICustomerService {
     
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void updateCustomer(int id, Customer customer) {
+    public void updateCustomer(int id, Customer customer) {// needs to be checked
         
         Customer c = customerDAO.getCustomer(id);
         c.setFirstName(customer.getFirstName());

@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 /**
  *
@@ -19,8 +20,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Faculty extends User {
-    
-    
+        
     private String status;
     
    
