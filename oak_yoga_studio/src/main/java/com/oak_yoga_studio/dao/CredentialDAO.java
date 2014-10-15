@@ -19,12 +19,10 @@ public interface CredentialDAO {
     
     public void updateCredential(Credential credential);
     
-    //public void removeCredential(Credential credential);
-    
     public Credential getCredential(int credentialid);
     
     public List<Credential> getAllCredentials();
     
-    public Credential getCredentialByUserName(String userName);
+    public Credential getCredentialByUserName(String username);
     
 }

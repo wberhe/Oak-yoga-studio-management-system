@@ -9,5 +9,7 @@
     </head>
     <body>
         <h1>Welcome to Oak Yoga Studio!!</h1>
+        <p>Please <a href="/addCredential">sign up</a>
+        
     </body>
 </html>
