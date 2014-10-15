@@ -136,9 +136,7 @@
     <!-- Service injections -->  
     
     <bean id="customerService" class="com.oak_yoga_studio.service.impl.CustomerServiceImpl">
-   
-        
-         <constructor-arg ref="customerDAO"/>
+        <constructor-arg ref="customerDAO"/>
         <constructor-arg ref="credentialDAO" />
         <constructor-arg ref="notificationService"/>
      </bean> 
@@ -155,10 +153,10 @@
       
       <bean id="EnrollmentService" class="com.oak_yoga_studio.service.impl.EnrollmentServiceImpl">
             <constructor-arg ref="customerDAO"/>
-        <constructor-arg ref="courseDAO" />
-        <constructor-arg ref="sectionDAO"/>
-        <constructor-arg ref="facultyDAO"/>
-        <constructor-arg ref="enrollmentDAO"/>
+            <constructor-arg ref="courseDAO" />
+            <constructor-arg ref="sectionDAO"/>
+            <constructor-arg ref="facultyDAO"/>
+            <constructor-arg ref="enrollmentDAO"/>
     </bean> 
       
       
