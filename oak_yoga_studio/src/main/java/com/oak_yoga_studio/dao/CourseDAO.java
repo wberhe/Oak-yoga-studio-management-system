@@ -16,11 +16,15 @@ import java.util.List;
  */
 public interface CourseDAO {
     
-      public void addCourse(Course course);
+     public void addCourse(Course course);
      
      public void updateCourse(Course course);
      
      public Course getCourse(int id);
+     
+     public List<Course> getCoursesWith(String words);
+     
+     public List<Course> getAllActiveCourses();
      
      public List<Course> getAllCourses();
      

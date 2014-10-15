@@ -49,6 +49,16 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
     @Override
+    public List<Faculty> getListOfActiveFaculty() {
+        try {
+            return facultyDAO.getAllActiveFaculties();
+        } catch (Exception e) {
+            return new ArrayList();
+        }
+
+    }
+    
+    @Override
     public List<Faculty> getListOfFaculty() {
         try {
             return facultyDAO.getAllFaculties();

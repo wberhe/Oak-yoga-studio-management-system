@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.oak_yoga_studio.domain;
 
 import java.util.List;
@@ -19,10 +18,9 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  * @author Fetiya
  */
-
 @Entity
 public class Course {
-    
+
     @Id
     @GeneratedValue
     private int id;
@@ -30,15 +28,17 @@ public class Course {
     private String courseNumber;
     @NotBlank
     private String courseName;
-    
+
+    private boolean active;
+
     private String description;
-    
+
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Section> sections;
-    
+
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Course>  prerequisites;
-    
+    private List<Course> prerequisites;
+
     @OneToMany(mappedBy = "waiverCourse", cascade = CascadeType.ALL)
     private List<Waiver> waivers;
 
@@ -54,15 +54,20 @@ public class Course {
         this.waivers = waivers;
     }
 
-  
-    
-       
     public String getCourseNumber() {
         return courseNumber;
     }
 
     public void setCourseNumber(String courseNumber) {
         this.courseNumber = courseNumber;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getCourseName() {
@@ -88,16 +93,17 @@ public class Course {
     public void setId(int id) {
         this.id = id;
     }
+
     //Add a single Section
-    public void addSection(Section section)
-    {
-        if(section.getCourse()==null){
+    public void addSection(Section section) {
+        if (section.getCourse() == null) {
             section.setCourse(this);
         }
         this.sections.add(section);
     }
-    public void removeSection(Section section){
-        if(section.getCourse()!=null){
+
+    public void removeSection(Section section) {
+        if (section.getCourse() != null) {
             section.setCourse(null);
         }
         this.sections.remove(section);
@@ -110,11 +116,12 @@ public class Course {
     public void setSections(List<Section> sections) {
         this.sections = sections;
     }
+
     //add prerequisite
-    public void addPrerequiste(Course course)
-    {
+    public void addPrerequiste(Course course) {
         this.prerequisites.add(course);
     }
+
     public List<Course> getPrerequisites() {
         return prerequisites;
     }
@@ -122,11 +129,13 @@ public class Course {
     public void setPrerequisites(List<Course> prerequisites) {
         this.prerequisites = prerequisites;
     }
-    public void addWaiver(Waiver waiver){
+
+    public void addWaiver(Waiver waiver) {
         waiver.setWaiverCourse(this);
         this.waivers.add(waiver);
-        
+
     }
+
     public List<Waiver> getWaivers() {
         return waivers;
     }
@@ -134,7 +143,6 @@ public class Course {
     public void setWaivers(List<Waiver> waivers) {
         this.waivers = waivers;
     }
-    
 
     @Override
     public int hashCode() {
@@ -165,6 +173,5 @@ public class Course {
         }
         return true;
     }
-    
-    
+
 }
