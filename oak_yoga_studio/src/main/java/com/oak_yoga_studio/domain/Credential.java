@@ -27,7 +27,7 @@ public class Credential {
     @GeneratedValue
     private int id;
     
-    private boolean blocked;
+    private boolean active;
     
     @NotBlank
     private String role;
@@ -53,7 +53,7 @@ public class Credential {
     }
 
     public Credential(boolean blocked, String role, String userName, String password, String confirmPassword, User user) {
-        this.blocked = blocked;
+        this.active = blocked;
         this.role = role;
         this.userName = userName;
         this.password = password;
@@ -70,14 +70,13 @@ public class Credential {
         this.id = id;
     }
 
-    public boolean isBlocked() {
-        return blocked;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setBlocked(boolean blocked) {
-        this.blocked = blocked;
+    public void setActive(boolean active) {
+        this.active = active;
     }
-    
 
     public String getRole() {
         return role;

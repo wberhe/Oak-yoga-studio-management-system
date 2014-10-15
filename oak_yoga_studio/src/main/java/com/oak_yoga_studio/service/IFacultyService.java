@@ -24,9 +24,9 @@ public interface IFacultyService {
 
     public void updateFaculty(Faculty faculty);
 
-    public Faculty getFacultyById(long Id);
+    public Faculty getFacultyById(int Id);
 
-    public void disableFaculty(Faculty faculty);
+    public void enableOrdisableFaculty(Faculty faculty);
 
     public List<Section> getFacultySections(Faculty faculty);
 

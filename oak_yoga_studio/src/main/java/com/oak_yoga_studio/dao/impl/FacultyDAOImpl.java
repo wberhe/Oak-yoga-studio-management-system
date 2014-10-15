@@ -56,6 +56,19 @@ public class FacultyDAOImpl implements FacultyDAO {
      */
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
+    public List<Faculty> getAllActiveFaculties() {
+        List<Faculty> faculties;        
+        Query query= sf.getCurrentSession().createQuery("from Faculty Where active=true");
+        faculties= query.list();
+        
+       return faculties;
+    }
+    /**
+     * 
+     * @returns only faculty users
+     */
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
     public List<Faculty> getAllFaculties() {
         List<Faculty> faculties;        
         Query query= sf.getCurrentSession().createQuery("from Faculty");

@@ -30,5 +30,5 @@ public interface ICustomerService {
     
     public boolean checkUserName(String userName); 
     
-    
+    public void notifyCustomer(Customer customer, String message);
 }
