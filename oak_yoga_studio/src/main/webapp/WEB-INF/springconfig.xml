@@ -141,10 +141,12 @@
         <constructor-arg ref="notificationService"/>
     </bean> 
      
-    <bean id="notificationService" class="com.oak_yoga_studio.service.impl.NotificationService">
+    <bean id="notificationService" class="com.oak_yoga_studio.service.impl.NotificationServiceImpl">
         <property name="javaMailSender" ref="javaMailSender"/>
         <property name="toAdminTemplate" ref="toAdminTemplate"/> 
-        <property name="toFacultiesTemplate" ref="toFacultiesTemplate"/>        
+        <property name="toFacultiesTemplate" ref="toFacultiesTemplate"/> 
+        <property name="toCustomersTemplate" ref="toCustomersTemplate"/>  
+        <property name="toAdvisorTemplate" ref="toAdvisorTemplate"/>     
     </bean> 
       
     
@@ -163,7 +165,7 @@
         </property>
     </bean>
   
-    <bean id="toCustomerTemplate"
+    <bean id="toCustomersTemplate"
           class="org.springframework.mail.SimpleMailMessage"> 
         <property name="from" value="mum.ea.project@gmail.com" />
         <property name="to" value="wel.berhe@gmail.com" />

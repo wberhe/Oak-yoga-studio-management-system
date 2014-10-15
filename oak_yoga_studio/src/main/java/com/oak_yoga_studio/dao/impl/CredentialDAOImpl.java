@@ -40,12 +40,6 @@ public class CredentialDAOImpl implements CredentialDAO {
         sf.getCurrentSession().saveOrUpdate(credential);
     }
 
-//    @Transactional(propagation = Propagation.MANDATORY)
-//    @Override
-//    public void removeCredential(Credential credential) {
-//        sf.getCurrentSession().delete(credential);
-//    }
-
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Credential getCredential(int credentialid) {
@@ -62,14 +56,14 @@ public class CredentialDAOImpl implements CredentialDAO {
     }
 
     @Override//getting credential by userName
-    public Credential getCredentialByUserName(String userName) {
+    public Credential getCredentialByUserName(String username) {
         Criteria criterea=sf.getCurrentSession().createCriteria(Credential.class); 
-        criterea.add(Restrictions.eq("username", userName));
+        criterea.add(Restrictions.eq("userName", username));
 //         Query query= sf.getCurrentSession().createQuery("select distinct c from Credential c where c.username=:u");
 //         query.setString("u", userName);
 //         List<Credential> credential= query.list();
          List<Credential> credential= criterea.list();
-         System.out.println(userName+":Size:"+credential.size());//for debuging
+         System.out.println(username+":Size:"+credential.size());//for debuging
          return ((credential.size()>0)?credential.get(0):null);
     }
 }
