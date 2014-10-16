@@ -5,12 +5,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Oak</title>
     </head>
     <body>
         <h1>Welcome to Oak Yoga Studio!!</h1>
         <p>Please <a href="addCredential">sign up</a>
-        <p>Administrator <a href="admin">o to admin home page</a>
+        <p>Administrator <a href="admin">go to admin home page</a>
         <p>Enrollment <a href="enrollInCourse">enroll</a>
         <p>Customer Profile Update <a href="editProfile">Edit Profile</a>
     </body>
