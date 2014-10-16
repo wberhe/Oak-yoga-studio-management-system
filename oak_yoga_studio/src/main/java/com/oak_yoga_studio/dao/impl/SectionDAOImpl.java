@@ -9,7 +9,6 @@ package com.oak_yoga_studio.dao.impl;
 import com.oak_yoga_studio.dao.SectionDAO;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Section;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -59,7 +58,7 @@ public class SectionDAOImpl implements SectionDAO {
     @Override
     public List<Section> getAllSections() {
         
-        List<Section> sections= new ArrayList<Section>();
+        List<Section> sections;
     
         Query query= sf.getCurrentSession().createQuery("from Section");
     

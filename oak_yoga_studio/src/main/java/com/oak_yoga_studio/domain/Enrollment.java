@@ -9,6 +9,8 @@ package com.oak_yoga_studio.domain;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -30,7 +32,13 @@ public class Enrollment {
     @GeneratedValue
     private int id;
     
-    private String status;
+    
+    public enum statusType{
+        ACTIVE,WAITINGLIST,WITHDRAWAL,COMPLETED;
+    }
+    
+    @Enumerated(EnumType.STRING)
+    private statusType status;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
@@ -47,12 +55,14 @@ public class Enrollment {
     public Enrollment() {
     }   
 
-    public Enrollment(String status, Date enrollmentDate, Customer customer, Section section) {
+    public Enrollment(statusType status, Date enrollmentDate, Customer customer, Section section) {
         this.status = status;
         this.enrollmentDate = enrollmentDate;
         this.customer = customer;
         this.section = section;
     }
+
+    
 
        
     
@@ -66,13 +76,15 @@ public class Enrollment {
         this.id = id;
     }
 
-    public String getStatus() {
+    public statusType getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(statusType status) {
         this.status = status;
     }
+
+    
 
     public Date getEnrollmentDate() {
         return enrollmentDate;
@@ -97,13 +109,14 @@ public class Enrollment {
     public void setSection(Section section) {
         this.section = section;
     }
-    
-    
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + (this.status != null ? this.status.hashCode() : 0);
-        hash = 83 * hash + (this.enrollmentDate != null ? this.enrollmentDate.hashCode() : 0);
+        int hash = 3;
+        hash = 41 * hash + (this.status != null ? this.status.hashCode() : 0);
+        hash = 41 * hash + (this.enrollmentDate != null ? this.enrollmentDate.hashCode() : 0);
+        hash = 41 * hash + (this.customer != null ? this.customer.hashCode() : 0);
+        hash = 41 * hash + (this.section != null ? this.section.hashCode() : 0);
         return hash;
     }
 
@@ -116,15 +129,20 @@ public class Enrollment {
             return false;
         }
         final Enrollment other = (Enrollment) obj;
-        if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
+        if (this.status != other.status) {
             return false;
         }
         if (this.enrollmentDate != other.enrollmentDate && (this.enrollmentDate == null || !this.enrollmentDate.equals(other.enrollmentDate))) {
             return false;
         }
+        if (this.customer != other.customer && (this.customer == null || !this.customer.equals(other.customer))) {
+            return false;
+        }
+        if (this.section != other.section && (this.section == null || !this.section.equals(other.section))) {
+            return false;
+        }
         return true;
     }
-    
     
     
     

@@ -32,7 +32,9 @@ public class Section {
     private int id;
     private String sectionName;
     
-    public enum Status {INPROGRESS,COMPLETED,OPEN ,CANCELED }
+    public enum Status {
+        INPROGRESS,COMPLETED,OPEN ,CANCELED 
+    }
     
     @Size(min=1, max = 15)
     private int capacity;
@@ -42,7 +44,7 @@ public class Section {
     
     @Min(1)
     @Max(15)
-    private int availableSeat;
+    private static int availableSeat;
     
     private Status status;
     
@@ -60,11 +62,10 @@ public class Section {
     public Section() {
     }
 
-    public Section(String sectionName, int capacity, int roomNumber, int availableSeat, Status status, Course course, Faculty professor, List<Enrollment> enrollements) {
+    public Section(String sectionName, int capacity, int roomNumber,Status status, Course course, Faculty professor, List<Enrollment> enrollements) {
         this.sectionName = sectionName;
         this.capacity = capacity;
         this.roomNumber = roomNumber;
-        this.availableSeat = availableSeat;
         this.status = status;
         this.course = course;
         this.professor = professor;
@@ -105,13 +106,13 @@ public class Section {
         this.roomNumber = roomNumber;
     }
 
-    public int getAvailableSeat() {
-        return availableSeat;
-    }
-
-    public void setAvailableSeat(int availableSeat) {
-        this.availableSeat = availableSeat;
-    }
+//    public int getAvailableSeat() {
+//        return availableSeat;
+//    }
+//
+//    public void setAvailableSeat(int availableSeat) {
+//        this.availableSeat = availableSeat;
+//    }
 
     public Status getStatus() {
         return status;
@@ -149,15 +150,16 @@ public class Section {
     public void setEnrollements(List<Enrollment> enrollements) {
         this.enrollements = enrollements;
     }
-    
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + (this.sectionName != null ? this.sectionName.hashCode() : 0);
-        hash = 17 * hash + this.capacity;
-        hash = 17 * hash + this.roomNumber;
-        hash = 17 * hash + this.availableSeat;
+        int hash = 3;
+        hash = 79 * hash + (this.sectionName != null ? this.sectionName.hashCode() : 0);
+        hash = 79 * hash + this.capacity;
+        hash = 79 * hash + this.roomNumber;
+        hash = 79 * hash + (this.status != null ? this.status.hashCode() : 0);
+        hash = 79 * hash + (this.course != null ? this.course.hashCode() : 0);
+        hash = 79 * hash + (this.enrollements != null ? this.enrollements.hashCode() : 0);
         return hash;
     }
 
@@ -179,9 +181,20 @@ public class Section {
         if (this.roomNumber != other.roomNumber) {
             return false;
         }
-        if (this.availableSeat != other.availableSeat) {
+        if (this.status != other.status) {
+            return false;
+        }
+        if (this.course != other.course && (this.course == null || !this.course.equals(other.course))) {
+            return false;
+        }
+        if (this.professor != other.professor && (this.professor == null || !this.professor.equals(other.professor))) {
+            return false;
+        }
+        if (this.enrollements != other.enrollements && (this.enrollements == null || !this.enrollements.equals(other.enrollements))) {
             return false;
         }
         return true;
     }
+    
+    
 }
