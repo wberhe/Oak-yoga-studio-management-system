@@ -32,6 +32,8 @@ public class Section {
     private int id;
     private String sectionName;
     
+    public enum Status {INPROGRESS,COMPLETED,OPEN ,CANCELED }
+    
     @Size(min=1, max = 15)
     private int capacity;
     
@@ -41,6 +43,8 @@ public class Section {
     @Min(1)
     @Max(15)
     private int availableSeat;
+    
+    private Status status;
     
     @ManyToOne
     @JoinColumn(name="course_id")
@@ -56,19 +60,17 @@ public class Section {
     public Section() {
     }
 
-    public Section(String sectionName, int capacity, int roomNumber, int availableSeat, Course course, Faculty professor, List<Enrollment> enrollements) {
+    public Section(String sectionName, int capacity, int roomNumber, int availableSeat, Status status, Course course, Faculty professor, List<Enrollment> enrollements) {
         this.sectionName = sectionName;
         this.capacity = capacity;
         this.roomNumber = roomNumber;
         this.availableSeat = availableSeat;
+        this.status = status;
         this.course = course;
         this.professor = professor;
         this.enrollements = enrollements;
     }
-    
-    
-    
-    
+
     public int getId() {
         return id;
     }
@@ -111,6 +113,14 @@ public class Section {
         this.availableSeat = availableSeat;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+    
     public Faculty getProfessor() {
         return professor;
     }
