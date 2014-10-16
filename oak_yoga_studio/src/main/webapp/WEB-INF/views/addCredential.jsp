@@ -14,12 +14,12 @@
         <link href="resources/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <h1>Sign up :</h1>
+        <h1>Customer sign up :</h1>
         <form:form commandName="credential" action="addCredential" method="post">
             <table>
 
                 <tr>
-                    <td>Customer Name :</td>
+                    <td>Username :</td>
                     <td><form:input type="text" path="userName" /> </td>
                     <td><form:errors path="userName" cssClass="error"/> </td>
                 </tr>
