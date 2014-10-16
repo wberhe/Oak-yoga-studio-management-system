@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SectionDAOImpl implements SectionDAO {
 
     
-    SessionFactory sf;
+    private SessionFactory sf;
 
     public void setSf(SessionFactory sf) {
         this.sf = sf;
@@ -33,7 +33,7 @@ public class SectionDAOImpl implements SectionDAO {
     
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public void addUseSection(Section section) {
+    public void addSection(Section section) {
              
         sf.getCurrentSession().save(section);
     }

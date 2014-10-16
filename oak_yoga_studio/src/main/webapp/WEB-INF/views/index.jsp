@@ -10,6 +10,8 @@
     <body>
         <h1>Welcome to Oak Yoga Studio!!</h1>
         <p>Please <a href="addCredential">sign up</a>
-        <p>Administrator Home page<a href="admin">Click here to view</a>
+        <p>Administrator <a href="admin">o to admin home page</a>
+        <p>Enrollment <a href="enrollInCourse">enroll</a>
+        <p>Customer Profile Update <a href="editProfile">Edit Profile</a>
     </body>
 </html>

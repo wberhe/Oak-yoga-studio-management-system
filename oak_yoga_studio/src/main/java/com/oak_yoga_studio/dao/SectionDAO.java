@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface SectionDAO {
     
-      public void addUseSection(Section section);
+      public void addSection(Section section);
      
      public void updateSection(Section section);
      
