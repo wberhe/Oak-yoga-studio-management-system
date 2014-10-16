@@ -166,6 +166,11 @@
         <constructor-arg ref="courseDAO"/>
         <constructor-arg ref="sectionDAO" />
      </bean> 
+     
+     <!-- Section service injections -->
+     <bean id="sectionService" class="com.oak_yoga_studio.service.impl.SectionServiceImpl">
+         <constructor-arg ref="sectionDAO" />
+     </bean> 
     
     <!--Email Service--> 
     <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

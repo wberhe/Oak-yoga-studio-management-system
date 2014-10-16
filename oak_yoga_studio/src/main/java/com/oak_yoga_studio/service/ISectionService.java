@@ -6,10 +6,19 @@
 
 package com.oak_yoga_studio.service;
 
+import com.oak_yoga_studio.domain.Section;
+import java.util.List;
+
 /**
  *
- * @author Weldino
+ * @author Senai
  */
 public interface ISectionService {
-    
+    public void addSection(Section section);
+
+    public void updateSection(Section section);
+
+    public Section getSectionById(int Id);
+        
+    public List<Section> getListOfSections();
 }
