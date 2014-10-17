@@ -10,9 +10,8 @@ import com.oak_yoga_studio.dao.EnrollmentDAO;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.Enrollment;
-import com.oak_yoga_studio.domain.Faculty;
 import com.oak_yoga_studio.domain.Section;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -37,7 +36,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public void addEnrollment(Enrollment enrollment) {
-   
+    
      sf.getCurrentSession().save(enrollment);
      
     }
@@ -217,5 +216,18 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
         //should do setEnrollmentStatus(status)
         // and update Enrollment
     
+    }
+
+    @Transactional( propagation = Propagation.MANDATORY)
+    @Override
+    public void addEnrollment(Enrollment.statusType status , Customer customer, Section section) {
+        
+          Enrollment enrollment = new Enrollment();
+          enrollment.setCustomer(customer);
+          enrollment.setSection(section);
+          enrollment.setEnrollmentDate(new Date());
+          enrollment.setStatus(status);
+          
+        sf.getCurrentSession().save(enrollment);
     }
 }

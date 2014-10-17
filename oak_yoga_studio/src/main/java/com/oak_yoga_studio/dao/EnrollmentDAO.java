@@ -11,6 +11,7 @@ import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.Enrollment;
 import com.oak_yoga_studio.domain.Faculty;
 import com.oak_yoga_studio.domain.Section;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +21,8 @@ import java.util.List;
 public interface EnrollmentDAO {
    
      public void addEnrollment(Enrollment enrollment);
+     
+     public void addEnrollment(Enrollment.statusType status, Customer customer, Section section);
      
      public void updateCourse(Enrollment enrollment);
      

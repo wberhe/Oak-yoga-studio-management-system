@@ -42,8 +42,7 @@ public class EnrollmentController {
       
       @Resource EnrollmentHelperController enrollmentHelperController;
       
-      @Resource 
-      private Enrollment enrollment;
+  ;
  
       
    @RequestMapping(value = "enrollInCourse/{id}", method = RequestMethod.GET)
@@ -99,11 +98,9 @@ public class EnrollmentController {
     public void enroll(Customer customer,Section section)
     {
        if(enrollmentService.checkSeatAvailablity(section.getId()))
-       {
-          
-          enrollment.setCustomer(customer);
-          enrollment.setSection(section);
-       //   enrollment.set
+       { 
+   
+           enrollmentService.addEnrollment(Enrollment.statusType.ACTIVE, customer, section);
        }
     }
 

@@ -17,6 +17,7 @@ import com.oak_yoga_studio.domain.Enrollment;
 import com.oak_yoga_studio.domain.Faculty;
 import com.oak_yoga_studio.domain.Section;
 import com.oak_yoga_studio.service.IEnrollmentService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -307,6 +308,15 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
         {
             return false;
         }
+    
+    
+    }
+
+    @Override
+    public void addEnrollment(Enrollment.statusType status, Customer customer, Section section) 
+       
+    {
+        enrollmentDAO.addEnrollment(null);
     
     
     }
