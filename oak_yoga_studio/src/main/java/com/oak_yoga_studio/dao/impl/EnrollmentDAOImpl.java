@@ -114,7 +114,8 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     public boolean checkSeatAvailablity(int sectionID) {
         
         
-        Query query= sf.getCurrentSession().createQuery("select availableSeat from Section where id=" + sectionID);
+        Query query= sf.getCurrentSession().createQuery("select availableSeat from Section where id=:sectionID");
+         query.setParameter("sectionID", sectionID);
         int availableSeats=0;
         availableSeats = (Integer)query.uniqueResult();
         

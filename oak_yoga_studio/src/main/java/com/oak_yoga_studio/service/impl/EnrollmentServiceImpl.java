@@ -295,6 +295,21 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
              
        }
     }
+
+    @Override
+    public boolean isFirstTimeEnrollment(Customer customer) {
+       
+        if(getEnrollmentsByCustomer(customer).isEmpty())
+        {
+             return true;
+        }
+        else
+        {
+            return false;
+        }
+    
+    
+    }
   
     
 }

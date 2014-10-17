@@ -38,10 +38,13 @@ public class EnrollmentController {
     private IEnrollmentService enrollmentService;
     
       @Resource
-    private ISectionService sectionService;
+     private ISectionService sectionService;
       
       @Resource EnrollmentHelperController enrollmentHelperController;
-
+      
+      @Resource 
+      private Enrollment enrollment;
+ 
       
    @RequestMapping(value = "enrollInCourse/{id}", method = RequestMethod.GET)
     public String getUserDetail(Model model, @PathVariable int id) {
@@ -87,9 +90,21 @@ public class EnrollmentController {
     
     public boolean checkPrerequisiteQualification(Customer customer,Course course )
     {
-        
+      
       return   enrollmentHelperController.checkPrerequisiteQualification(customer, course);
         
+    }
+    
+    
+    public void enroll(Customer customer,Section section)
+    {
+       if(enrollmentService.checkSeatAvailablity(section.getId()))
+       {
+          
+          enrollment.setCustomer(customer);
+          enrollment.setSection(section);
+       //   enrollment.set
+       }
     }
 
 }

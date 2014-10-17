@@ -50,5 +50,7 @@ public interface IEnrollmentService {
      public Enrollment getTopWaitingList(int sectionId);
      
      public  void changeEnrollmentStatus(String status);
+     
+     public boolean isFirstTimeEnrollment(Customer customer);
     
 }
