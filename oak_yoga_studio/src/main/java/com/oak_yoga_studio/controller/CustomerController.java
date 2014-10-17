@@ -120,19 +120,45 @@ public class CustomerController {
         }
         return view;
     }
+   
+    
+ 
+      @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
+       public String getUserDetail(Model model, @PathVariable int id) {
+        model.addAttribute("customerDetail", customerService.getCustomerById(id));
+        System.out.println("Hi this is udner editProfile   ");
+        return "EditProfile";
+    }
+       
+      
 
-    /**
-     * Updating the user
-     *
-     * @param id
-     * @param model
-     * @return
-     */
-//    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-//    public String getUser(@PathVariable int id, Model model) {
-//        model.addAttribute("user", userService.getUser(id));
-//        return "userDetail";
-//    }
+       
+   @RequestMapping(value = "/updateProfile/{id}", method = RequestMethod.POST)
+    public String updateUser(@Valid Customer customer, BindingResult result, @PathVariable int id, HttpSession session) {
+        //System.out.println("Update");
+        if (!result.hasErrors()) {
+                  
+            session.setAttribute("customer", customer);
+            System.out.println("Customer firstName " + customer.getFirstName()) ;
+            Credential c= (customerService.getCustomerById(id)).getCredential();
+            System.out.println(" uswe name "+c.getUserName());
+            customer.setCredential(c);
+            
+            System.out.println("Customer ID " + customer.getId());
+            System.out.println("Customer LastName :" + customer.getLastName());
+            System.out.println("Customer email" + customer.getEmail());
+            System.out.println("Username" + customer.getCredential().getUserName());
+            customerService.updateCustomer(id, customer);
+            return "redirect:/index";
+        } else {
+            for (FieldError err : result.getFieldErrors()) {
+                System.out.println("Error from UpdateProfileController " + err.getField() + ": " + err.getDefaultMessage());
+            }
+            System.out.println("err");
+            return "index";
+        }
+    }
+       
 //
 //    @RequestMapping(value = "/users/{id}", method = RequestMethod.POST)
 //    public String updateUser(@Valid User user, BindingResult result, @PathVariable int id, HttpSession session) {
@@ -213,6 +239,13 @@ public class CustomerController {
             Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+@ModelAttribute("customer")
+public Customer loadEmptyModelBean(){
+    Customer customer;
+        customer = new Customer();
+   return customer;
+}
 
 }
 

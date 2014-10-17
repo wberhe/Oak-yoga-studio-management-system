@@ -6,6 +6,7 @@
 package com.oak_yoga_studio.service.impl;
 
 import com.oak_yoga_studio.dao.SectionDAO;
+import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Section;
 import com.oak_yoga_studio.service.ISectionService;
 import java.util.ArrayList;
@@ -64,6 +65,23 @@ public class SectionServiceImpl implements ISectionService {
             return new ArrayList();
         }
 
+    }
+    
+    
+     @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public List<Section> getSectionsByCourse(Course course) {
+        
+            try
+       {
+         return   sectionDAO.getCourseSections(course);
+           
+       }
+       catch(Exception e)
+       {
+           return null;
+       }
+    
     }
 
 }

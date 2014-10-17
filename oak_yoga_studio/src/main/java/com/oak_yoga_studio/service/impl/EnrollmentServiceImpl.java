@@ -128,21 +128,7 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
        }
     }
     
-    @Transactional(propagation = Propagation.REQUIRED)
-    @Override
-    public List<Section> getSections(Course course) {
-        
-            try
-       {
-            enrollmentDAO.getSections(course);
-            return null;
-       }
-       catch(Exception e)
-       {
-           return null;
-       }
-    
-    }
+   
  
     
     @Transactional(propagation = Propagation.REQUIRED)

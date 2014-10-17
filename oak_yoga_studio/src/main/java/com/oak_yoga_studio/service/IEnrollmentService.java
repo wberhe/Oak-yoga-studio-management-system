@@ -29,8 +29,6 @@ public interface IEnrollmentService {
      
      public List<Enrollment> getEnrollmentsByCustomerID(int customerID);
       
-     public List<Section> getSections(Course course);
-
      public boolean checkSeatAvailablity(int sectionID);
      
      public List<Course> getAllCourses();

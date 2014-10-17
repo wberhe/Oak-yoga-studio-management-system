@@ -167,9 +167,10 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
         
      // change this SQL QUERY TO CORRECT HQL......
      
-        Query query= sf.getCurrentSession().createQuery("select c from Course c JOIIN Section s on s.course_Id="
-                + "c.Id JOIN Enrollment e ON e.section_Id= s.Id "
-                + "where e.status ='Completed' AND e.customer_id="+ customerID);
+        Query query= sf.getCurrentSession().createQuery("select c from Course c JOIN c.sections s "
+                + "JOIN s.enrollments e  "
+                + "where e.status ='COMPLETED' AND e.customerID=:customerID");
+         query.setParameter("customerID", customerID);
         courses= query.list();
         
        return courses;

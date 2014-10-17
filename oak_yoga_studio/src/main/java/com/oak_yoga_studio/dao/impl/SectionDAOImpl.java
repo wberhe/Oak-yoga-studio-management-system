@@ -72,8 +72,11 @@ public class SectionDAOImpl implements SectionDAO {
     @Override
     public List<Section> getCourseSections(Course course) {
         List<Section> sections;
-        Query q=sf.getCurrentSession().createQuery("Select distinct s from Section s join s.course c where c=course");
+        Query q=sf.getCurrentSession().createQuery(" select s from Section s join s.course c where c=:course");
+        
+        q.setParameter("course", course);
         sections=q.list();
+    
         return sections;
     }
     

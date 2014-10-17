@@ -19,11 +19,11 @@
             <c:forEach var="s" items="${sections}">
                  <tr>
                     
-                    <td>${s.sectionName}</td> 
+                    <td>${s.sectionName }</td> 
                     <td>${s.roomNumber}</td>
-                   <td><a href="viewSections/${c.id}">Enroll <a></td>
-                </tr
-            </li>
+                   <td><a href="../enrollInCourse/${s.id}">Enroll For this section <a></td>
+                               </tr>
+            
             </c:forEach>
         </table>
     </body>
