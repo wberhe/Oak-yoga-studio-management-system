@@ -33,6 +33,6 @@ public interface IFacultyService {
 
     public void updateWaiverRequest(Waiver waiver);
 
-    public List<Customer> facultyAdvisees(Faculty faculty);
+    public List<Customer> getfacultyAdvisees(Faculty faculty);
 
 }
