@@ -113,11 +113,12 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Override
     public boolean checkSeatAvailablity(int sectionID) {
         
-        
+
 
         Query query= sf.getCurrentSession().createQuery("select availableSeat from Section s where s.id=:sectionID");
          query.setParameter("sectionID", sectionID);
         int availableSeats=0;
+
 
         availableSeats = (Integer)query.uniqueResult();
         
@@ -168,7 +169,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     public List<Course> getCoursesTaken(int customerID) {
         
      List<Course> courses;
-     
+
 
         Query query= sf.getCurrentSession().createQuery("select c from Course c JOIN c.sections s "
                 + "JOIN s.enrollments e  "
@@ -176,6 +177,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
          query.setParameter("customerID", customerID);
 
     
+
 
         courses= query.list();
        return courses;
