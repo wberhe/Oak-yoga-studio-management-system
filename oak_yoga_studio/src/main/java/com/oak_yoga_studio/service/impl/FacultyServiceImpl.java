@@ -125,7 +125,7 @@ public class FacultyServiceImpl implements IFacultyService {
     }
  @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public List<Customer> facultyAdvisees(Faculty faculty) {
+    public List<Customer> getfacultyAdvisees(Faculty faculty) {
         try{
             return faculty.getAdvisees();
         }catch(Exception e){
