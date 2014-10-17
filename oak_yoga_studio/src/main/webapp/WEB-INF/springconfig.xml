@@ -53,7 +53,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost/yoga_studio" />
         <property name="username" value="root" />
-        <property name="password" value="weldu" />
+        <property name="password" value="Pass@deliver" />
     </bean>
 
     <!-- hibernate Properties -->
@@ -179,8 +179,8 @@
      <!-- Section service injections -->
      <bean id="sectionService" class="com.oak_yoga_studio.service.impl.SectionServiceImpl">
          <constructor-arg ref="sectionDAO" />
-     </bean> 
-         
+     </bean>
+     
     <!--Email Service--> 
     <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />

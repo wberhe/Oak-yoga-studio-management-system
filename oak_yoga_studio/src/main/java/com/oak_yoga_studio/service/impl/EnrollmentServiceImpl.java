@@ -17,6 +17,7 @@ import com.oak_yoga_studio.domain.Enrollment;
 import com.oak_yoga_studio.domain.Faculty;
 import com.oak_yoga_studio.domain.Section;
 import com.oak_yoga_studio.service.IEnrollmentService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -128,21 +129,7 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
        }
     }
     
-    @Transactional(propagation = Propagation.REQUIRED)
-    @Override
-    public List<Section> getSections(Course course) {
-        
-            try
-       {
-            enrollmentDAO.getSections(course);
-            return null;
-       }
-       catch(Exception e)
-       {
-           return null;
-       }
-    
-    }
+   
  
     
     @Transactional(propagation = Propagation.REQUIRED)
@@ -308,6 +295,30 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
        {
              
        }
+    }
+
+    @Override
+    public boolean isFirstTimeEnrollment(Customer customer) {
+       
+        if(getEnrollmentsByCustomer(customer).isEmpty())
+        {
+             return true;
+        }
+        else
+        {
+            return false;
+        }
+    
+    
+    }
+
+    @Override
+    public void addEnrollment(Enrollment.statusType status, Customer customer, Section section) 
+       
+    {
+        enrollmentDAO.addEnrollment(null);
+    
+    
     }
   
     

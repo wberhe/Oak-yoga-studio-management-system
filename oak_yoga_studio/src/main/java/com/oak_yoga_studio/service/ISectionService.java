@@ -6,6 +6,7 @@
 
 package com.oak_yoga_studio.service;
 
+import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Section;
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface ISectionService {
     public Section getSectionById(int Id);
         
     public List<Section> getListOfSections();
+    
+     public List<Section> getSectionsByCourse(Course course);
 }

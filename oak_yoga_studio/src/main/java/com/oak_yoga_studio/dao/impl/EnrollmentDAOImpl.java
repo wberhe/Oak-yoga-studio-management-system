@@ -10,9 +10,8 @@ import com.oak_yoga_studio.dao.EnrollmentDAO;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.Enrollment;
-import com.oak_yoga_studio.domain.Faculty;
 import com.oak_yoga_studio.domain.Section;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -37,7 +36,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public void addEnrollment(Enrollment enrollment) {
-   
+    
      sf.getCurrentSession().save(enrollment);
      
     }
@@ -113,9 +112,13 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Override
     public boolean checkSeatAvailablity(int sectionID) {
         
-        
-        Query query= sf.getCurrentSession().createQuery("select availableSeat from Section s where s.id=sectionID");
-        int availableSeats;
+
+
+        Query query= sf.getCurrentSession().createQuery("select availableSeat from Section s where s.id=:sectionID");
+         query.setParameter("sectionID", sectionID);
+        int availableSeats=0;
+
+
         availableSeats = (Integer)query.uniqueResult();
         
         if (availableSeats >0 && availableSeats < 15)
@@ -165,10 +168,16 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     public List<Course> getCoursesTaken(int customerID) {
         
      List<Course> courses;
-     
-        Query query= sf.getCurrentSession().createQuery("select distinct c from Course c "
-                + "join c.sections s join s.erollments e join e.customer cus"
-                             + "where cus.id=customerID and c.status='COMPLETED'");
+
+
+        Query query= sf.getCurrentSession().createQuery("select c from Course c JOIN c.sections s "
+                + "JOIN s.enrollments e  "
+                + "where e.status ='COMPLETED' AND e.customerID=:customerID");
+         query.setParameter("customerID", customerID);
+
+    
+
+
         courses= query.list();
        return courses;
     }
@@ -207,5 +216,18 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
         //should do setEnrollmentStatus(status)
         // and update Enrollment
     
+    }
+
+    @Transactional( propagation = Propagation.MANDATORY)
+    @Override
+    public void addEnrollment(Enrollment.statusType status , Customer customer, Section section) {
+        
+          Enrollment enrollment = new Enrollment();
+          enrollment.setCustomer(customer);
+          enrollment.setSection(section);
+          enrollment.setEnrollmentDate(new Date());
+          enrollment.setStatus(status);
+          
+        sf.getCurrentSession().save(enrollment);
     }
 }
