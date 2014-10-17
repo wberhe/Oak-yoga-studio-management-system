@@ -17,11 +17,14 @@ import com.oak_yoga_studio.service.IFacultyService;
 import com.oak_yoga_studio.service.INotificationService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Weldino
  */
+
 public class FacultyServiceImpl implements IFacultyService {
 
     private FacultyDAO facultyDAO;
@@ -38,7 +41,7 @@ public class FacultyServiceImpl implements IFacultyService {
         this.customerDAO = customerDAO;
         this.notificationService = notificationService;
     }
-
+ @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void addFaculty(Faculty faculty) {
         try {
@@ -47,7 +50,7 @@ public class FacultyServiceImpl implements IFacultyService {
 
         }
     }
-
+ @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public List<Faculty> getListOfActiveFaculty() {
         try {
@@ -57,7 +60,7 @@ public class FacultyServiceImpl implements IFacultyService {
         }
 
     }
-    
+     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public List<Faculty> getListOfFaculty() {
         try {
@@ -67,16 +70,19 @@ public class FacultyServiceImpl implements IFacultyService {
         }
 
     }
-
+ @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void updateFaculty(Faculty faculty) {
-        try {
-            facultyDAO.updateFaculty(faculty);
-        } catch (Exception e) {
-
-        }
+    public void updateFaculty(int id,Faculty faculty) {
+        Faculty f = facultyDAO.getFaculty(id);
+        f.setFirstName(faculty.getFirstName());
+        f.setLastName(faculty.getLastName());
+        f.setDateOfBirth(faculty.getDateOfBirth());
+        f.setEmail(faculty.getEmail());
+        f.setProfilePicture(faculty.getProfilePicture());
+        f.getCredential().setActive(faculty.getCredential().isActive());
+        
     }
-
+ @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Faculty getFacultyById(int Id) {
         try {
@@ -85,7 +91,7 @@ public class FacultyServiceImpl implements IFacultyService {
             return null;
         }
     }
-
+ @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void enableOrdisableFaculty(Faculty faculty) {
         try {
@@ -99,7 +105,7 @@ public class FacultyServiceImpl implements IFacultyService {
 
         }
     }
-
+ @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public List<Section> getFacultySections(Faculty faculty) {
         try {
@@ -108,7 +114,7 @@ public class FacultyServiceImpl implements IFacultyService {
             return new ArrayList();
         }
     }
-
+ @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateWaiverRequest(Waiver waiver) {
         try {
@@ -117,9 +123,9 @@ public class FacultyServiceImpl implements IFacultyService {
              
         }
     }
-
+ @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public List<Customer> facultyAdvisees(Faculty faculty) {
+    public List<Customer> getfacultyAdvisees(Faculty faculty) {
         try{
             return faculty.getAdvisees();
         }catch(Exception e){

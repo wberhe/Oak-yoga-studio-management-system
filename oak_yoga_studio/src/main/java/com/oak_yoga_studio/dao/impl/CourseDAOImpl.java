@@ -8,7 +8,6 @@ package com.oak_yoga_studio.dao.impl;
 import com.oak_yoga_studio.dao.CourseDAO;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Customer;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -55,7 +54,8 @@ public class CourseDAOImpl implements CourseDAO {
     public List<Course> getCoursesWith(String words) {
         List<Course> courses;
 
-        Query query = sf.getCurrentSession().createQuery("from Course Where courseName LIKE " + words);
+        Query query = sf.getCurrentSession().createQuery("from Course c Where c.courseName like words");
+        //query.setParameter("name",words);
         courses = query.list();
 
         return courses;
@@ -66,7 +66,7 @@ public class CourseDAOImpl implements CourseDAO {
     public List<Course> getAllActiveCourses() {
         List<Course> courses;
 
-        Query query = sf.getCurrentSession().createQuery("from Course Where active=true");
+        Query query = sf.getCurrentSession().createQuery("from Course c Where c.active=true");
         courses = query.list();
 
         return courses;
@@ -89,10 +89,9 @@ public class CourseDAOImpl implements CourseDAO {
         @Override
     public List<Course> getWaivers(Customer customerID) {
         
-        List<Course> courses=new ArrayList<Course>();
+        List<Course> courses;
         
-        Query query= sf.getCurrentSession().createQuery("select distinct c from Course c JOIN Waiver w on"
-                + "w.course_id= c.id where w.customer_id="+ customerID);
+        Query query= sf.getCurrentSession().createQuery("select distinct c from Course c join c.waivers w join w.customer cu where cu.id=customerID");
         courses= query.list();
         
        return courses;

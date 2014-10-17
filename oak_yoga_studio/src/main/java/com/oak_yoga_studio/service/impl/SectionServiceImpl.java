@@ -57,6 +57,7 @@ public class SectionServiceImpl implements ISectionService {
         }
     }
     
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Section> getListOfSections() {
         try {

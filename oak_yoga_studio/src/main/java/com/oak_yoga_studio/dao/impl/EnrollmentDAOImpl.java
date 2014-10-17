@@ -63,7 +63,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Override
     public List<Enrollment> getAllEnrollments() {
         
-        List<Enrollment> enrollments=new ArrayList<Enrollment>();
+        List<Enrollment> enrollments;
         
         Query query= sf.getCurrentSession().createQuery("from Enrollment");
         enrollments= query.list();
@@ -77,9 +77,9 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     public List<Enrollment> getEnrollmentsByCustomer(Customer customer) {
         
     
-        List<Enrollment> enrollments=new ArrayList<Enrollment>();
+        List<Enrollment> enrollments;
         
-        Query query= sf.getCurrentSession().createQuery("from Enrollment where customer_Id=" + customer.getId());
+        Query query= sf.getCurrentSession().createQuery("Seclect distinct e from Enrollment e where e.customer=customer");
         enrollments= query.list();
         
        return enrollments;
@@ -90,9 +90,9 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Override
     public List<Enrollment> getEnrollmentsByCustomerID(int customerId) {
        
-        List<Enrollment> enrollments=new ArrayList<Enrollment>();
+        List<Enrollment> enrollments;
         
-        Query query= sf.getCurrentSession().createQuery("from Enrollment where customer_Id=" + customerId);
+        Query query= sf.getCurrentSession().createQuery("from Enrollment e where e.customer.id=customerId");
         enrollments= query.list();
         
        return enrollments;
@@ -101,9 +101,9 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Override
     public List<Section> getSections(Course course) {
         
-    List<Section> sections=new ArrayList<Section>();
+    List<Section> sections;
         
-        Query query= sf.getCurrentSession().createQuery("select distinct s from Section s join  s.course  c where c=course");
+        Query query= sf.getCurrentSession().createQuery("from Section s where s.course=course");
         
         sections= query.list();
         
@@ -114,12 +114,14 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     public boolean checkSeatAvailablity(int sectionID) {
         
         
-        Query query= sf.getCurrentSession().createQuery("select availableSeat from Section where id=:sectionID");
+
+        Query query= sf.getCurrentSession().createQuery("select availableSeat from Section s where s.id=:sectionID");
          query.setParameter("sectionID", sectionID);
         int availableSeats=0;
+
         availableSeats = (Integer)query.uniqueResult();
         
-        if (availableSeats >0)
+        if (availableSeats >0 && availableSeats < 15)
         {
             return true;
         }
@@ -133,9 +135,9 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Override
     public List<Course> getAllCourses() {
        
-        List<Course> courses=new ArrayList<Course>();
+        List<Course> courses;
         
-        Query query= sf.getCurrentSession().createQuery("from Course");
+        Query query= sf.getCurrentSession().createQuery("from Course c.");
         courses= query.list();
         
        return courses;
@@ -155,8 +157,9 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Override
     public void addWaitingListEnrollment(Enrollment enrollment) {
              
-             enrollment.setStatus("Waiting");
-             sf.getCurrentSession().save(enrollment);
+             enrollment.setStatus(Enrollment.statusType.ACTIVE);
+             sf.getCurrentSession().saveOrUpdate(enrollment);
+             
     }
 
 
@@ -164,24 +167,22 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Override
     public List<Course> getCoursesTaken(int customerID) {
         
-     List<Course> courses=new ArrayList<Course>();
-        
-     // change this SQL QUERY TO CORRECT HQL......
+     List<Course> courses;
      
+
         Query query= sf.getCurrentSession().createQuery("select c from Course c JOIN c.sections s "
                 + "JOIN s.enrollments e  "
                 + "where e.status ='COMPLETED' AND e.customerID=:customerID");
          query.setParameter("customerID", customerID);
+
+    
+
         courses= query.list();
-        
        return courses;
     }
 
     @Override
     public void withdraw(Customer customer, Section section) {
-      
-        
-        // verify query's correctness
         
         Enrollment enrollment ;
         Query query= sf.getCurrentSession().createQuery("select e from Enrollment e  Join e.customer cu" +
@@ -197,11 +198,9 @@ public class EnrollmentDAOImpl implements EnrollmentDAO{
     @Override
     public Enrollment getTopWaitingList(int sectionId) {
         
-              // verify query's correctness
-        
         Enrollment enrollment ;
         Query query= sf.getCurrentSession().createQuery("select top 1 e from Enrollment e join e.section s"
-                + "where s.id=" + sectionId + " and e.status='Waiting'" );
+                + "where s.id=sectionId and e.status='WAITINGLIST'" );
         enrollment= (Enrollment)query.uniqueResult();
         
         return enrollment;

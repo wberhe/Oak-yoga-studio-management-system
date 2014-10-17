@@ -52,7 +52,7 @@ public class FacultyDAOImpl implements FacultyDAO {
      }
     /**
      * 
-     * @returns only faculty users
+     * @returns only active faculties
      */
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
@@ -82,7 +82,7 @@ public class FacultyDAOImpl implements FacultyDAO {
     public Faculty getAvailableAdvisor() {
         //decide first on what basis an advisor should be chosen
         Faculty faculty;        
-        Query query= sf.getCurrentSession().createQuery("select top 1 f from Faculty  f ");
+        Query query= sf.getCurrentSession().createQuery("select top 1 from Faculty");
         
         faculty=(Faculty) query.uniqueResult();
         

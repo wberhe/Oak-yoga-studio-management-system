@@ -6,22 +6,20 @@
 
 package com.oak_yoga_studio.domain;
 
+
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
-
 /**
  *
  * @author Weldu
  */
 @Entity
-public class Faculty extends User {
+public class Faculty extends User implements Serializable {
         
-    private String status;
+    private boolean active;
     
    
     @OneToMany(mappedBy = "advisor",cascade =CascadeType.ALL )
@@ -38,23 +36,23 @@ public class Faculty extends User {
     public Faculty() {
     }
 
-    public Faculty(String status, List<Customer> advisees, List<Section> sections, List<Waiver> waivers) {
-        this.status = status;
+    public Faculty(boolean active, List<Customer> advisees, List<Section> sections, List<Waiver> waivers) {
+        this.active = active;
         this.advisees = advisees;
         this.sections = sections;
         this.waivers = waivers;
     }
-   
+
     
-    
-    
-    public String getStatus() {
-        return status;
+
+    public boolean isActive() {
+        return active;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setActive(boolean active) {
+        this.active = active;
     }
+    
     //Add advisee
     public void addAdvisee(Customer customer)
     {
@@ -99,11 +97,14 @@ public class Faculty extends User {
     public void setWaivers(List<Waiver> waivers) {
         this.waivers = waivers;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + (this.status != null ? this.status.hashCode() : 0);
+        int hash = 3;
+        hash = 83 * hash + (this.active ? 1 : 0);
+        hash = 83 * hash + (this.advisees != null ? this.advisees.hashCode() : 0);
+        hash = 83 * hash + (this.sections != null ? this.sections.hashCode() : 0);
+        hash = 83 * hash + (this.waivers != null ? this.waivers.hashCode() : 0);
         return hash;
     }
 
@@ -116,13 +117,21 @@ public class Faculty extends User {
             return false;
         }
         final Faculty other = (Faculty) obj;
-        if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
+        if (this.active != other.active) {
+            return false;
+        }
+        if (this.advisees != other.advisees && (this.advisees == null || !this.advisees.equals(other.advisees))) {
+            return false;
+        }
+        if (this.sections != other.sections && (this.sections == null || !this.sections.equals(other.sections))) {
+            return false;
+        }
+        if (this.waivers != other.waivers && (this.waivers == null || !this.waivers.equals(other.waivers))) {
             return false;
         }
         return true;
     }
-
-   
+    
     
     
 }

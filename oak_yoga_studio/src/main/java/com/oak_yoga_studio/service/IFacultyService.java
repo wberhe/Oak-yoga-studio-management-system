@@ -23,7 +23,7 @@ public interface IFacultyService {
 
     public List<Faculty> getListOfFaculty();
 
-    public void updateFaculty(Faculty faculty);
+    public void updateFaculty(int id,Faculty faculty);
 
     public Faculty getFacultyById(int Id);
 
@@ -33,6 +33,6 @@ public interface IFacultyService {
 
     public void updateWaiverRequest(Waiver waiver);
 
-    public List<Customer> facultyAdvisees(Faculty faculty);
+    public List<Customer> getfacultyAdvisees(Faculty faculty);
 
 }
