@@ -180,15 +180,7 @@
      <bean id="sectionService" class="com.oak_yoga_studio.service.impl.SectionServiceImpl">
          <constructor-arg ref="sectionDAO" />
      </bean> 
-     <!-- Faculty service injections -->
-     <bean id="facultyService" class="com.oak_yoga_studio.service.impl.FacultyServiceImpl">
-         <constructor-arg ref="facultyDAO" />
-         <constructor-arg ref="sectionDAO" />
-         <constructor-arg ref="waiverDAO" />
-         <constructor-arg ref="customerDAO" />
-         <constructor-arg ref="notificationService" />
-     </bean>
-    
+         
     <!--Email Service--> 
     <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />
@@ -284,44 +276,40 @@ Administrator.
             </value>
         </property>
     </bean>
-
     <!--Email Service-->
   
     
-<!--    Security
-    
+    <!--Security-->    
     <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
     <sec:global-method-security secured-annotations="enabled"/>
     <sec:http >
-        <sec:intercept-url pattern="/SpringLoginPage.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <sec:intercept-url pattern="/LoginFailure.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <!--<sec:intercept-url pattern="/SpringLoginPage.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>-->
         <sec:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/addCredential" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <sec:intercept-url pattern="/addUser" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/addCustomer" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/loginFail" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <sec:intercept-url pattern="/REST/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <sec:intercept-url pattern="/gohome" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <sec:intercept-url pattern="/viewPost/*" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>
-        <sec:intercept-url pattern="/j_spring_security_check" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>
         
+        <!--<sec:intercept-url pattern="/viewPost/*" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>-->
+        <sec:intercept-url pattern="/j_spring_security_check" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>        
         <sec:intercept-url pattern="/**" access="ROLE_CUSTOMER,ROLE_ADMIN,ROLE_FACULTY"/>
         
-        <sec:form-login login-page="/login" default-target-url="/blog" authentication-failure-url="/loginFail"/>
+        <sec:form-login login-page="/login" default-target-url="/index" authentication-failure-url="/loginFail"/>
         <sec:logout delete-cookies="true" invalidate-session="true" logout-success-url="/"/>
+        
     </sec:http>
     <sec:authentication-manager>
         <sec:authentication-provider>
             <sec:user-service>
-                <sec:user name="test" password="test" authorities="ROLE_BLOGGER"/>
+                <sec:user name="test" password="test" authorities="ROLE_CUSTOMER"/>
             </sec:user-service>
         </sec:authentication-provider>
         <sec:authentication-provider >
-            <sec:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select username,password, isnull(blocked)=0 enabled from credential where username=?" authorities-by-username-query="select username, previledge as authority from credential where username=?"/>
+            <sec:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select username,password, active=1 enabled from credential where username=?" authorities-by-username-query="select username, role as authority from credential where username=?"/>
         </sec:authentication-provider>
-    </sec:authentication-manager>-->
-    
+    </sec:authentication-manager>
+    <!--Security-->
     
     
 </beans>
