@@ -14,6 +14,7 @@ import java.util.List;
  * @author Weldino
  */
 public interface FacultyDAO {
+    
      public void addFaculty(Faculty faculty);
      
      public void updateFaculty(Faculty faculty);

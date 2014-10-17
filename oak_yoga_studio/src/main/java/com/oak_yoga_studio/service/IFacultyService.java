@@ -23,7 +23,7 @@ public interface IFacultyService {
 
     public List<Faculty> getListOfFaculty();
 
-    public void updateFaculty(Faculty faculty);
+    public void updateFaculty(int id,Faculty faculty);
 
     public Faculty getFacultyById(int Id);
 

@@ -112,7 +112,7 @@ public class CustomerController {
         if (!result.hasErrors()) {
             Customer c = (Customer) session.getAttribute("loggedUser");
             credential.setRole("ROLE_CUSTOMER");
-            credential.setActive(false);
+            credential.setActive(true);
             session.setAttribute("credential", credential);
             
         } else {

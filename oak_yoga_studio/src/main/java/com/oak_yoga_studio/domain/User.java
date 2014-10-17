@@ -34,7 +34,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author weldu
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     
     @Id
