@@ -30,10 +30,14 @@ public class EnrollmentHelperController {
 
     public boolean checkPrerequisiteQualification(Customer customer, Course course) {
 
+       
         List<Course> prerequisites = course.getPrerequisites();
 
-        if (prerequisites == null) {
-            return true;
+        
+               
+        if (prerequisites.isEmpty()) {
+             System.out.println("size is " + prerequisites.size());
+             return true;
         } else {
 
           ///verify prerequisiteCompletion

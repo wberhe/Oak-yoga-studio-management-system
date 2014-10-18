@@ -18,6 +18,7 @@ import com.oak_yoga_studio.service.ISectionService;
 import com.oak_yoga_studio.service.impl.SectionServiceImpl;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,29 +43,31 @@ public class EnrollmentController {
       
       @Resource EnrollmentHelperController enrollmentHelperController;
       
-  ;
  
       
    @RequestMapping(value = "enrollInCourse/{id}", method = RequestMethod.GET)
-    public String getUserDetail(Model model, @PathVariable int id) {
-        
-        System.out.println("Enorll hwere are you");
+    public String getUserDetail(Model model, @PathVariable int id, HttpSession session) {
+      
       //  model.addAttribute("sectionDetail",sectionService.getSectionById(id));
      
-        
-       Course course= (sectionService.getSectionById(id)).getCourse();
+        Section section =sectionService.getSectionById(id);
+        Course course= section.getCourse();
+            
        
-       
-       //// Here customer should be changed with the current logged in custerm . 
-       ///!!!!!!!!Dont' forget
-       
-      Customer customer= new Customer();
-       if(checkPrerequisiteQualification(customer,course ))
+      Customer customer = (Customer) session.getAttribute("loggedUser");
+
+
+      if(checkPrerequisiteQualification(customer,course ))
        {
+           
+           System.out.println("Prerequisite Qualifeid");
+           
+           enroll(customer, section);
         return "enrollInCourse";
        }
        else
        {
+             System.out.println("Prerequisite not qualified");
               return "index"; 
         }
     }
@@ -97,6 +100,7 @@ public class EnrollmentController {
     
     public void enroll(Customer customer,Section section)
     {
+        
        if(enrollmentService.checkSeatAvailablity(section.getId()))
        { 
    

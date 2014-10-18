@@ -13,7 +13,7 @@
         <sec:authorize access="hasRole('ROLE_CUSTOMER')">
         <p>Customer Profile Update <a href="editProfile">Edit Profile</a>
         <p>Please <a href="addCredential">sign up</a>
-         <p>Enrollment <a href="enrollInCourse">enroll</a>
+         <p>Enrollment <a href="viewCourses">enroll</a>
         </sec:authorize>  
                 
          <sec:authorize access="hasRole('ROLE_ADMIN')">
