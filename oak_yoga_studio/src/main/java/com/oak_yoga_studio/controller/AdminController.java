@@ -138,7 +138,8 @@ public class AdminController {
                 faculty.setProfilePicture(file.getBytes());
             } catch (IOException ex) {
                 //Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
+            faculty.getCredential().setActive(true);
             faculty.setActive(true);
             facultyServcie.addFaculty(faculty);
             session.removeAttribute("credential");
@@ -183,5 +184,14 @@ public class AdminController {
         facultyServcie.updateFaculty(facultyId,f);
         //userService.updateUserInfo(userId, u);
         return "redirect:/viewFaculties";
+    }
+    
+    /**
+     * 
+     * SECTION MANAGMENT
+     */
+    @RequestMapping(value="/addSection", method = RequestMethod.POST)
+    public void addSection(){
+        
     }
 }

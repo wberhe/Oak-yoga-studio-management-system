@@ -101,9 +101,10 @@ public class EnrollmentController {
     public void enroll(Customer customer,Section section)
     {
         
+        System.out.println("Inside enroll");
        if(enrollmentService.checkSeatAvailablity(section.getId()))
        { 
-   
+  
            enrollmentService.addEnrollment(Enrollment.statusType.ACTIVE, customer, section);
        }
     }

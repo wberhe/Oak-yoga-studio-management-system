@@ -1,5 +1,6 @@
 package com.oak_yoga_studio.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -115,6 +116,48 @@ public class Product {
 
     public void setShoppingCartItems(List<ShoppingCartItem> shoppingCartItems) {
         this.shoppingCartItems = shoppingCartItems;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 11 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
+        hash = 11 * hash + Arrays.hashCode(this.image);
+        hash = 11 * hash + this.quantity;
+        hash = 11 * hash + (this.status != null ? this.status.hashCode() : 0);
+        hash = 11 * hash + (this.shoppingCartItems != null ? this.shoppingCartItems.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.price) != Double.doubleToLongBits(other.price)) {
+            return false;
+        }
+        if (!Arrays.equals(this.image, other.image)) {
+            return false;
+        }
+        if (this.quantity != other.quantity) {
+            return false;
+        }
+        if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
+            return false;
+        }
+        if (this.shoppingCartItems != other.shoppingCartItems && (this.shoppingCartItems == null || !this.shoppingCartItems.equals(other.shoppingCartItems))) {
+            return false;
+        }
+        return true;
     }
     
     
