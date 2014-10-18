@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.validator.constraints.Email;
@@ -22,6 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author Somayeh
  */
 @Entity
+@Table(name="order_table")
 public class Order {
 
     @Id
@@ -115,4 +117,44 @@ public class Order {
         this.customer = customer;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + (this.orderDate != null ? this.orderDate.hashCode() : 0);
+        hash = 47 * hash + (this.email != null ? this.email.hashCode() : 0);
+        hash = 47 * hash + (int) (Double.doubleToLongBits(this.totalPrice) ^ (Double.doubleToLongBits(this.totalPrice) >>> 32));
+        hash = 47 * hash + (this.orderItems != null ? this.orderItems.hashCode() : 0);
+        hash = 47 * hash + (this.customer != null ? this.customer.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Order other = (Order) obj;
+        if (this.orderDate != other.orderDate && (this.orderDate == null || !this.orderDate.equals(other.orderDate))) {
+            return false;
+        }
+        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.totalPrice) != Double.doubleToLongBits(other.totalPrice)) {
+            return false;
+        }
+        if (this.orderItems != other.orderItems && (this.orderItems == null || !this.orderItems.equals(other.orderItems))) {
+            return false;
+        }
+        if (this.customer != other.customer && (this.customer == null || !this.customer.equals(other.customer))) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
 }
