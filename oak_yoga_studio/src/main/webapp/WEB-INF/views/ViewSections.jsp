@@ -22,7 +22,7 @@
                     <td>${s.sectionName }</td> 
                     <td>${s.roomNumber}</td>
                    <td><a href="../enrollInCourse/${s.id}">Enroll For this section <a></td>
-                               </tr>
+                 </tr>
             
             </c:forEach>
         </table>

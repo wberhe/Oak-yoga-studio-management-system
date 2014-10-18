@@ -66,6 +66,7 @@ public class AdminController {
     @RequestMapping(value="/addCourse", method=RequestMethod.POST)
     public String addCourse(@Valid Course course,BindingResult result,HttpSession session){
         String view="redirect:/index";
+        //session.getAttribute("loggedUser");
                 if(!result.hasErrors()){
                     course.setActive(true);
                     courseService.addCourse(course);

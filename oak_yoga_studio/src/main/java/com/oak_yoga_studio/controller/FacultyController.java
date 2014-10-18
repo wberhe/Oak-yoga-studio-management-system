@@ -35,10 +35,10 @@ public class FacultyController {
         return "faculty";
     }
     
-    @RequestMapping(value = "/viewAdvisees", method = RequestMethod.POST)
-    public String viewAdvisees(Model model,@PathVariable String id,HttpSession session){
+    @RequestMapping(value = "/viewAdvisees", method = RequestMethod.GET)
+    public String viewAdvisees(Model model,@PathVariable int id,HttpSession session){
         System.out.println("I am here");
-        model.addAttribute("advisees", facultyService.getFacultyById(Integer.parseInt(id)));
+        model.addAttribute("advisees", facultyService.getFacultyById(id));
                            
         return "AdviseesList"; 
     }

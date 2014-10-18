@@ -21,11 +21,11 @@
             <value>com\oak_yoga_studio\messages</value>
         </property>
     </bean>
-<!--    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
-    <bean id="uniqueName" class="cs544.wamp_blog_engine.validators.UniqueUserNameValidator">
-    </bean>-->
+    <bean id="uniqueName" class="com.oak_yoga_studio.validators.UniqueUserNameValidator">
+    </bean>
     
     <mvc:annotation-driven />
     <context:component-scan base-package="com" />
@@ -53,8 +53,8 @@
 
 
     <mvc:view-controller path="index" view-name="index"/>
-<!--    <mvc:view-controller path="loginFail" view-name="loginFail"/>
-    <mvc:view-controller path="login" view-name="login2"/>-->
+    <mvc:view-controller path="loginFail" view-name="loginFail"/>
+    <mvc:view-controller path="login" view-name="login"/>
     
     
     

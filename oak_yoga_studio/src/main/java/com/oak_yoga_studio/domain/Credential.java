@@ -6,6 +6,8 @@
 
 package com.oak_yoga_studio.domain;
 
+import com.oak_yoga_studio.validators.annotations.FieldMatch;
+import com.oak_yoga_studio.validators.annotations.UniqueUserName;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,6 +23,7 @@ import org.hibernate.validator.constraints.SafeHtml;
  * @author Weldu
  */
 @Entity
+@FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match")
 public class Credential {
     
     @Id
@@ -34,7 +37,7 @@ public class Credential {
     
     @NotBlank
     @SafeHtml
-    //@UniqueUserName(message = "Username must be unique")
+    @UniqueUserName(message = "Username must be unique")
     private String userName;
     
     @NotBlank    
