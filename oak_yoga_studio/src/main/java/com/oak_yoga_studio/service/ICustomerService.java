@@ -35,6 +35,8 @@ public interface ICustomerService {
     public void notifyCustomer(Customer customer, String message);
     
     public List<Waiver> getApprovedWaiversByCustomerID ( int customerID);
+
+public Waiver getWaiverRequest(int id);
     
     public List<Course> getAllCoursesToWaive(Customer customer);
 }

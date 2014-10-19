@@ -7,6 +7,7 @@ package com.oak_yoga_studio.service.impl;
 
 import com.oak_yoga_studio.dao.CredentialDAO;
 import com.oak_yoga_studio.dao.CustomerDAO;
+import com.oak_yoga_studio.dao.WaiverDAO;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Credential;
 import com.oak_yoga_studio.domain.Customer;
@@ -26,11 +27,12 @@ public class CustomerServiceImpl implements ICustomerService {
     
     private CustomerDAO customerDAO;
     private CredentialDAO credentialDAO;
+    private WaiverDAO waiverDAO;
     private INotificationService notificationService;
     
     
     
-    public CustomerServiceImpl(CustomerDAO customerDAO, CredentialDAO credentialDAO,
+    public CustomerServiceImpl(CustomerDAO customerDAO, CredentialDAO credentialDAO,WaiverDAO waiverDAO,
             INotificationService notificationService) {
         this.customerDAO = customerDAO;
         this.credentialDAO = credentialDAO;
@@ -140,7 +142,18 @@ public class CustomerServiceImpl implements ICustomerService {
       return   customerDAO.getApprovedWaiversByCustomerID(customerID);
       
     }
- 
+     
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public Waiver getWaiverRequest(int id) {
+        try {
+            return waiverDAO.getWaiverr(id);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     
      @Transactional(propagation = Propagation.REQUIRED)
     @Override

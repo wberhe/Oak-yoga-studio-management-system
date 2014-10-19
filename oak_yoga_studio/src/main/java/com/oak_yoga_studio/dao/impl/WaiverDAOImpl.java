@@ -44,15 +44,14 @@ public class WaiverDAOImpl implements WaiverDAO{
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Waiver getWaiverr(int id) {
-      
+        System.out.println("id "+ id);
         Waiver waiver=(Waiver)sf.getCurrentSession().get(Waiver.class,id);
         
         return waiver;
       
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS
-    )
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Waiver> getAllWaivers() {
        
