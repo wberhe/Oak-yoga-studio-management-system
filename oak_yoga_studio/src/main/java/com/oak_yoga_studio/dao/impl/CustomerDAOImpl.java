@@ -7,14 +7,21 @@
 package com.oak_yoga_studio.dao.impl;
 
 import com.oak_yoga_studio.dao.CustomerDAO;
+import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Customer;
-import com.oak_yoga_studio.domain.User;
 import com.oak_yoga_studio.domain.Waiver;
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
+import org.hibernate.Session; 
+
+
+
 
 /**
  *
@@ -78,6 +85,29 @@ public class CustomerDAOImpl implements CustomerDAO {
         waivers= query.list();
         
        return waivers;
+    
+    }
+
+    @Override
+    public List<Course> getAllCoursesToWaive(Customer customer) {
+        
+         List<Course> courses;
+         String sql =  ""
+                    + "  select distinct co.* from Customer c  join  enrollment e on c.id=e.customer_id" 
+                    + "  join section s on s.id=e.section_id "
+                    + "  join course co on s.course_id= co.ID "
+                    + "  where  e.status!='COMPLETED' AND c.id= " + customer.getId()
+                    + "  AND c.id not in (select course_id from  waiver"
+                    + "  where customer_id = " + customer.getId() +  ")" ;
+   
+      SQLQuery query = sf.getCurrentSession().createSQLQuery(sql);
+      query.addEntity(Course.class);
+        courses = query.list();
+
+        System.out.println("number of courses taken by customer is "+ courses.size() );
+       return courses;
+       
+    
     
     }
     

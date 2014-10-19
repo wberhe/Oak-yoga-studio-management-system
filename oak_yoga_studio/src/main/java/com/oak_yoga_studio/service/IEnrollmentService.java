@@ -30,6 +30,7 @@ public interface IEnrollmentService {
      
      public List<Enrollment> getEnrollmentsByCustomer(Customer cusomer);
      
+        
      public List<Enrollment> getEnrollmentsByCustomerID(int customerID);
       
      public boolean checkSeatAvailablity(int sectionID);

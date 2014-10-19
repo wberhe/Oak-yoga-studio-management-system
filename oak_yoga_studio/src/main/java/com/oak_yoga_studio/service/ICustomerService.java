@@ -6,6 +6,7 @@
 
 package com.oak_yoga_studio.service;
 
+import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.User;
 import com.oak_yoga_studio.domain.Waiver;
@@ -34,4 +35,6 @@ public interface ICustomerService {
     public void notifyCustomer(Customer customer, String message);
     
     public List<Waiver> getApprovedWaiversByCustomerID ( int customerID);
+    
+    public List<Course> getAllCoursesToWaive(Customer customer);
 }

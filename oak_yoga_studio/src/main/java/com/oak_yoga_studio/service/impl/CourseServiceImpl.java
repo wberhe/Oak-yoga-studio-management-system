@@ -8,7 +8,9 @@ package com.oak_yoga_studio.service.impl;
 import com.oak_yoga_studio.dao.CourseDAO;
 import com.oak_yoga_studio.dao.SectionDAO;
 import com.oak_yoga_studio.domain.Course;
+import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.Section;
+import com.oak_yoga_studio.domain.Waiver;
 import com.oak_yoga_studio.service.ICourseService;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,5 +114,17 @@ public class CourseServiceImpl implements ICourseService {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public void requestWaiver(Course course, Customer customer, String reason) {
+        
+        Waiver waiver= new Waiver();
+        waiver.setCustomer(customer);
+        waiver.setRequestReason(reason);
+        waiver.setStatus("PENDING");
+        
+        courseDAO.addWaiver(waiver);
+        
     }
 }

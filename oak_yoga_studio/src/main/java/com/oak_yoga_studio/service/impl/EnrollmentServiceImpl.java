@@ -296,10 +296,13 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
        }
     }
 
+    
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public boolean isFirstTimeEnrollment(Customer customer) {
        
-        if(getEnrollmentsByCustomer(customer).isEmpty())
+        if(enrollmentDAO.isFirstTimeEnrollment(customer))
+           
         {
              return true;
         }

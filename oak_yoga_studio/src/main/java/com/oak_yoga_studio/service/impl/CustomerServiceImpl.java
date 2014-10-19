@@ -7,6 +7,7 @@ package com.oak_yoga_studio.service.impl;
 
 import com.oak_yoga_studio.dao.CredentialDAO;
 import com.oak_yoga_studio.dao.CustomerDAO;
+import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Credential;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.User;
@@ -138,6 +139,15 @@ public class CustomerServiceImpl implements ICustomerService {
         
       return   customerDAO.getApprovedWaiversByCustomerID(customerID);
       
+    }
+ 
+    
+     @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public List<Course> getAllCoursesToWaive(Customer customer) {
+        
+    
+        return customerDAO.getAllCoursesToWaive(customer);
     }
     
 }

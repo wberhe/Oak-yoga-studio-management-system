@@ -51,4 +51,6 @@ public interface EnrollmentDAO {
      public Enrollment getTopWaitingList(int sectionId);
      
      public  void changeEnrollmentStatus(String status);
+     
+     public boolean isFirstTimeEnrollment(Customer customer) ;
 }
