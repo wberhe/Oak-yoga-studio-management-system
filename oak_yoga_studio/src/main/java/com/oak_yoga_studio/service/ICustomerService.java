@@ -8,6 +8,7 @@ package com.oak_yoga_studio.service;
 
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.User;
+import com.oak_yoga_studio.domain.Waiver;
 import java.util.List;
 
 /**
@@ -31,4 +32,6 @@ public interface ICustomerService {
     public boolean checkUserName(String userName); 
     
     public void notifyCustomer(Customer customer, String message);
+    
+    public List<Waiver> getApprovedWaiversByCustomerID ( int customerID);
 }

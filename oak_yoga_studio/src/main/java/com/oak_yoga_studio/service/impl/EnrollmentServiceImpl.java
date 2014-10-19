@@ -64,9 +64,8 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
        }
     }
 
-  
-
-     @Transactional(propagation = Propagation.REQUIRED)
+    
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Enrollment getEnrollmentById(int id) {
        
@@ -316,7 +315,10 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
     public void addEnrollment(Enrollment.statusType status, Customer customer, Section section) 
        
     {
-        enrollmentDAO.addEnrollment(null);
+        
+        System.out.println("udner dao");
+        enrollmentDAO.addEnrollment(status, customer, section);
+        
        
     }
   

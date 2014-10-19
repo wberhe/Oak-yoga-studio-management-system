@@ -9,6 +9,7 @@ package com.oak_yoga_studio.dao.impl;
 import com.oak_yoga_studio.dao.CustomerDAO;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.User;
+import com.oak_yoga_studio.domain.Waiver;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -62,6 +63,22 @@ public class CustomerDAOImpl implements CustomerDAO {
         customers= query.list();
         
        return customers;
+    }
+
+    @Transactional(propagation = Propagation.MANDATORY)
+    @Override
+    public List<Waiver> getApprovedWaiversByCustomerID ( int customerID)
+    {
+       
+        List<Waiver> waivers ;
+             
+        Query query= sf.getCurrentSession().createQuery("from Waiver where customer.id=:customerID");
+        
+        query.setParameter("customerID", customerID);
+        waivers= query.list();
+        
+       return waivers;
+    
     }
     
 }
