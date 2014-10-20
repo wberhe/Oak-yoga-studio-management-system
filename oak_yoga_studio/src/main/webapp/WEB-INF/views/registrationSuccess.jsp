@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> successful registration</title>
+        <title> Enroll in course result</title>
     </head>
     <body>
         <h1></h1>

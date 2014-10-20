@@ -5,6 +5,7 @@
  */
 package com.oak_yoga_studio.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -35,18 +36,23 @@ public class Customer extends User {
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<Order> orders;
 
-    @OneToOne
-    @JoinColumn(name = "shoppingCart_id")
+    @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
     public Customer() {
+        
+        this.shoppingCart = new ShoppingCart(new ArrayList<ShoppingCartItem>(), this);
     }
 
     public Customer(List<Enrollment> enrollments, List<Waiver> waivers, List<Order> orders, ShoppingCart shoppingCart) {
+        
+        super();
         this.enrollments = enrollments;
         this.waivers = waivers;
         this.orders = orders;
-        this.shoppingCart = shoppingCart;
+        this.shoppingCart = new ShoppingCart(new ArrayList<ShoppingCartItem>(), this);
+         
+    
     }
     
    

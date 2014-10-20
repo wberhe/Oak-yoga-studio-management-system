@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.oak_yoga_studio.dao.impl;
 
 import com.oak_yoga_studio.dao.ShoppingCartDAO;
+import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.ShoppingCart;
 import java.util.List;
 import org.hibernate.Query;
@@ -16,10 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Senai
+ * @author weldu
  */
-public class ShoppingCartDAOImpl implements ShoppingCartDAO{
-    
+public class ShoppingCartDAOImpl implements ShoppingCartDAO {
+
     private SessionFactory sf;
 
     public void setSf(SessionFactory sf) {
@@ -38,21 +38,39 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO{
         sf.getCurrentSession().saveOrUpdate(shoppingCart);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public ShoppingCart getShoppingCart(int id) {
         ShoppingCart shoppingCart = (ShoppingCart) sf.getCurrentSession().get(ShoppingCart.class, id);
         return shoppingCart;
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public List<ShoppingCart> getAllShoppingCarts() {
-        
+
         Query query = sf.getCurrentSession().createQuery("from Order");
         List<ShoppingCart> shoppingCarts = query.list();
 
         return shoppingCarts;
+    }
+
+    @Transactional(propagation = Propagation.MANDATORY)
+    @Override
+    public ShoppingCart getShoppingCart(Customer customer) {
+        Query q = sf.getCurrentSession().createQuery("from ShoppingCart cart where cart.customer=customer");
+        List<ShoppingCart> carts = q.list();
+        return carts.get(0);
+    }
+
+    @Override
+    public void clearShoppingCart(int id) {
+        ShoppingCart cart = getShoppingCart(id);
+        if (cart != null) {
+            cart.getShoppingCartItems().clear();
+            updateShoppingCart(cart);
+        }
+
     }
 
 }

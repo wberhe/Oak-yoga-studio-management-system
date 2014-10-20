@@ -30,18 +30,62 @@ public class ProductServiceImpl implements IProductService {
     }
      
     @Transactional(propagation = Propagation.REQUIRED)
-    
     @Override
     public List<Product> searchProductByName(String pname) {
         //TODO
         return null;
     }
-
+ @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Product getProductDetailInfo(int id) {
         //TODO
         return null;
     }
+ @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void addProduct(Product product) {
+        try{
+           productDAO.addProduct(product);
+        }catch(Exception e){
+            
+        }
+    }
+ @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void updateProduct(Product product) {
+        try{
+           productDAO.updateProduct(product);
+        }catch(Exception e){
+            
+        }
+    }
+ @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public Product getProduct(int id) {
+        
+        try{
+           return productDAO.getProduct(id);
+        }catch(Exception e){
+            return null;
+        }
+    }
     
-
+ @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public List<Product> getAllProducts() {
+        List<Product> products=productDAO.getAllProducts();
+        return products;
+    }
+    
+ @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public List<Product> getProductByName(String name) {
+        try{
+            return productDAO.getProductByName(name);
+        }catch(Exception e){
+            return null;
+        }
+    }
+    
+  
 }

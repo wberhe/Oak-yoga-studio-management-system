@@ -6,6 +6,7 @@
 
 package com.oak_yoga_studio.dao;
 
+import com.oak_yoga_studio.domain.ShoppingCart;
 import com.oak_yoga_studio.domain.ShoppingCartItem;
 import java.util.List;
 
@@ -14,11 +15,17 @@ import java.util.List;
  * @author Senai
  */
 public interface ShoppingCartItemDAO {
+    
     public void addShoppingCartItem(ShoppingCartItem item);
      
      public void updateShoppingCartItem(ShoppingCartItem item);
      
      public ShoppingCartItem getShoppingCartItem(int id);
      
-     public List<ShoppingCartItem> getAllShoppingCartItems(int id);
+     public List<ShoppingCartItem> getAllShoppingCartItems();
+     
+     public void deleteShoppingCartItem(ShoppingCartItem item);
+     
+     public List<ShoppingCartItem> getShoppingCartItemsOfCart(ShoppingCart cart);
+     
 }

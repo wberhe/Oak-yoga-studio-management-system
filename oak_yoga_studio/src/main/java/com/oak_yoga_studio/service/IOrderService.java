@@ -15,13 +15,14 @@ import java.util.List;
  *
  * @author Somayeh
  */
-public interface IOrderService {
+public interface IOrderService {    
+      
+    public void addOrder(Order order);
     
-    public void fillingShippingAddress(Address address);
+    public Order getOrderById(int id);
     
-    public void fillingPaymentInfo(User userInfo);
+    public void updateOrder(Order order);
     
-    public List<Order> placeOrder(Order orderList);
+    public List<Order> getAllOrders();
     
-
-}
+  }

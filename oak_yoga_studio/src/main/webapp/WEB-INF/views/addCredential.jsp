@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add Credentials</title>
-        <link href="resources/style.css" rel="stylesheet" type="text/css" />
+        <link href="resources/styles/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <h1>Customer sign up :</h1>

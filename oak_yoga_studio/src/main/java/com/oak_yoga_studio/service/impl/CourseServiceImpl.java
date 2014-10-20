@@ -122,9 +122,13 @@ public class CourseServiceImpl implements ICourseService {
         Waiver waiver= new Waiver();
         waiver.setCustomer(customer);
         waiver.setRequestReason(reason);
+
         waiver.setWaiverCourse(course);
-        waiver.setStatus("PENDING");
+      
         waiver.setFaculty(customer.getAdvisor());
+
+        waiver.setStatus(Waiver.Status.PENDING);
+
         courseDAO.addWaiver(waiver);
         
     }

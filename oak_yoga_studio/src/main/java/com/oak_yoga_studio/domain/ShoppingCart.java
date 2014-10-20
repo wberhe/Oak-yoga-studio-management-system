@@ -3,8 +3,10 @@ package com.oak_yoga_studio.domain;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -19,10 +21,11 @@ public class ShoppingCart {
     @GeneratedValue
     private int id;
 
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<ShoppingCartItem> shoppingCartItems;
 
-    @OneToOne(mappedBy = "shoppingCart")
+    @OneToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     public ShoppingCart() {
@@ -44,18 +47,37 @@ public class ShoppingCart {
         this.id = id;
     }
     //add and remove items from cart
-    public void addItem(ShoppingCartItem item)
-            
-    {
+//    public void addItem(ShoppingCartItem item)
+//            
+//    {
+//        this.shoppingCartItems.add(item);
+//        item.setShoppingCart(this);
+//    }
+//    
+//    public void removeItem(ShoppingCartItem item)
+//    {
+//        item.setShoppingCart(null);
+//        this.shoppingCartItems.remove(item);
+//    }
+    /**
+     * add item
+     * @param item 
+     */
+    public void addShoppingCartItem(ShoppingCartItem item){
         this.shoppingCartItems.add(item);
         item.setShoppingCart(this);
     }
-    
-    public void removeItem(ShoppingCartItem item)
-    {
-        item.setShoppingCart(null);
+    /**
+     * remove item
+     * @return 
+     */
+    public void removeShoppingCartItem(ShoppingCartItem item){
+        if(item.getShoppingCart()!=null){
+            item.setShoppingCart(null);
+        }
         this.shoppingCartItems.remove(item);
     }
+    
     public List<ShoppingCartItem> getShoppingCartItems() {
         return shoppingCartItems;
     }
@@ -72,4 +94,31 @@ public class ShoppingCart {
         this.customer = customer;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 73 * hash + (this.shoppingCartItems != null ? this.shoppingCartItems.hashCode() : 0);
+        hash = 73 * hash + (this.customer != null ? this.customer.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShoppingCart other = (ShoppingCart) obj;
+        if (this.shoppingCartItems != other.shoppingCartItems && (this.shoppingCartItems == null || !this.shoppingCartItems.equals(other.shoppingCartItems))) {
+            return false;
+        }
+        if (this.customer != other.customer && (this.customer == null || !this.customer.equals(other.customer))) {
+            return false;
+        }
+        return true;
+    }
+  
+    
 }

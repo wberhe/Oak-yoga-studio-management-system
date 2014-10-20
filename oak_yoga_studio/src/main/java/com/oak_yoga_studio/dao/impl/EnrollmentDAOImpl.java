@@ -274,14 +274,32 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
 
         if (enrollments.isEmpty()) {
 
-            System.out.println("return ing false");
             return false;
         } 
         else {
             
-             System.out.println("return ing true");
-
-            return true;
+                 return true;
         } 
     }
+    
+    
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public long getEnrollmentsCountBySection(Section section) {
+        
+  
+
+      Query query = sf.getCurrentSession().createQuery("select count(e.id) from Enrollment e where  e.section =:section "
+                + " and ( e.status ='ACTIVE' OR e.status ='INPROGRESS' )  ");
+        query.setParameter("section", section);
+       
+       long count = (Long)query.uniqueResult();
+    
+       System.out.println("count is  " + count);
+       
+       return count;
+
+    }
+    
+    
 }

@@ -56,5 +56,18 @@ public class ProductDAOImpl implements ProductDAO{
 
         return products;
     }
+@Transactional(propagation = Propagation.MANDATORY)
+    @Override
+    public List<Product> getProductByName(String name) {
+        List<Product> product;
+        Query query=sf.getCurrentSession().createQuery("select distinct p from Product p where p.name LIKE :theName");
+        query.setParameter("theName",name);
+        product=query.list();
+        return product;
+    
+    }
+    
+    
+   
 
 }

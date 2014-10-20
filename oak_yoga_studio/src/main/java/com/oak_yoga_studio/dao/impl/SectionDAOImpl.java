@@ -8,6 +8,7 @@ package com.oak_yoga_studio.dao.impl;
 
 import com.oak_yoga_studio.dao.SectionDAO;
 import com.oak_yoga_studio.domain.Course;
+import com.oak_yoga_studio.domain.Enrollment;
 import com.oak_yoga_studio.domain.Section;
 import java.util.List;
 import org.hibernate.Query;
@@ -45,7 +46,7 @@ public class SectionDAOImpl implements SectionDAO {
         sf.getCurrentSession().saveOrUpdate(section);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public Section getSection(int id) {
         
@@ -54,7 +55,7 @@ public class SectionDAOImpl implements SectionDAO {
         return section;
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public List<Section> getAllSections() {
         
@@ -67,7 +68,7 @@ public class SectionDAOImpl implements SectionDAO {
         return sections;
         
     }
-
+@Transactional(propagation = Propagation.MANDATORY)
     @Override
     public List<Section> getCourseSections(Course course) {
         List<Section> sections;
@@ -78,5 +79,7 @@ public class SectionDAOImpl implements SectionDAO {
     
         return sections;
     }
+
+    
     
 }

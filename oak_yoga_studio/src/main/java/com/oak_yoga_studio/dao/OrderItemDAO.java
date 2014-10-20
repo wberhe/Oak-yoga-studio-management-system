@@ -21,5 +21,7 @@ public interface OrderItemDAO {
      
      public OrderItem getOrderItem(int id);
      
-     public List<OrderItem> getAllOrderItems(int orderId);
+     public List<OrderItem> getAllOrderItems();
+     
+      public List<OrderItem> getAllOrderItemsOfThis(int orderId);
 }

@@ -15,8 +15,18 @@ import java.util.List;
  */
 public interface IProductService {
     
-    public List<Product> searchProductByName(String pname);
+     public List<Product> searchProductByName(String pname);
     
-    public Product getProductDetailInfo(int id);
+     public Product getProductDetailInfo(int id);
+    
+     public void addProduct(Product product);
+     
+     public void updateProduct(Product product);
+     
+     public Product getProduct(int id);
+     
+     public List<Product> getAllProducts();
+     
+     public List<Product> getProductByName(String name);
 
 }

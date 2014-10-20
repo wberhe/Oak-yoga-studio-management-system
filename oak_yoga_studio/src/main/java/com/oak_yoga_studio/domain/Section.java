@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -30,21 +31,23 @@ public class Section {
     @Id
     @GeneratedValue
     private int id;
+    
+    @NotEmpty
     private String sectionName;
     
     public enum Status {
         INPROGRESS,COMPLETED,OPEN ,CANCELED 
     }
     
-    @Size(min=1, max = 15)
+    //@Size(min=1, max = 15)
     private int capacity;
     
-    @NotEmpty
+    //@NotNull
     private int roomNumber;
     
-    @Min(1)
-    @Max(15)
-    private int availableSeat;
+//    @Min(0)
+//    @Max(15)
+ //   private int availableSeat;
     
     private Status status;
     
@@ -62,16 +65,17 @@ public class Section {
     public Section() {
     }
 
-    public Section(String sectionName, int capacity, int roomNumber, int availableSeat, Status status, Course course, Faculty professor, List<Enrollment> enrollements) {
+    public Section(String sectionName, int capacity, int roomNumber, Status status, Course course, Faculty professor, List<Enrollment> enrollements) {
         this.sectionName = sectionName;
         this.capacity = capacity;
         this.roomNumber = roomNumber;
-        this.availableSeat = availableSeat;
         this.status = status;
         this.course = course;
         this.professor = professor;
         this.enrollements = enrollements;
     }
+
+
 
    
 
@@ -109,13 +113,13 @@ public class Section {
         this.roomNumber = roomNumber;
     }
 
-    public int getAvailableSeat() {
-        return availableSeat;
-    }
-
-    public void setAvailableSeat(int availableSeat) {
-        this.availableSeat = availableSeat;
-    }
+//    public int getAvailableSeat() {
+//        return availableSeat;
+//    }
+//
+//    public void setAvailableSeat(int availableSeat) {
+//        this.availableSeat = availableSeat;
+//    }
 
     public Status getStatus() {
         return status;
@@ -131,6 +135,7 @@ public class Section {
 
     public void setProfessor(Faculty professor) {
         this.professor = professor;
+        //professor.addSection(this);
     }
 
     public Course getCourse() {
@@ -139,6 +144,7 @@ public class Section {
 
     public void setCourse(Course course) {
         this.course = course;
+        //course.addSection(this);
     }
     public void addEnrollment(Enrollment enrollment)
     {
@@ -160,7 +166,6 @@ public class Section {
         hash = 41 * hash + (this.sectionName != null ? this.sectionName.hashCode() : 0);
         hash = 41 * hash + this.capacity;
         hash = 41 * hash + this.roomNumber;
-        hash = 41 * hash + this.availableSeat;
         hash = 41 * hash + (this.status != null ? this.status.hashCode() : 0);
         hash = 41 * hash + (this.course != null ? this.course.hashCode() : 0);
         hash = 41 * hash + (this.professor != null ? this.professor.hashCode() : 0);
@@ -186,9 +191,7 @@ public class Section {
         if (this.roomNumber != other.roomNumber) {
             return false;
         }
-        if (this.availableSeat != other.availableSeat) {
-            return false;
-        }
+    
         if (this.status != other.status) {
             return false;
         }

@@ -31,13 +31,13 @@ public class Product {
     @Min(0)
     private double price;
      
-    @Column(name="image",columnDefinition="longblob")
+    @Column(name="poductImage",columnDefinition="longblob")
     private byte[] image;
     
     @Min(1)
     private int quantity;
     
-    @NotBlank
+    
     private String status;
 
     
@@ -46,6 +46,7 @@ public class Product {
 
     public Product() {
     }
+    
 
     public Product(String name, double price, byte[] image, int quantity, String status, List<ShoppingCartItem> shoppingCartItems) {
         this.name = name;

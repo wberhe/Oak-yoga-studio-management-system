@@ -14,7 +14,7 @@
     <body>
         <div align="center">
 
-            <h3>: ${message} </h3>
+            <h3> ${msg} </h3>
         </div>
         <br />
         <div align="center">

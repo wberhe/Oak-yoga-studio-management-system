@@ -14,16 +14,23 @@
     </head>
     <body>
         <h3>List of all Advisees :</h3>
-            <table>
-                <c:forEach var="a" items="${advisees}">
-                    <tr>
-                        <td><input type="checkbox" name="ids" value="${a.id}"/></td> 
-                        <td>${a.firstName}</td> 
-                        <td>${a.lastName}</td>
-                        <td>(Email: ${a.email})</td>
-                        <td><a href="customerDetail/${a.id}">customer details</a></td>
-                    </tr>
-                </c:forEach>
-            </table>
+        <table>
+            <tr>
+                <td></td>
+                <td>First Name</td>
+                <td>Last Name </td>
+                <td>Email</td>
+                <td></td>
+            </tr>
+            <c:forEach var="a" items="${advisees}">
+                <tr>
+                    <td></td> 
+                    <td><a href="adviseeDetail/${a.id}">${a.firstName}</a></td> 
+                    <td><a href="adviseeDetail/${a.id}">${a.lastName}</a></td>
+                    <td>${a.email}</td>
+                    <td></td>                    
+                </tr>
+            </c:forEach>
+        </table>
     </body>
 </html>

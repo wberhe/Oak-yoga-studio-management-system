@@ -13,7 +13,19 @@
         <link href="resources/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <h2>Faculty home page</h2>
-        <a href="viewAdvisees/">my advisees</a>
+        <h3>This is faculty Home page</h3>
+        <ul>
+            <li>
+                <!--                <form commandName="advisee" action="viewAdvisees" method="post" enctype="multipart/form-data">
+                                    <input type="textfield" path="id"/>
+                                    <input type="submit" value="submit"/>
+                                    </form>-->
+                <a href="viewAdvisees"> view Advisees</a>
+            </li>
+            <li> <a href="viewWaiverRequests">View Waiver Requests</a></li>
+            <li> <a href="viewFacultySections">View Sections</a></li>
+
+
+        </ul>
     </body>
 </html>

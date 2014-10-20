@@ -48,7 +48,7 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public List<Order> getAllOrders() {
         
-        Query query = sf.getCurrentSession().createQuery("from Order");
+        Query query = sf.getCurrentSession().createQuery("from Order_table");
         List<Order> orders = query.list();
 
         return orders;

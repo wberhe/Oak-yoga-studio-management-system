@@ -128,7 +128,7 @@ public class Course {
     public void addPrerequiste(Course course) {
         this.prerequisites.add(course);
     }
-
+   
     public List<Course> getPrerequisites() {
         return prerequisites;
     }

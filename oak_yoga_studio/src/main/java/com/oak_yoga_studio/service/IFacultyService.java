@@ -34,5 +34,9 @@ public interface IFacultyService {
     public void updateWaiverRequest(Waiver waiver);
 
     public List<Customer> getfacultyAdvisees(Faculty faculty);
+    
+    public List<Waiver> getfacultyPendingWaiverRequests(Faculty faculty);
+    
+    public List<Waiver> getfacultyDecidedWaivers(Faculty faculty);
 
 }

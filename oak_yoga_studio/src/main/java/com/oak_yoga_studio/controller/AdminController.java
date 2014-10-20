@@ -6,22 +6,29 @@
 
 package com.oak_yoga_studio.controller;
 
+import com.oak_yoga_studio.domain.Admin;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Credential;
 import com.oak_yoga_studio.domain.Faculty;
+import com.oak_yoga_studio.domain.Section;
 import com.oak_yoga_studio.service.ICourseService;
 import com.oak_yoga_studio.service.ICustomerService;
 import com.oak_yoga_studio.service.IFacultyService;
 import com.oak_yoga_studio.service.INotificationService;
 import com.oak_yoga_studio.service.ISectionService;
+import java.beans.PropertyEditorSupport;
 import java.io.IOException;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,25 +64,32 @@ public class AdminController {
     
     
     @RequestMapping(value = "/addCourse", method = RequestMethod.GET)
-    public String addCourse(@ModelAttribute("course") Course course, HttpSession session) {
-        //customer.setCredential((Credential) session.getAttribute("credential"));
-        //System.out.println("hello signup");
-        return "addCourse";
+    public String addCourse(@ModelAttribute("course") Course course, HttpSession session,Model model) {
+           model.addAttribute("ALLCourses", courseService.getListOfCourses());
+           return "addCourse";
     }
     
     @RequestMapping(value="/addCourse", method=RequestMethod.POST)
     public String addCourse(@Valid Course course,BindingResult result,HttpSession session){
-        String view="redirect:/index";
-        //session.getAttribute("loggedUser");
+        String view="redirect:/showPrerequisite";
+          /**
+           * Binding is the secret,,bind prerequisite with the course
+           */
                 if(!result.hasErrors()){
                     course.setActive(true);
-                    courseService.addCourse(course);
-                   
+                    courseService.updateCourse(course);
                 }else{
                      view="addCourse";
                 }
                 return view;
     }
+    
+    @RequestMapping(value = "/showPrerequisite", method = RequestMethod.GET)
+    public String showPrerequisite(Model model, HttpSession session) {
+           model.addAttribute("courses", courseService.getListOfCourses());
+           return "ViewAllCourses";
+    }
+    
     
     @RequestMapping(value = "/viewCustomers", method = RequestMethod.GET)
     public String getAllCustomers(Model model,HttpSession session) {
@@ -190,8 +204,138 @@ public class AdminController {
      * 
      * SECTION MANAGMENT
      */
-    @RequestMapping(value="/addSection", method = RequestMethod.POST)
-    public void addSection(){
+    /**
+     *  I NEED TO CREATE THE sectionList/{id} tomorrow
+     * ??TODO..............
+     * 
+     */
+    
+    @RequestMapping(value = "/newSection", method = RequestMethod.GET)
+    public String showCreatedSection(Model model) {
+//        Course course=courseService.getCourseById(id);
+        model.addAttribute("section", new Section());
+//        model.addAttribute("course", course);
+        model.addAttribute("allCourses", courseService.getListOfCourses());
+        model.addAttribute("allFaculities", facultyServcie.getListOfFaculty());
+        return "createSection";
         
     }
+    
+    @RequestMapping(value = "/sectionList",method=RequestMethod.GET)
+    public String sectinLists(Model model){
+        model.addAttribute("sections",sectionService.getListOfSections());
+        return "sectionList";
+    }
+    
+    
+    
+    @RequestMapping(value = "/newSection", method = RequestMethod.POST)
+    public String createSection(@Valid Section section,BindingResult result,Model model) {
+          
+        /**
+         * //dump fix, I almost hate my self...damnnn
+         * ,,,here the professor and course are binded with section
+         */
+        String view = "redirect:/sectionList";
+        
+        if (result.hasErrors()) {
+            view = "createSection";
+           
+        } else {
+            
+            section.getProfessor().addSection(section);
+            section.getCourse().addSection(section);
+            sectionService.updateSection(section);
+         }
+        return view;
+    }
+    
+//    @RequestMapping(value = "deleteSection/{id}", method = RequestMethod.POST)
+//    public String deleteSection(Model model, @PathVariable int id, RedirectAttributes redattr) {
+//        Section section=sectionService.getSectionById(id);
+//        int courseID = section.getCourse().getId();
+//        Course course=courseService.getCourseById(courseID);
+//        course.removeSection(section);
+//        courseService.updateCourse(course);
+//        section.setCourse(null);
+//        //sectionService.delete
+//        redattr.addAttribute("id", courseID);
+//        return "redirect:/sectionList/{id}";
+//    }
+    
+    
+    
+    	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		
+//		binder.registerCustomEditor(Integer.class, "totalSeat",
+//				new PropertyEditorSupport() {
+//
+//					@Override
+//					public void setAsText(String text) {
+//						Integer totalSeat= Integer.parseInt(text);
+//						setValue(totalSeat);
+//					}
+//				});
+//		
+//		binder.registerCustomEditor(Long.class, "id",
+//				new PropertyEditorSupport() {
+//
+//					@Override
+//					public void setAsText(String text) {
+//						Long id= Long.parseLong(text);
+//						setValue(id);
+//					}
+//				});
+//
+//		
+		
+	binder.registerCustomEditor(List.class, "prerequisites",
+			new CustomCollectionEditor(List.class) {
+				@Override
+				protected Object convertElement(Object element) {
+					Integer id = null;
+					if (element instanceof String
+							&& !((String) element).equals("")) {
+						// From the JSP 'element' will be a String
+						try {
+							id = Integer.parseInt((String) element);
+						} catch (NumberFormatException e) {
+							System.out.println("Element was "
+									+ ((String) element));
+							e.printStackTrace();
+						}
+					} else if (element instanceof Integer) {
+						// From the database 'element' will be a int
+						id = (Integer) element;
+					}
+					return id != null ? courseService.getCourseById(id): null;
+							
+				}
+			});
+            
+	binder.registerCustomEditor(Faculty.class, "professor",
+			new PropertyEditorSupport() {
+
+				@Override
+				public void setAsText(String facultyID) {
+					Faculty faculty = facultyServcie.getFacultyById(Integer.parseInt(facultyID));
+							
+					setValue(faculty);
+				}
+			});
+	
+	binder.registerCustomEditor(Course.class, "course",
+			new PropertyEditorSupport() {
+
+				@Override
+				public void setAsText(String courseID) {
+					Course course = courseService.getCourseById(Integer.parseInt(courseID));							
+					setValue(course);
+				}
+			});
+	}
+
+
+    
 }

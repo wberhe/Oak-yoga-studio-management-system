@@ -8,6 +8,7 @@ package com.oak_yoga_studio.controller;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Credential;
 import com.oak_yoga_studio.domain.Customer;
+import com.oak_yoga_studio.domain.ShoppingCart;
 import com.oak_yoga_studio.domain.Waiver;
 import com.oak_yoga_studio.service.ICourseService;
 import com.oak_yoga_studio.service.ICustomerService;
@@ -50,11 +51,9 @@ public class CustomerController {
     @Resource
     private ICourseService courseService;
 
-    
-    @Resource 
+    @Resource
     private IEnrollmentService enrollmentService;
-    
-    
+
     @RequestMapping("/")
     public String redirectRoot() {
         return "redirect:/index";
@@ -84,12 +83,15 @@ public class CustomerController {
             } catch (IOException ex) {
                 //Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
             }
+//            ShoppingCart cart= new ShoppingCart();
+//            customer.setShoppingCart(cart);
             customerService.addCustomer(customer);
             session.removeAttribute("credential");
             flashAttr.addFlashAttribute("successfulSignup", "Customer signed up succesfully. please  log in to proceed");
             //           Customer c=(Customer) session.getAttribute("loggedCustomer");
 //            if(c!=null && c.getUserCredential().isAdmin()){
 //                view="redirect:/settings";
+
 //            }
         } else {
             for (FieldError err : result.getFieldErrors()) {
@@ -163,62 +165,54 @@ public class CustomerController {
         }
     }
 
-  
-    
+
     @RequestMapping(value = "/requestWaiver", method = RequestMethod.GET)
-    public String requestWaiver(Model model,HttpSession session) {
-     
+    public String requestWaiver(Model model, HttpSession session) {
+
     //    model.addAttribute("courses", courseService.getListOfCourses());
-     
-          Customer customer = (Customer) session.getAttribute("loggedUser");
-       
+        Customer customer = (Customer) session.getAttribute("loggedUser");
 
         if (!customerService.getAllCoursesToWaive(customer).isEmpty()) {
-           
-           
+
             model.addAttribute("coursesToWaive", customerService.getAllCoursesToWaive(customer));
             model.addAttribute("msg", " Courses Qualified to be waived ");
         } else {
             model.addAttribute("msg", " There is no course that you can waive");
         }
-        
+
         return "waiverRequest";
     }
 
-    
-       
-    
-   @RequestMapping(value = "/waiverRequest/{id}", method = RequestMethod.POST)
-      public String waiverForm(@PathVariable int id,Model model, HttpSession session) {
-        
+    @RequestMapping(value = "/waiverRequest/{id}", method = RequestMethod.POST)
+    public String waiverForm(@PathVariable int id, Model model, HttpSession session) {
+
         Customer customer = (Customer) session.getAttribute("loggedUser");
-    
-     //    model.addAttribute("course", courseService.getCourseById(id));
+
+        //    model.addAttribute("course", courseService.getCourseById(id));
         return "redirect:/waiverForm/{id}";
     }
-    
-      
-      
+
     @RequestMapping(value = "/waiverForm/{id}", method = RequestMethod.GET)
     public String waiverForm(Model model, @PathVariable int id) {
         model.addAttribute("course", courseService.getCourseById(id));
-       
+
         return "waiverForm";
     }
-    
-    
-  @RequestMapping(value = "/waiverResult/{id}", method = RequestMethod.POST)
-    public String waiverResult(@PathVariable int id, Model model, String text, String[] ids,HttpSession session) {
-               
-     
+
+    @RequestMapping(value = "/waiverResult/{id}", method = RequestMethod.POST)
+    public String waiverResult(@PathVariable int id, Model model, String text, String[] ids, HttpSession session) {
+
         Customer customer = (Customer) session.getAttribute("loggedUser");
-        Course course= courseService.getCourseById(id);
-        
+        Course course = courseService.getCourseById(id);
+
         courseService.requestWaiver(course, customer, text);
-              
-        model.addAttribute("message", "Your Waiver request for course " + course.getCourseName() + " is successfuly saved" );
-     
+
+
+        model.addAttribute("msg", "Your Waiver request for course " + course.getCourseName() + " is successfuly saved");
+
+
         return "waiverResult";
+
     }    
  
    
@@ -253,6 +247,10 @@ public class CustomerController {
             
          
          
+
+    
+
+
     /**
      * Enabling and disabling the user
      *
@@ -303,10 +301,15 @@ public class CustomerController {
      * @param response
      */
 
-    
-            
-    
-    
-    
+
+
+
+    private void requestWaiver(Customer customer, String reason) {
+
+    }
+
+
+
+
 
 }
