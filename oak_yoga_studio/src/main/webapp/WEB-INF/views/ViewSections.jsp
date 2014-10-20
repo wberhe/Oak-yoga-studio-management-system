@@ -29,7 +29,7 @@
                   </sec:authorize>
                     
                    <td><a href="../enrollInCourse/${s.id}">Enroll For this section /a></td>
-                               <h2> ${message}</h2>
+                               <h4> ${message}</h4>
                  </tr>
             
             </c:forEach>
