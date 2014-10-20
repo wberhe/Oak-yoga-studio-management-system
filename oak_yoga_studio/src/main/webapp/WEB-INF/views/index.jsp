@@ -14,7 +14,7 @@
             
         <p>Customer Profile Update <a href="editProfile">Edit Profile</a>
         <p>Please <a href="addCredential">sign up</a>
-         <p>Enrollment <a hrefaddCredential="viewCourses">enroll</a>
+         <p>Enrollment <a href="viewCourses">enroll</a>
              
         <p>Course Waiver Request  <a href="requestWaiver">Request Waiver</a>
         <p>Enrollment History  <a href="enrolled">Enrollment History</a>
