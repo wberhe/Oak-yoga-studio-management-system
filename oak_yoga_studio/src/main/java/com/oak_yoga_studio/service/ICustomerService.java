@@ -36,7 +36,7 @@ public interface ICustomerService {
     
     public List<Waiver> getApprovedWaiversByCustomerID ( int customerID);
 
-public Waiver getWaiverRequest(int id);
+    public Waiver getWaiverRequest(int id);
     
     public List<Course> getAllCoursesToWaive(Customer customer);
 }

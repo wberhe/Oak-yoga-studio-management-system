@@ -146,22 +146,50 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
-    public List<Waiver> getfacultyWaiverRequests(Faculty faculty) {
+    @Override
+    public List<Waiver> getfacultyPendingWaiverRequests(Faculty faculty) {
         try {
             Faculty faculty1 = facultyDAO.getFaculty(faculty.getId());
-            //System.out.println("to get waiver 1 " + faculty1+" "+faculty.getId());
+            
             List<Customer> advisees = faculty1.getAdvisees();
             List<Waiver> waiverRequests = new ArrayList();
            
             for (Customer c : advisees) {
                 List<Waiver> waivers = c.getWaivers();
+                
                 for (Waiver w : waivers) {
+                    System.out.println("to get waiver 1 " + faculty1+" "+w.getStatus());
                     if (w.getStatus().equals(Waiver.Status.PENDING)) {
                         waiverRequests.add(w);
                     }
                 }
             }
             return waiverRequests;
+        } catch (Exception e) {
+            System.out.println("Exception "+ e.getMessage());
+            return new ArrayList();
+        }
+    }
+    
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<Waiver> getfacultyDecidedWaivers(Faculty faculty) {
+        try {
+            Faculty faculty1 = facultyDAO.getFaculty(faculty.getId());
+            List<Customer> advisees = faculty1.getAdvisees();
+            List<Waiver> decidedWaivers = new ArrayList();
+            System.out.println("before advises");
+            for (Customer c : advisees) {
+                List<Waiver> waivers = c.getWaivers(); 
+                System.out.println("one advisee");
+                for (Waiver w : waivers) {
+                    System.out.println("waive");
+                    if (!w.getStatus().equals(Waiver.Status.PENDING)) {
+                        decidedWaivers.add(w);
+                    }
+                }
+            }
+            return decidedWaivers;
         } catch (Exception e) {
             System.out.println("Exception "+ e.getMessage());
             return new ArrayList();

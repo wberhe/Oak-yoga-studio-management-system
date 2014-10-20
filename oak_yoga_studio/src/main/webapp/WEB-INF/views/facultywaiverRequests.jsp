@@ -36,7 +36,7 @@
                 </tr>
             </c:forEach>
         </table>
-        
+
         <h3>List of Waivers :</h3>
         <table >
             <tr style="">
@@ -56,8 +56,7 @@
                     <td>(Email: ${w.customer.email})</td>
                     <td>${w.waiverCourse.courseName}</td>
                     <td>${w.requestReason}</td>
-                    :if
-                    <td><form action="decideOnWaiver/${w.id}" method="post"> <hidden name="" value="${w.id}"/> <input type="radio" name="waiverDecision" value="accepted" /> ACCEPT / <input type="radio" name="waiverDecision" value="rejected"/>REJECT <input type="Submit" /></form></td>
+                    <td>${w.status}</td>                                           
                 </tr>
             </c:forEach>
         </table>

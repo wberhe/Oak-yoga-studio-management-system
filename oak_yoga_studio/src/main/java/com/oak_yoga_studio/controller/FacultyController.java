@@ -59,25 +59,26 @@ public class FacultyController {
     @RequestMapping(value = "/viewWaiverRequests", method = RequestMethod.GET)
     public String viewWaiverRequests(Model model, HttpSession session) {
         Faculty f = (Faculty) session.getAttribute("loggedUser");
-        System.out.println("Faculty retrieved from Session");
-        model.addAttribute("waiverRequests", facultyService.getfacultyWaiverRequests(f));
+        model.addAttribute("waiverRequests", facultyService.getfacultyPendingWaiverRequests(f));
+        model.addAttribute("waivers", facultyService.getfacultyDecidedWaivers(f));
         return "facultywaiverRequests";
     }
 
     @RequestMapping(value = "/decideOnWaiver/{waiver_Id}", method = RequestMethod.POST)
     public String decideOnWaiver(Model model, @PathVariable int waiver_Id, String waiverDecision, HttpSession session) {
-       System.out.println(" Atiye   "+ waiver_Id+" decision -"+waiverDecision);
         Waiver w = customerService.getWaiverRequest(waiver_Id);
         
         System.out.println(" waiver   "+ w.getId());
         if (waiverDecision.equals("accepted")) {
             w.setStatus(Waiver.Status.ACCEPTED);
+            System.out.println("accepted");
         } else {
             w.setStatus(Waiver.Status.REJECTED);
+            System.out.println("rejected");
         }
         facultyService.updateWaiverRequest(w);
-        
-        return "facultywaiverRequests";
+        System.out.println("done");
+        return viewWaiverRequests(model,session);
     }
 
     @RequestMapping(value = "/viewFacultySections", method = RequestMethod.GET)

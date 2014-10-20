@@ -36,6 +36,7 @@ public class CustomerServiceImpl implements ICustomerService {
             INotificationService notificationService) {
         this.customerDAO = customerDAO;
         this.credentialDAO = credentialDAO;
+        this.waiverDAO=waiverDAO;
         this.notificationService = notificationService;
     }
     
