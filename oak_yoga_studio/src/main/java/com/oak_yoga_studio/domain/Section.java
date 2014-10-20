@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -30,20 +31,22 @@ public class Section {
     @Id
     @GeneratedValue
     private int id;
+    
+    @NotEmpty
     private String sectionName;
     
     public enum Status {
         INPROGRESS,COMPLETED,OPEN ,CANCELED 
     }
     
-    @Size(min=1, max = 15)
+    //@Size(min=1, max = 15)
     private int capacity;
     
-    @NotEmpty
+    //@NotNull
     private int roomNumber;
     
-    @Min(1)
-    @Max(15)
+//    @Min(0)
+//    @Max(15)
     private int availableSeat;
     
     private Status status;
@@ -131,6 +134,7 @@ public class Section {
 
     public void setProfessor(Faculty professor) {
         this.professor = professor;
+        //professor.addSection(this);
     }
 
     public Course getCourse() {
@@ -139,6 +143,7 @@ public class Section {
 
     public void setCourse(Course course) {
         this.course = course;
+        //course.addSection(this);
     }
     public void addEnrollment(Enrollment enrollment)
     {

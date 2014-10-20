@@ -61,7 +61,7 @@
           class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="properties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect
                 </prop>
                 <prop key="connection.pool_size">1</prop>
@@ -179,6 +179,28 @@
      <!-- Section service injections -->
      <bean id="sectionService" class="com.oak_yoga_studio.service.impl.SectionServiceImpl">
          <constructor-arg ref="sectionDAO" />
+     </bean>
+     
+     <!-- product service injections --> 
+     <bean id="productService" class="com.oak_yoga_studio.service.impl.ProductServiceImpl">
+         <constructor-arg ref="productDAO" />
+     </bean>
+     
+     <!-- order service injections -->
+     <bean id="orderService" class="com.oak_yoga_studio.service.impl.OrderServiceImpl">
+         <property name="orderDAO" ref="orderDAO"/>
+     </bean>
+     <!-- orderItem service injections -->
+     <bean id="orderItemService" class="com.oak_yoga_studio.service.impl.OrderItemServiceImpl">
+         <property name="orderItemDAO" ref="orderItemDAO"/>
+     </bean>
+     <!-- shoppingCart service injections -->
+     <bean id="shoppingCartService" class="com.oak_yoga_studio.service.impl.ShoppingCartServiceImpl">
+         <property name="cartDAO" ref="shoppingCartDAO"/>
+     </bean>
+     <!-- shoppingCartItem service injections -->
+     <bean id="shoppingCartItemService" class="com.oak_yoga_studio.service.impl.ShoppingCartItemServiceImpl">
+         <property name="cartItemDAO" ref="shoppingCartItemDAO"/>
      </bean>
      
     <!--Email Service--> 
@@ -306,7 +328,7 @@ Administrator.
             </sec:user-service>
         </sec:authentication-provider>
         <sec:authentication-provider >
-            <sec:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select username,password, active=1 enabled from credential where username=?" authorities-by-username-query="select username, role as authority from credential where username=?"/>
+            <sec:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select username,password, active=0 enabled from credential where username=?" authorities-by-username-query="select username, role as authority from credential where username=?"/>
         </sec:authentication-provider>
     </sec:authentication-manager>
     <!--Security-->

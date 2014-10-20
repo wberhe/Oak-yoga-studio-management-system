@@ -8,6 +8,7 @@ package com.oak_yoga_studio.controller;
 
 import com.oak_yoga_studio.domain.Credential;
 import com.oak_yoga_studio.domain.Customer;
+import com.oak_yoga_studio.domain.ShoppingCart;
 import com.oak_yoga_studio.service.ICustomerService;
 import com.oak_yoga_studio.service.INotificationService;
 import java.io.IOException;
@@ -76,12 +77,15 @@ public class CustomerController {
             } catch (IOException ex) {
                 //Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
             }
+//            ShoppingCart cart= new ShoppingCart();
+//            customer.setShoppingCart(cart);
             customerService.addCustomer(customer);
             session.removeAttribute("credential");
             flashAttr.addFlashAttribute("successfulSignup", "Customer signed up succesfully. please  log in to proceed");
  //           Customer c=(Customer) session.getAttribute("loggedCustomer");
 //            if(c!=null && c.getUserCredential().isAdmin()){
 //                view="redirect:/settings";
+            
 //            }
         } else {
             for (FieldError err : result.getFieldErrors()) {

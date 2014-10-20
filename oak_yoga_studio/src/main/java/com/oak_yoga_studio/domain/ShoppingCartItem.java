@@ -31,6 +31,12 @@ public class ShoppingCartItem {
     public ShoppingCartItem() {
     }
 
+    public ShoppingCartItem(int quantity, Product product) {
+        this.quantity = quantity;
+        this.product = product;
+    }
+    
+    
     public ShoppingCartItem(int quantity, ShoppingCart shoppingCart, Product product) {
         this.quantity = quantity;
         this.shoppingCart = shoppingCart;
@@ -70,6 +76,36 @@ public class ShoppingCartItem {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + this.quantity;
+        hash = 37 * hash + (this.shoppingCart != null ? this.shoppingCart.hashCode() : 0);
+        hash = 37 * hash + (this.product != null ? this.product.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShoppingCartItem other = (ShoppingCartItem) obj;
+        if (this.quantity != other.quantity) {
+            return false;
+        }
+        if (this.shoppingCart != other.shoppingCart && (this.shoppingCart == null || !this.shoppingCart.equals(other.shoppingCart))) {
+            return false;
+        }
+        if (this.product != other.product && (this.product == null || !this.product.equals(other.product))) {
+            return false;
+        }
+        return true;
     }
     
     

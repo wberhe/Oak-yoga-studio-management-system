@@ -1,7 +1,7 @@
 <%-- 
-    Document   : ViewSections
-    Created on : Oct 15, 2014, 9:36:42 PM
-    Author     : weldino
+    Document   : sectionList
+    Created on : Oct 18, 2014, 4:31:59 PM
+    Author     : Weldino
 --%>
 <%@taglib  prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Available Sections for .. course Name </title>
+        <title>All sections</title>
     </head>
     <body>
         <h2> List of Sections </h2>
@@ -21,7 +21,7 @@
                     
                     <td>${s.sectionName }</td> 
                     <td>${s.roomNumber}</td>
-                   <td><a href="../enrollInCourse/${s.id}">Enroll For this section </a></td>
+                   <td><a href="../enrollInCourse/${s.id}" >Enroll For this section </a></td>
                  </tr>
                  <tr>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -33,3 +33,4 @@
         </table>
     </body>
 </html>
+

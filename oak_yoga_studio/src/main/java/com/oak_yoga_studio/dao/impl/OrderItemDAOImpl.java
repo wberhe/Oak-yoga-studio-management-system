@@ -39,21 +39,27 @@ public class OrderItemDAOImpl implements OrderItemDAO {
         sf.getCurrentSession().saveOrUpdate(item);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public OrderItem getOrderItem(int id) {
         OrderItem order = (OrderItem) sf.getCurrentSession().get(Order.class, id);
         return order;
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.MANDATORY)
     @Override
-    public List<OrderItem> getAllOrderItems(int orderId) {
+    public List<OrderItem> getAllOrderItemsOfThis(int orderId) {
         
-        Query query = sf.getCurrentSession().createQuery("from Order, OrderItem Where Order_id=" + orderId );
+        Query query = sf.getCurrentSession().createQuery("select ol from OrderItem ol join Order_table o Where o.id=orderId");
         List<OrderItem> orderItems = query.list();
 
         return orderItems;
+    }
+
+    @Override
+    public List<OrderItem> getAllOrderItems() {
+        Query q=sf.getCurrentSession().createQuery("from OrderItem");
+        return q.list();
     }
 
 }

@@ -51,12 +51,14 @@ public class Order {
     public Order() {
     }
 
-    public Order(Date orderDate, String email, double totalPrice, List<OrderItem> orderItems, Customer customer) {
+    
+    
+    public Order(Date orderDate, String email, double totalPrice, List<OrderItem> orderItems) {
         this.orderDate = orderDate;
         this.email = email;
         this.totalPrice = totalPrice;
         this.orderItems = orderItems;
-        this.customer = customer;
+        
     }
     
     

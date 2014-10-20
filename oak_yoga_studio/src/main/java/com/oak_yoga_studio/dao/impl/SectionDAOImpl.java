@@ -45,7 +45,7 @@ public class SectionDAOImpl implements SectionDAO {
         sf.getCurrentSession().saveOrUpdate(section);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public Section getSection(int id) {
         
@@ -54,7 +54,7 @@ public class SectionDAOImpl implements SectionDAO {
         return section;
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.MANDATORY)
     @Override
     public List<Section> getAllSections() {
         
@@ -67,7 +67,7 @@ public class SectionDAOImpl implements SectionDAO {
         return sections;
         
     }
-
+@Transactional(propagation = Propagation.MANDATORY)
     @Override
     public List<Section> getCourseSections(Course course) {
         List<Section> sections;

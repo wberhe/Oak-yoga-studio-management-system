@@ -98,6 +98,8 @@ public class CustomerServiceImpl implements ICustomerService {
         c.setEmail(customer.getEmail());
         c.setProfilePicture(customer.getProfilePicture());
         c.getCredential().setActive(customer.getCredential().isActive());
+        c.setShoppingCart(customer.getShoppingCart());
+        
     }
     
     @Transactional(propagation = Propagation.REQUIRED)
