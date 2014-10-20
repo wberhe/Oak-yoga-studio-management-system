@@ -11,12 +11,17 @@
         <h1>Welcome to Oak Yoga Studio!!</h1>
         
         <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+            
         <p>Customer Profile Update <a href="editProfile">Edit Profile</a>
         <p>Please <a href="addCredential">sign up</a>
          <p>Enrollment <a hrefaddCredential="viewCourses">enroll</a>
              
         <p>Course Waiver Request  <a href="requestWaiver">Request Waiver</a>
         <p>Enrollment History  <a href="enrolled">Enrollment History</a>
+         <p>Product <a href="products">go to product list</a>
+         <p>Search Product <a href="searchProduct">click here</a>
+         <p>Shopping cart Product <a href="viewCart">view my cart</a>
+             
         </sec:authorize>  
                 
          <sec:authorize access="hasRole('ROLE_ADMIN')">
