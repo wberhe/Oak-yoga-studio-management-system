@@ -8,6 +8,7 @@ package com.oak_yoga_studio.aop;
 
 
 import com.oak_yoga_studio.domain.Customer;
+import com.oak_yoga_studio.domain.Waiver;
 import com.oak_yoga_studio.service.INotificationService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -42,4 +43,13 @@ public class EmailAdvice {
         notificationService.notifyCustomer(c, text);
     }   
     
+    @AfterReturning(pointcut = "execution(* com.oak_yoga_studio.service.impl.FacultyServiceImpl.updateWaiverRequest(..))")
+    public void waiverEmailNotification(JoinPoint jp) {
+        Waiver w=(Waiver) jp.getArgs()[0];
+        
+        System.out.println("Eamil Notification--------------------------/////-----");
+        String text = "Dear "+ w.getCustomer().getFirstName()+" /n a decision has been made on your waiver request for the course "+w.getWaiverCourse().getCourseName()+". So now you can check in your account for the decision made.";
+        
+        notificationService.notifyCustomer(w.getCustomer(), text);
+    }
 }

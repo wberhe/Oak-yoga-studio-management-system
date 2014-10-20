@@ -150,6 +150,7 @@
     <bean id="customerService" class="com.oak_yoga_studio.service.impl.CustomerServiceImpl">
         <constructor-arg ref="customerDAO"/>
         <constructor-arg ref="credentialDAO" />
+        <constructor-arg ref="waiverDAO" />
         <constructor-arg ref="notificationService"/>
      </bean> 
       

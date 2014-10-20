@@ -6,11 +6,10 @@
 
 package com.oak_yoga_studio.dao.impl;
 
-import com.oak_yoga_studio.dao.CustomerDAO;
 import com.oak_yoga_studio.dao.FacultyDAO;
 import com.oak_yoga_studio.domain.Faculty;
-import com.oak_yoga_studio.domain.User;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Propagation;
@@ -81,11 +80,16 @@ public class FacultyDAOImpl implements FacultyDAO {
     @Override
     public Faculty getAvailableAdvisor() {
         //decide first on what basis an advisor should be chosen
-        Faculty faculty;        
-        Query query= sf.getCurrentSession().createQuery("select top 1 from Faculty");
-        
-        faculty=(Faculty) query.uniqueResult();
-        
+        Faculty faculty;      
+     
+         //.........................................................................
+        // change this to return faculty basaed on number of advisees or some thing else
+        System.out.println("You should see this ");
+        Query query= sf.getCurrentSession().createQuery("from Faculty");
+         System.out.println("after");
+       //  query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+       List<Faculty> faculties=(List<Faculty>) query.list();
+          faculty=faculties.get(0);
         return faculty;
         
     }

@@ -26,6 +26,10 @@ public class Waiver {
     @GeneratedValue
     private int id;
     
+    public enum Status {
+        PENDING,ACCEPTED,REJECTED 
+    }
+        
     @NotBlank
     private String requestReason;
     
@@ -33,7 +37,7 @@ public class Waiver {
     private String remarks;
     
     @NotBlank
-    private String status;
+    private Status status;
     
     @ManyToOne
     @JoinColumn(name="customer_id")
@@ -51,7 +55,7 @@ public class Waiver {
     public Waiver() {
     }
 
-    public Waiver(String requestReason, String remarks, String status, Customer customer, Course waiverCourse, Faculty faculty) {
+    public Waiver(String requestReason, String remarks, Status status, Customer customer, Course waiverCourse, Faculty faculty) {
         this.requestReason = requestReason;
         this.remarks = remarks;
         this.status = status;
@@ -88,11 +92,11 @@ public class Waiver {
         this.remarks = remarks;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

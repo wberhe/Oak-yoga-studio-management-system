@@ -7,9 +7,12 @@ package com.oak_yoga_studio.service.impl;
 
 import com.oak_yoga_studio.dao.CredentialDAO;
 import com.oak_yoga_studio.dao.CustomerDAO;
+import com.oak_yoga_studio.dao.WaiverDAO;
+import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Credential;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.User;
+import com.oak_yoga_studio.domain.Waiver;
 import com.oak_yoga_studio.service.ICustomerService;
 import com.oak_yoga_studio.service.INotificationService;
 import java.util.List;
@@ -24,14 +27,16 @@ public class CustomerServiceImpl implements ICustomerService {
     
     private CustomerDAO customerDAO;
     private CredentialDAO credentialDAO;
+    private WaiverDAO waiverDAO;
     private INotificationService notificationService;
     
     
     
-    public CustomerServiceImpl(CustomerDAO customerDAO, CredentialDAO credentialDAO,
+    public CustomerServiceImpl(CustomerDAO customerDAO, CredentialDAO credentialDAO,WaiverDAO waiverDAO,
             INotificationService notificationService) {
         this.customerDAO = customerDAO;
         this.credentialDAO = credentialDAO;
+        this.waiverDAO=waiverDAO;
         this.notificationService = notificationService;
     }
     
@@ -91,7 +96,7 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public void updateCustomer(int id, Customer customer) {// needs to be checked
         
-        Customer c = customerDAO.getCustomer(id);
+        /*Customer c = customerDAO.getCustomer(id);
         c.setFirstName(customer.getFirstName());
         c.setLastName(customer.getLastName());
         c.setDateOfBirth(customer.getDateOfBirth());
@@ -99,7 +104,10 @@ public class CustomerServiceImpl implements ICustomerService {
         c.setProfilePicture(customer.getProfilePicture());
         c.getCredential().setActive(customer.getCredential().isActive());
         c.setShoppingCart(customer.getShoppingCart());
+
+        c.getCredential().setActive(customer.getCredential().isActive());*/
         
+        customerDAO.updateCustomer(customer);
     }
     
     @Transactional(propagation = Propagation.REQUIRED)
@@ -128,6 +136,35 @@ public class CustomerServiceImpl implements ICustomerService {
             
         }
         return user;
+    }
+
+    
+      @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public List<Waiver> getApprovedWaiversByCustomerID(int customerID) {
+        
+      return   customerDAO.getApprovedWaiversByCustomerID(customerID);
+      
+    }
+     
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public Waiver getWaiverRequest(int id) {
+        try {
+            return waiverDAO.getWaiverr(id);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    
+     @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public List<Course> getAllCoursesToWaive(Customer customer) {
+        
+    
+        return customerDAO.getAllCoursesToWaive(customer);
     }
     
 }

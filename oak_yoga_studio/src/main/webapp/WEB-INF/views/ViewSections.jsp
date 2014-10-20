@@ -27,6 +27,9 @@
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <td> <a href="newSection">add a new section</a></td>
                   </sec:authorize>
+                    
+                   <td><a href="../enrollInCourse/${s.id}">Enroll For this section /a></td>
+                               <h2> ${message}</h2>
                  </tr>
             
             </c:forEach>

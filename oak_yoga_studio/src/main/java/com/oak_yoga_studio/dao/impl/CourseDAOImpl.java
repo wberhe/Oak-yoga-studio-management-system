@@ -8,6 +8,7 @@ package com.oak_yoga_studio.dao.impl;
 import com.oak_yoga_studio.dao.CourseDAO;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Customer;
+import com.oak_yoga_studio.domain.Waiver;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -95,5 +96,12 @@ public class CourseDAOImpl implements CourseDAO {
         courses= query.list();
         
        return courses;
+    }
+
+    @Override
+    public void addWaiver(Waiver waiver) {
+       
+    
+    sf.getCurrentSession().save(waiver);
     }
 }

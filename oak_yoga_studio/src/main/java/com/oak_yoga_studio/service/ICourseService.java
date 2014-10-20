@@ -7,6 +7,7 @@
 package com.oak_yoga_studio.service;
 
 import com.oak_yoga_studio.domain.Course;
+import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.Section;
 import java.util.List;
 
@@ -29,5 +30,7 @@ public interface ICourseService {
     public List<Course> getListOfCourses();
     
     public List<Section> getCourseSections(Course course);
+    
+    public void requestWaiver(Course course, Customer customer, String reason);
 
 }

@@ -18,6 +18,10 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  * @author Fetiya
  */
+
+
+
+
 @Entity
 public class Course {
 

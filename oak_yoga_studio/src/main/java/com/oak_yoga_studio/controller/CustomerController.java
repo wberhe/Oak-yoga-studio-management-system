@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.oak_yoga_studio.controller;
 
+import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Credential;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.ShoppingCart;
+import com.oak_yoga_studio.domain.Waiver;
+import com.oak_yoga_studio.service.ICourseService;
 import com.oak_yoga_studio.service.ICustomerService;
+import com.oak_yoga_studio.service.IEnrollmentService;
 import com.oak_yoga_studio.service.INotificationService;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -39,26 +42,29 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 public class CustomerController {
-    
+
     @Resource
     private ICustomerService customerService;
     @Resource
     private INotificationService notificationService;
-    
-    
+
+    @Resource
+    private ICourseService courseService;
+
+    @Resource
+    private IEnrollmentService enrollmentService;
+
     @RequestMapping("/")
     public String redirectRoot() {
         return "redirect:/index";
     }
 
-    
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public String getAll(Model model) {
         model.addAttribute("users", customerService.getAllCustomers());
         return "customerList";
     }
-    
-    
+
     @RequestMapping(value = "/addCustomer", method = RequestMethod.GET)
     public String addCustomer(@ModelAttribute("customer") Customer customer, HttpSession session) {
         customer.setCredential((Credential) session.getAttribute("credential"));
@@ -82,10 +88,10 @@ public class CustomerController {
             customerService.addCustomer(customer);
             session.removeAttribute("credential");
             flashAttr.addFlashAttribute("successfulSignup", "Customer signed up succesfully. please  log in to proceed");
- //           Customer c=(Customer) session.getAttribute("loggedCustomer");
+            //           Customer c=(Customer) session.getAttribute("loggedCustomer");
 //            if(c!=null && c.getUserCredential().isAdmin()){
 //                view="redirect:/settings";
-            
+
 //            }
         } else {
             for (FieldError err : result.getFieldErrors()) {
@@ -96,8 +102,6 @@ public class CustomerController {
         return view;
     }
 
-
-    
     @RequestMapping(value = "/addCredential", method = RequestMethod.GET)
     public String addCredential(@ModelAttribute("credential") Credential credential) {
         credential.setRole("Please don't change");
@@ -110,7 +114,7 @@ public class CustomerController {
         //dumb fix
         boolean used = customerService.checkUserName(credential.getUserName());
         if (used) {
-            FieldError f = new FieldError("credential", "userName", credential.getUserName(), false, null, null, "Username : " + credential.getUserName()+ " already in use");
+            FieldError f = new FieldError("credential", "userName", credential.getUserName(), false, null, null, "Username : " + credential.getUserName() + " already in use");
             result.addError(f);
         }
         if (!result.hasErrors()) {
@@ -118,36 +122,31 @@ public class CustomerController {
             credential.setRole("ROLE_CUSTOMER");
             credential.setActive(true);
             session.setAttribute("credential", credential);
-            
+
         } else {
             view = "addCredential";
         }
         return view;
     }
-   
-    
- 
-      @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
-       public String getUserDetail(Model model, @PathVariable int id) {
+
+    @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
+    public String getUserDetail(Model model, @PathVariable int id) {
         model.addAttribute("customerDetail", customerService.getCustomerById(id));
         System.out.println("Hi this is udner editProfile   ");
         return "EditProfile";
     }
-       
-      
 
-       
-   @RequestMapping(value = "/updateProfile/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateProfile/{id}", method = RequestMethod.POST)
     public String updateUser(@Valid Customer customer, BindingResult result, @PathVariable int id, HttpSession session) {
         //System.out.println("Update");
         if (!result.hasErrors()) {
-                  
+
             session.setAttribute("customer", customer);
-            System.out.println("Customer firstName " + customer.getFirstName()) ;
-            Credential c= (customerService.getCustomerById(id)).getCredential();
-            System.out.println(" uswe name "+c.getUserName());
+            System.out.println("Customer firstName " + customer.getFirstName());
+            Credential c = (customerService.getCustomerById(id)).getCredential();
+            System.out.println(" uswe name " + c.getUserName());
             customer.setCredential(c);
-            
+
             System.out.println("Customer ID " + customer.getId());
             System.out.println("Customer LastName :" + customer.getLastName());
             System.out.println("Customer email" + customer.getEmail());
@@ -162,24 +161,52 @@ public class CustomerController {
             return "index";
         }
     }
-       
-//
-//    @RequestMapping(value = "/users/{id}", method = RequestMethod.POST)
-//    public String updateUser(@Valid User user, BindingResult result, @PathVariable int id, HttpSession session) {
-//        //System.out.println("Update");
-//        if (!result.hasErrors()) {
-//            //System.out.println("done");
-//            session.setAttribute("user", user);
-//            userService.updateUserInfo(id, user);
-//            return "redirect:/users";
-//        } else {
-//            for (FieldError err : result.getFieldErrors()) {
-//                System.out.println(err.getField() + ": " + err.getDefaultMessage());
-//            }
-//            System.out.println("err");
-//            return "userDetail";
-//        }
-//    }
+
+    @RequestMapping(value = "/requestWaiver", method = RequestMethod.GET)
+    public String requestWaiver(Model model, HttpSession session) {
+
+    //    model.addAttribute("courses", courseService.getListOfCourses());
+        Customer customer = (Customer) session.getAttribute("loggedUser");
+
+        if (!customerService.getAllCoursesToWaive(customer).isEmpty()) {
+
+            model.addAttribute("coursesToWaive", customerService.getAllCoursesToWaive(customer));
+            model.addAttribute("msg", " Courses Qualified to be waived ");
+        } else {
+            model.addAttribute("msg", " There is no course that you can waive");
+        }
+
+        return "waiverRequest";
+    }
+
+    @RequestMapping(value = "/waiverRequest/{id}", method = RequestMethod.POST)
+    public String waiverForm(@PathVariable int id, Model model, HttpSession session) {
+
+        Customer customer = (Customer) session.getAttribute("loggedUser");
+
+        //    model.addAttribute("course", courseService.getCourseById(id));
+        return "redirect:/waiverForm/{id}";
+    }
+
+    @RequestMapping(value = "/waiverForm/{id}", method = RequestMethod.GET)
+    public String waiverForm(Model model, @PathVariable int id) {
+        model.addAttribute("course", courseService.getCourseById(id));
+
+        return "waiverForm";
+    }
+
+    @RequestMapping(value = "/waiverResult/{id}", method = RequestMethod.POST)
+    public String waiverResult(@PathVariable int id, Model model, String text, String[] ids, HttpSession session) {
+
+        Customer customer = (Customer) session.getAttribute("loggedUser");
+        Course course = courseService.getCourseById(id);
+
+        courseService.requestWaiver(course, customer, text);
+
+        model.addAttribute("msg", "Your Waiver request for course " + course.getCourseName() + " is successfuly saved");
+
+        return "waiverResult";
+    }
 
     /**
      * Enabling and disabling the user
@@ -203,7 +230,6 @@ public class CustomerController {
 //        userService.updateUserInfo(userId, u);
 //        return "redirect:/users";
 //    }
-
     /**
      * Admin notification to bloggers by email
      *
@@ -224,12 +250,13 @@ public class CustomerController {
 //        model.addAttribute("allusers", userService.getAllUsers());
 //        return "settings";
 //    }
-   /**
-    * In order to upload the users profile picture
-    * @param model
-    * @param id
-    * @param response 
-    */
+    /**
+     * In order to upload the users profile picture
+     *
+     * @param model
+     * @param id
+     * @param response
+     */
     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
     public void getUserImage(Model model, @PathVariable int id, HttpServletResponse response) {
         try {
@@ -243,13 +270,20 @@ public class CustomerController {
             Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-@ModelAttribute("customer")
-public Customer loadEmptyModelBean(){
-    Customer customer;
+
+    @ModelAttribute("customer")
+    public Customer loadEmptyModelBean() {
+        Customer customer;
         customer = new Customer();
-   return customer;
-}
+        return customer;
+    }
+
+    private void requestWaiver(Customer customer, String reason) {
+
+    }
+
+    private List<Course> getAllCoursesToWaive(Customer customer) {
+        return customerService.getAllCoursesToWaive(customer);
+    }
 
 }
-
