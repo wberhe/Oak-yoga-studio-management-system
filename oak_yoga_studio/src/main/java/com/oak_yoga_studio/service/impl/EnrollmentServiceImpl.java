@@ -301,28 +301,27 @@ public class EnrollmentServiceImpl  implements IEnrollmentService
     @Override
     public boolean isFirstTimeEnrollment(Customer customer) {
        
-        if(enrollmentDAO.isFirstTimeEnrollment(customer))
+       return enrollmentDAO.isFirstTimeEnrollment(customer);
            
-        {
-             return true;
-        }
-        else
-        {
-            return false;
-        }
-    
+     
     
     }
 
+      @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void addEnrollment(Enrollment.statusType status, Customer customer, Section section) 
        
     {
         
-        System.out.println("udner dao");
-        enrollmentDAO.addEnrollment(status, customer, section);
-        
+              enrollmentDAO.addEnrollment(status, customer, section);
        
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public boolean isExistingEnrollment(Customer customer, Section section) {
+       
+       return  enrollmentDAO.isExistingEnrollment(customer, section);
     }
   
     

@@ -138,10 +138,10 @@ public class EnrollmentController {
 
     }
 
-    @RequestMapping(value = "/waitingListSuccess", method = RequestMethod.GET)
+    @RequestMapping(value = "/waitingListResult", method = RequestMethod.GET)
     public String addToWaitingList(@ModelAttribute("section") Section section, HttpSession session) {
 
-        return "waitingListSuccess";
+        return "waitingListResult";
     }
 
     @RequestMapping(value = "/addToWaitingList/{section}", method = RequestMethod.POST)
@@ -154,10 +154,43 @@ public class EnrollmentController {
         if (!result.hasErrors()) {
 
             toWaitingList(customer, section);
-            view = "redirect:/waitingListSuccess";
+            view = "redirect:/waitingListResult";
         } else {
             // view="addCourse";
         }
+        return view;
+    }
+    
+    
+    
+        @RequestMapping(value = "/waitingListResult/{id}", method = RequestMethod.POST)
+        public String waitingListResult(Model model, @PathVariable int id, HttpSession session,
+                RedirectAttributes re) {
+        String view = "redirect:/";
+
+        System.out.println("Running inside addToWaitingList post");
+        Customer customer = (Customer) session.getAttribute("loggedUser");
+        Section section = sectionService.getSectionById(id);
+           
+            
+           if(! enrollmentService.isExistingEnrollment(customer, section))
+           {
+               toWaitingList(customer, section);
+            
+            re.addFlashAttribute("section", section);
+            re.addFlashAttribute("message", "You have been successfully added to the waiting list for");
+          
+            }
+            else
+            {
+                re.addFlashAttribute("section", section);
+                re.addFlashAttribute("message", "Sorry you couldn't be enrolled for this section. Your record "
+                        + "shows you already have an active or in progress enrollment for this section ");
+          
+            }
+            
+            view = "redirect:/waitingListResult";
+     
         return view;
     }
 
@@ -177,15 +210,6 @@ public class EnrollmentController {
         return "courseHistory";
     }
 
-    /*   @RequestMapping(value = "/withdraw/{enrollment}", method = RequestMethod.GET)
-     public String addCredential(@ModelAttribute("enrollment") Enrollment Enrollment) {
-      
-     return "withdrawResult";
-     }
-     @RequestMapping(value = "/withdraw/{enrollment}", method = RequestMethod.POST)
-     public String withdraw(@Valid Enrollment enrollment,BindingResult result, 
-     HttpSession session, RedirectAttributes re) {
-     */
     @RequestMapping(value = "/withdraw/{id}", method = RequestMethod.POST)
     public String withdraw(@PathVariable int id, Model model,
             HttpSession session, RedirectAttributes re) {
@@ -236,11 +260,15 @@ public class EnrollmentController {
         return "withdrawResult";
     }
 
-    public void toWaitingList(Customer customer, Section section) {
+    private void toWaitingList(Customer customer, Section section) {
 
+        //add to waiting list if the customer is already registerd for this section currently.
+       
         enrollmentService.addEnrollment(Enrollment.statusType.WAITINGLIST, customer, section);
 
     }
+    
+  
 
     public void enrollTopWaitingList(Section section) {
 
