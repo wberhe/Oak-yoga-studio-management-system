@@ -39,12 +39,14 @@
                     <td><form:errors path="roomNumber" cssClass="error"/> </td>
                 </tr>
                 <tr>
+
                 <td>Select available faculty </td>
                 <td> <form:select path="professor" >
 			<form:options items="${allFaculities}"  itemLabel="firstName" itemValue="id"/>
                     </form:select></td>
            
                 </tr>
+
             </table>
                 <form:hidden path="status" />
             <input type="submit" value="add section"/>

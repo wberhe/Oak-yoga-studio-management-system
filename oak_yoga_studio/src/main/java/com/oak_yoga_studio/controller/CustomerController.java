@@ -208,10 +208,13 @@ public class CustomerController {
         courseService.requestWaiver(course, customer, text);
 
 
+
         model.addAttribute("msg", "Your Waiver request for course " + course.getCourseName() + " is successfuly saved");
 
 
+
         return "waiverResult";
+
 
     }    
  
@@ -249,7 +252,6 @@ public class CustomerController {
          
 
     
-
 
     /**
      * Enabling and disabling the user
@@ -307,9 +309,6 @@ public class CustomerController {
     private void requestWaiver(Customer customer, String reason) {
 
     }
-
-
-
 
 
 }

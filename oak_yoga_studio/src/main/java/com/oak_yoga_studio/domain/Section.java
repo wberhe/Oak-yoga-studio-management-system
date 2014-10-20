@@ -47,7 +47,9 @@ public class Section {
     
 //    @Min(0)
 //    @Max(15)
+
  //   private int availableSeat;
+
     
     private Status status;
     
