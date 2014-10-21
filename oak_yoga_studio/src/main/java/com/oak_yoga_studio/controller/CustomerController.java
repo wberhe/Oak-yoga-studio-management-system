@@ -172,12 +172,13 @@ public class CustomerController {
     //    model.addAttribute("courses", courseService.getListOfCourses());
         Customer customer = (Customer) session.getAttribute("loggedUser");
 
-        if (!customerService.getAllCoursesToWaive(customer).isEmpty()) {
+        List<Course> coursesToWaive=customerService.getAllCoursesToWaive(customer);
+        if (!coursesToWaive.isEmpty()) {
 
-            model.addAttribute("coursesToWaive", customerService.getAllCoursesToWaive(customer));
+            model.addAttribute("coursesToWaive", coursesToWaive);
             model.addAttribute("msg", " Courses Qualified to be waived ");
         } else {
-            model.addAttribute("msg", " There is no course that you can waive");
+            model.addAttribute("msg", " There are no courses that you can waive");
         }
 
         return "waiverRequest";
@@ -200,14 +201,12 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/waiverResult/{id}", method = RequestMethod.POST)
-    public String waiverResult(@PathVariable int id, Model model, String text, String[] ids, HttpSession session) {
+    public String sumbitRequest(@PathVariable int id, Model model, String text, String[] ids, HttpSession session) {
 
         Customer customer = (Customer) session.getAttribute("loggedUser");
         Course course = courseService.getCourseById(id);
 
         courseService.requestWaiver(course, customer, text);
-
-
 
         model.addAttribute("msg", "Your Waiver request for course " + course.getCourseName() + " is successfuly saved");
 

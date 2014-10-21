@@ -18,6 +18,7 @@
              
         <p>Course Waiver Request  <a href="requestWaiver">Request Waiver</a>
         <p>Enrollment History  <a href="enrolled">Enrollment History</a>
+             <p>Withdraw  <a href="requestWithdraw">Withdraw</a>
          <p>Product <a href="products">go to product list</a>
          <p>Search Product <a href="searchProduct">click here</a>
          <p>Shopping cart Product <a href="viewCart">view my cart</a>

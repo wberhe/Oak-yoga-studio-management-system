@@ -13,14 +13,19 @@
         <title>All sections</title>
     </head>
     <body>
-        <h2> List of Sections </h2>
+        <h2> Sections for Course </h2>
         <table>
                  
+            <tr><td>Section Name</td>
+                <td>Room Number</td>
+                <td>Instructor</tr>
+            <tr></tr>
             <c:forEach var="s" items="${sections}">
                  <tr>
                     
                     <td>${s.sectionName }</td> 
                     <td>${s.roomNumber}</td>
+                    <td>${s.faculty.id}</td>
                    <td><a href="../enrollInCourse/${s.id}" >Enroll For this section </a></td>
                  </tr>
                  <tr>

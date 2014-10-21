@@ -15,15 +15,15 @@
         <title>Courses List</title>
     </head>
     <body>
-        <h2> List of Courses </h2>
-        <table>
+        <h2> Courses</h2>
+        <table width="100%">
 
             <tr>
-                <td>Course Number</td>
-                <td>Course Name </td>
-                <td>Description</td>
-                <td>Prerequisite</td>
-                <td></td>
+                <th>Course Number</th>
+                <th>Course Name </th>
+                <th>Description</th>
+                <th>Prerequisites</th>
+                <th></td>
                 <td></td>
             </tr>
 
