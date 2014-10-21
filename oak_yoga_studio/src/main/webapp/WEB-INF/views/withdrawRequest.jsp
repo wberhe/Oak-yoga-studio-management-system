@@ -17,16 +17,16 @@
     </head>
     <body>
         <div align="center">
-        <h1>${msg}</h1>
-        <table border="1" cellpadding="5">  <tr>
-                <td>Enrollment Status</td>
-                <td>Enrollment Date</td>
-                <td>Section</td>
-                <td>Course Name</td>
-                <td>Course Number  </td>
-                <td>Professor</td>
-                <td>Section Status</td>
-                <td></td>
+        <h3>${msg}</h3>
+        <table border="1" cellpadding="5" width="100%">  <tr>
+                <th>Enrollment Status</th>
+                <th>Enrollment Date</th>
+                <th>Section</th>
+                <th>Course Name</th>
+                <th>Course Number  </th>
+                <th>Professor</td>
+                <th>Section Status</th>
+                <th></th>
 
             </tr>
             <c:forEach var="enrollment" items="${sectionsTaken}">
@@ -52,7 +52,7 @@
                                     <input type="submit" value="Withdraw" disabled="disabled"/>
                                 </c:when>
                                 <c:otherwise> 
-                                    <input type="submit" value="Withdraw"/>
+                                    <input type="submit" value="Withdraw" width="100%"/>
                                 </c:otherwise>
                             </c:choose>
                         </form>
