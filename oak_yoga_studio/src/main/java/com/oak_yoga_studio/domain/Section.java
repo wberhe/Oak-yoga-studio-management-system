@@ -45,11 +45,6 @@ public class Section {
     //@NotNull
     private String roomNumber;
     
-//    @Min(0)
-//    @Max(15)
-
- //   private int availableSeat;
-    
     private Status status;
     
     @ManyToOne
@@ -74,7 +69,8 @@ public class Section {
         this.course = course;
         this.professor = professor;
         this.enrollements = enrollements;
-    }
+    }    
+    
 
     public int getId() {
         return id;
@@ -151,7 +147,7 @@ public class Section {
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 5;
         hash = 59 * hash + (this.sectionName != null ? this.sectionName.hashCode() : 0);
         hash = 59 * hash + this.capacity;
         hash = 59 * hash + (this.roomNumber != null ? this.roomNumber.hashCode() : 0);
@@ -194,6 +190,8 @@ public class Section {
         }
         return true;
     }
+
+    
 
     
     
