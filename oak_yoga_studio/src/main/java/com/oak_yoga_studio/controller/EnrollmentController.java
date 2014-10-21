@@ -69,32 +69,48 @@ public class EnrollmentController {
 
             model.addAttribute("section", section);
 
-            if (enrollmentService.checkSeatAvailablity(section.getId())) {
+            // check if there is available seat
+            if(isSeatAvailable(section))
+            {
+           /////////  if (enrollmentService.checkSeatAvailablity(section.getId())) {
 
                 //check if this is the first time enrollment for the  customer and assign advisor
                 Faculty advisor = handleFirstTimeEnrollment(customer);
 
-                enrollmentService.addEnrollment(Enrollment.statusType.ACTIVE, customer, section);
+                if (!enrollmentService.isExistingEnrollment(customer, section)) {
 
-                int seats = section.getAvailableSeat();
+                    enrollmentService.addEnrollment(Enrollment.statusType.ACTIVE, customer, section);
 
-                section.setAvailableSeat(--seats);
-                sectionService.updateSection(section);
+                    
+                    
+                    
+                  //  int seats = section.getAvailableSeat();
 
-                if (advisor != null) {
+                 //   section.setAvailableSeat(--seats);
+                //    sectionService.updateSection(section);
 
-                    //display success with advisor info
-                    message = "Successfully enrolled to section. " + section.getSectionName()
-                            + "and your advisor is " + advisor.getFirstName() + " " + advisor.getLastName();
-                    model.addAttribute("message", message);
-                    return "registrationSuccess";
+                    if (advisor != null) {
+
+                        //display success with advisor info
+                        message = "Successfully enrolled to section. " + section.getSectionName()
+                                + "and your advisor is " + advisor.getFirstName() + " " + advisor.getLastName();
+                        model.addAttribute("message", message);
+                        return "registrationSuccess";
+                    } else {
+                        message = "Congratulations. Now you are successfully enrolled in yoga class";
+                        model.addAttribute("message", message);
+                        return "registrationSuccess";
+
+                    }
+
                 } else {
-                    message = "Congratulations. Now you are successfully enrolled in yoga class";
+                    message = "Sorry. You can not be registered for section now because your record"
+                            + " shows that you already have a current active registration for this section";
                     model.addAttribute("message", message);
                     return "registrationSuccess";
-
                 }
-            } //if there is no available seat for a section ask customer to be inclued in waiting list
+            } 
+//if there is no available seat for a section ask customer to be inclued in waiting list
             else {
                 //redirect message
                 message = "There is no seat available for the selected section . Would you like to be added in the waitinglist? ";
@@ -104,12 +120,21 @@ public class EnrollmentController {
             }
 
         } else {
-            System.out.println("Prerequisite not qualified");
+            
+      //Prerequisite not qualified
+            
             message = "Your transcript shows you didn't complete prerequistes for this section"
-                    + "Would you like to request a waiver ?";
+                    + " Would you like to request a waiver ?";
             model.addAttribute("message", message);
             model.addAttribute("course", course);
-            return "toWaiverRequst";
+           //return "toWaiverRequst";
+
+         //   return "registrationSuccess";
+            
+            return "toWaiverRequest";
+            
+            
+            
 
         }
 
@@ -138,10 +163,10 @@ public class EnrollmentController {
 
     }
 
-    @RequestMapping(value = "/waitingListSuccess", method = RequestMethod.GET)
+    @RequestMapping(value = "/waitingListResult", method = RequestMethod.GET)
     public String addToWaitingList(@ModelAttribute("section") Section section, HttpSession session) {
 
-        return "waitingListSuccess";
+        return "waitingListResult";
     }
 
     @RequestMapping(value = "/addToWaitingList/{section}", method = RequestMethod.POST)
@@ -154,10 +179,37 @@ public class EnrollmentController {
         if (!result.hasErrors()) {
 
             toWaitingList(customer, section);
-            view = "redirect:/waitingListSuccess";
+            view = "redirect:/waitingListResult";
         } else {
             // view="addCourse";
         }
+        return view;
+    }
+
+    @RequestMapping(value = "/waitingListResult/{id}", method = RequestMethod.POST)
+    public String waitingListResult(Model model, @PathVariable int id, HttpSession session,
+            RedirectAttributes re) {
+        String view = "redirect:/";
+
+        System.out.println("Running inside addToWaitingList post");
+        Customer customer = (Customer) session.getAttribute("loggedUser");
+        Section section = sectionService.getSectionById(id);
+
+        if (!enrollmentService.isExistingEnrollment(customer, section)) {
+            toWaitingList(customer, section);
+
+            re.addFlashAttribute("section", section);
+            re.addFlashAttribute("message", "You have been successfully added to the waiting list for");
+
+        } else {
+            re.addFlashAttribute("section", section);
+            re.addFlashAttribute("message", "Sorry you couldn't be enrolled for this section. Your record "
+                    + "shows you already have an active or in progress enrollment for this section ");
+
+        }
+
+        view = "redirect:/waitingListResult";
+
         return view;
     }
 
@@ -177,44 +229,21 @@ public class EnrollmentController {
         return "courseHistory";
     }
 
-    /*   @RequestMapping(value = "/withdraw/{enrollment}", method = RequestMethod.GET)
-     public String addCredential(@ModelAttribute("enrollment") Enrollment Enrollment) {
-      
-     return "withdrawResult";
-     }
-     @RequestMapping(value = "/withdraw/{enrollment}", method = RequestMethod.POST)
-     public String withdraw(@Valid Enrollment enrollment,BindingResult result, 
-     HttpSession session, RedirectAttributes re) {
-     */
     @RequestMapping(value = "/withdraw/{id}", method = RequestMethod.POST)
     public String withdraw(@PathVariable int id, Model model,
             HttpSession session, RedirectAttributes re) {
-        
+
         Customer customer = (Customer) session.getAttribute("loggedUser");
 
-        
-        Enrollment enrollment= enrollmentService.getEnrollmentById(id);
+        Enrollment enrollment = enrollmentService.getEnrollmentById(id);
         // Section section =  enrollment.getSection();
-        Section section =  enrollment.getSection();//sectionService.getSectionById(id);
+        Section section = enrollment.getSection();//sectionService.getSectionById(id);
 
         if (section.getStatus() == Section.Status.OPEN || section.getStatus() == Section.Status.INPROGRESS) {
 
-            
-              // when fixed , updated seat based on enrollment status here 
-            
-            if(enrollment.getStatus()==enrollment.getStatus().ACTIVE)
-            {
-            int seats = section.getAvailableSeat();
 
-            section.setAvailableSeat(++seats);
-
-            sectionService.updateSection(section);
-            }
-            
-            
             enrollmentService.withdraw(customer, section);
 
-           
             //System check
             //check and add customer in top of waitingList to enrolled
             enrollTopWaitingList(section);
@@ -236,8 +265,9 @@ public class EnrollmentController {
         return "withdrawResult";
     }
 
-    public void toWaitingList(Customer customer, Section section) {
+    private void toWaitingList(Customer customer, Section section) {
 
+        //add to waiting list if the customer is already registerd for this section currently.
         enrollmentService.addEnrollment(Enrollment.statusType.WAITINGLIST, customer, section);
 
     }
@@ -252,10 +282,7 @@ public class EnrollmentController {
 
             enrollment.setStatus(Enrollment.statusType.ACTIVE);
             enrollmentService.saveEnrollment(enrollment);
-            int seats = section.getAvailableSeat();
-
-            section.setAvailableSeat(--seats);
-            sectionService.updateSection(section);
+           
 
         }
 
@@ -275,6 +302,19 @@ public class EnrollmentController {
             return advisor;
         }
         return null;
+    }
+    
+    
+    public boolean isSeatAvailable(Section section)
+    {
+        long enrolledTotal=enrollmentService.getEnrollmentsCountBySection(section);
+        
+        long seats= enrolledTotal - section.getCapacity();
+        
+        if(seats>0)
+            return true;
+        else 
+            return false;
     }
 
 }

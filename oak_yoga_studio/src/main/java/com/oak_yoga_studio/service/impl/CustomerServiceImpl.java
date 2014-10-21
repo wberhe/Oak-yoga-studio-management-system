@@ -159,7 +159,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     
-     @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public List<Course> getAllCoursesToWaive(Customer customer) {
         

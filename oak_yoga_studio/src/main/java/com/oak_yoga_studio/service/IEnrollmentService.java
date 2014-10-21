@@ -56,5 +56,9 @@ public interface IEnrollmentService {
      public  void changeEnrollmentStatus(String status);
      
      public boolean isFirstTimeEnrollment(Customer customer);
+     
+     public boolean isExistingEnrollment(Customer customer,Section section);
+     
+      public long getEnrollmentsCountBySection(Section section) ;
     
 }

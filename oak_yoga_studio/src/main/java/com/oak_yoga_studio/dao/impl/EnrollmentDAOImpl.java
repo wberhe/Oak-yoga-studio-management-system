@@ -256,4 +256,50 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
             return false;
         }
     }
+
+    
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public boolean isExistingEnrollment(Customer customer , Section section ) {
+       
+        List<Enrollment> enrollments;
+
+        Query query = sf.getCurrentSession().createQuery("select distinct e from Enrollment e where e.customer=:customer"
+                + " AND e.section = :section and ( e.status ='ACTIVE' OR e.status ='INPROGRESS' OR e.status='WAITINGLIST')  ");
+
+        query.setParameter("customer", customer);
+         query.setParameter("section", section);
+       
+         enrollments = query.list();
+
+        if (enrollments.isEmpty()) {
+
+            return false;
+        } 
+        else {
+            
+                 return true;
+        } 
+    }
+    
+    
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public long getEnrollmentsCountBySection(Section section) {
+        
+  
+
+      Query query = sf.getCurrentSession().createQuery("select count(e.id) from Enrollment e where  e.section =:section "
+                + " and ( e.status ='ACTIVE' OR e.status ='INPROGRESS' )  ");
+        query.setParameter("section", section);
+       
+       long count = (Long)query.uniqueResult();
+    
+       System.out.println("count is  " + count);
+       
+       return count;
+
+    }
+    
+    
 }

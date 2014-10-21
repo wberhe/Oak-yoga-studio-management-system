@@ -15,10 +15,11 @@
        <h1>${message} ${section.id}</h1>
     </body>
  
-    <form:form commandName="section" action="../waitingListSuccess/${section.id}" method="post">
+    <form:form commandName="section" action="../waitingListResult/${section.id}" method="post">
 	
             
                 <input type="submit" value="Add me To WaitingList"/> 
+                
                 <input type="cancel" value="Cancel" /> 
                 
 	

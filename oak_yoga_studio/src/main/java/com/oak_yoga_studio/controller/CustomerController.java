@@ -129,15 +129,18 @@ public class CustomerController {
         return view;
     }
 
-    @RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
-    public String getUserDetail(Model model, @PathVariable int id) {
-        model.addAttribute("customerDetail", customerService.getCustomerById(id));
+    @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
+    public String getUserDetail(Model model, HttpSession session) {
+        
+        
+        model.addAttribute("customerDetail", session.getAttribute("loggedUser"));
         System.out.println("Hi this is udner editProfile   ");
         return "EditProfile";
     }
 
     @RequestMapping(value = "/updateProfile/{id}", method = RequestMethod.POST)
-    public String updateUser(@Valid Customer customer, BindingResult result, @PathVariable int id, HttpSession session) {
+    public String updateUser(@Valid Customer customer, BindingResult result,
+            @PathVariable int id, HttpSession session) {
         //System.out.println("Update");
         if (!result.hasErrors()) {
 
@@ -161,6 +164,7 @@ public class CustomerController {
             return "index";
         }
     }
+
 
     @RequestMapping(value = "/requestWaiver", method = RequestMethod.GET)
     public String requestWaiver(Model model, HttpSession session) {
@@ -203,10 +207,51 @@ public class CustomerController {
 
         courseService.requestWaiver(course, customer, text);
 
+
+
         model.addAttribute("msg", "Your Waiver request for course " + course.getCourseName() + " is successfuly saved");
 
+
+
         return "waiverResult";
+
+
+    }    
+ 
+   
+         
+     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
+    public void getUserImage(Model model, @PathVariable int id, HttpServletResponse response) {
+        try {
+            Customer c = customerService.getCustomerById(id);
+            if (c != null) {
+                OutputStream out = response.getOutputStream();
+                out.write(c.getProfilePicture());
+                response.flushBuffer();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
+    @ModelAttribute("customer")
+    public Customer loadEmptyModelBean() {
+        Customer customer;
+        customer = new Customer();
+        return customer;
+    }
+    
+ 
+    
+    private  List<Course> getAllCoursesToWaive(Customer customer)
+    {
+       return  customerService.getAllCoursesToWaive(customer);
+    }
+            
+         
+         
+
+    
 
     /**
      * Enabling and disabling the user
@@ -257,33 +302,13 @@ public class CustomerController {
      * @param id
      * @param response
      */
-    @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
-    public void getUserImage(Model model, @PathVariable int id, HttpServletResponse response) {
-        try {
-            Customer c = customerService.getCustomerById(id);
-            if (c != null) {
-                OutputStream out = response.getOutputStream();
-                out.write(c.getProfilePicture());
-                response.flushBuffer();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
-    @ModelAttribute("customer")
-    public Customer loadEmptyModelBean() {
-        Customer customer;
-        customer = new Customer();
-        return customer;
-    }
+
+
 
     private void requestWaiver(Customer customer, String reason) {
 
     }
 
-    private List<Course> getAllCoursesToWaive(Customer customer) {
-        return customerService.getAllCoursesToWaive(customer);
-    }
 
 }

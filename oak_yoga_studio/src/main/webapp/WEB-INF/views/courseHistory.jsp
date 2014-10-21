@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sections Taken</title>
+        <title>Enrollment History</title>
     </head>
     <body>
         <div align="center">

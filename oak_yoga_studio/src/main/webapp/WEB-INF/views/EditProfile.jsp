@@ -13,49 +13,52 @@
         <title> update</title>
     </head>
     <body>
-        <h3>Customer Information :</h3>
-    
-    <form:form commandName="customer" action="../updateProfile/${customerDetail.id}" method="post" enctype="multipart/form-data">
+        <div align="center">
+            <h3>Customer Information :</h3>
 
-        <table>
-            <tr>
-       
-                
-                
-                <td>Picture:</td>
-                <td><img src="../image/${customerDetail.id}" width="80" height="80"/></td>
+            <form:form commandName="customer" action="../updateProfile/${customerDetail.id}" method="post" enctype="multipart/form-data">
 
-                <td>Change Picture</td> 
-                <td><input type="file" name="file"   /> </td>
-            </tr>
+                <table>
+                    <tr>
 
-            <tr>
-                <td>First name:</td>
-               <td><form:input type="text" path="firstName"  value="${customerDetail.firstName}"/> </td>
-               <td><form:errors path="firstName" cssClass="error" /> </td>
-            </tr>
-            <tr>
-                <td>Last name :</td>
-                <td><form:input type="text" path="lastName" size="30" value="${customerDetail.lastName}" />  </td>
-                <td><form:errors path="lastName" cssClass="error"/> </td>
+                        <td>Picture:</td>
+                        <td><img src="../image/${customerDetail.id}" width="80" height="80"/></td>
 
-            </tr>
-            <tr>
-                <td> Email :</td>
-                <td><form:input type="text" path="email" size="30" value="${customerDetail.email}" /> </td>
-                <td><form:errors path="email" cssClass="error"/> </td>
-            </tr>
-          
-        </table>
-            
-        
+                        <td>Change Picture</td> 
+                        <td><input type="file" name="file"   /> </td>
+                    </tr>
+
+                    <tr>
+                        <td>First name:</td>
+                        <td><form:input type="text" path="firstName"  value="${customerDetail.firstName}"/> </td>
+                        <td><form:errors path="firstName" cssClass="error" /> </td>
+                    </tr>
+                    <tr>
+                        <td>Last name :</td>
+                        <td><form:input type="text" path="lastName" size="30" value="${customerDetail.lastName}" />  </td>
+                        <td><form:errors path="lastName" cssClass="error"/> </td>
+
+                    </tr>
+                    <tr>
+                        <td> Email :</td>
+                        <td><form:input type="text" path="email" size="30" value="${customerDetail.email}" /> </td>
+                        <td><form:errors path="email" cssClass="error"/> </td>
+                    </tr>
+
+                </table>
+
+
                 <form:hidden path="dateOfBirth" />
-              
-<input type="submit" value="Update"/>
 
-    </form:form>
+                <input type="submit" value="Update"/>
 
-</body>
+            </form:form>
+        </div>
+        <div>
+            <div align="center">
+                <a href="${pageContext.request.contextPath}/index">Back</a></br>
+            </div></div>
+    </body>
 
 </html>
 

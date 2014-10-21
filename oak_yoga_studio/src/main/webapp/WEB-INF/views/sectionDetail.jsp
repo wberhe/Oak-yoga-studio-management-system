@@ -28,9 +28,7 @@
             <tr>                
                 <td>Room Number</td>
                 <td>${sectionDetail.roomNumber}</td>
-                <td> </td>
-                <td>Available Seat</td>
-                <td>${sectionDetail.availableSeat}</td>
+
                 <td> </td>
                 <td>status</td>  
                 <td>${sectionDetail.status}</td>

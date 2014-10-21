@@ -24,4 +24,7 @@ public interface ISectionService {
     public List<Section> getListOfSections();
     
      public List<Section> getSectionsByCourse(Course course);
+     
+  
 }
+

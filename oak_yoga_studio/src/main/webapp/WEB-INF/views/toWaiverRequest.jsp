@@ -13,8 +13,12 @@
     </head>
     <body>
         <h1></h1>
+         
         
-        <h3>${message}  ${course.name}</h3>
-          <td><a href="../waiver/${course.id}">Request waiver</a></td> 
+        <h4> ${message} </h4>
+        
+        
+        <td><a href="../requestWaiver">Request waiver</a></td>
+
     </body>
 </html>

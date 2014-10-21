@@ -39,14 +39,13 @@
                     <td><form:errors path="roomNumber" cssClass="error"/> </td>
                 </tr>
                 <tr>
-                    <td>Seat availability :</td>
-                    <td><form:input  type="text" path="availableSeat" placeholder="total seat"/> </td>
-                    <td><form:errors path="availableSeat" cssClass="error"/> </td>
-                </tr>
-                <h4>Select available faculty :</h4>
-                <form:select path="professor" >
+
+                <td>Select available faculty </td>
+                <td> <form:select path="professor" >
 			<form:options items="${allFaculities}"  itemLabel="firstName" itemValue="id"/>
-		</form:select>
+                    </form:select></td>
+           
+                </tr>
 
             </table>
                 <form:hidden path="status" />
