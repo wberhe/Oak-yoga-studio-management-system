@@ -21,7 +21,7 @@
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
    
 
-    <title>Oak Yoga Studio - Start Bootstrap Theme</title>
+    <title>Oak Yoga Studio </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/oak_yoga_studio/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +46,7 @@
 <body>
 
     <div class="brand">Oak Yoga Studio</div>
-    <div class="address-bar">MUM 1000 N 4th street, Fairfield, IA 52557 | 123.456.7890</div>
+    <div class="address-bar">MUM 1000 N 4th street, Fairfield, IA 52557 | 641.641.641</div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
@@ -69,11 +69,11 @@
                         <a href="/oak_yoga_studio/index">Home</a>
                     </li>
                     <li>
-                        <a href="/oak_yoga_studio/ViewAllCourses">Courses</a>
+                        <a href="/oak_yoga_studio/viewCourses">Courses</a>
                     </li>
                     <li>
                     <li>
-                        <a href="/oak_yoga_studio/productList">Products</a>
+                        <a href="/oak_yoga_studio/products">Products</a>
                     </li>
                     <li>
                         <a href="/oak_yoga_studio/about">About</a>
