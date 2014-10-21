@@ -318,12 +318,19 @@ Administrator.
         <sec:intercept-url pattern="/addCustomer" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/loginFail" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/welcome" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/contact" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/about" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/viewCourses" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/products" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <sec:intercept-url pattern="/products" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        
         
         <!--<sec:intercept-url pattern="/viewPost/*" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>-->
         <sec:intercept-url pattern="/j_spring_security_check" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>        
         <sec:intercept-url pattern="/**" access="ROLE_CUSTOMER,ROLE_ADMIN,ROLE_FACULTY"/>
         
-        <sec:form-login login-page="/login" default-target-url="/index" authentication-failure-url="/loginFail"/>
+        <sec:form-login login-page="/welcome" default-target-url="/index" authentication-failure-url="/loginFail"/>
         <sec:logout delete-cookies="true" invalidate-session="true" logout-success-url="/"/>
         
     </sec:http>
