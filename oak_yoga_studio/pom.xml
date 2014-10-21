@@ -70,6 +70,11 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-orm</artifactId>
+            <version>4.5.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.3.6.Final</version>
         </dependency>
@@ -177,12 +182,18 @@
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
-<!--        for web service-->
+        <!--        for web service-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
             <version>4.0.2.RELEASE</version>
         </dependency>
+        <!-- Sitemesh -->
+		<dependency>
+			<groupId>org.sitemesh</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>3.0.0</version>
+		</dependency>
     </dependencies>
 
     <!--needed for security-->

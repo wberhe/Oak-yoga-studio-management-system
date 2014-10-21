@@ -21,7 +21,7 @@ public class ShoppingCart {
     @GeneratedValue
     private int id;
 
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL,orphanRemoval=true,fetch = FetchType.EAGER)
     private List<ShoppingCartItem> shoppingCartItems;
 
     @OneToOne
@@ -72,9 +72,9 @@ public class ShoppingCart {
      * @return 
      */
     public void removeShoppingCartItem(ShoppingCartItem item){
-        if(item.getShoppingCart()!=null){
+      //  if(item.getShoppingCart()!=null){
             item.setShoppingCart(null);
-        }
+       // }
         this.shoppingCartItems.remove(item);
     }
     

@@ -21,5 +21,9 @@ public interface IShoppingCartService {
     
     public void clearCart(int id);
     
+    public void addShoppingCartItem(ShoppingCart cart,ShoppingCartItem item);
+    
+    public void deleteShoppingCartItem(ShoppingCart cart,ShoppingCartItem item);
+    
     
 }

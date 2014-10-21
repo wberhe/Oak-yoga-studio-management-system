@@ -30,20 +30,25 @@ public class Address {
     
     private String city;
     
+    private String creditCardNumber;
+    
+    private String ownerNameOnCreditCard;
+    
     @Pattern(regexp = "\\d{5}", message = "Zip code must be numeric and either 5 characters.")
     private String zipCode;
 
     public Address() {
     }
 
-    public Address(String street, String state, String city, String zipCode) {
+    public Address(String street, String state, String city, String creditCardNumber, String ownerNameOnCreditCard, String zipCode) {
         this.street = street;
         this.state = state;
         this.city = city;
+        this.creditCardNumber = creditCardNumber;
+        this.ownerNameOnCreditCard = ownerNameOnCreditCard;
         this.zipCode = zipCode;
     }
-    
-    
+
 
     public int getId() {
         return id;
@@ -85,13 +90,31 @@ public class Address {
         this.zipCode = zipCode;
     }
 
+    public String getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public String getOwnerNameOnCreditCard() {
+        return ownerNameOnCreditCard;
+    }
+
+    public void setOwnerNameOnCreditCard(String ownerNameOnCreditCard) {
+        this.ownerNameOnCreditCard = ownerNameOnCreditCard;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + (this.street != null ? this.street.hashCode() : 0);
-        hash = 43 * hash + (this.state != null ? this.state.hashCode() : 0);
-        hash = 43 * hash + (this.city != null ? this.city.hashCode() : 0);
-        hash = 43 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
+        int hash = 5;
+        hash = 79 * hash + (this.street != null ? this.street.hashCode() : 0);
+        hash = 79 * hash + (this.state != null ? this.state.hashCode() : 0);
+        hash = 79 * hash + (this.city != null ? this.city.hashCode() : 0);
+        hash = 79 * hash + (this.creditCardNumber != null ? this.creditCardNumber.hashCode() : 0);
+        hash = 79 * hash + (this.ownerNameOnCreditCard != null ? this.ownerNameOnCreditCard.hashCode() : 0);
+        hash = 79 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
         return hash;
     }
 
@@ -113,11 +136,19 @@ public class Address {
         if ((this.city == null) ? (other.city != null) : !this.city.equals(other.city)) {
             return false;
         }
+        if ((this.creditCardNumber == null) ? (other.creditCardNumber != null) : !this.creditCardNumber.equals(other.creditCardNumber)) {
+            return false;
+        }
+        if ((this.ownerNameOnCreditCard == null) ? (other.ownerNameOnCreditCard != null) : !this.ownerNameOnCreditCard.equals(other.ownerNameOnCreditCard)) {
+            return false;
+        }
         if ((this.zipCode == null) ? (other.zipCode != null) : !this.zipCode.equals(other.zipCode)) {
             return false;
         }
         return true;
     }
+
+    
     
     
     

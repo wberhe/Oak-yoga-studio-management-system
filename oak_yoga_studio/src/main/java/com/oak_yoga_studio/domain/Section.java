@@ -43,14 +43,8 @@ public class Section {
     private int capacity;
     
     //@NotNull
-    private int roomNumber;
-    
-//    @Min(0)
-//    @Max(15)
+    private String roomNumber;
 
- //   private int availableSeat;
-
-    
     private Status status;
     
     @ManyToOne
@@ -67,7 +61,7 @@ public class Section {
     public Section() {
     }
 
-    public Section(String sectionName, int capacity, int roomNumber, Status status, Course course, Faculty professor, List<Enrollment> enrollements) {
+    public Section(String sectionName, int capacity, String roomNumber, Status status, Course course, Faculty professor, List<Enrollment> enrollements) {
         this.sectionName = sectionName;
         this.capacity = capacity;
         this.roomNumber = roomNumber;
@@ -75,11 +69,8 @@ public class Section {
         this.course = course;
         this.professor = professor;
         this.enrollements = enrollements;
-    }
-
-
-
-   
+    }    
+    
 
     public int getId() {
         return id;
@@ -107,21 +98,13 @@ public class Section {
         this.capacity = capacity;
     }
 
-    public int getRoomNumber() {
+    public String getRoomNumber() {
         return roomNumber;
     }
 
-    public void setRoomNumber(int roomNumber) {
+    public void setRoomNumber(String roomNumber) {
         this.roomNumber = roomNumber;
     }
-
-//    public int getAvailableSeat() {
-//        return availableSeat;
-//    }
-//
-//    public void setAvailableSeat(int availableSeat) {
-//        this.availableSeat = availableSeat;
-//    }
 
     public Status getStatus() {
         return status;
@@ -165,13 +148,13 @@ public class Section {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 41 * hash + (this.sectionName != null ? this.sectionName.hashCode() : 0);
-        hash = 41 * hash + this.capacity;
-        hash = 41 * hash + this.roomNumber;
-        hash = 41 * hash + (this.status != null ? this.status.hashCode() : 0);
-        hash = 41 * hash + (this.course != null ? this.course.hashCode() : 0);
-        hash = 41 * hash + (this.professor != null ? this.professor.hashCode() : 0);
-        hash = 41 * hash + (this.enrollements != null ? this.enrollements.hashCode() : 0);
+        hash = 59 * hash + (this.sectionName != null ? this.sectionName.hashCode() : 0);
+        hash = 59 * hash + this.capacity;
+        hash = 59 * hash + (this.roomNumber != null ? this.roomNumber.hashCode() : 0);
+        hash = 59 * hash + (this.status != null ? this.status.hashCode() : 0);
+        hash = 59 * hash + (this.course != null ? this.course.hashCode() : 0);
+        hash = 59 * hash + (this.professor != null ? this.professor.hashCode() : 0);
+        hash = 59 * hash + (this.enrollements != null ? this.enrollements.hashCode() : 0);
         return hash;
     }
 
@@ -190,10 +173,9 @@ public class Section {
         if (this.capacity != other.capacity) {
             return false;
         }
-        if (this.roomNumber != other.roomNumber) {
+        if ((this.roomNumber == null) ? (other.roomNumber != null) : !this.roomNumber.equals(other.roomNumber)) {
             return false;
         }
-    
         if (this.status != other.status) {
             return false;
         }
@@ -209,6 +191,9 @@ public class Section {
         return true;
     }
 
+    
+
+    
     
     
     

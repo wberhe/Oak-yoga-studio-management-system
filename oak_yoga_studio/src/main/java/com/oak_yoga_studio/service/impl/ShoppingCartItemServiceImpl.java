@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Weldino
+ * @author Weldu
  */
 @Transactional(propagation = Propagation.REQUIRED)
 public class ShoppingCartItemServiceImpl implements IShoppingCartItemService {
