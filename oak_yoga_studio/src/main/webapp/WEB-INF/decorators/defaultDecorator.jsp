@@ -109,10 +109,10 @@
                 
                 <sec:authorize access="hasRole('ROLE_ADMIN')" >
                          
-                          <li><a href="ViewAllCourses"> Manage Courses</a></li>
-                          <li><a href="ViewSections">Manage Section</a></li>
+                          <li><a href="viewCourses"> Manage Courses</a></li>
+                          <li><a href="newSection">Manage Section</a></li>
                           <li><a href="viewFaculties">Manage Faculties</a></li>
-                          <li><a href="productList">Manage Products</a></li>
+                          <li><a href="products">Manage Products</a></li>
                           <li><a href="logout" >Logout</a></li>
                 </sec:authorize>
                           
