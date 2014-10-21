@@ -1,10 +1,9 @@
 package com.oak_yoga_studio.service.impl;
 
 import com.oak_yoga_studio.dao.OrderDAO;
-import com.oak_yoga_studio.dao.ShoppingCartDAO;
-import com.oak_yoga_studio.domain.Address;
+import com.oak_yoga_studio.dao.OrderItemDAO;
 import com.oak_yoga_studio.domain.Order;
-import com.oak_yoga_studio.domain.User;
+import com.oak_yoga_studio.domain.OrderItem;
 import com.oak_yoga_studio.service.IOrderService;
 import java.util.List;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderServiceImpl implements IOrderService {
 
     private OrderDAO orderDAO;
+    private OrderItemDAO orderItemDAO;
 
     public OrderServiceImpl() {
     }
@@ -27,11 +27,19 @@ public class OrderServiceImpl implements IOrderService {
         this.orderDAO = orderDAO;
     }
 
+    public void setOrderItemDAO(OrderItemDAO orderItemDAO) {
+        this.orderItemDAO = orderItemDAO;
+    }
+    
+
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void addOrder(Order order) {
         try {
             orderDAO.addOrder(order);
+            for(OrderItem o:order.getOrderItems()){
+                orderItemDAO.addOrderItem(o);
+            }
         } catch (Exception e) {
 
         }

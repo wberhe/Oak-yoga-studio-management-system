@@ -50,8 +50,6 @@ public class AdminController {
     private ICourseService courseService;
     @Resource
     private ISectionService sectionService;
-//    @Resource
-//    private IProductService productServcie;
     @Resource
     private IFacultyService facultyServcie;
     @Resource

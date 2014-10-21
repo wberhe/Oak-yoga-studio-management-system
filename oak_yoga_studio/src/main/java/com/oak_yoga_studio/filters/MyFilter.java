@@ -5,7 +5,8 @@
  */
 package com.oak_yoga_studio.filters;
 
-
+import com.oak_yoga_studio.domain.Customer;
+import com.oak_yoga_studio.domain.User;
 import com.oak_yoga_studio.service.ICustomerService;
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -21,7 +22,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  *
- * @author weldino
+ * @author weldu
  */
 public class MyFilter implements Filter {
 
@@ -43,6 +44,11 @@ public class MyFilter implements Filter {
                 ((HttpServletRequest) request).getSession().setAttribute("loggedUser", userService.getUserByUsername(user.getUsername()));
 //            System.out.println("Inside Filter Logged User(from db):" + ((HttpServletRequest) request).getSession().getAttribute("loggedUser"));
 //              System.out.println("Inside Filter Logged User(from request):" + user.getUsername());
+            }
+        } else {
+            User customer = (User) ((HttpServletRequest) request).getSession().getAttribute("loggedUser");
+            if (customer instanceof Customer) {
+                userService.updateCustomer(customer.getId(), (Customer) customer);
             }
         }
         chain.doFilter(request, response);

@@ -30,23 +30,23 @@ else
         
     </head>
     <body>
-        <h1>Products</h1>
-        <table border='1'>
+        <p style="color:red">${message}</p>
+        <h1>shopping cart Details</h1>
+        <table >
+            <tr><td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
             <c:forEach var="item" items="${shoppingCartItems}">
                 <tr>
-                    <td>${item.product.name}</td>
-                    <td>${item.quantity}</td>
-                    <td>${item.product.price}</td>
                     <td>
-                        <form:form action="${pageContext.request.contextPath}/cart/addOne/${item.id}" method="post">
-                            <input type="submit" value="+"/>
-                        </form:form>
+                       <img src="poductImage/${item.product.id}" width="100" height="100"/>
                     </td>
-                    <td>
-                        <form:form action="${pageContext.request.contextPath}/cart/subtractOne/${item.id}" method="post">
-                            <input type="submit" value="-"/>
-                        </form:form>
-                    </td>
+                    Name:<td>${item.product.name}</td>
+                    quantity:<td>${item.quantity}</td>
+                    $ <td>${item.product.price}</td>
                     <td>
                         <form:form action="${pageContext.request.contextPath}/cart/delete/${item.id}" method="post">
                             <input type="submit" value="Delete" onclick="return confirmComplete();"/>
@@ -59,7 +59,7 @@ else
         Total Price is:
         <c:out value="${totalPrice}"/></br>
 
-        <form:form commandName="product" action="${pageContext.request.contextPath}/checkout" method="post">
+        <form:form commandName="product" action="checkout" method="get">
 <!--            <input type="hidden" value="${totalPrice}"/>-->
             <input type="submit" value="Checkout"/>
         </form:form>

@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Somayeh
+ * @author weldu
  */
 @Transactional(propagation = Propagation.REQUIRED)
 public class ShoppingCartServiceImpl implements IShoppingCartService {
@@ -68,13 +68,33 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
         }
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    
     @Override
     public void clearCart(int id) {
         try {
             cartDAO.clearShoppingCart(id);
         } catch (Exception e) {
+           e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void addShoppingCartItem(ShoppingCart cart, ShoppingCartItem item) {
+        try{
+            cart.addShoppingCartItem(item);
+            cartDAO.updateShoppingCart(cart);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public void deleteShoppingCartItem(ShoppingCart cart, ShoppingCartItem item) {
+        try{
+            cart.removeShoppingCartItem(item);
+            cartDAO.updateShoppingCart(cart);
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 

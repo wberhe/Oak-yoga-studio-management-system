@@ -190,6 +190,7 @@
      <!-- order service injections -->
      <bean id="orderService" class="com.oak_yoga_studio.service.impl.OrderServiceImpl">
          <property name="orderDAO" ref="orderDAO"/>
+         <property name="orderItemDAO" ref="orderItemDAO"/>
      </bean>
      <!-- orderItem service injections -->
      <bean id="orderItemService" class="com.oak_yoga_studio.service.impl.OrderItemServiceImpl">
@@ -202,6 +203,9 @@
      <!-- shoppingCartItem service injections -->
      <bean id="shoppingCartItemService" class="com.oak_yoga_studio.service.impl.ShoppingCartItemServiceImpl">
          <property name="cartItemDAO" ref="shoppingCartItemDAO"/>
+     </bean>
+     <bean id="address" class="com.oak_yoga_studio.service.impl.AddressServiceImpl">
+         <constructor-arg ref="addressDAO"/>
      </bean>
      
     <!--Email Service--> 
