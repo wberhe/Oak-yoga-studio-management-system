@@ -66,6 +66,10 @@ public class CustomerController {
     public String redirectAbout() {
         return "about";
     }
+    @RequestMapping("/welcome")
+    public String redirectWelcome() {
+        return "welcome";
+    }
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public String getAll(Model model) {
