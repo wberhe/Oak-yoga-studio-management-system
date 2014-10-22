@@ -120,8 +120,8 @@
                         <sec:authorize access="hasRole('ROLE_FACULTY')" >
 
                             <li><a href="viewAdvisees" class="list-group-item"> View Advisees</a></li>
-                            <li><a href="facultywaiverRequests" class="list-group-item">View Waiver Request</a></li>
-                            <li><a href="facultySections" class="list-group-item">View Sections</a></li>
+                            <li><a href="viewWaiverRequests" class="list-group-item">View Waiver Request</a></li>
+                            <li><a href="viewFacultySections" class="list-group-item">View Sections</a></li>
                             
                             </sec:authorize>
                     </div>

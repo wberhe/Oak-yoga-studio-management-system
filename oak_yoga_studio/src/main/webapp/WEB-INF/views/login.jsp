@@ -23,7 +23,7 @@
             Pass: <input type="password" name='j_password' /> <br />
             Remember me: <input type="checkbox" name="_spring_security_remember_me" /> <br />
             <input type="submit" value="Login" />
-            <a href="addCredential">sign up</a>
+            
         </form>
     </div>
     <!--    <p> sample text.</p>
