@@ -6,6 +6,7 @@
 
 package com.oak_yoga_studio.dao;
 
+import com.oak_yoga_studio.domain.Address;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.Waiver;
@@ -28,5 +29,7 @@ public interface CustomerDAO {
      public List<Waiver> getApprovedWaiversByCustomerID(int customerID);
      
      public List<Course> getAllCoursesToWaive(Customer customer);
+     
+     public List<Address> getCustomerAddresses(int customerId );
      
 }

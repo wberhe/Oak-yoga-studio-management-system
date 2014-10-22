@@ -11,14 +11,23 @@ import com.oak_yoga_studio.service.ICustomerService;
 import com.oak_yoga_studio.service.IFacultyService;
 import com.oak_yoga_studio.service.INotificationService;
 import com.oak_yoga_studio.service.ISectionService;
+import java.io.IOException;
+import java.io.OutputStream;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -41,6 +50,56 @@ public class FacultyController {
         return "faculty";
     }
 
+    
+    @RequestMapping(value = "/facultyProfile", method = RequestMethod.GET)
+    public String getUserDetail(@ModelAttribute("customerUpdate") Faculty facultyUpdate,Model model, HttpSession session) {
+        System.out.println("begininnnnnnnnnnnnnnnnnnnnnnnnnn");
+        Faculty loggedFaculty = (Faculty) session.getAttribute("loggedUser");
+        model.addAttribute("facultyDetail", facultyService.getFacultyById(loggedFaculty.getId()));
+        System.out.println("in between ewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+//        Address a = customerService.getCutomerAdress(loggedCustomer.getId());
+//        if (a != null) {
+//            model.addAttribute("addressDetail", a);
+//        } else {
+//            model.addAttribute("addressDetail", new Address());
+//        }
+        return "facultyProfile";
+    }
+
+    @RequestMapping(value = "/updateFacultyProfile", method = RequestMethod.POST)
+    public String updateUser(@Valid Faculty facultyUpdate, BindingResult result, HttpSession session, RedirectAttributes flashAttr, @RequestParam("file") MultipartFile file) {
+        String view = "redirect:/";
+
+        if (!result.hasErrors()) {
+            int Id = ((Faculty) session.getAttribute("loggedUser")).getId();
+            Faculty faculty = facultyService.getFacultyById(Id);
+
+            faculty.setFirstName(facultyUpdate.getFirstName());
+            faculty.setLastName(facultyUpdate.getLastName());
+            //System.out.println("Date of Birth" + customerUpdate.getDateOfBirth());
+            //customer.setDateOfBirth(customerUpdate.getDateOfBirth());
+            faculty.setEmail(facultyUpdate.getEmail());
+
+            try {
+                System.out.println("Imageeeeeeeeeee - " + file.getBytes());
+                if (file.getBytes().length != 0) {
+                    faculty.setProfilePicture(file.getBytes());
+                }
+            } catch (IOException ex) {
+
+            }
+
+            facultyService.updateFaculty(Id, faculty);
+        } else {
+            for (FieldError err : result.getFieldErrors()) {
+                System.out.println("Error from UpdateProfileController " + err.getField() + ": " + err.getDefaultMessage());
+            }
+            System.out.println("err");
+        }
+        return "redirect:/facultyProfile";
+    }
+
+    
     @RequestMapping(value = "/viewAdvisees", method = RequestMethod.GET)
     public String viewAdvisees(Model model, HttpSession session) {
 
@@ -94,4 +153,17 @@ public class FacultyController {
         return "sectionDetail";
     }
 
+     @RequestMapping(value = "/facultyProfileImage/{id}", method = RequestMethod.GET)
+    public void getProfileImage(Model model, @PathVariable int id, HttpServletResponse response) {
+        try {
+            Faculty f = facultyService.getFacultyById(id);
+            if (f != null) {
+                OutputStream out = response.getOutputStream();
+                out.write(f.getProfilePicture());
+                response.flushBuffer();
+            }
+        } catch (IOException ex) {
+            // Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

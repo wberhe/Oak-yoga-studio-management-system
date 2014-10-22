@@ -6,6 +6,7 @@
 package com.oak_yoga_studio.dao.impl;
 
 import com.oak_yoga_studio.dao.CustomerDAO;
+import com.oak_yoga_studio.domain.Address;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.Waiver;
@@ -107,4 +108,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     }
 
+    public List<Address> getCustomerAddresses(int customerId) {
+        List<Address> addresses;
+
+        SQLQuery query = sf.getCurrentSession().createSQLQuery("select * from Address where user_id=" + customerId);
+        query.addEntity(Course.class);
+        addresses = query.list();
+        System.out.println("number of addresses of by customer is " + addresses.size());
+        return addresses;
+    }
 }

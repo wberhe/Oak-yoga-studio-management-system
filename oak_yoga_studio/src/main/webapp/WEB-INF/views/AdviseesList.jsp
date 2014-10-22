@@ -14,23 +14,27 @@
     </head>
     <body>
         <h3>List of all Advisees :</h3>
-        <table>
-            <tr>
-                <td></td>
-                <td>First Name</td>
-                <td>Last Name </td>
-                <td>Email</td>
-                <td></td>
-            </tr>
-            <c:forEach var="a" items="${advisees}">
-                <tr>
-                    <td></td> 
-                    <td><a href="adviseeDetail/${a.id}">${a.firstName}</a></td> 
-                    <td><a href="adviseeDetail/${a.id}">${a.lastName}</a></td>
-                    <td>${a.email}</td>
-                    <td></td>                    
-                </tr>
-            </c:forEach>
-        </table>
+        <div class="datagrid">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                <h>First Name</th>
+                    <th>Last Name </th>
+                    <th>Email</th>
+                    <th></th>
+                    </tr>
+                    </thead>
+                    <c:forEach var="a" items="${advisees}">
+                        <tr>
+                            <td></td> 
+                            <td><a href="adviseeDetail/${a.id}">${a.firstName}</a></td> 
+                            <td><a href="adviseeDetail/${a.id}">${a.lastName}</a></td>
+                            <td>${a.email}</td>
+                            <td></td>                    
+                        </tr>
+                    </c:forEach>
+            </table>
+        </div>
     </body>
 </html>

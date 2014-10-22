@@ -15,6 +15,7 @@
     <body>
         <h3>This is faculty Home page</h3>
         <ul>
+            <li> <a href="facultyProfile">My Profile</a></li>
             <li>
                 <!--                <form commandName="advisee" action="viewAdvisees" method="post" enctype="multipart/form-data">
                                     <input type="textfield" path="id"/>

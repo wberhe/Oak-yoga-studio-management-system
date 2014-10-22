@@ -34,9 +34,14 @@ public class AddressServiceImpl {
             e.printStackTrace();
         }
     }
-
+    
     @Transactional(propagation = Propagation.REQUIRED)
-    public void getAddress(Customer customer) {
-
+    public void updateAddress(Address address) {
+        try {
+            addDAO.updateAddress(address);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 }
