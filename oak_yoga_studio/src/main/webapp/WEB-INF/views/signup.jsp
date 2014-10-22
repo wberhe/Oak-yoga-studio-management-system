@@ -13,6 +13,7 @@
         <link href="resources/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
+        <h2>Please fill your personal information:</h2>
         <form:form commandName="customer" action="addCustomer" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
@@ -32,7 +33,7 @@
                 </tr>
                 <tr>
                     <td>Picture :</td> 
-                    <td><input type="file" name="file"   /> </td>
+                    <td><input type="file" name="file"/> </td>
                 </tr>
                 <tr>
                     <td>Email :</td>

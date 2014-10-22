@@ -85,4 +85,14 @@ public class SectionServiceImpl implements ISectionService {
     
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void deleteSection(Section section) {
+        try{
+            sectionDAO.deleteSection(section);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

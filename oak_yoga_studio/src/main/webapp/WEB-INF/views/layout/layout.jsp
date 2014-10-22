@@ -8,22 +8,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html>
-     
+
 <html>
     <head>
-        <title>WAMP Blog Engine</title>
+        <title>OAK Yoga Studio</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-        <link href="/Wamp/resources/common_style.css" rel="stylesheet" type="text/css" />
+        <link href="/oak_yoga_studio/resources/common_style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <div id="container">
-            <tiles:insertAttribute name="header" />
+            <div id="header"> 
+                <tiles:insertAttribute name="header" />
+            </div>           
             <div class="clear"></div>
             <div id="sidebar">
                 <c:if test="${empty loggedUser }">
                     <tiles:insertAttribute name="login" />
                 </c:if>
-                <tiles:insertAttribute name="navigation" />
+                <c:if test="${not empty loggedUser }">
+                    <tiles:insertAttribute name="navigation" />
+                </c:if>
             </div>
             <div id="content">
                 <!--<h2>Header</h2>-->
@@ -34,7 +38,7 @@
                 <!--
               <h2>Services</h2>
               <p><img class="imgleft" src="../resources/images/orb.png" alt="" /> text.. </p>
-                 --> 
+                --> 
             </div>
 
             <div class="clear"></div>

@@ -44,9 +44,9 @@ else
                     <td>
                        <img src="poductImage/${item.product.id}" width="100" height="100"/>
                     </td>
-                    Name:<td>${item.product.name}</td>
-                    quantity:<td>${item.quantity}</td>
-                    $ <td>${item.product.price}</td>
+                    <td>${item.product.name}</td>
+                    <td>(quantity: ${item.quantity})</td>
+                    <td>USD $ ${item.product.price}</td>
                     <td>
                         <form:form action="${pageContext.request.contextPath}/cart/delete/${item.id}" method="post">
                             <input type="submit" value="Delete" onclick="return confirmComplete();"/>
@@ -60,10 +60,11 @@ else
         <c:out value="${totalPrice}"/></br>
 
         <form:form commandName="product" action="checkout" method="get">
-<!--            <input type="hidden" value="${totalPrice}"/>-->
             <input type="submit" value="Checkout"/>
-        </form:form>
-
+           
+        </form:form> 
+            <a style="color:blue" href="index">Back</a>
+        
     
 
     </body>

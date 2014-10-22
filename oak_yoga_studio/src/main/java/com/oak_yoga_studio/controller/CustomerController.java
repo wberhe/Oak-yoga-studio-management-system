@@ -56,7 +56,7 @@ public class CustomerController {
 
     @RequestMapping("/")
     public String redirectRoot() {
-        return "redirect:/index";
+        return "redirect:/welcome";
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)

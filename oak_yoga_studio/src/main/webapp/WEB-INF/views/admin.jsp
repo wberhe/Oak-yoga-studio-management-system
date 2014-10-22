@@ -15,7 +15,9 @@
         <h3>This is admin Home page</h3>
            <ul>
                <li>View Courses <a href="viewCourses">click here to view</a></li>
-              <li>Add Course <a href="addCourse">Add Course</a></li>              
+              <li>Add Course <a href="addCourse">Add Course</a></li>
+              <li>Add Section <a href="newSection">add section</a></li> 
+              <li>view Sections <a href="sectionList">view sections</a></li> 
               <li>View Customer <a href="viewCustomers">View Customers</a></li>
               <li>Add Faculty <a href="addFacultyCredential">click here to add</a></li>
               <li>View Faculty <a href="viewFaculties">click here to view</a></li>  

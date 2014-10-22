@@ -1,0 +1,178 @@
+body {
+padding : 0;
+margin : 0;
+font : 75% tahoma, "Trebuchet MS", sans-serif;
+line-height : 1.5em;
+background : #c3d9c3 url(images/bg.jpg) repeat-y top center;
+color : #666;
+}
+#container {
+width : 760px;
+margin : 0 auto;
+padding : 0;
+border: 5px solid #fff;
+}
+			/*BANNER*/
+#banner {
+padding : 0;
+margin-top : 0;
+height : 130px;
+background : #5a8f57 url(images/orb.png) no-repeat right center;
+}
+#banner h1 {
+float : right;
+margin-top : 0;
+letter-spacing : 3px;
+font-size : 110%;
+padding : 50px 50px 0 0;
+color : #000;
+}
+			/*TOP NAV*/
+#navbar ul {
+float : left;
+width : 760px;
+padding : 0;
+margin : 0;
+list-style-type : none;
+font-size : 110%;
+text-align : left;
+border-top : 5px solid #fff;
+border-bottom : 5px solid #fff;
+background : #92cc8f;
+color : #000;
+}
+#navbar a {
+float : left;
+width : 6em;
+text-decoration : none;
+color : #000;
+background : #92cc8f url(images/square.gif) no-repeat left center;
+padding : 0.5em 1em;
+}
+#navbar a:hover {
+background : #5a8f57 url(images/square.gif) no-repeat left center;
+color : #fff;
+}
+#navbar li {
+display : inline;
+}
+			/*MAIN CONTENT*/
+#content {
+width : 500px;
+padding : 1em;
+margin-left : 230px;
+/* border: 1px solid; */
+/*border-radius: 25px;*/
+}
+			/*SIDEBAR*/
+#sidebar {
+float : left;
+width : 200px;
+padding : 1em;
+margin-top : 0;
+}
+			/*BOTTOM*/
+#bottom {
+clear : both;
+height : 230px;
+padding : 5px;
+margin-top : 5px;
+margin-bottom : 35px;
+background : inherit;
+}
+			/*FOOTER*/
+#footer h1 {
+letter-spacing : 2px;
+font-size : 110%;
+margin-left : 40px;
+color : #c7d9c3;
+}
+#footer p {
+font-size : 90%;
+padding : 0 0 0 10px;
+color : #c7d9c3;
+}
+#footer {
+padding : 5px;
+margin-top : 5px;
+border-top : 5px solid #fff;
+background : #5a8f57;
+}
+#footer a, a:visited {
+color : #333;
+background : inherit;
+text-decoration : underline;
+}
+#footer a:hover {
+color : #92cc8f;
+background : inherit;
+text-decoration : none;
+}
+			/*FOOTER COLUMNS*/
+.col3, .col3center {
+float : left;
+width : 33%;
+margin-bottom : 20px;
+}
+.col3center {
+margin : 0;
+}
+			/*LINKS*/
+a:link, a:visited {
+color : #5a8f57;
+background : inherit;
+text-decoration : underline;
+}
+a:hover {
+color : #143d55;
+background : inherit;
+text-decoration : none;
+}
+a img {
+border: 0;
+}
+ul li {
+list-style-type : none;
+}
+.navlist ul li {
+list-style-image : url(images/square.gif);
+padding-left : 5px;
+margin-bottom : 0;
+}
+			/*TYPOGRAPHY*/
+h2 {
+letter-spacing : 3px;
+font-size : 130%;
+padding : 10px;
+color : #5a8f57;
+}
+blockquote {
+padding : 5px;
+font-weight : bold;
+font-style : italic;
+color : #b29b35;
+}
+			/*CLASS*/
+.imgleft {
+float : left;
+padding : 10px;
+}
+.clear {
+clear : both;
+overflow : hidden;
+width : 0;
+height : 1px;
+}
+
+
+.security{
+ border: 1px solid rgb(158, 143, 189);
+ padding-left: 10px;
+ padding-bottom: 5px;
+}
+
+
+.signupSuccess{
+    color: green;
+    font-weight: bold;
+}

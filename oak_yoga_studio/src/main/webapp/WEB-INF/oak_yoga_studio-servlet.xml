@@ -33,7 +33,7 @@
 
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources 
     in the /WEB-INF/views directory -->
-        <bean
+<!--        <bean
          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.JstlView" />
@@ -41,7 +41,7 @@
         <property name="suffix" value=".jsp" />
         </bean>
 
- 
+ -->
 
 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving 
@@ -52,15 +52,14 @@
     <mvc:default-servlet-handler />
 
 
-    <mvc:view-controller path="index" view-name="index"/>
-    <!--<mvc:view-controller path="index2" view-name="index2"/>-->
+    <!--<mvc:view-controller path="index" view-name="index"/>-->
+    <mvc:view-controller path="welcome" view-name="welcome"/>
     <mvc:view-controller path="loginFail" view-name="loginFail"/>
-    <mvc:view-controller path="login" view-name="login"/>
-    
+    <mvc:view-controller path="login" view-name="login2"/>
     
     
     <!--configure Tiles for the Spring Framework -->	
-<!--    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
     </bean>
 
@@ -70,7 +69,7 @@
                 <value>/WEB-INF/tiles-definitions.xml</value>
             </list>
         </property>
-    </bean>-->
+    </bean>
         
         
         

@@ -12,47 +12,45 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Products currently in the oak yoga studio</title>
+        <title>oak products</title>
     </head>
     <body>
-        <h2>Products</h2>
+        <h2>Products currently in the oak yoga studio</h2>
         <table >
-            <tr><td>Picture:</td>
-                <td>Name</td>
-                <td>Price</td>
-                <td>cart</td>
-                <td>Quantity</td>
+            <tr><td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <c:forEach var="product" items="${products}">
                 <tr>
                     <td>
-                       <img src="poductImage/${product.id}" width="200" height="200"/>
+                        <img src="poductImage/${product.id}" width="250" height="250"/>
                     </td>
-                    <td>${product.name}</td>
-                    
-                    <td>${product.price}</td>
-                    
-                    <td><form:form commandName="product" action="cart/${product.id}" method="post">
-                        <input type="submit" value="Add to cart"/>
-                        <input type="text" name="quantity" size="3"/>
-                        </form:form>
-                    </td>
-                    
-                    <sec:authorize access="hasRole('ROLE_ADMIN')" >
-                        <td><a href="products/${product.id}">edit</a></td>
+                    <td>${product.name} </td>
+
+                    <td>USD :$ ${product.price}</td>
+                    <sec:authorize access="hasRole('ROLE_CUSTOMER')" >
+                        <td><form:form commandName="product" action="cart/${product.id}" method="post">
+                                <input type="text" name="quantity" size="3"/>
+                                <input style="background-color:lightgoldenrodyellow" type="submit" value="Add to cart"/>
+
+                            </form:form>
+                        </td>
                     </sec:authorize>
-                        
+
                     <sec:authorize access="hasRole('ROLE_ADMIN')" >
-                        <td><a href="products/${product.id}">delete</a></td>
+                        <td><a href="productEdit/${product.id}">  Edit Product</a></td>
                     </sec:authorize>
                 </tr>
-                   <%--</form:form>--%> 
+                <%--</form:form>--%> 
             </c:forEach>
         </table>
-        
 
+        <a style="color:blue" href="addProduct">Back</a>    
 
     </body>
 </html>
