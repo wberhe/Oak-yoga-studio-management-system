@@ -17,7 +17,7 @@
     </head>
     <body>
         <h4> Courses</h4>
-        <table width="100%" border="1" cellPadding="5" cellspacing="15">
+        <table width="100%" border="1" cellPadding="5">
 
             <tr>
                 <th>Course Number</th>

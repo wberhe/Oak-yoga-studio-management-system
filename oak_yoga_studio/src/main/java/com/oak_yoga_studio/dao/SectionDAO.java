@@ -26,7 +26,7 @@ public interface SectionDAO {
      
      public List<Section> getCourseSections(Course course);
       
-    
+    public void deleteSection(Section section);
      
     
 }

@@ -32,4 +32,4 @@
         </ul>
       </div>
     </div>-->
-    <p><a href="#">homepage</a> | <a href="#">contact</a> | &copy; 2014 WAMP </p>
+    <p><a href="#">Homepage</a> | <a href="#">contact</a> | &copy; 2014 OAK YOGA STUDIO </p>

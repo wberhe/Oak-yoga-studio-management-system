@@ -16,7 +16,7 @@
     </head>
     <body>
        <p style="color:red">  ${message}</p>
-        <h2>Please your billing address information</h2>
+        <h1>Please your billing address information:</h1>
         <form:form commandName="address" action="purchaseInfo" method="post">
             <form:errors path="*" cssClass="errorblock" element="div" />
             <table>
@@ -54,7 +54,7 @@
 
             </table>
             <input type="submit"/>
-
+            <a style="color:blue" href="index">Back</a>
         </form:form>
     </body>
 </html>

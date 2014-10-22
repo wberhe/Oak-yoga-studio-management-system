@@ -12,11 +12,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,14 +73,13 @@ public class ProductController {
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
     public String addProduct(@Valid Product product, BindingResult result, RedirectAttributes re,@RequestParam("file") MultipartFile file) {
         String view = "redirect:/products";
-        //System.out.println("outSide adding product");
         if (!result.hasErrors()) {
             try {
                 product.setImage(file.getBytes());
+                product.setStatus("ACTIVE");
             } catch (IOException ex){
-                //Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
-            //System.out.println("Not error");
             productService.addProduct(product);
         } else {
             //System.out.println("inside error adding product");
@@ -86,13 +87,44 @@ public class ProductController {
         }
         return view;
     }
+    /**
+     * EDIT PRODUCT
+     * @param prodid
+     * @return 
+     */
+    @RequestMapping(value = "/productEdit/{id}", method = RequestMethod.GET)
+    public String getProduct(@ModelAttribute("product") Product product,@PathVariable int id) {
+        //model.addAttribute("product", productService.getProductDetailInfo(id));
+        
+        return "editProduct";
+    }
 
-//    @RequestMapping(value = "/products/delete", method = RequestMethod.POST)
-//    public String delete(@RequestParam(value = "productId", required = true) int prodid) {
-//        productService.d
-//        return "redirect:/products";
-//    }
-    
+    @RequestMapping(value = "/productEdit", method = RequestMethod.POST)
+    public String updateProduct(@Valid Product product,BindingResult result,@RequestParam("file") MultipartFile file) {
+        
+          if (!result.hasErrors()) {
+              try {
+                product.setImage(file.getBytes());
+                product.setStatus("ACTIVE");
+                productService.updateProduct(product);
+            } catch (IOException ex){
+               ex.printStackTrace();
+            }
+               
+              return "redirect:/products";
+          } else{
+              for (FieldError err : result.getFieldErrors()) {
+                System.out.println(err.getField() + ": " + err.getDefaultMessage());
+                
+            }
+              return "editProduct";
+          }
+            
+    }
+/**
+ * 
+ * @return 
+ */
     
     
     @RequestMapping(value="/productResult", method = RequestMethod.GET)
@@ -109,8 +141,8 @@ public class ProductController {
           return "redirect:/productResult";
       }
         else{
-            re.addFlashAttribute("msg", "Product not found, please try again"); 
-            return "redirect:/notFound";
+            re.addFlashAttribute("msgs", "Product not found, please try again"); 
+            return "notFound";
         }
     }
     @RequestMapping(value="/searchProduct", method = RequestMethod.GET)
@@ -131,7 +163,7 @@ public class ProductController {
                 response.flushBuffer();
             }
         } catch (IOException ex) {
-           // Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 }

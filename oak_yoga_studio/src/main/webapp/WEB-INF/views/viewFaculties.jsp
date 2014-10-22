@@ -17,9 +17,10 @@
         <table>
             <c:forEach var="faculty" items="${faculties}">
                 <tr>
+                    <td><input type="checkbox" name="ids" value="${faculty.id}"/></td> 
                     <td>${faculty.firstName}</td>
                     <td>${faculty.lastName}</td>
-                    <td>${faculty.email}</td>
+                    <td>(Email: ${faculty.email})</td>
                     
                     <c:choose>
                         <c:when test="${faculty.credential.active==true}">
@@ -32,7 +33,7 @@
                 </tr>
             </c:forEach>
         </table>
-        <a href="addFacultyCredential"> Add Faculty</a>
-
+        <a href="addFacultyCredential"> Add Faculty</a><br/>
+       <a href="admin"> Back</a>
     </body>
 </html>

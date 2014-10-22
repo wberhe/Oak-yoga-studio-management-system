@@ -5,14 +5,14 @@
 --%>
 
   <div id="banner">
-    <h1>WAMP Blog Engine</h1>
+    <h1>Oak Yoga Studio</h1>
   </div>
   <div id="navbar">
     <ul>
-      <li><a href="/Wamp/gohome">Home</a></li>
+      <li><a href="/oak_yoga_studio/index">Home</a></li>
+      <li><a href="#">Courses</a></li>
+      <li><a href="#">Products</a></li
       <li><a href="#">About Us</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Our Work</a></li>
       <li><a href="#">Contact Us</a></li>
     </ul>
   </div>

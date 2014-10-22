@@ -24,10 +24,14 @@
                         <td><form:textarea path="description" rows="5" cols="40"></form:textarea></td>
                         <td><form:errors path="description" cssClass="error" /> </td>
 		</tr>
+                
                 <tr>
-                <form:select path="prerequisites" >
-			<form:options items="${ALLCourses}"  itemLabel="courseName" itemValue="id"/>
-		</form:select>
+                    <td> Select Prerequisite : </td>
+                    <td>
+                      <form:select path="prerequisites" >
+			 <form:options items="${ALLCourses}"  itemLabel="courseName" itemValue="id"/>
+		     </form:select>
+                   </td>
                 </tr>
         </table> 
                 <form:hidden path="active"  /> 

@@ -39,7 +39,7 @@ public class SectionDAOImpl implements SectionDAO {
     }
 
     
-    @Transactional(propagation = Propagation.MANDATORY)
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public void updateSection(Section section) {
        
@@ -78,6 +78,16 @@ public class SectionDAOImpl implements SectionDAO {
         sections=q.list();
     
         return sections;
+    }
+
+    @Transactional(propagation = Propagation.MANDATORY)
+    @Override
+    public void deleteSection(Section section) {
+       // if(section.getStatus().equals(Section.Status.CANCELED))
+        //{
+            sf.getCurrentSession().delete(section);
+       // }
+        
     }
 
     

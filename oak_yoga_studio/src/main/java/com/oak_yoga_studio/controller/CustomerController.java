@@ -56,12 +56,14 @@ public class CustomerController {
 
     @RequestMapping("/")
     public String redirectRoot() {
-        return "redirect:/index";
+        return "redirect:/welcome";
     }
+
     @RequestMapping("/contact")
     public String redirectContact() {
         return "contact";
     }
+
     @RequestMapping("/about")
     public String redirectAbout() {
         return "about";
