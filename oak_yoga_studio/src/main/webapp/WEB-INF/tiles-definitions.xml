@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC 
     "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
     "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
@@ -33,7 +33,7 @@
         <put-attribute name="body" value="/WEB-INF/views/welcome.jsp" />
     </definition>
  
-    <!--Faculty service -->
+    Faculty service 
     <definition name="AdviseesList" extends="baseLayout">
         <put-attribute name="title" value="Faculty" />
         <put-attribute name="body" value="/WEB-INF/views/AdviseesList.jsp" />
@@ -203,4 +203,4 @@
         <put-attribute name="body" value="/WEB-INF/views/withdrawResult.jsp" />
     </definition>
     
-</tiles-definitions>
+</tiles-definitions>-->
