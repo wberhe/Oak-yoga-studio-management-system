@@ -91,9 +91,11 @@
                         </sec:authorize>
                         <sec:authorize access="hasRole('ROLE_CUSTOMER')">
                             <li><a href="viewProfile" class="list-group-item">Profile</a></li>
-                            <li><a href="ViewAllCourses" class="list-group-item">Enrolling Course</a></li>
-                            <li><a href="waiverRequest" class="list-group-item">Course Waiving Request</a></li>
-                            <li><a href="enrollInCourse" class="list-group-item">Enrollment History</a></li>
+                            <li><a href="ViewCourses" class="list-group-item">Register for a Course</a></li>
+                            <li><a href="enrolled" class="list-group-item">View Enrollment History</a></li>
+                            <li><a href="requestWaiver" class="list-group-item">Request waiver</a></li>
+                            <li><a href="viewWaivers" class="list-group-item">View Waivers</a></li>
+                            <li><a href="requestWithdraw" class="list-group-item">Withdraw</a></li>
                             <li><a href="searchProduct" class="list-group-item">Search Product</a></li>
                             <li><a href="shoppingCart" class="list-group-item">Shopping Cart</a></li>
                             <li><a href="logout" class="list-group-item">Logout</a></li>
