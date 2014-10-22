@@ -141,6 +141,7 @@ public class EnrollmentController {
 
         Course course = courseService.getCourseById(id);
         model.addAttribute("sections", sectionService.getSectionsByCourse(course));
+        model.addAttribute("course",course);
 
         return "ViewSections";
     }
@@ -209,9 +210,9 @@ public class EnrollmentController {
         if (!enrollmentService.getEnrollmentsByCustomer(customer).isEmpty()) {
 
             model.addAttribute("sectionsTaken", enrollmentService.getEnrollmentsByCustomer(customer));
-            model.addAttribute("msg", " Course Enrollment History");
+            model.addAttribute("msg", "Current courses to withdraw");
         } else {
-            model.addAttribute("msg", "You haven't been enrolled in any section");
+            model.addAttribute("msg", "Your record shows there are no current courses that you are enrolled in.");
         }
 
         return "withdrawRequest";

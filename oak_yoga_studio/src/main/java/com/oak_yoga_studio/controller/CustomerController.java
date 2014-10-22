@@ -143,8 +143,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
     public String getUserDetail(Model model, HttpSession session) {
-        
-        
+
         model.addAttribute("customerDetail", session.getAttribute("loggedUser"));
         System.out.println("Hi this is udner editProfile   ");
         return "EditProfile";
@@ -177,14 +176,13 @@ public class CustomerController {
         }
     }
 
-
     @RequestMapping(value = "/requestWaiver", method = RequestMethod.GET)
     public String requestWaiver(Model model, HttpSession session) {
 
-    //    model.addAttribute("courses", courseService.getListOfCourses());
+        //    model.addAttribute("courses", courseService.getListOfCourses());
         Customer customer = (Customer) session.getAttribute("loggedUser");
 
-        List<Course> coursesToWaive=customerService.getAllCoursesToWaive(customer);
+        List<Course> coursesToWaive = customerService.getAllCoursesToWaive(customer);
         if (!coursesToWaive.isEmpty()) {
 
             model.addAttribute("coursesToWaive", coursesToWaive);
@@ -222,16 +220,29 @@ public class CustomerController {
 
         model.addAttribute("msg", "Your Waiver request for course " + course.getCourseName() + " is successfuly saved");
 
-
-
         return "waiverResult";
 
+    }
 
-    }    
- 
-   
-         
-     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewWaivers", method = RequestMethod.GET)
+    public String getCourses(Model model, HttpSession session) {
+
+        Customer customer = (Customer) session.getAttribute("loggedUser");
+     
+        List<Waiver> allWaivers = customerService.getAllWaiversByCustomer(customer);
+        System.out.println("waivers length is " + allWaivers.size());
+        if (!allWaivers.isEmpty()) {
+            
+            model.addAttribute("waivers", allWaivers);
+            model.addAttribute("msg", " courses with waiver status");
+        } else {
+            model.addAttribute("msg", " No records found ");
+        }
+
+        return "viewWaivers";
+    }
+
+    @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
     public void getUserImage(Model model, @PathVariable int id, HttpServletResponse response) {
         try {
             Customer c = customerService.getCustomerById(id);
@@ -251,18 +262,10 @@ public class CustomerController {
         customer = new Customer();
         return customer;
     }
-    
- 
-    
-    private  List<Course> getAllCoursesToWaive(Customer customer)
-    {
-       return  customerService.getAllCoursesToWaive(customer);
-    }
-            
-         
-         
 
-    
+    private List<Course> getAllCoursesToWaive(Customer customer) {
+        return customerService.getAllCoursesToWaive(customer);
+    }
 
     /**
      * Enabling and disabling the user
@@ -313,13 +316,8 @@ public class CustomerController {
      * @param id
      * @param response
      */
-
-
-
-
     private void requestWaiver(Customer customer, String reason) {
 
     }
-
 
 }
