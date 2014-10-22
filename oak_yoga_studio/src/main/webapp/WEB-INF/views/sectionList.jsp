@@ -14,19 +14,20 @@
     </head>
     <body>
         <h2> Sections for Course </h2>
-        <table>
+        <table >
                  
-            <tr><td>Section Name</td>
-                <td>Room Number</td>
-                <td>Instructor</tr>
+            <tr><th>Section Name</th>
+                <th>Room Number</th>
+                <th>Instructor</th>
+            </tr>
             <tr></tr>
             <c:forEach var="s" items="${sections}">
                  <tr>
                     
                     <td>${s.sectionName }</td> 
                     <td>${s.roomNumber}</td>
-                    <td>${s.faculty.id}</td>
-                   <td><a href="../enrollInCourse/${s.id}" >Enroll For this section </a></td>
+                    <td></td>
+                   
                  </tr>
                  <tr>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">

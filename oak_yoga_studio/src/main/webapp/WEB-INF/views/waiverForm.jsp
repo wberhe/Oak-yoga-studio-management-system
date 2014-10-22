@@ -29,17 +29,17 @@
 
 
                     <tr>
-                        <td> Course Number </td>
-                        <td>${course.courseNumber}</td>
+                        <td> Course Number : </td>
+                        <td> ${course.courseNumber}</td>
                     </tr>
                     <tr>
-                        <td>Course Name :</td>
-                        <td>${course.courseName}</td>
+                        <td>Course Name    :</td>
+                        <td> ${course.courseName}</td>
                     </tr>
 
                     <tr>
                         <td> Reason</td>
-                        <td><br/><textarea name="text" rows="5" cols="30"></textarea><br/>
+                        <td><br/> <textarea name="text" rows="5" cols="50"></textarea><br/>
                         </td>
                     </tr>
                     <tr>

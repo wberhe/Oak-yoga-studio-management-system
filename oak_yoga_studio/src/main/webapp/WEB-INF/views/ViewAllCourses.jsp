@@ -13,10 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="resources/css/style.css" rel="stylesheet" type="text/css" />
         <title>Courses List</title>
+        
     </head>
     <body>
-        <h2> Courses</h2>
-        <table width="100%">
+        <h4> Courses</h4>
+        <table width="100%" border="1" cellPadding="5" cellspacing="15">
 
             <tr>
                 <th>Course Number</th>
@@ -31,11 +32,11 @@
                 <tr>
                     <td>${c.courseNumber}</a></td>
                     <td>${c.courseName }</td> 
-                    <td>${c.description}</td>
+                    <td width="20%">${c.description}</td>
 
                     <td>
                         <c:forEach var="pre" items="${c.prerequisites}">
-                    <li>${pre.courseNumber}  ${pre.courseName}</li>
+                    <li> ${pre.courseName}</li>
                     </c:forEach>
             </td>
             <td><a href="viewSections/${c.id}"> view sections </a></td>

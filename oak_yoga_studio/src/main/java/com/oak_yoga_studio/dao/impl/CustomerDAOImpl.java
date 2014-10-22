@@ -80,6 +80,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     }
 
+     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Course> getAllCoursesToWaive(Customer customer) {
 
@@ -101,6 +102,22 @@ public class CustomerDAOImpl implements CustomerDAO {
         System.out.println("number of courses taken by customer is " + courses.size());
         return courses;
 
+    }
+
+     @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<Waiver> getAllWaiversByCustomer(Customer customer) {
+
+        List<Waiver> waivers;
+
+        Query query = sf.getCurrentSession().createQuery(" from Waiver where customer=:customer");
+
+        query.setParameter("customer", customer);
+        waivers = query.list();
+        
+         System.out.println("Waivers length is " + waivers.size());
+
+        return waivers;
     }
 
 }
