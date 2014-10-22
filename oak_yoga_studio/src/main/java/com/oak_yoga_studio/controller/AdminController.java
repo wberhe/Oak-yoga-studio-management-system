@@ -232,7 +232,7 @@ public class AdminController {
           
         /**
          * //dump fix, I almost hate my self...damnnn
-         * ,,,here the professor and course are binded with section
+         * ,,,here the faculty and course are binded with section
          */
         String view = "redirect:/sectionList";
         
