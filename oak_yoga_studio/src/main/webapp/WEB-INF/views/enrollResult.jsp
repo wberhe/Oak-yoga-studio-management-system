@@ -1,5 +1,5 @@
 <%-- 
-    Document   : registrationSuccess
+    Document   : enrollResult
     Created on : Oct 18, 2014, 3:54:11 PM
     Author     : Fetiya
 --%>

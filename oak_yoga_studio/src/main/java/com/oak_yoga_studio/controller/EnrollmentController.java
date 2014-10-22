@@ -89,11 +89,11 @@ public class EnrollmentController {
                         message = "Successfully enrolled to section. " + section.getSectionName()
                                 + "and your advisor is " + advisor.getFirstName() + " " + advisor.getLastName();
                         model.addAttribute("message", message);
-                        return "registrationSuccess";
+                        return "enrollResult";
                     } else {
                         message = "Congratulations. Now you are successfully enrolled in yoga class";
                         model.addAttribute("message", message);
-                        return "registrationSuccess";
+                        return "enrollResult";
 
                     }
 
@@ -101,7 +101,7 @@ public class EnrollmentController {
                     message = "Sorry. You can not be registered for section now because your record"
                             + " shows that you already have a current active registration for this section";
                     model.addAttribute("message", message);
-                    return "registrationSuccess";
+                    return "enrollResult";
                 }
             } //if there is no available seat for a section ask customer to be inclued in waiting list
             else {
@@ -121,7 +121,7 @@ public class EnrollmentController {
             model.addAttribute("course", course);
            //return "toWaiverRequst";
 
-         //   return "registrationSuccess";
+         //   return "enrollResult";
             return "toWaiverRequest";
 
         }
