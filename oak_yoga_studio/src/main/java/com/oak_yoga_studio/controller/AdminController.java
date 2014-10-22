@@ -18,6 +18,7 @@ import com.oak_yoga_studio.service.INotificationService;
 import com.oak_yoga_studio.service.ISectionService;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -123,7 +124,7 @@ public class AdminController {
         if (!result.hasErrors()) {
             //Faculty f = (Faculty) session.getAttribute("loggedUser");
             credential.setRole("ROLE_FACULTY");
-            credential.setActive(true);
+            credential.setActive(false);
             session.setAttribute("credential", credential);
         } else {
             view = "addFacultyCredential";
@@ -142,8 +143,7 @@ public class AdminController {
 
     @RequestMapping(value = "/addFaculty", method = RequestMethod.POST)
     public String addFaculty(Faculty faculty, BindingResult result, HttpSession session, RedirectAttributes flashAttr, @RequestParam("file") MultipartFile file) {
-        String view = "redirect:/admin";
-        System.out.println("add faculty Add outside");
+        String view = "redirect:/viewFaculties";
 
         if (!result.hasErrors()) {
             try {
@@ -151,8 +151,8 @@ public class AdminController {
             } catch (IOException ex) {
                 //Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
             } 
-            faculty.getCredential().setActive(true);
-            faculty.setActive(true);
+            faculty.getCredential().setActive(false);
+            faculty.setActive(false);
             facultyServcie.addFaculty(faculty);
             session.removeAttribute("credential");
             flashAttr.addFlashAttribute("successful registered", "Faculty signed up succesfully. please  log in to proceed"); //           Customer c=(Customer) session.getAttribute("loggedCustomer");
@@ -240,7 +240,7 @@ public class AdminController {
             view = "createSection";
            
         } else {
-            
+            section.setStatus(Section.Status.OPEN);
             section.getProfessor().addSection(section);
             section.getCourse().addSection(section);
             sectionService.updateSection(section);
@@ -248,20 +248,35 @@ public class AdminController {
         return view;
     }
     
-//    @RequestMapping(value = "deleteSection/{id}", method = RequestMethod.POST)
-//    public String deleteSection(Model model, @PathVariable int id, RedirectAttributes redattr) {
-//        Section section=sectionService.getSectionById(id);
-//        int courseID = section.getCourse().getId();
-//        Course course=courseService.getCourseById(courseID);
-//        course.removeSection(section);
-//        courseService.updateCourse(course);
-//        section.setCourse(null);
-//        //sectionService.delete
-//        redattr.addAttribute("id", courseID);
-//        return "redirect:/sectionList/{id}";
-//    }
+    /**
+     * DELETING A SECTION
+     * @param model
+     * @param id
+     * @param redattr
+     * @return 
+     */
+    @RequestMapping(value = "/deleteSection", method = RequestMethod.POST)
+    public String deleteSection(Model model, String[] ids) {
+        
+        List<Section> sections = new ArrayList<Section>();
+        if (ids != null) {
+            for (String id : ids) {
+                sections.add(sectionService.getSectionById(Integer.parseInt(id)));
+            }
+        }
+        for(Section s : sections){
+            sectionService.deleteSection(s);
+            
+        }
+        
+        model.addAttribute("sections",sectionService.getListOfSections());
+        return "sectionList";
+    }
     
-    
+    /**
+     * 
+     * @param binder 
+     */
     
     	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
