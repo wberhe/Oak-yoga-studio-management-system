@@ -46,6 +46,7 @@ else
                     <td>${s.professor.firstName}</td>
                     <td>${s.course.courseName}</td>
                     <td>${s.status}</td>
+                    <td></td>
                  </tr>
             </c:forEach>
         </table>

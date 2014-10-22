@@ -73,6 +73,20 @@ public class CustomerController {
         return "welcome";
     }
 
+    @RequestMapping("/contact")
+    public String redirectContact() {
+        return "contact";
+    }
+
+    @RequestMapping("/about")
+    public String redirectAbout() {
+        return "about";
+    }
+    @RequestMapping("/welcome")
+    public String redirectWelcome() {
+        return "welcome";
+    }
+
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public String getAll(Model model) {
         model.addAttribute("users", customerService.getAllCustomers());
