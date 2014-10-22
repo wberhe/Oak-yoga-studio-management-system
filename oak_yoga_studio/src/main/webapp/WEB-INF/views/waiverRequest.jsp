@@ -19,14 +19,14 @@
     </head>
     <body>
         <div align="center">
-            <h1> ${msg}</h1>
-            <table border="1" cellpadding="10">  <tr>
+            <h3> ${msg}</h3>
+            <table border="1" cellpadding="2" width="100%">  <tr>
 
                 <tr>
-                    <td>Course Name</td>
-                    <td>Course Number  </td>
-                    <td>Description</td>
-                    <td></td>
+                    <th>Course Name</th>
+                    <th>Course Number  </th>
+                    <th>Description</th>
+                    <th></th>
                 </tr>
 
                 <c:forEach var="course" items="${coursesToWaive}">
@@ -44,7 +44,7 @@
                                 <input type="submit" value="Waive"/>
 
                             </form>
-
+                            
                         </td>    
 
 

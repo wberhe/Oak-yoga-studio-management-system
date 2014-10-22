@@ -29,4 +29,5 @@ public interface CustomerDAO {
      
      public List<Course> getAllCoursesToWaive(Customer customer);
      
+     public List<Waiver> getAllWaiversByCustomer(Customer customer);
 }

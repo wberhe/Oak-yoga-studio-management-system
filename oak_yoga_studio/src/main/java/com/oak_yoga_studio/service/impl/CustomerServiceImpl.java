@@ -139,7 +139,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     
-      @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public List<Waiver> getApprovedWaiversByCustomerID(int customerID) {
         
@@ -165,6 +165,14 @@ public class CustomerServiceImpl implements ICustomerService {
         
     
         return customerDAO.getAllCoursesToWaive(customer);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public List<Waiver> getAllWaiversByCustomer(Customer customer) {
+        
+        return customerDAO.getAllWaiversByCustomer(customer);
+    
     }
     
 }

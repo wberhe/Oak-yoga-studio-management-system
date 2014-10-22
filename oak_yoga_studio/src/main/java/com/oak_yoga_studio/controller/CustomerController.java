@@ -59,6 +59,20 @@ public class CustomerController {
         return "redirect:/welcome";
     }
 
+    @RequestMapping("/contact")
+    public String redirectContact() {
+        return "contact";
+    }
+
+    @RequestMapping("/about")
+    public String redirectAbout() {
+        return "about";
+    }
+    @RequestMapping("/welcome")
+    public String redirectWelcome() {
+        return "welcome";
+    }
+
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public String getAll(Model model) {
         model.addAttribute("users", customerService.getAllCustomers());
@@ -131,8 +145,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
     public String getUserDetail(Model model, HttpSession session) {
-        
-        
+
         model.addAttribute("customerDetail", session.getAttribute("loggedUser"));
         System.out.println("Hi this is udner editProfile   ");
         return "EditProfile";
@@ -165,19 +178,19 @@ public class CustomerController {
         }
     }
 
-
     @RequestMapping(value = "/requestWaiver", method = RequestMethod.GET)
     public String requestWaiver(Model model, HttpSession session) {
 
-    //    model.addAttribute("courses", courseService.getListOfCourses());
+        //    model.addAttribute("courses", courseService.getListOfCourses());
         Customer customer = (Customer) session.getAttribute("loggedUser");
 
-        if (!customerService.getAllCoursesToWaive(customer).isEmpty()) {
+        List<Course> coursesToWaive = customerService.getAllCoursesToWaive(customer);
+        if (!coursesToWaive.isEmpty()) {
 
-            model.addAttribute("coursesToWaive", customerService.getAllCoursesToWaive(customer));
+            model.addAttribute("coursesToWaive", coursesToWaive);
             model.addAttribute("msg", " Courses Qualified to be waived ");
         } else {
-            model.addAttribute("msg", " There is no course that you can waive");
+            model.addAttribute("msg", " There are no courses that you can waive");
         }
 
         return "waiverRequest";
@@ -200,27 +213,38 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/waiverResult/{id}", method = RequestMethod.POST)
-    public String waiverResult(@PathVariable int id, Model model, String text, String[] ids, HttpSession session) {
+    public String sumbitRequest(@PathVariable int id, Model model, String text, String[] ids, HttpSession session) {
 
         Customer customer = (Customer) session.getAttribute("loggedUser");
         Course course = courseService.getCourseById(id);
 
         courseService.requestWaiver(course, customer, text);
 
-
-
         model.addAttribute("msg", "Your Waiver request for course " + course.getCourseName() + " is successfuly saved");
-
-
 
         return "waiverResult";
 
+    }
 
-    }    
- 
-   
-         
-     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewWaivers", method = RequestMethod.GET)
+    public String getCourses(Model model, HttpSession session) {
+
+        Customer customer = (Customer) session.getAttribute("loggedUser");
+     
+        List<Waiver> allWaivers = customerService.getAllWaiversByCustomer(customer);
+        System.out.println("waivers length is " + allWaivers.size());
+        if (!allWaivers.isEmpty()) {
+            
+            model.addAttribute("waivers", allWaivers);
+            model.addAttribute("msg", " courses with waiver status");
+        } else {
+            model.addAttribute("msg", " No records found ");
+        }
+
+        return "viewWaivers";
+    }
+
+    @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
     public void getUserImage(Model model, @PathVariable int id, HttpServletResponse response) {
         try {
             Customer c = customerService.getCustomerById(id);
@@ -240,18 +264,10 @@ public class CustomerController {
         customer = new Customer();
         return customer;
     }
-    
- 
-    
-    private  List<Course> getAllCoursesToWaive(Customer customer)
-    {
-       return  customerService.getAllCoursesToWaive(customer);
-    }
-            
-         
-         
 
-    
+    private List<Course> getAllCoursesToWaive(Customer customer) {
+        return customerService.getAllCoursesToWaive(customer);
+    }
 
     /**
      * Enabling and disabling the user
@@ -302,13 +318,8 @@ public class CustomerController {
      * @param id
      * @param response
      */
-
-
-
-
     private void requestWaiver(Customer customer, String reason) {
 
     }
-
 
 }

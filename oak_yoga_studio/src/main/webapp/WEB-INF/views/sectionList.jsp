@@ -28,7 +28,6 @@ else
         </script>
     </head>
     <body>
-        
         <h2> List of Sections </h2>
         <form:form comandName="section" action="deleteSection" method="post">
         <table><tr>
@@ -39,7 +38,6 @@ else
                 <td><strong>Course: </strong></td>
                 <td><strong>Status: </strong></td>
             </tr>
-                 
             <c:forEach var="s" items="${sections}">
                  <tr>
                     <td><input type="checkbox" name="ids" value="${s.id}"/></td> 
@@ -48,12 +46,7 @@ else
                     <td>${s.professor.firstName}</td>
                     <td>${s.course.courseName}</td>
                     <td>${s.status}</td>
-                    <sec:authorize access=" hasRole('ROLE_CUSTOMER')">
-                        <td><a href="../enrollInCourse/${s.id}" >Enroll For this section </a></td>
-                    </sec:authorize>     
-                   
                  </tr>
-            
             </c:forEach>
         </table>
             <sec:authorize access="hasRole('ROLE_ADMIN')">

@@ -60,9 +60,9 @@ public class EnrollmentController {
 
         String message;
 
-        System.out.println("Before going to CheckPrerequisitesQualification ");
-        // System.out.println( checkPrerequisiteQualification(customer, course) );
-
+       //CheckPrerequisitesQualification 
+      
+        
         if (checkPrerequisiteQualification(customer, course)) {
 
             System.out.println("Prerequisite Qualifeid");
@@ -70,8 +70,7 @@ public class EnrollmentController {
             model.addAttribute("section", section);
 
             // check if there is available seat
-            if(isSeatAvailable(section))
-            {
+            if (isSeatAvailable(section)) {
            /////////  if (enrollmentService.checkSeatAvailablity(section.getId())) {
 
                 //check if this is the first time enrollment for the  customer and assign advisor
@@ -81,25 +80,20 @@ public class EnrollmentController {
 
                     enrollmentService.addEnrollment(Enrollment.statusType.ACTIVE, customer, section);
 
-                    
-                    
-                    
                   //  int seats = section.getAvailableSeat();
-
                  //   section.setAvailableSeat(--seats);
-                //    sectionService.updateSection(section);
-
+                    //    sectionService.updateSection(section);
                     if (advisor != null) {
 
                         //display success with advisor info
                         message = "Successfully enrolled to section. " + section.getSectionName()
                                 + "and your advisor is " + advisor.getFirstName() + " " + advisor.getLastName();
                         model.addAttribute("message", message);
-                        return "registrationSuccess";
+                        return "enrollResult";
                     } else {
                         message = "Congratulations. Now you are successfully enrolled in yoga class";
                         model.addAttribute("message", message);
-                        return "registrationSuccess";
+                        return "enrollResult";
 
                     }
 
@@ -107,10 +101,9 @@ public class EnrollmentController {
                     message = "Sorry. You can not be registered for section now because your record"
                             + " shows that you already have a current active registration for this section";
                     model.addAttribute("message", message);
-                    return "registrationSuccess";
+                    return "enrollResult";
                 }
-            } 
-//if there is no available seat for a section ask customer to be inclued in waiting list
+            } //if there is no available seat for a section ask customer to be inclued in waiting list
             else {
                 //redirect message
                 message = "There is no seat available for the selected section . Would you like to be added in the waitinglist? ";
@@ -120,21 +113,16 @@ public class EnrollmentController {
             }
 
         } else {
-            
+
       //Prerequisite not qualified
-            
             message = "Your transcript shows you didn't complete prerequistes for this section"
                     + " Would you like to request a waiver ?";
             model.addAttribute("message", message);
             model.addAttribute("course", course);
            //return "toWaiverRequst";
 
-         //   return "registrationSuccess";
-            
+         //   return "enrollResult";
             return "toWaiverRequest";
-            
-            
-            
 
         }
 
@@ -153,6 +141,7 @@ public class EnrollmentController {
 
         Course course = courseService.getCourseById(id);
         model.addAttribute("sections", sectionService.getSectionsByCourse(course));
+        model.addAttribute("course",course);
 
         return "ViewSections";
     }
@@ -213,6 +202,22 @@ public class EnrollmentController {
         return view;
     }
 
+    @RequestMapping(value = "/requestWithdraw", method = RequestMethod.GET)
+    public String requestWithdraw(Model model, HttpSession session) {
+
+        Customer customer = (Customer) session.getAttribute("loggedUser");
+
+        if (!enrollmentService.getEnrollmentsByCustomer(customer).isEmpty()) {
+
+            model.addAttribute("sectionsTaken", enrollmentService.getEnrollmentsByCustomer(customer));
+            model.addAttribute("msg", "Current courses to withdraw");
+        } else {
+            model.addAttribute("msg", "Your record shows there are no current courses that you are enrolled in.");
+        }
+
+        return "withdrawRequest";
+    }
+
     @RequestMapping(value = "/enrolled", method = RequestMethod.GET)
     public String getEnrolledSections(Model model, HttpSession session) {
 
@@ -240,7 +245,6 @@ public class EnrollmentController {
         Section section = enrollment.getSection();//sectionService.getSectionById(id);
 
         if (section.getStatus() == Section.Status.OPEN || section.getStatus() == Section.Status.INPROGRESS) {
-
 
             enrollmentService.withdraw(customer, section);
 
@@ -282,7 +286,6 @@ public class EnrollmentController {
 
             enrollment.setStatus(Enrollment.statusType.ACTIVE);
             enrollmentService.saveEnrollment(enrollment);
-           
 
         }
 
@@ -303,18 +306,17 @@ public class EnrollmentController {
         }
         return null;
     }
-    
-    
-    public boolean isSeatAvailable(Section section)
-    {
-        long enrolledTotal=enrollmentService.getEnrollmentsCountBySection(section);
-        
-        long seats= enrolledTotal - section.getCapacity();
-        
-        if(seats>0)
+
+    public boolean isSeatAvailable(Section section) {
+        long enrolledTotal = enrollmentService.getEnrollmentsCountBySection(section);
+
+        long seats = section.getCapacity() - enrolledTotal;
+
+        if (seats > 0) {
             return true;
-        else 
+        } else {
             return false;
+        }
     }
 
 }

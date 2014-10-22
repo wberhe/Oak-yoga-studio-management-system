@@ -80,23 +80,20 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     }
 
+     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Course> getAllCoursesToWaive(Customer customer) {
 
         List<Course> courses;
-        String sql = "SELECT distinct co.* FROM COURSE co WHERE  co.id "
-                + " NOT IN\n"
-                + "(SELECT s.course_id FROM enrollment e  join customer c on c.id=e.customer_id\n"
-                + "  JOIN section s on s.id=e.section_id \n"
-                + "  WHERE  c.id= " + customer.getId()
-                + ")UNION\n"
-                + "        \n"
-                + "                      \n"
-                + "SELECT distinct co.* from Course co \n"
-                + " \n"
-                + "WHERE co.id NOT IN \n"
-                + "(SELECT waiverCourse_id from  waiver \n"
-                + "                     WHERE customer_id =" + customer.getId() + " )";
+        String sql = "SELECT distinct co.* FROM COURSE co WHERE  co.id \n"
+                + "               NOT IN\n"
+                + "                (SELECT s.course_id FROM enrollment e  join customer c on c.id=e.customer_id\n"
+                + "                  \n"
+                + "                JOIN section s on s.id=e.section_id \n"
+                + "                WHERE  c.id= " + customer.getId() + " AND e.status='COMPLETED'\n"
+                + "                )\n"
+                + "                AND co.id NOT IN ( SELECT waiverCourse_id from  waiver \n"
+                + "                                  WHERE customer_id =" + customer.getId() + ")";
 
         SQLQuery query = sf.getCurrentSession().createSQLQuery(sql);
         query.addEntity(Course.class);
@@ -105,6 +102,22 @@ public class CustomerDAOImpl implements CustomerDAO {
         System.out.println("number of courses taken by customer is " + courses.size());
         return courses;
 
+    }
+
+     @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<Waiver> getAllWaiversByCustomer(Customer customer) {
+
+        List<Waiver> waivers;
+
+        Query query = sf.getCurrentSession().createQuery(" from Waiver where customer=:customer");
+
+        query.setParameter("customer", customer);
+        waivers = query.list();
+        
+         System.out.println("Waivers length is " + waivers.size());
+
+        return waivers;
     }
 
 }

@@ -13,7 +13,7 @@
         <title>Available Sections for .. course Name </title>
     </head>
     <body>
-        <h2> jhiiiiiiiiiii of Sections </h2>
+        <h2>  of Sections </h2>
         <table>
          
         </table>
