@@ -60,7 +60,7 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getProductByName(String name) {
         List<Product> product;
-        Query query=sf.getCurrentSession().createQuery("select p from Product p where p.name like %name%");
+        Query query=sf.getCurrentSession().createQuery("select p from Product p where p.name=name");
         System.out.println("hereeee"+ query.list());
         //query.setString("theName",name);
         product=query.list();
