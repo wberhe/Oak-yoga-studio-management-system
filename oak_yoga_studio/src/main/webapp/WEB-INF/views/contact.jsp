@@ -27,7 +27,7 @@
                 </div>-->
 <!--                <div class="col-lg-12">-->
                     
-                    <p>In this online registration yoga studio, our sole purpose is to help you find unique and best yoga practice courses and products available for purchase through our trusted online merchant partners. Please be aware that all purchases are subject to that particular merchant's terms and policies, and purchase-related questions and concerns should be directed to the merchant. If you have any question you can email us, this is the list of our team members who work in this online registration yoga studio:
+    <p>In this online registration yoga studio, our sole purpose is to help you find unique and best yoga practice courses and products available for purchase through our trusted online merchant partners. Please be aware that all purchases are subject to that particular merchant's terms and policies, and purchase-related questions and concerns should be directed to the merchant. If you have any question you can email us, this is the list of our team members who work in this online registration yoga studio:
                         <br /></p>
 <!--
                     <form role="form">
