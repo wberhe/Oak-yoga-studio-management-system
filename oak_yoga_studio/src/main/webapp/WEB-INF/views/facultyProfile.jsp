@@ -14,26 +14,25 @@
         <title> Faculty Profile</title>
     </head>
     <body>
-        <h3>My Profile :</h3>
+        <h3>My Profile :</h3><br/><br/><br/>
         <%--<form:form commandName="customer" action="updateProfile" method="post" enctype="multipart/form-data">--%>
         <form:form commandName="facultyDetail" action="updateFacultyProfile" method="post" enctype="multipart/form-data">
             <%--<form:hidden path="id" value="${customerDetail.id}"   />--%>
-            <table>
+            <table class="profileTable">
                 <tr>
-                    <td>Picture:</td>
-                    <td><img src="facultyProfileImage/${facultyDetail.id}" width="80" height="80"/></td>
+                    <td colspan="2"><img  src="facultyProfileImage/${facultyDetail.id}" width="80" height="80"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>Change Picture</td> 
                     <td><input type="file" name="file" /> </td>
                 </tr>
                 <tr>
-                    <td>First name:</td>
-                    <td><form:input type="text" path="firstName"  value="${facultyDetail.firstName}"/> </td>
-                    <td><form:errors path="firstName" cssClass="error" /> </td>
+                    <td><br/>First name:<br/></td>
+                    <td><br/><form:input type="text" path="firstName"  value="${facultyDetail.firstName}"/> <br/></td>
+                    <td><br/><form:errors path="firstName" cssClass="error" /> <br/></td>
                 </tr>
                 <tr>
-                    <td>Last name :</td>
-                    <td><form:input type="text" path="lastName" size="30" value="${facultyDetail.lastName}" />  </td>
-                    <td><form:errors path="lastName" cssClass="error"/> </td>
+                    <td><br/>Last name :<br/></td>
+                    <td><br/><form:input type="text" path="lastName" size="30" value="${facultyDetail.lastName}" /> <br/> </td>
+                    <td><br/><form:errors path="lastName" cssClass="error"/> <br/></td>
                 </tr><form:hidden path="dateOfBirth" />
                 <%--                <tr>
                                     <td> Birth Date :</td>
@@ -42,11 +41,11 @@
                                 <td><form:errors path="dateOfBirth" cssClass="error"/> </td>
                             </tr>--%>
                 <tr>
-                    <td> Email :</td>
-                    <td><form:input type="text" path="email" size="30" value="${facultyDetail.email}" /> </td>
-                    <td><form:errors path="email" cssClass="error"/> </td>
+                    <td><br/> Email :<br/></td>
+                    <td><br/><form:input type="text" path="email" size="30" value="${facultyDetail.email}" /><br/> </td>
+                    <td><br/><form:errors path="email" cssClass="error"/> <br/></td>
                 </tr>
-            </table>            
+            </table>   <br/>         
             <input type="submit" value="Update User Info"/>
         </form:form>
        <%-- <form:form commandName="addressUpdate" action="updateAddress" method="post" >
