@@ -175,6 +175,6 @@ public class CustomerServiceImpl implements ICustomerService {
     public List<Waiver> getAllWaiversByCustomer(Customer customer) {
         
         return customerDAO.getAllWaiversByCustomer(customer);
-    
-    }
+
+       }
 }

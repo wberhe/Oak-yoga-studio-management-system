@@ -115,7 +115,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         return addresses;
     }
 
-     @Transactional(propagation = Propagation.SUPPORTS)
+       @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Waiver> getAllWaiversByCustomer(Customer customer) {
 

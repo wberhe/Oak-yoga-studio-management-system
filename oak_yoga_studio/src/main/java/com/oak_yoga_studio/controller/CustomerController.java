@@ -74,6 +74,7 @@ public class CustomerController {
     public String redirectAbout() {
         return "about";
     }
+
     @RequestMapping("/welcome")
     public String redirectWelcome() {
         return "welcome";
@@ -150,7 +151,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
-public String getUserDetail(@ModelAttribute("customerUpdate") Customer customerUpdate, Model model, HttpSession session){//, @ModelAttribute("addressUpdate") Address addressUpdate) {
+    public String getUserDetail(@ModelAttribute("customerUpdate") Customer customerUpdate, Model model, HttpSession session) {//, @ModelAttribute("addressUpdate") Address addressUpdate) {
         System.out.println("begininnnnnnnnnnnnnnnnnnnnnnnnnn");
         Customer loggedCustomer = (Customer) session.getAttribute("loggedUser");
         model.addAttribute("customerDetail", customerService.getCustomerById(loggedCustomer.getId()));
@@ -227,7 +228,6 @@ public String getUserDetail(@ModelAttribute("customerUpdate") Customer customerU
         return "redirect:/editProfile";
     }
 
-
     @RequestMapping(value = "/requestWaiver", method = RequestMethod.GET)
     public String requestWaiver(Model model, HttpSession session) {
 
@@ -280,11 +280,11 @@ public String getUserDetail(@ModelAttribute("customerUpdate") Customer customerU
     public String getCourses(Model model, HttpSession session) {
 
         Customer customer = (Customer) session.getAttribute("loggedUser");
-     
+
         List<Waiver> allWaivers = customerService.getAllWaiversByCustomer(customer);
         System.out.println("waivers length is " + allWaivers.size());
         if (!allWaivers.isEmpty()) {
-            
+
             model.addAttribute("waivers", allWaivers);
             model.addAttribute("msg", " courses with waiver status");
         } else {
@@ -293,7 +293,6 @@ public String getUserDetail(@ModelAttribute("customerUpdate") Customer customerU
 
         return "viewWaivers";
     }
-
 
     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
     public void getUserImage(Model model, @PathVariable int id, HttpServletResponse response) {
