@@ -1,9 +1,12 @@
 <%-- 
-    Document   : createSection
+    Document   : editProduct
     Created on : Oct 17, 2014, 10:41:58 PM
     Author     : Weldino
---%>    
+--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,8 +15,7 @@
         <link href="../resources/style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <form:form commandName="product" action="../products/${product.id}" method="post">
-            <form:hidden path="id" />
+        <form:form modelAttribute="product" action="../productEdit" method="post" enctype="multipart/form-data">
             <form:errors path="*" cssClass="errorblock" element="div" />
             <table>
                 <tr>
@@ -36,11 +38,8 @@
                     <td><input type="file" name="file"/> </td>
                 </tr>
             </table>
+                <form:hidden path="status" />
             <input type="submit" value="update"/>
         </form:form>
-
-        <form action="delete?productId=${product.id}" method="post">
-            <button type="submit">Delete</button>
-        </form>
     </body>
 </html>

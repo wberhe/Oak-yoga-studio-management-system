@@ -172,4 +172,9 @@ public class CustomerServiceImpl implements ICustomerService {
         return null;
     }
 
+    public List<Waiver> getAllWaiversByCustomer(Customer customer) {
+        
+        return customerDAO.getAllWaiversByCustomer(customer);
+    
+    }
 }

@@ -17,7 +17,7 @@
         <table>
                 <tr>
                     <td>Picture:</td>
-                    <td><img src="../image/${customerDetail.id}" width="80" height="80"/></td>
+                    <td><img src="../image/${customerDetail.id}" width="100" height="100"/></td>
                 </tr>
                 <tr>
                     <td>First name:</td>

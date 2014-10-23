@@ -15,38 +15,46 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+       
+
     </head>
     <body>
         <div align="center">
-        <h1>Enter reason for waiver</h1>
-        
-        
-            
-            <form  action="${pageContext.request.contextPath}/waiverResult/${course.id}" method="post">
-             <table>
-                 
-          
-        </table>  <tr>
-                    <td> Course Number </td>
-                    <td>${course.courseNumber}</td>
-                </tr>
-                <tr>
-                    <td>Course Name :</td>
-                    <td>${course.courseName}</td>
-                </tr>
-               
-    
-            Reason <br/><textarea name="text" rows="5" cols="30"></textarea><br/>
-            <input type="submit" value="Submit Request " />
-        </form>      
-             
-             
-             
+            <h1>Enter reason for waiver</h1>
 
-    </div>  
-            
+
+
+            <form  action="${pageContext.request.contextPath}/waiverResult/${course.id}" method="post">
+                <table>
+
+
+                    <tr>
+                        <td> Course Number : </td>
+                        <td> ${course.courseNumber}</td>
+                    </tr>
+                    <tr>
+                        <td>Course Name    :</td>
+                        <td> ${course.courseName}</td>
+                    </tr>
+
+                    <tr>
+                        <td> Reason</td>
+                        <td><br/> <textarea name="text" rows="5" cols="50"></textarea><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td colspan="2" align="right">   <input type="submit" value="Submit Request " /></td>
+                    </tr>
+                </table>
+
+            </form>      
+
+
+        </div>  
+
         <div align="center">
-        <a href="${pageContext.request.contextPath}/index">Back</a></br>
+            <a href="${pageContext.request.contextPath}/index">Back</a></br>
         </div>
     </body>
 </html>

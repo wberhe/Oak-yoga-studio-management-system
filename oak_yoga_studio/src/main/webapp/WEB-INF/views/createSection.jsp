@@ -50,6 +50,8 @@
             </table>
                 <form:hidden path="status" />
             <input type="submit" value="add section"/>
+            <a href="admin"> Back to home</a>
         </form:form>
+            
     </body>
 </html>

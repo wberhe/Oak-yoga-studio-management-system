@@ -42,4 +42,6 @@ public interface ICustomerService {
     public List<Course> getAllCoursesToWaive(Customer customer);
     
     public Address getCutomerAdress(int customerId);
+
+    public List<Waiver> getAllWaiversByCustomer(Customer customer);
 }

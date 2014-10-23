@@ -23,8 +23,8 @@ public interface ISectionService {
         
     public List<Section> getListOfSections();
     
-     public List<Section> getSectionsByCourse(Course course);
+    public List<Section> getSectionsByCourse(Course course);
      
-  
+    public void deleteSection(Section section);
 }
 

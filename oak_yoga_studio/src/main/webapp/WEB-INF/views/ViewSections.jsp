@@ -13,15 +13,22 @@
         <title>Available Sections for .. course Name </title>
     </head>
     <body>
-        <h2> List of Sections </h2>
-        <table>
-                 
+        <h2>Sections for ${course.courseName} ${course.courseNumber}  </h2>
+        <table width="100%" border="1" cellPadding="5">
+                <tr><th>Section Name</th>
+                <th>Room Number</th>
+                <th>Instructor</th>
+                </tr>
             <c:forEach var="s" items="${sections}">
                  <tr>
                     
                     <td>${s.sectionName }</td> 
                     <td>${s.roomNumber}</td>
+                    <td>${s.professor.firstName}  ${s.professor.lastName}</td>
+                    <sec:authorize access="hasRole('ROLE_CUSTOMER')">               
+                   
                    <td><a href="../enrollInCourse/${s.id}">Enroll For this section </a></td>
+                    </sec:authorize>
                  </tr>
                  <tr>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">

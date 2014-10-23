@@ -31,5 +31,6 @@ public interface CustomerDAO {
      public List<Course> getAllCoursesToWaive(Customer customer);
      
      public List<Address> getCustomerAddresses(int customerId );
-     
+
+     public List<Waiver> getAllWaiversByCustomer(Customer customer);
 }

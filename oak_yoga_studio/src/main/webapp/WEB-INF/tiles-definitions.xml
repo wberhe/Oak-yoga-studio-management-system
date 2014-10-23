@@ -1,0 +1,206 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+    "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+ 
+    <definition name="baseLayout" template="/WEB-INF/views/layout/layout.jsp">
+        <put-attribute name="title" value="SivaLabs" />
+        <put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+        <put-attribute name="login" value="/WEB-INF/views/layout/loginInfo.jsp" />
+        <put-attribute name="navigation" value="/WEB-INF/views/layout/navigation.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+    </definition>
+  
+    <definition name="login2" extends="baseLayout">
+        <put-attribute name="title" value="SivaLabs : Login" />
+        <put-attribute name="login" value="" />
+        <put-attribute name="navigation" value="" />
+        <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+    </definition>
+ 
+    <definition name="loginFail" extends="baseLayout">
+        <put-attribute name="title" value="SivaLabs : Login" />
+        <put-attribute name="login" value="/WEB-INF/views/layout/loginFail.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/welcome.jsp" />
+    </definition>
+   
+    <definition name="welcome" extends="baseLayout">
+        <put-attribute name="title" value="Welcome" />
+        <put-attribute name="login" value="/WEB-INF/views/layout/loginInfo.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/welcome.jsp" />
+    </definition>
+ 
+    Faculty service 
+    <definition name="AdviseesList" extends="baseLayout">
+        <put-attribute name="title" value="Faculty" />
+        <put-attribute name="body" value="/WEB-INF/views/AdviseesList.jsp" />
+    </definition>
+ 
+    <definition name="ViewAllCourses" extends="baseLayout">
+        <put-attribute name="title" value="Courses" />
+        <put-attribute name="body" value="/WEB-INF/views/ViewAllCourses.jsp" />
+    </definition> 
+ 
+    <definition name="signup" extends="baseLayout">
+        <put-attribute name="title" value="Admin profile" />
+        <put-attribute name="body" value="/WEB-INF/views/signup.jsp" />
+    </definition> 
+ 
+    <definition name="ViewSections" extends="baseLayout">
+        <put-attribute name="title" value="Sections" />
+        <put-attribute name="body" value="/WEB-INF/views/ViewSections.jsp" />
+    </definition> 
+ 
+    <definition name="addCredential" extends="baseLayout">
+        <put-attribute name="title" value="Customer" />
+        <put-attribute name="body" value="/WEB-INF/views/addCredential.jsp" />
+    </definition> 
+ 
+    <definition name="addCourse" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="body" value="/WEB-INF/views/addCourse.jsp" />
+    </definition>
+ 
+    <definition name="addFaculty" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="body" value="/WEB-INF/views/addFaculty.jsp" />
+    </definition>
+ 
+    <definition name="addFacultyCredential" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="body" value="/WEB-INF/views/addFacultyCredential.jsp" />
+    </definition>
+ 
+    <definition name="addProduct" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="body" value="/WEB-INF/views/addProduct.jsp" />
+    </definition>
+ 
+    <definition name="adviseeDetail" extends="baseLayout">
+        <put-attribute name="title" value="Faculty" />
+        <put-attribute name="body" value="/WEB-INF/views/adviseeDetail.jsp" />
+    </definition> 
+ 
+    <definition name="courseHistory" extends="baseLayout">
+        <put-attribute name="title" value="Customer" />
+        <put-attribute name="body" value="/WEB-INF/views/courseHistory.jsp" />
+    </definition> 
+ 
+    <definition name="createSection" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="body" value="/WEB-INF/views/createSection.jsp" />
+    </definition> 
+ 
+    <definition name="customerDetail" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="body" value="/WEB-INF/views/customerDetail.jsp" />
+    </definition> 
+
+    <definition name="customersList" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="body" value="/WEB-INF/views/customersList.jsp" />
+    </definition> 
+    <definition name="editProduct" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="body" value="/WEB-INF/views/editProduct.jsp" />
+    </definition> 
+    <definition name="enrollInCourse" extends="baseLayout">
+        <put-attribute name="title" value="Customer" />
+        <put-attribute name="body" value="/WEB-INF/views/enrollInCourse.jsp" />
+    </definition> 
+    <definition name="enrollInCourseResult" extends="baseLayout">
+        <put-attribute name="title" value="Customer" />
+        <put-attribute name="body" value="/WEB-INF/views/enrollInCourseResult.jsp" />
+    </definition> 
+    <definition name="gohome" extends="baseLayout">
+        <put-attribute name="title" value="OAK Home" />
+        <put-attribute name="login" value="/WEB-INF/views/layout/loginInfo.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/welcome.jsp" />
+    </definition>
+    
+    <definition name="facultySections" extends="baseLayout">
+        <put-attribute name="title " value="Faculty"/>
+        <put-attribute name="body" value="/WEB-INF/views/facultySections.jsp" />
+    </definition>
+    
+     <definition name="facultywaiverRequests" extends="baseLayout">
+        <put-attribute name="title " value="Faculty"/>
+        <put-attribute name="body" value="/WEB-INF/views/facultywaiverRequests.jsp" />
+    </definition>
+     <definition name="invoice" extends="baseLayout">
+        <put-attribute name="title " value="Order"/>
+        <put-attribute name="body" value="/WEB-INF/views/invoice.jsp" />
+    </definition>
+     <definition name="notFound" extends="baseLayout">
+        <put-attribute name="title " value="Order"/>
+        <put-attribute name="body" value="/WEB-INF/views/notFound.jsp" />
+    </definition>
+     <definition name="productList" extends="baseLayout">
+        <put-attribute name="title " value="Product"/>
+        <put-attribute name="body" value="/WEB-INF/views/productList.jsp" />
+    </definition>
+     <definition name="purchasingAddress" extends="baseLayout">
+        <put-attribute name="title " value="Order"/>
+        <put-attribute name="body" value="/WEB-INF/views/purchasingAddress.jsp" />
+    </definition>
+     <definition name="registrationSuccess" extends="baseLayout">
+        <put-attribute name="title " value="Registration Success"/>
+        <put-attribute name="body" value="/WEB-INF/views/registrationSuccess.jsp" />
+    </definition>
+     <definition name="searchProduct" extends="baseLayout">
+        <put-attribute name="title " value="Products"/>
+        <put-attribute name="body" value="/WEB-INF/views/searchProduct.jsp" />
+    </definition>
+     <definition name="sectionDetail" extends="baseLayout">
+        <put-attribute name="title " value="Faculty"/>
+        <put-attribute name="body" value="/WEB-INF/views/sectionDetail.jsp" />
+    </definition>
+     <definition name="sectionList" extends="baseLayout">
+        <put-attribute name="title " value="Admin"/>
+        <put-attribute name="body" value="/WEB-INF/views/sectionList.jsp" />
+    </definition>
+     <definition name="shoppingCart" extends="baseLayout">
+        <put-attribute name="title " value="Shopping Cart"/>
+        <put-attribute name="body" value="/WEB-INF/views/shoppingCart.jsp" />
+    </definition>
+     <definition name="toWaitingList" extends="baseLayout">
+        <put-attribute name="title " value="Customer"/>
+        <put-attribute name="body" value="/WEB-INF/views/toWaitingList.jsp" />
+    </definition>
+     <definition name="toWaiverRequest" extends="baseLayout">
+        <put-attribute name="title " value="Customer"/>
+        <put-attribute name="body" value="/WEB-INF/views/toWaiverRequest.jsp" />
+    </definition>
+     <definition name="viewAdvisees" extends="baseLayout">
+        <put-attribute name="title " value="Faculty"/>
+        <put-attribute name="body" value="/WEB-INF/views/viewAdvisees.jsp" />
+    </definition>
+     <definition name="viewFaculties" extends="baseLayout">
+        <put-attribute name="title " value="Admin"/>
+        <put-attribute name="body" value="/WEB-INF/views/viewFaculties.jsp" />
+    </definition>
+     <definition name="waitingListResult" extends="baseLayout">
+        <put-attribute name="title " value="Customer"/>
+        <put-attribute name="body" value="/WEB-INF/views/waitingListResult.jsp" />
+    </definition>
+     <definition name="waiverForm" extends="baseLayout">
+        <put-attribute name="title " value="Customer"/>
+        <put-attribute name="body" value="/WEB-INF/views/waiverForm.jsp" />
+    </definition>
+     <definition name="waiverRequest" extends="baseLayout">
+        <put-attribute name="title " value="Customer"/>
+        <put-attribute name="body" value="/WEB-INF/views/waiverRequest.jsp" />
+    </definition>
+     <definition name="waiverResult" extends="baseLayout">
+        <put-attribute name="title " value="Faculty"/>
+        <put-attribute name="body" value="/WEB-INF/views/waiverResult.jsp" />
+    </definition>
+     <definition name="withdrawResult" extends="baseLayout">
+        <put-attribute name="title " value="Customer"/>
+        <put-attribute name="body" value="/WEB-INF/views/withdrawResult.jsp" />
+    </definition>
+    
+</tiles-definitions>-->
