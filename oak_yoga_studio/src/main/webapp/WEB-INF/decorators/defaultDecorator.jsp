@@ -131,6 +131,7 @@
 
                         <sec:authorize access="hasRole('ROLE_FACULTY')" >
 <!--                            <li><a href="${pageContext.request.contextPath}/faculty" class="list-group-item">Faculty Home Page</a></li>-->
+                            <li><a href="${pageContext.request.contextPath}/facultyProfile" class="list-group-item">Profile</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewAdvisees" class="list-group-item"> View Advisees</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewWaiverRequests" class="list-group-item">View Waiver Request</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewFacultySections" class="list-group-item">View Sections</a></li>
