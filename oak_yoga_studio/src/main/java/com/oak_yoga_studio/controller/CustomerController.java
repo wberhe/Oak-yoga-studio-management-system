@@ -5,6 +5,8 @@
  */
 package com.oak_yoga_studio.controller;
 
+//
+import com.oak_yoga_studio.domain.Address;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Credential;
 import com.oak_yoga_studio.domain.Customer;
@@ -14,6 +16,7 @@ import com.oak_yoga_studio.service.ICourseService;
 import com.oak_yoga_studio.service.ICustomerService;
 import com.oak_yoga_studio.service.IEnrollmentService;
 import com.oak_yoga_studio.service.INotificationService;
+import com.oak_yoga_studio.service.impl.AddressServiceImpl;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -54,6 +57,9 @@ public class CustomerController {
     @Resource
     private IEnrollmentService enrollmentService;
 
+    @Resource
+    private AddressServiceImpl addressService;
+
     @RequestMapping("/")
     public String redirectRoot() {
         return "redirect:/welcome";
@@ -68,6 +74,7 @@ public class CustomerController {
     public String redirectAbout() {
         return "about";
     }
+
     @RequestMapping("/welcome")
     public String redirectWelcome() {
         return "welcome";
@@ -144,38 +151,81 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
-    public String getUserDetail(Model model, HttpSession session) {
+    public String getUserDetail(@ModelAttribute("customerUpdate") Customer customerUpdate, Model model, HttpSession session) {//, @ModelAttribute("addressUpdate") Address addressUpdate) {
+        System.out.println("begininnnnnnnnnnnnnnnnnnnnnnnnnn");
+        Customer loggedCustomer = (Customer) session.getAttribute("loggedUser");
+        model.addAttribute("customerDetail", customerService.getCustomerById(loggedCustomer.getId()));
+        System.out.println("in between ewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+//        Address a = customerService.getCutomerAdress(loggedCustomer.getId());
+//        if (a == null) {
+//            a = new Address();
+//            a.setStreet("");
+//            a.setCity("");
+//            a.setZipCode("");
+//            a.setState("");
+//        }
+//        model.addAttribute("addressDetail", a);
+        return "CustomerProfile";
 
-        model.addAttribute("customerDetail", session.getAttribute("loggedUser"));
-        System.out.println("Hi this is udner editProfile   ");
-        return "EditProfile";
     }
 
-    @RequestMapping(value = "/updateProfile/{id}", method = RequestMethod.POST)
-    public String updateUser(@Valid Customer customer, BindingResult result,
-            @PathVariable int id, HttpSession session) {
-        //System.out.println("Update");
+    @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
+    public String updateUser(@Valid Customer customerUpdate, BindingResult result, HttpSession session, RedirectAttributes flashAttr, @RequestParam("file") MultipartFile file) {
+        String view = "redirect:/";
+
         if (!result.hasErrors()) {
+            int Id = ((Customer) session.getAttribute("loggedUser")).getId();
+            Customer customer = customerService.getCustomerById(Id);
 
-            session.setAttribute("customer", customer);
-            System.out.println("Customer firstName " + customer.getFirstName());
-            Credential c = (customerService.getCustomerById(id)).getCredential();
-            System.out.println(" uswe name " + c.getUserName());
-            customer.setCredential(c);
+            customer.setFirstName(customerUpdate.getFirstName());
+            customer.setLastName(customerUpdate.getLastName());
+            //System.out.println("Date of Birth" + customerUpdate.getDateOfBirth());
+            //customer.setDateOfBirth(customerUpdate.getDateOfBirth());
+            customer.setEmail(customerUpdate.getEmail());
 
-            System.out.println("Customer ID " + customer.getId());
-            System.out.println("Customer LastName :" + customer.getLastName());
-            System.out.println("Customer email" + customer.getEmail());
-            System.out.println("Username" + customer.getCredential().getUserName());
-            customerService.updateCustomer(id, customer);
-            return "redirect:/index";
+            try {
+                System.out.println("Imageeeeeeeeeee - " + file.getBytes());
+                if (file.getBytes().length != 0) {
+                    customer.setProfilePicture(file.getBytes());
+                }
+            } catch (IOException ex) {
+
+            }
+
+            customerService.updateCustomer(Id, customer);
         } else {
             for (FieldError err : result.getFieldErrors()) {
                 System.out.println("Error from UpdateProfileController " + err.getField() + ": " + err.getDefaultMessage());
             }
             System.out.println("err");
-            return "index";
         }
+        return "redirect:/editProfile";
+    }
+
+    @RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
+    public String updateAddress(@Valid Address addressUpdate, BindingResult result, HttpSession session, RedirectAttributes flashAttr) {
+        String view = "redirect:/";
+
+        if (!result.hasErrors()) {
+            int Id = ((Customer) session.getAttribute("loggedUser")).getId();
+            Address address = customerService.getCutomerAdress(Id);
+
+            address.setStreet(addressUpdate.getStreet());
+            address.setCity(addressUpdate.getCity());
+            address.setZipCode(addressUpdate.getZipCode());
+            address.setState(addressUpdate.getState());
+            if (address.getId() == 0) {
+                addressService.addAddress(address);
+            } else {
+                addressService.updateAddress(address);
+            }
+        } else {
+            for (FieldError err : result.getFieldErrors()) {
+                System.out.println("Error from UpdateProfileController " + err.getField() + ": " + err.getDefaultMessage());
+            }
+            System.out.println("err");
+        }
+        return "redirect:/editProfile";
     }
 
     @RequestMapping(value = "/requestWaiver", method = RequestMethod.GET)
@@ -230,11 +280,11 @@ public class CustomerController {
     public String getCourses(Model model, HttpSession session) {
 
         Customer customer = (Customer) session.getAttribute("loggedUser");
-     
+
         List<Waiver> allWaivers = customerService.getAllWaiversByCustomer(customer);
         System.out.println("waivers length is " + allWaivers.size());
         if (!allWaivers.isEmpty()) {
-            
+
             model.addAttribute("waivers", allWaivers);
             model.addAttribute("msg", " courses with waiver status");
         } else {
@@ -322,4 +372,17 @@ public class CustomerController {
 
     }
 
+    @RequestMapping(value = "/profileImage/{id}", method = RequestMethod.GET)
+    public void getProfileImage(Model model, @PathVariable int id, HttpServletResponse response) {
+        try {
+            Customer c = customerService.getCustomerById(id);
+            if (c != null) {
+                OutputStream out = response.getOutputStream();
+                out.write(c.getProfilePicture());
+                response.flushBuffer();
+            }
+        } catch (IOException ex) {
+            // Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

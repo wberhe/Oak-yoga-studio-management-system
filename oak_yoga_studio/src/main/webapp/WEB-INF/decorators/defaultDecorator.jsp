@@ -54,7 +54,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/oak_yoga_studio/index">Home</a>
+                            <a href="/oak_yoga_studio/welcome">Home</a>
                         </li>
                         <li>
                             <a href="/oak_yoga_studio/viewCourses">Courses</a>
@@ -78,45 +78,54 @@
 
         <!-- Page Content -->
         <div class="container">
-
+<c:if test="${not empty loggedUser }">
+    Welcome,<br/>
+    ${loggedUser.firstName} ${loggedUser.lastName}
+    <a href="/oak_yoga_studio/j_spring_security_logout">Logout</a>
+</c:if>
             <div class="row">
 
                 <div class="col-md-3">
                     <p class="lead">Oak Yoga Studio</p>
                     <div class="list-group">
                         <sec:authorize access="hasRole('ROLE_ANONYMOUS')">
-                            <li><a href="addCredential" class="list-group-item active">Sign Up</a></li>
+                            <li><a href="${pageContext.request.contextPath}/addCredential" class="list-group-item active">Sign Up</a></li>
+                            
                             <li><a href="login" class="list-group-item">Login</a></li>
 
                         </sec:authorize>
+                            
                         <sec:authorize access="hasRole('ROLE_CUSTOMER')">
-                            <li><a href="viewProfile" class="list-group-item">Profile</a></li>
-                            <li><a href="viewCourses" class="list-group-item">Register for a Course</a></li>
-                            <li><a href="enrolled" class="list-group-item">View Enrollment History</a></li>
-                            <li><a href="requestWaiver" class="list-group-item">Request waiver</a></li>
-                            <li><a href="viewWaivers" class="list-group-item">View Waivers</a></li>
-                            <li><a href="requestWithdraw" class="list-group-item">Withdraw</a></li>
-                            <li><a href="searchProduct" class="list-group-item">Search Product</a></li>
-                            <li><a href="shoppingCart" class="list-group-item">Shopping Cart</a></li>
-                            <li><a href="logout" class="list-group-item">Logout</a></li>
+
+                            <li><a href="${pageContext.request.contextPath}/customerProfile" class="list-group-item">Profile</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewCourses" class="list-group-item">Register for a Course</a></li>
+                            <li><a href="${pageContext.request.contextPath}/enrolled" class="list-group-item">View Enrollment History</a></li>
+                            <li><a href="${pageContext.request.contextPath}/requestWaiver" class="list-group-item">Request waiver</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewWaivers" class="list-group-item">View Waivers</a></li>
+                            <li><a href="${pageContext.request.contextPath}/requestWithdraw" class="list-group-item">Withdraw</a></li>
+                            <li><a href="${pageContext.request.contextPath}/searchProduct" class="list-group-item">Search Product</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewCart" class="list-group-item">Shopping Cart</a></li>
+                            
+
                             </sec:authorize>
 
 
                         <sec:authorize access="hasRole('ROLE_ADMIN')" >
 
-                            <li><a href="viewCourses" class="list-group-item"> Manage Courses</a></li>
-                            <li><a href="newSection" class="list-group-item">Manage Section</a></li>
-                            <li><a href="viewFaculties" class="list-group-item">Manage Faculties</a></li>
-                            <li><a href="products" class="list-group-item">Manage Products</a></li>
-                            <li><a href="logout" class="list-group-item">Logout</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewCourses" class="list-group-item"> Manage Courses</a></li>
+                            <li><a href="${pageContext.request.contextPath}/newSection" class="list-group-item">Manage Section</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewFaculties" class="list-group-item">Manage Faculties</a></li>
+                            <li><a href="${pageContext.request.contextPath}/products" class="list-group-item">Manage Products</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewCustomers" class="list-group-item">Manage Customers</a></li>
+                            
                             </sec:authorize>
 
                         <sec:authorize access="hasRole('ROLE_FACULTY')" >
 
-                            <li><a href="viewAdvisees" class="list-group-item"> View Advisees</a></li>
-                            <li><a href="facultywaiverRequests" class="list-group-item">View Waiver Request</a></li>
-                            <li><a href="facultySections" class="list-group-item">View Sections</a></li>
-                            <li><a href="logout" class="list-group-item">Logout</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewAdvisees" class="list-group-item"> View Advisees</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewWaiverRequests" class="list-group-item">View Waiver Request</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewFacultySections" class="list-group-item">View Sections</a></li>
+                            
                             </sec:authorize>
                     </div>
                 </div>

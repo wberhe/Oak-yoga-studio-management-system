@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Oak</title>
-        <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
+        <!--<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>-->
     </head>
     <body>
         <h1>Welcome to Oak Yoga Studio</h1>

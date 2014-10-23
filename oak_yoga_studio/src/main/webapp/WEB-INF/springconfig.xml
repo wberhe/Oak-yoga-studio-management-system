@@ -319,7 +319,6 @@ Administrator.
         <sec:intercept-url pattern="/loginFail" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
                     
-        <sec:intercept-url pattern="/gohome" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/welcome" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/searchProduct" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>
         <sec:intercept-url pattern="/products" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>

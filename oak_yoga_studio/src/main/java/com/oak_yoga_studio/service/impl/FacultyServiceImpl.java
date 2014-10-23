@@ -25,13 +25,13 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Senai
  */
 public class FacultyServiceImpl implements IFacultyService {
-
+    
     private FacultyDAO facultyDAO;
     private SectionDAO sectionDAO;
     private WaiverDAO waiverDAO;
     private CustomerDAO customerDAO;
     private INotificationService notificationService;
-
+    
     public FacultyServiceImpl(FacultyDAO facultyDAO, SectionDAO sectionDAO, WaiverDAO waiverDAO,
             CustomerDAO customerDAO, INotificationService notificationService) {
         this.facultyDAO = facultyDAO;
@@ -40,17 +40,35 @@ public class FacultyServiceImpl implements IFacultyService {
         this.customerDAO = customerDAO;
         this.notificationService = notificationService;
     }
-
+    
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void addFaculty(Faculty faculty) {
         try {
             facultyDAO.addFaculty(faculty);
         } catch (Exception e) {
-
+            
         }
     }
-
+    
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void updateFaculty(int id, Faculty faculty) {
+        try {
+            Faculty f = facultyDAO.getFaculty(id);
+            f.setFirstName(faculty.getFirstName());
+            f.setLastName(faculty.getLastName());
+            f.setDateOfBirth(faculty.getDateOfBirth());
+            f.setEmail(faculty.getEmail());
+            f.setProfilePicture(faculty.getProfilePicture());
+            f.getCredential().setActive(faculty.getCredential().isActive());
+            facultyDAO.updateFaculty(f);
+        } catch (Exception ex) {
+            System.out.println("Error:" + ex.getMessage());
+        }
+        
+    }
+    
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Faculty> getListOfActiveFaculty() {
@@ -59,9 +77,9 @@ public class FacultyServiceImpl implements IFacultyService {
         } catch (Exception e) {
             return new ArrayList();
         }
-
+        
     }
-
+    
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Faculty> getListOfFaculty() {
@@ -70,22 +88,9 @@ public class FacultyServiceImpl implements IFacultyService {
         } catch (Exception e) {
             return new ArrayList();
         }
-
+        
     }
-
-    @Transactional(propagation = Propagation.REQUIRED)
-    @Override
-    public void updateFaculty(int id, Faculty faculty) {
-        Faculty f = facultyDAO.getFaculty(id);
-        f.setFirstName(faculty.getFirstName());
-        f.setLastName(faculty.getLastName());
-        f.setDateOfBirth(faculty.getDateOfBirth());
-        f.setEmail(faculty.getEmail());
-        f.setProfilePicture(faculty.getProfilePicture());
-        f.getCredential().setActive(faculty.getCredential().isActive());
-
-    }
-
+    
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Faculty getFacultyById(int Id) {
@@ -95,7 +100,7 @@ public class FacultyServiceImpl implements IFacultyService {
             return null;
         }
     }
-
+    
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void enableOrdisableFaculty(Faculty faculty) {
@@ -107,10 +112,10 @@ public class FacultyServiceImpl implements IFacultyService {
             }
             facultyDAO.updateFaculty(faculty);
         } catch (Exception e) {
-
+            
         }
     }
-
+    
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Section> getFacultySections(Faculty faculty) {
@@ -122,17 +127,17 @@ public class FacultyServiceImpl implements IFacultyService {
             return new ArrayList();
         }
     }
-
+    
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateWaiverRequest(Waiver waiver) {
         try {
             waiverDAO.updateWaiver(waiver);
         } catch (Exception e) {
-
+            
         }
     }
-
+    
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Customer> getfacultyAdvisees(Faculty faculty) {
@@ -144,7 +149,7 @@ public class FacultyServiceImpl implements IFacultyService {
             return new ArrayList();
         }
     }
-
+    
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Waiver> getfacultyPendingWaiverRequests(Faculty faculty) {
@@ -153,12 +158,12 @@ public class FacultyServiceImpl implements IFacultyService {
             
             List<Customer> advisees = faculty1.getAdvisees();
             List<Waiver> waiverRequests = new ArrayList();
-           
+            
             for (Customer c : advisees) {
                 List<Waiver> waivers = c.getWaivers();
                 
                 for (Waiver w : waivers) {
-                    System.out.println("to get waiver 1 " + faculty1+" "+w.getStatus());
+                    System.out.println("to get waiver 1 " + faculty1 + " " + w.getStatus());
                     if (w.getStatus().equals(Waiver.Status.PENDING)) {
                         waiverRequests.add(w);
                     }
@@ -166,7 +171,7 @@ public class FacultyServiceImpl implements IFacultyService {
             }
             return waiverRequests;
         } catch (Exception e) {
-            System.out.println("Exception "+ e.getMessage());
+            System.out.println("Exception " + e.getMessage());
             return new ArrayList();
         }
     }
@@ -180,7 +185,7 @@ public class FacultyServiceImpl implements IFacultyService {
             List<Waiver> decidedWaivers = new ArrayList();
             System.out.println("before advises");
             for (Customer c : advisees) {
-                List<Waiver> waivers = c.getWaivers(); 
+                List<Waiver> waivers = c.getWaivers();                
                 System.out.println("one advisee");
                 for (Waiver w : waivers) {
                     System.out.println("waive");
@@ -191,7 +196,7 @@ public class FacultyServiceImpl implements IFacultyService {
             }
             return decidedWaivers;
         } catch (Exception e) {
-            System.out.println("Exception "+ e.getMessage());
+            System.out.println("Exception " + e.getMessage());
             return new ArrayList();
         }
     }

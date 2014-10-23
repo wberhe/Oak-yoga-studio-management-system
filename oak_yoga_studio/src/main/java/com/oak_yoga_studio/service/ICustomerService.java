@@ -6,6 +6,7 @@
 
 package com.oak_yoga_studio.service;
 
+import com.oak_yoga_studio.domain.Address;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Customer;
 import com.oak_yoga_studio.domain.User;
@@ -39,6 +40,8 @@ public interface ICustomerService {
     public Waiver getWaiverRequest(int id);
     
     public List<Course> getAllCoursesToWaive(Customer customer);
+
+    public Address getCutomerAdress(int customerId);
 
     public List<Waiver> getAllWaiversByCustomer(Customer customer);
 }
