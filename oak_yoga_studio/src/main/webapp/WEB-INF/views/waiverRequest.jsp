@@ -20,42 +20,45 @@
     <body>
         <div align="center">
             <h3> ${msg}</h3>
-            <table border="1" cellpadding="2" width="100%">  <tr>
-
-                <tr>
-                    <th>Course Name</th>
-                    <th>Course Number  </th>
-                    <th>Description</th>
-                    <th></th>
-                </tr>
-
-                <c:forEach var="course" items="${coursesToWaive}">
-
-                    <tr>
-
-                        <td> ${course.courseName} </td> 
-                        <td>${course.courseNumber}</td>
-                        <td>${course.description}</td>
+            <div class="datagrid">
+                <table >  <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Course Number  </th>
+                            <th>Description</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="course" items="${coursesToWaive}" varStatus="loopStatus">
 
 
-                        <td>
-                            <form commandName="course"  action="${pageContext.request.contextPath}/waiverRequest/${course.id}" method="POST">
 
-                                <input type="submit" value="Waive"/>
-
-                            </form>
-                            
-                        </td>    
+                            <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
+                                <td> ${course.courseName} </td> 
+                                <td>${course.courseNumber}</td>
+                                <td>${course.description}</td>
 
 
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
+                                <td>
+                                    <form commandName="course"  action="${pageContext.request.contextPath}/waiverRequest/${course.id}" method="POST">
 
-        <div align="center">
-            <a href="${pageContext.request.contextPath}/index">Back</a></br>
-        </div>
+                                        <input type="submit" value="Waive"/>
+
+                                    </form>
+
+                                </td>    
+
+
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
+            <div align="center">
+                <a href="${pageContext.request.contextPath}/index">Back</a></br>
+            </div>
 
 
     </body>

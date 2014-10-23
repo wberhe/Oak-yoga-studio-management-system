@@ -18,7 +18,8 @@
     <body>
         <div align="center">
         <h3>${msg}</h3>
-        <table border="1" cellpadding="5" width="100%">  <tr>
+       <div class="datagrid">
+            <table >  <thead>
                 <th>Enrollment Status</th>
                 <th>Enrollment Date</th>
                 <th>Section</th>
@@ -29,12 +30,13 @@
                 <th></th>
 
             </tr>
-            <c:forEach var="enrollment" items="${sectionsTaken}">
+</thead>
+<tbody>
+            <c:forEach var="enrollment" items="${sectionsTaken}" varStatus="loopStatus">
 
-
-                <tr>
-
-
+ 
+ 
+                    <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
                     <td>${enrollment.status}</td> 
                     <td>${enrollment.enrollmentDate}</td> 
                     <td>${enrollment.section.sectionName}</td>
@@ -62,6 +64,7 @@
 
                 </tr>
             </c:forEach>
+</tbody>
         </table>
         </div>
         

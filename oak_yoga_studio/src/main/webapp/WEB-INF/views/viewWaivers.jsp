@@ -18,30 +18,36 @@
     </head>
     <body>
         <h4>${msg}</h4>
-        
-        
-               
-        <table width="100%" border="1" cellpadding="5">
 
-            <tr>
-                <th>Course Number</th>
-                <th>Course Name </th>
-                <th>Status </th>
-                <th></td>
-                <td></td>
-            </tr>
 
-            <c:forEach var="w" items="${waivers}">
-                <tr>
-                    <td>${w.waiverCourse.courseNumber}</a></td>
-                    <td>${w.waiverCourse.courseName }</td> 
-                    <td>${w.status}</td>
 
-                   
-        </tr>
-    </c:forEach>
-</table>
-</body>
+        <div class="datagrid">
+            <table >  <thead>
+
+                    <tr>
+                        <th>Course Number</th>
+                        <th>Course Name </th>
+                        <th>Status </th>
+                        <th></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="w" items="${waivers}" varStatus="loopStatus" >
+
+                        <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}" >
+
+                            <td>${w.waiverCourse.courseNumber}</a></td>
+                            <td>${w.waiverCourse.courseName }</td> 
+                            <td>${w.status}</td>
+
+
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </body>
 
 </html>
 
