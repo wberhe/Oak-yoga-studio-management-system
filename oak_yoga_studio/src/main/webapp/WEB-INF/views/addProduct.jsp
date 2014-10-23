@@ -39,7 +39,7 @@
                 
             </table>
                <form:hidden path="status" /> 
-            <input type="submit"/>
+               <input type="submit" value="Add"/>
 
         </form:form>
     </body>

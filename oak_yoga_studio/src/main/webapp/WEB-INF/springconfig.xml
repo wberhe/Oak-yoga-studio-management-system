@@ -53,7 +53,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost/yoga_studio" />
         <property name="username" value="root" />
-        <property name="password" value="Pass@deliver" />
+        <property name="password" value="" />
     </bean>
 
     <!-- hibernate Properties -->
@@ -320,10 +320,13 @@ Administrator.
         <sec:intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
                     
         <sec:intercept-url pattern="/welcome" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <sec:intercept-url pattern="/searchProduct" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>
+        <sec:intercept-url pattern="/searchProduct" access="IS_AUTHENTICATED_ANONYMOUSLY" method="POST"/>
         <sec:intercept-url pattern="/products" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>
         <sec:intercept-url pattern="/ViewAllCourses" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/productResult" access="IS_AUTHENTICATED_ANONYMOUSLY" method="GET"/>
+        <sec:intercept-url pattern="/productList" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        
+        <sec:intercept-url pattern="/productImage/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         
         <sec:intercept-url pattern="/welcome" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <sec:intercept-url pattern="/contact" access="IS_AUTHENTICATED_ANONYMOUSLY"/>

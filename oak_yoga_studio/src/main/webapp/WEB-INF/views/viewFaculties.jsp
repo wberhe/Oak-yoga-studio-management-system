@@ -34,6 +34,5 @@
             </c:forEach>
         </table>
         <a href="addFacultyCredential"> Add Faculty</a><br/>
-       <a href="admin"> Back</a>
     </body>
 </html>

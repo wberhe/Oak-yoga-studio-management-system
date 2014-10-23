@@ -153,7 +153,7 @@ public class ProductController {
     /**
      * Image display
      */
-@RequestMapping(value = "/poductImage/{id}", method = RequestMethod.GET)
+@RequestMapping(value = "/productImage/{id}", method = RequestMethod.GET)
     public void getProductImage(Model model, @PathVariable int id, HttpServletResponse response) {
         try {
             Product p = productService.getProduct(id);
