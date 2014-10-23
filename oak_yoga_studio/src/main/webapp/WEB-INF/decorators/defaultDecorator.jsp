@@ -64,7 +64,7 @@
                             <a href="/oak_yoga_studio/products">Products</a>
                         </li>
                         <li>
-                            <a href="/oak_yoga_studio/welcome">About</a>
+                            <a href="/oak_yoga_studio/about">About</a>
                         </li>
                         <li>
                             <a href="/oak_yoga_studio/contact">Contact</a>
