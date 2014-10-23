@@ -10,6 +10,18 @@ body {
     -background-size: cover;
     
 }
+.error {
+    color: red;
+}
+.errorBlock{
+    color: red;
+    border-style: solid;
+    border-color: red;
+    border-width: 1px;
+    padding: 3px;
+    background-color: rgb(231, 231, 231);
+}
+
 
 .thumbnail img {
     width: 100%;
