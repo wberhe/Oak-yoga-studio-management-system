@@ -42,7 +42,7 @@ else
             <c:forEach var="item" items="${shoppingCartItems}">
                 <tr>
                     <td>
-                       <img src="poductImage/${item.product.id}" width="100" height="100"/>
+                       <img src="productImage/${item.product.id}" width="100" height="100"/>
                     </td>
                     <td>${item.product.name}</td>
                     <td>(quantity: ${item.quantity})</td>

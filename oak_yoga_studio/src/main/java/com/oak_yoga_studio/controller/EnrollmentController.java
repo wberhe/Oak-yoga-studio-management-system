@@ -14,6 +14,7 @@ import com.oak_yoga_studio.service.ICourseService;
 import com.oak_yoga_studio.service.ICustomerService;
 import com.oak_yoga_studio.service.IEnrollmentService;
 import com.oak_yoga_studio.service.ISectionService;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -207,9 +208,10 @@ public class EnrollmentController {
 
         Customer customer = (Customer) session.getAttribute("loggedUser");
 
-        if (!enrollmentService.getEnrollmentsByCustomer(customer).isEmpty()) {
+        List<Enrollment> sectionsTaken=enrollmentService.getEnrollmentsByCustomer(customer);
+        if (!sectionsTaken.isEmpty()) {
 
-            model.addAttribute("sectionsTaken", enrollmentService.getEnrollmentsByCustomer(customer));
+            model.addAttribute("sectionsTaken", sectionsTaken);
             model.addAttribute("msg", "Current courses to withdraw");
         } else {
             model.addAttribute("msg", "Your record shows there are no current courses that you are enrolled in.");
@@ -223,6 +225,7 @@ public class EnrollmentController {
 
         Customer customer = (Customer) session.getAttribute("loggedUser");
 
+        
         if (!enrollmentService.getEnrollmentsByCustomer(customer).isEmpty()) {
 
             model.addAttribute("sectionsTaken", enrollmentService.getEnrollmentsByCustomer(customer));
@@ -271,7 +274,7 @@ public class EnrollmentController {
 
     private void toWaitingList(Customer customer, Section section) {
 
-        //add to waiting list if the customer is already registerd for this section currently.
+        //add to waiting .
         enrollmentService.addEnrollment(Enrollment.statusType.WAITINGLIST, customer, section);
 
     }
