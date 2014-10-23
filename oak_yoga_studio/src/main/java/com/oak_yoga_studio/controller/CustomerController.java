@@ -152,19 +152,10 @@ public class CustomerController {
 
     @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
     public String getUserDetail(@ModelAttribute("customerUpdate") Customer customerUpdate, Model model, HttpSession session) {//, @ModelAttribute("addressUpdate") Address addressUpdate) {
-        System.out.println("begininnnnnnnnnnnnnnnnnnnnnnnnnn");
+        
         Customer loggedCustomer = (Customer) session.getAttribute("loggedUser");
         model.addAttribute("customerDetail", customerService.getCustomerById(loggedCustomer.getId()));
-        System.out.println("in between ewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
-//        Address a = customerService.getCutomerAdress(loggedCustomer.getId());
-//        if (a == null) {
-//            a = new Address();
-//            a.setStreet("");
-//            a.setCity("");
-//            a.setZipCode("");
-//            a.setState("");
-//        }
-//        model.addAttribute("addressDetail", a);
+       
         return "CustomerProfile";
 
     }
@@ -184,7 +175,7 @@ public class CustomerController {
             customer.setEmail(customerUpdate.getEmail());
 
             try {
-                System.out.println("Imageeeeeeeeeee - " + file.getBytes());
+               
                 if (file.getBytes().length != 0) {
                     customer.setProfilePicture(file.getBytes());
                 }
