@@ -64,7 +64,7 @@
                             <a href="/oak_yoga_studio/products">Products</a>
                         </li>
                         <li>
-                            <a href="/oak_yoga_studio/about">About</a>
+                            <a href="/oak_yoga_studio/welcome">About</a>
                         </li>
                         <li>
                             <a href="/oak_yoga_studio/contact">Contact</a>
@@ -83,6 +83,12 @@
     ${loggedUser.firstName} ${loggedUser.lastName}
     <a href="/oak_yoga_studio/j_spring_security_logout">Logout</a>
 </c:if>
+    <div class="search">
+    <form action="searchProduct" method="POST">  
+                <input type="text" name="productName" placeholder="search Product by name"/>              
+                <input type="submit" value="Search Product"/>
+            </form>
+    </div>
             <div class="row">
 
                 <div class="col-md-3">
@@ -97,7 +103,7 @@
                             
                         <sec:authorize access="hasRole('ROLE_CUSTOMER')">
 
-                            <li><a href="${pageContext.request.contextPath}/customerProfile" class="list-group-item">Profile</a></li>
+                            <li><a href="${pageContext.request.contextPath}/editProfile" class="list-group-item">Profile</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewCourses" class="list-group-item">Register for a Course</a></li>
                             <li><a href="${pageContext.request.contextPath}/enrolled" class="list-group-item">View Enrollment History</a></li>
                             <li><a href="${pageContext.request.contextPath}/requestWaiver" class="list-group-item">Request waiver</a></li>
@@ -111,17 +117,20 @@
 
 
                         <sec:authorize access="hasRole('ROLE_ADMIN')" >
-                            <li><a href="${pageContext.request.contextPath}/admin" class="list-group-item">Admin Home Page</a></li>
-                            <li><a href="${pageContext.request.contextPath}/viewCourses" class="list-group-item"> Manage Courses</a></li>
-                            <li><a href="${pageContext.request.contextPath}/newSection" class="list-group-item">Manage Section</a></li>
-                            <li><a href="${pageContext.request.contextPath}/viewFaculties" class="list-group-item">Manage Faculties</a></li>
-                            <li><a href="${pageContext.request.contextPath}/products" class="list-group-item">Manage Products</a></li>
-                            <li><a href="${pageContext.request.contextPath}/viewCustomers" class="list-group-item">Manage Customers</a></li>
-                            
+<!--                            <li><a href="${pageContext.request.contextPath}/admin" class="list-group-item">Admin Home Page</a></li>-->
+                            <li><a href="${pageContext.request.contextPath}/viewCourses" class="list-group-item">View Courses</a></li>
+                            <li><a href="${pageContext.request.contextPath}/addCourse" class="list-group-item">Add Course</a></li>
+                            <li><a href="${pageContext.request.contextPath}/sectionList" class="list-group-item">view Sections</a></li> 
+                            <li><a href="${pageContext.request.contextPath}/newSection" class="list-group-item">Add Section</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewCustomers" class="list-group-item">View Customers</a></li>
+                            <li><a href="${pageContext.request.contextPath}/viewFaculties" class="list-group-item">View Faculties</a></li>
+                            <li><a href="${pageContext.request.contextPath}/addFacultyCredential" class="list-group-item">Add Faculty</a></li>
+                            <li><a href="${pageContext.request.contextPath}/products" class="list-group-item">View Products</a></li>
+                            <li><a href="${pageContext.request.contextPath}/addProduct" class="list-group-item">Add Product</a></li>
                             </sec:authorize>
 
                         <sec:authorize access="hasRole('ROLE_FACULTY')" >
-                            <li><a href="${pageContext.request.contextPath}/faculty" class="list-group-item">Faculty Home Page</a></li>
+<!--                            <li><a href="${pageContext.request.contextPath}/faculty" class="list-group-item">Faculty Home Page</a></li>-->
                             <li><a href="${pageContext.request.contextPath}/viewAdvisees" class="list-group-item"> View Advisees</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewWaiverRequests" class="list-group-item">View Waiver Request</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewFacultySections" class="list-group-item">View Sections</a></li>

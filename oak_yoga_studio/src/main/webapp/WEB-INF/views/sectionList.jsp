@@ -51,7 +51,6 @@ else
             </c:forEach>
         </table>
             <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <a href="admin"> Back to home</a>
                 <p> <a href="newSection">add a new section</a></p>
                 <input type="submit" value="Delete" onclick="return confirmComplete();"/>
             </sec:authorize>

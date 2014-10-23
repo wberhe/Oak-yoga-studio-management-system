@@ -28,7 +28,7 @@
             <c:forEach var="product" items="${products}">
                 <tr>
                     <td width="40%">
-                        <img src="poductImage/${product.id}" />
+                        <img src="productImage/${product.id}" />
                     </td>
                     <td>${product.name} </td>
 
@@ -50,7 +50,6 @@
             </c:forEach>
         </table>
 
-        <a style="color:blue" href="addProduct">Back</a>    
 
     </body>
 </html>
