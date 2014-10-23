@@ -30,7 +30,7 @@ else
         
     </head>
     <body>
-        <p style="color:red">${message}</p>
+        <p style="color:green">${message}</p>
         <h1>shopping cart Details</h1>
         <table >
             <tr><td></td>
@@ -42,7 +42,7 @@ else
             <c:forEach var="item" items="${shoppingCartItems}">
                 <tr>
                     <td>
-                       <img src="productImage/${item.product.id}" width="100" height="100"/>
+                       <img src="productImage/${item.product.id}" width="200" height="200"/>
                     </td>
                     <td>${item.product.name}</td>
                     <td>(quantity: ${item.quantity})</td>
@@ -62,8 +62,7 @@ else
         <form:form commandName="product" action="checkout" method="get">
             <input type="submit" value="Checkout"/>
            
-        </form:form> 
-            <a style="color:blue" href="index">Back</a>
+        </form:form>
         
     
 

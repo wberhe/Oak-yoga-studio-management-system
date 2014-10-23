@@ -14,8 +14,8 @@
         <title>invoice</title>
     </head>
     <body>
-        <h1>hello invoice</h1>
-        ${message}    
+        <h1>"YOUR IN VOICE"</h1>
+        <p style="color:green">${message}</p>    
 
     </body>
 </html>

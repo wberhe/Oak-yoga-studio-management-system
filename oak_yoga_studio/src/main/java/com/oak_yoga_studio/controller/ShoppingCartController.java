@@ -153,14 +153,15 @@ public class ShoppingCartController {
      */
 
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
-    public String checkout(@ModelAttribute Address address,final RedirectAttributes re, HttpSession session) {
+    public String checkout(@ModelAttribute Address address,Model model,final RedirectAttributes re, HttpSession session) {
         String message = "";
         double totalPrice = 0;
         Customer c = (Customer) session.getAttribute("loggedUser");
         //
         if (c.getAddress().isEmpty()) {
             //model.addAttribute("message", message);
-            re.addFlashAttribute("message", "No address, Update your profile please");
+            model.addAttribute("message","No address, Update your profile please");
+            //re.addFlashAttribute("message", "No address, Update your profile please");
             return "purchasingAddress";
         }
 
@@ -173,7 +174,8 @@ public class ShoppingCartController {
 
         if (c.getShoppingCart().getShoppingCartItems().isEmpty()) {
             message = "Your shopping cart is Empty";
-            re.addFlashAttribute("message", message);
+            //re.addFlashAttribute("message", message);
+             model.addAttribute("message",message);
             return "invoice";
         } else {
             List<ShoppingCartItem> items = c.getShoppingCart().getShoppingCartItems();
@@ -191,7 +193,8 @@ public class ShoppingCartController {
 
             cartService.clearCart(c.getShoppingCart().getId());
             message = "Your order has been processed and $" + totalPrice + " will be deducted from your creditcard";
-            re.addFlashAttribute("message", message);
+            model.addAttribute("message",message);
+            //re.addFlashAttribute("message", message);
             return "invoice";
         }
 
