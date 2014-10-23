@@ -30,16 +30,20 @@ else
     <body>
         <h2> List of Sections </h2>
         <form:form comandName="section" action="deleteSection" method="post">
-        <table><tr>
-                <td></td>
-                <td><strong>Name: </strong></td>
-                <td><strong>Room number: </strong></td>
-                <td><strong>Professor: </strong></td>
-                <td><strong>Course: </strong></td>
-                <td><strong>Status: </strong></td>
+            <div class="datagrid">
+            <table >  <thead>
+       <tr>
+                <th></td>
+                <th><strong>Name: </strong></th>
+                <th><strong>Room number: </strong></th>
+                <th><strong>Professor: </strong></th>
+                <th><strong>Course: </strong></th>
+                <th><strong>Status: </strong></th>
             </tr>
-            <c:forEach var="s" items="${sections}">
-                 <tr>
+                </thead>
+            <c:forEach var="s" items="${sections}" varStatus="loopStatus">
+                        <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
+
                     <td><input type="checkbox" name="ids" value="${s.id}"/></td> 
                     <td>${s.sectionName}</td> 
                     <td>${s.roomNumber}</td>
@@ -50,6 +54,8 @@ else
                  </tr>
             </c:forEach>
         </table>
+                
+            </div>
             <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <p> <a href="newSection">add a new section</a></p>
                 <input type="submit" value="Delete" onclick="return confirmComplete();"/>
