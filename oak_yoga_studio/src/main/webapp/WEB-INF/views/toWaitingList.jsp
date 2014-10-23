@@ -18,6 +18,7 @@
     <form:form commandName="section" action="../waitingListResult/${section.id}" method="post">
 	
             
+        
                 <input type="submit" value="Add me To WaitingList"/> 
                 
                 <input type="cancel" value="Cancel" /> 
