@@ -109,7 +109,7 @@
 
 
                         <sec:authorize access="hasRole('ROLE_ADMIN')" >
-
+                            <li><a href="${pageContext.request.contextPath}/admin" class="list-group-item">Admin Home Page</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewCourses" class="list-group-item"> Manage Courses</a></li>
                             <li><a href="${pageContext.request.contextPath}/newSection" class="list-group-item">Manage Section</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewFaculties" class="list-group-item">Manage Faculties</a></li>
@@ -119,7 +119,7 @@
                             </sec:authorize>
 
                         <sec:authorize access="hasRole('ROLE_FACULTY')" >
-
+                            <li><a href="${pageContext.request.contextPath}/faculty" class="list-group-item">Faculty Home Page</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewAdvisees" class="list-group-item"> View Advisees</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewWaiverRequests" class="list-group-item">View Waiver Request</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewFacultySections" class="list-group-item">View Sections</a></li>
