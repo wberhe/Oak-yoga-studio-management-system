@@ -25,8 +25,8 @@
                         <th>Course Name </th>
                         <th>Description</th>
                         <th>Prerequisites</th>
-                        <th></td>
                         <td></td>
+                       <td></td>
                     </tr>
                 </thead>
                 <tbody>

@@ -13,18 +13,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>All sections</title>
         <script>
-        function confirmComplete() {
-alert("confirmComplete");
-var answer=confirm("Admin are you sure you want to delete the selected section?");
-if (answer==true)
-  {
-    return true;
-  }
-else
-  {
-    return false;
-  }
-}    
+            function confirmComplete() {
+                alert("confirmComplete");
+                var answer = confirm("Admin are you sure you want to delete the selected section?");
+                if (answer == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         </script>
     </head>
     <body>
@@ -50,18 +50,24 @@ else
                     <td>${s.professor.firstName}</td>
                     <td>${s.course.courseName}</td>
                     <td>${s.status}</td>
+
                     <td></td>
+
                  </tr>
             </c:forEach>
         </table>
                 
             </div>
+
+                    
+                
+
             <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <p> <a href="newSection">add a new section</a></p>
-                <input type="submit" value="Delete" onclick="return confirmComplete();"/>
+                <input type="submit" value="Delete Section" onclick="return confirmComplete();"/>
+                 <a href="newSection"><button>Add a new section</button></a>
             </sec:authorize>
         </form:form>
-            
+
     </body>
 </html>
 

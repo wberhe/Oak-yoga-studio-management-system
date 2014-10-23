@@ -14,25 +14,37 @@
     </head>
     <body>
         <h3>Here are the list of all faculties :</h3>
-        <table>
-            <c:forEach var="faculty" items="${faculties}">
-                <tr>
-                    <td><input type="checkbox" name="ids" value="${faculty.id}"/></td> 
-                    <td>${faculty.firstName}</td>
-                    <td>${faculty.lastName}</td>
-                    <td>(Email: ${faculty.email})</td>
-                    
-                    <c:choose>
-                        <c:when test="${faculty.credential.active==true}">
-                            <td><a href="faculties/${faculty.id}/disable"> Deactivate </a></td>
-                        </c:when>
-                        <c:otherwise>
-                           <td><a href="faculties/${faculty.id}/enable"> Activate </a></td>
-                        </c:otherwise>
-                    </c:choose>
-                </tr>
-            </c:forEach>
-        </table>
+        <div class="datagrid">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><strong>First Name </strong></th>
+                        <th><strong>Last Name </strong></th>
+                        <th><strong>Email </strong></th>
+                        <th><strong> </strong></th>
+
+                    </tr>
+                </thead>
+                <c:forEach var="faculty" items="${faculties}" varStatus="loopStatus">
+                    <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
+                        <td><input type="checkbox" name="ids" value="${faculty.id}"/></td> 
+                        <td>${faculty.firstName}</td>
+                        <td>${faculty.lastName}</td>
+                        <td>${faculty.email}</td>
+
+                        <c:choose>
+                            <c:when test="${faculty.credential.active==true}">
+                                <td><a href="faculties/${faculty.id}/disable"> Deactivate </a></td>
+                            </c:when>
+                            <c:otherwise>
+                                <td><a href="faculties/${faculty.id}/enable"> Activate </a></td>
+                            </c:otherwise>
+                        </c:choose>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
         <a href="addFacultyCredential"> Add Faculty</a><br/>
     </body>
 </html>
