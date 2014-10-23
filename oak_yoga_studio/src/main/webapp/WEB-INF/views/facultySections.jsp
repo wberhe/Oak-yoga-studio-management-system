@@ -14,26 +14,30 @@
     </head>
     <body>
         <h3>List of all my sections :</h3>
-        <table>
-            <tr>
-                <td>course</td>
-                <td>section Name</td>
-                <td>Capacity </td>
-                <td>Room Number</td>
-                <td>Available Seat</td>
-                <td>status</td>                
-            </tr>
-            <c:forEach var="s" items="${facultySections}">
-                <tr>
-                    <td>${s.course.courseName}</td> 
-                    <td>${s.sectionName}</td> 
-                    <td>${s.capacity}</td>
-                    <td>${s.roomNumber}</td>
-                    <td>${s.availableSeat}</td>
-                    <td>${s.status}</td>
-                    <td><a href="sectionDetail/${s.id}">Section details</a></td>
-                </tr>
-            </c:forEach>
-        </table>
+        <div class="datagrid">
+            <table>
+                <thead>
+
+                    <tr>
+                        <th>course</th>
+                        <th>section Name</th>
+                        <th>Capacity </th>
+                        <th>Room Number</th>
+                        <th>status</th>                
+                    </tr>
+                </thead>
+                <c:forEach var="s" items="${facultySections}"  varStatus="loopStatus">
+                        <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
+                        <td>${s.course.courseName}</td> 
+                        <td>${s.sectionName}</td> 
+                        <td>${s.capacity}</td>
+                        <td>${s.roomNumber}</td>
+                        <td>${s.status}</td>
+                        <td><a href="sectionDetail/${s.id}">Section details</a></td>
+                    </tr>
+                </c:forEach>
+
+            </table>
+        </div>
     </body>
 </html>

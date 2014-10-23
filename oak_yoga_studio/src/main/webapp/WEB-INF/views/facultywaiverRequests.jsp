@@ -14,51 +14,59 @@
     </head>
     <body>
         <h3>List of pending Waiver Requests :</h3>
-        <table >
-            <tr style="">
-                <td></td>
-                <td>First Name</td>
-                <td>Last Name </td>                
-                <td>Email</td>
-                <td>Course </td>
-                <td>Reason</td>
-                <td>Accept/Reject Waiver</td>
-            </tr>
-            <c:forEach var="w" items="${waiverRequests}">
-                <tr>
-                    <td></td> 
-                    <td>${w.customer.firstName}</td> 
-                    <td>${w.customer.lastName}</td>
-                    <td>(Email: ${w.customer.email})</td>
-                    <td>${w.waiverCourse.courseName}</td>
-                    <td>${w.requestReason}</td>
-                    <td><form action="decideOnWaiver/${w.id}" method="post"> <hidden name="" value="${w.id}"/> <input type="radio" name="waiverDecision" value="accepted" /> ACCEPT / <input type="radio" name="waiverDecision" value="rejected"/>REJECT <input type="Submit" /></form></td>
-                </tr>
-            </c:forEach>
-        </table>
+        <div class="datagrid">
+            <table>
+                <thead>
+                    <tr >
 
+                        <th>First Name</th>
+                        <th>Last Name </th>                
+                        <th>Email</t>
+                        <th>Course </th>
+                        <th>Reason</th>
+                        <th>Accept/Reject Waiver</th>
+                    </tr>
+                </thead>
+                <c:forEach var="w" items="${waiverRequests}" varStatus="loopStatus">
+
+                       <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
+                     
+                        <td>${w.customer.firstName}</td> 
+                        <td>${w.customer.lastName}</td>
+                        <td>${w.customer.email}</td>
+                        <td>${w.waiverCourse.courseName}</td>
+                        <td>${w.requestReason}</td>
+                        <td><form action="decideOnWaiver/${w.id}" method="post"> <hidden name="" value="${w.id}"/> <input type="radio" name="waiverDecision" value="accepted" /> ACCEPT / <input type="radio" name="waiverDecision" value="rejected"/>REJECT <input type="Submit" /></form></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
         <h3>List of Waivers :</h3>
-        <table >
-            <tr style="">
-                <td></td>
-                <td>First Name</td>
-                <td>Last Name </td>                
-                <td>Email</td>
-                <td>Course </td>
-                <td>Reason</td>
-                <td>Accept/Reject Waiver</td>
-            </tr>
-            <c:forEach var="w" items="${waivers}">
-                <tr>
-                    <td></td> 
-                    <td>${w.customer.firstName}</td> 
-                    <td>${w.customer.lastName}</td>
-                    <td>(Email: ${w.customer.email})</td>
-                    <td>${w.waiverCourse.courseName}</td>
-                    <td>${w.requestReason}</td>
-                    <td>${w.status}</td>                                           
-                </tr>
-            </c:forEach>
-        </table>
+        <div class="datagrid">
+            <table>
+                <thead>
+                    <tr >
+                        <th>First Name</th>
+                        <th>Last Name </th>                
+                        <th>Email</th>
+                        <th>Course </th>
+                        <th>Reason</th>
+                        <th>Accept/Reject Waiver</th>
+                    </tr>
+                </thead>
+                <c:forEach var="w" items="${waivers}" varStatus="loopStatus">
+
+                       <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
+                        <td>${w.customer.firstName}</td> 
+                        <td>${w.customer.lastName}</td>
+                        <td>(Email: ${w.customer.email})</td>
+                        <td>${w.waiverCourse.courseName}</td>
+                        <td>${w.requestReason}</td>
+                        <td>${w.status}</td>                                           
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+
     </body>
 </html>

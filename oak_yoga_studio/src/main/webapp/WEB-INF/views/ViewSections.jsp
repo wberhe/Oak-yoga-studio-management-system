@@ -23,9 +23,6 @@
                 </thead>
                 <tbody>
                     <c:forEach var="s" items="${sections}" varStatus="loopStatus">
-
-
-
                         <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
 
                             <td>${s.sectionName }</td> 
@@ -35,12 +32,6 @@
 
                                 <td><a href="../enrollInCourse/${s.id}">Enroll For this section </a></td>
                             </sec:authorize>
-                        </tr>
-                        <tr>
-                            <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                <td> <a href="newSection">add a new section</a></td>
-                            </sec:authorize>
-
                         </tr>
 
                     </c:forEach>
