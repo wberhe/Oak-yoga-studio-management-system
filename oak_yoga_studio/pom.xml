@@ -8,7 +8,7 @@
     <packaging>war</packaging>
 
     <name>oak_yoga_studio</name>
-
+    
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -188,6 +188,12 @@
             <artifactId>spring-oxm</artifactId>
             <version>4.0.2.RELEASE</version>
         </dependency>
+        <!-- Sitemesh -->
+		<dependency>
+			<groupId>org.sitemesh</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>3.0.0</version>
+		</dependency>
     </dependencies>
 
     <!--needed for security-->
