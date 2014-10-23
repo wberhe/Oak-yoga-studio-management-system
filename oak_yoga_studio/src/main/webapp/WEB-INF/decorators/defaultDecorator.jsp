@@ -97,7 +97,7 @@
                             
                         <sec:authorize access="hasRole('ROLE_CUSTOMER')">
 
-                            <li><a href="${pageContext.request.contextPath}/customerProfile" class="list-group-item">Profile</a></li>
+                            <li><a href="${pageContext.request.contextPath}/editProfile" class="list-group-item">Profile</a></li>
                             <li><a href="${pageContext.request.contextPath}/viewCourses" class="list-group-item">Register for a Course</a></li>
                             <li><a href="${pageContext.request.contextPath}/enrolled" class="list-group-item">View Enrollment History</a></li>
                             <li><a href="${pageContext.request.contextPath}/requestWaiver" class="list-group-item">Request waiver</a></li>

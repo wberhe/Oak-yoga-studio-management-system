@@ -61,8 +61,8 @@
             </table>
         </div>
 
-        <div align="center">
+<!--        <div align="center">
             <a href="${pageContext.request.contextPath}/index">Back</a></br>
-        </div>
+        </div>-->
 
     </body>

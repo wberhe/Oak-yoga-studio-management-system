@@ -18,20 +18,18 @@
             <table>
                 <thead>
                     <tr>
-                        <th></th>
-                <h>First Name</th>
+                <th>First Name</th>
                     <th>Last Name </th>
                     <th>Email</th>
-                    <th></th>
+                    
                     </tr>
                     </thead>
-                    <c:forEach var="a" items="${advisees}">
-                        <tr>
-                            <td></td> 
+                    <c:forEach var="a" items="${advisees}" varStatus="loopStatus">
+                        <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
                             <td><a href="adviseeDetail/${a.id}">${a.firstName}</a></td> 
                             <td><a href="adviseeDetail/${a.id}">${a.lastName}</a></td>
                             <td>${a.email}</td>
-                            <td></td>                    
+                                            
                         </tr>
                     </c:forEach>
             </table>
