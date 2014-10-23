@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Oak</title>
-        <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
+        <!--<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>-->
     </head>
     <body>
         <h1>Welcome to Oak Yoga Studio</h1>
@@ -24,6 +24,8 @@
              
         <p>Course Waiver Request  <a href="requestWaiver">Request Waiver</a>
         <p>Enrollment History  <a href="enrolled">Enrollment History</a>
+             <p>View Waivers  <a href="viewWaivers">View Waivers</a>
+                  <p>Withdraw  <a href="requestWithdraw">Withdraw</a>
          <p>Product <a href="products">go to product list</a>
          <p>Search Product <a href="searchProduct">click here</a>
          <p>Shopping cart Product <a href="viewCart">view my cart</a>
