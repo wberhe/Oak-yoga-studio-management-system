@@ -29,11 +29,11 @@
 
 
                     <tr>
-                        <td> Course Number : </td>
+                        <td> Course Number   :   </td>
                         <td> ${course.courseNumber}</td>
                     </tr>
                     <tr>
-                        <td>Course Name    :</td>
+                        <td>Course Name      :</td>
                         <td> ${course.courseName}</td>
                     </tr>
 

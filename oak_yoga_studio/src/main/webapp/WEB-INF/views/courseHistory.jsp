@@ -15,11 +15,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Enrollment History</title>
+        
+        
+
     </head>
     <body>
         <div align="center">
             <h3>${msg}</h3>
-            <table border="1" width="100%" >  <tr>
+            <div class="datagrid">
+            <table >  <thead><tr>
                     <th>Enrollment Status</th>
                     <th>Enrollment Date</th>
                     <th>Section</th>
@@ -27,13 +31,16 @@
                     <th>Course Number  </th>
                     <th>Professor</th>
                     <th>Section Status</th>
-                    <th></td>
+                   
 
                 </tr>
-                <c:forEach var="enrollment" items="${sectionsTaken}">
+                </thead>
+                <tbody>
+                <c:forEach var="enrollment" items="${sectionsTaken}" varStatus="loopStatus">
 
-
-                    <tr>
+ 
+ 
+                    <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
 
 
                         <td>${enrollment.status}</td> 
@@ -49,6 +56,8 @@
 
                     </tr>
                 </c:forEach>
+                    </tbody>
+                    
             </table>
         </div>
 

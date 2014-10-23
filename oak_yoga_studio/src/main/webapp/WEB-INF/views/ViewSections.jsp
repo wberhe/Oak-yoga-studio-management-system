@@ -14,30 +14,38 @@
     </head>
     <body>
         <h2>Sections for ${course.courseName} ${course.courseNumber}  </h2>
-        <table width="100%" border="1" cellPadding="5">
-                <tr><th>Section Name</th>
-                <th>Room Number</th>
-                <th>Instructor</th>
-                </tr>
-            <c:forEach var="s" items="${sections}">
-                 <tr>
-                    
-                    <td>${s.sectionName }</td> 
-                    <td>${s.roomNumber}</td>
-                    <td>${s.professor.firstName}  ${s.professor.lastName}</td>
-                    <sec:authorize access="hasRole('ROLE_CUSTOMER')">               
-                   
-                   <td><a href="../enrollInCourse/${s.id}">Enroll For this section </a></td>
-                    </sec:authorize>
-                 </tr>
-                 <tr>
-                    <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <td> <a href="newSection">add a new section</a></td>
-                  </sec:authorize>
-            
-                 </tr>
-            
-            </c:forEach>
-        </table>
+        <div class="datagrid">
+            <table >  <thead>
+                    <tr><th>Section Name</th>
+                        <th>Room Number</th>
+                        <th>Instructor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="s" items="${sections}" varStatus="loopStatus">
+
+
+
+                        <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
+
+                            <td>${s.sectionName }</td> 
+                            <td>${s.roomNumber}</td>
+                            <td>${s.professor.firstName}  ${s.professor.lastName}</td>
+                            <sec:authorize access="hasRole('ROLE_CUSTOMER')">               
+
+                                <td><a href="../enrollInCourse/${s.id}">Enroll For this section </a></td>
+                            </sec:authorize>
+                        </tr>
+                        <tr>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <td> <a href="newSection">add a new section</a></td>
+                            </sec:authorize>
+
+                        </tr>
+
+                    </c:forEach>
+                </tbody>
+
+            </table>
     </body>
 </html>

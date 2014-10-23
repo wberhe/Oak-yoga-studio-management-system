@@ -13,41 +13,49 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="resources/css/style.css" rel="stylesheet" type="text/css" />
         <title>Courses List</title>
-        
+
     </head>
     <body>
         <h4> Courses</h4>
-        <table width="100%" border="1" cellPadding="5">
+        <div class="datagrid">
+            <table >  <thead>
 
-            <tr>
-                <th>Course Number</th>
-                <th>Course Name </th>
-                <th>Description</th>
-                <th>Prerequisites</th>
-                <th></td>
-                <td></td>
-            </tr>
+                    <tr>
+                        <th>Course Number</th>
+                        <th>Course Name </th>
+                        <th>Description</th>
+                        <th>Prerequisites</th>
+                        <th></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="c" items="${courses}" varStatus="loopStatus" >
 
-            <c:forEach var="c" items="${courses}">
-                <tr>
-                    <td>${c.courseNumber}</a></td>
-                    <td>${c.courseName }</td> 
-                    <td width="20%">${c.description}</td>
 
+
+                        <tr class="${loopStatus.index % 2 == 0 ? 'alt2' :'alt'}">
+
+                            <td>${c.courseNumber}</a></td>
+                            <td>${c.courseName }</td> 
+                            <td width="20%">${c.description}</td>
+
+                            <td>
+                                <c:forEach var="pre" items="${c.prerequisites}">
+                        <li> ${pre.courseName}</li>
+                        </c:forEach>
+                    </td>
+                    <td><a href="viewSections/${c.id}"> view sections </a></td>
                     <td>
-                        <c:forEach var="pre" items="${c.prerequisites}">
-                    <li> ${pre.courseName}</li>
-                    </c:forEach>
-            </td>
-            <td><a href="viewSections/${c.id}"> view sections </a></td>
-            <td>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <a href="newSection">add a new section</a>
-                </sec:authorize>
-            </td>
-        </tr>
-    </c:forEach>
-</table>
-</body>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                            <a href="newSection">add a new section</a>
+                        </sec:authorize>
+                    </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </body>
 
 </html>

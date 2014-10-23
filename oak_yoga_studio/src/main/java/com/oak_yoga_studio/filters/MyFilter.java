@@ -45,7 +45,8 @@ public class MyFilter implements Filter {
 //            System.out.println("Inside Filter Logged User(from db):" + ((HttpServletRequest) request).getSession().getAttribute("loggedUser"));
 //              System.out.println("Inside Filter Logged User(from request):" + user.getUsername());
             }
-        } else {
+        } 
+        else {
             User customer = (User) ((HttpServletRequest) request).getSession().getAttribute("loggedUser");
             if (customer instanceof Customer) {
                 userService.updateCustomer(customer.getId(), (Customer) customer);
