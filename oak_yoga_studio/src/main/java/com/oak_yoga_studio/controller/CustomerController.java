@@ -5,6 +5,7 @@
  */
 package com.oak_yoga_studio.controller;
 
+//
 import com.oak_yoga_studio.domain.Address;
 import com.oak_yoga_studio.domain.Course;
 import com.oak_yoga_studio.domain.Credential;
@@ -61,7 +62,21 @@ public class CustomerController {
 
     @RequestMapping("/")
     public String redirectRoot() {
-        return "redirect:/index";
+        return "redirect:/welcome";
+    }
+
+    @RequestMapping("/contact")
+    public String redirectContact() {
+        return "contact";
+    }
+
+    @RequestMapping("/about")
+    public String redirectAbout() {
+        return "about";
+    }
+    @RequestMapping("/welcome")
+    public String redirectWelcome() {
+        return "welcome";
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
@@ -135,7 +150,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
-    public String getUserDetail(@ModelAttribute("customerUpdate") Customer customerUpdate, Model model, HttpSession session){//, @ModelAttribute("addressUpdate") Address addressUpdate) {
+public String getUserDetail(@ModelAttribute("customerUpdate") Customer customerUpdate, Model model, HttpSession session){//, @ModelAttribute("addressUpdate") Address addressUpdate) {
         System.out.println("begininnnnnnnnnnnnnnnnnnnnnnnnnn");
         Customer loggedCustomer = (Customer) session.getAttribute("loggedUser");
         model.addAttribute("customerDetail", customerService.getCustomerById(loggedCustomer.getId()));
@@ -150,6 +165,7 @@ public class CustomerController {
 //        }
 //        model.addAttribute("addressDetail", a);
         return "CustomerProfile";
+
     }
 
     @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
@@ -211,18 +227,20 @@ public class CustomerController {
         return "redirect:/editProfile";
     }
 
+
     @RequestMapping(value = "/requestWaiver", method = RequestMethod.GET)
     public String requestWaiver(Model model, HttpSession session) {
 
         //    model.addAttribute("courses", courseService.getListOfCourses());
         Customer customer = (Customer) session.getAttribute("loggedUser");
 
-        if (!customerService.getAllCoursesToWaive(customer).isEmpty()) {
+        List<Course> coursesToWaive = customerService.getAllCoursesToWaive(customer);
+        if (!coursesToWaive.isEmpty()) {
 
-            model.addAttribute("coursesToWaive", customerService.getAllCoursesToWaive(customer));
+            model.addAttribute("coursesToWaive", coursesToWaive);
             model.addAttribute("msg", " Courses Qualified to be waived ");
         } else {
-            model.addAttribute("msg", " There is no course that you can waive");
+            model.addAttribute("msg", " There are no courses that you can waive");
         }
 
         return "waiverRequest";
@@ -245,7 +263,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/waiverResult/{id}", method = RequestMethod.POST)
-    public String waiverResult(@PathVariable int id, Model model, String text, String[] ids, HttpSession session) {
+    public String sumbitRequest(@PathVariable int id, Model model, String text, String[] ids, HttpSession session) {
 
         Customer customer = (Customer) session.getAttribute("loggedUser");
         Course course = courseService.getCourseById(id);
@@ -257,6 +275,25 @@ public class CustomerController {
         return "waiverResult";
 
     }
+
+    @RequestMapping(value = "/viewWaivers", method = RequestMethod.GET)
+    public String getCourses(Model model, HttpSession session) {
+
+        Customer customer = (Customer) session.getAttribute("loggedUser");
+     
+        List<Waiver> allWaivers = customerService.getAllWaiversByCustomer(customer);
+        System.out.println("waivers length is " + allWaivers.size());
+        if (!allWaivers.isEmpty()) {
+            
+            model.addAttribute("waivers", allWaivers);
+            model.addAttribute("msg", " courses with waiver status");
+        } else {
+            model.addAttribute("msg", " No records found ");
+        }
+
+        return "viewWaivers";
+    }
+
 
     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
     public void getUserImage(Model model, @PathVariable int id, HttpServletResponse response) {
