@@ -74,7 +74,7 @@
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container -->
-        </nav><br />
+        </nav>
 
         <!-- Page Content -->
         <div class="container">
