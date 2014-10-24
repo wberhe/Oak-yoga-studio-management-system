@@ -102,18 +102,12 @@ public class CustomerController {
             try {
                 customer.setProfilePicture(file.getBytes());
             } catch (IOException ex) {
-                //Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
             }
-//            ShoppingCart cart= new ShoppingCart();
-//            customer.setShoppingCart(cart);
             customerService.addCustomer(customer);
             session.removeAttribute("credential");
             flashAttr.addFlashAttribute("successfulSignup", "Customer signed up succesfully. please  log in to proceed");
-            //           Customer c=(Customer) session.getAttribute("loggedCustomer");
-//            if(c!=null && c.getUserCredential().isAdmin()){
-//                view="redirect:/settings";
 
-//            }
         } else {
             for (FieldError err : result.getFieldErrors()) {
                 System.out.println("Error:" + err.getField() + ":" + err.getDefaultMessage());
@@ -152,10 +146,10 @@ public class CustomerController {
 
     @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
     public String getUserDetail(@ModelAttribute("customerUpdate") Customer customerUpdate, Model model, HttpSession session) {//, @ModelAttribute("addressUpdate") Address addressUpdate) {
-        
+
         Customer loggedCustomer = (Customer) session.getAttribute("loggedUser");
         model.addAttribute("customerDetail", customerService.getCustomerById(loggedCustomer.getId()));
-       
+
         return "CustomerProfile";
 
     }
@@ -175,7 +169,7 @@ public class CustomerController {
             customer.setEmail(customerUpdate.getEmail());
 
             try {
-               
+
                 if (file.getBytes().length != 0) {
                     customer.setProfilePicture(file.getBytes());
                 }
@@ -311,13 +305,13 @@ public class CustomerController {
     }
 
     /**
-     * Enabling and disabling the user
+     * Enabling and disabling the customer
      *
      * @param userId
      * @param operation
      * @return
      */
-//    @RequestMapping(value = "/users/{id}/{operation}", method = RequestMethod.GET)
+//    @RequestMapping(value = "/customers/{id}/{operation}", method = RequestMethod.GET)
 //    public String EnableDisable(@PathVariable("id") int userId, @PathVariable("operation") String operation) {
 //
 //        User u = userService.getUser(userId);
@@ -327,13 +321,13 @@ public class CustomerController {
 //            u.getUserCredential().setUsername(u.getUserCredential().getUsername());
 //        } else {
 //            System.out.println("disabled");
-//            u.getUserCredential().setBlocked(false);
+//            u.getUserCredential().setActive(false);
 //        }
 //        userService.updateUserInfo(userId, u);
-//        return "redirect:/users";
+//        return "redirect:/";
 //    }
     /**
-     * Admin notification to bloggers by email
+     * Admin notification to All customers by email
      *
      * @param model
      * @param text
@@ -341,17 +335,26 @@ public class CustomerController {
      * @return to settings page
      */
 //    @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
-//    public String notifyUsers(Model model, String text, String[] ids) {
-//        List<User> user = new ArrayList<User>();
+//    public String notifyAllustomers(Model model, String text, String[] ids) {
+//        List<Customer> customer = new ArrayList<Customer>();
 //        if (ids != null) {
 //            for (String id : ids) {
-//                user.add(userService.getUser(Integer.parseInt(id)));
+//                user.add(customerService.getCustomer(Integer.parseInt(id)));
 //            }
 //        }
-//        notificationService.notifyBlogger(user, text);
-//        model.addAttribute("allusers", userService.getAllUsers());
-//        return "settings";
+//        notificationService.notifycustomer(customer, text);
+//        model.addAttribute("allCustomers", customerService.getAllcustomers());
+//        return "";
 //    }
+    /**
+     *
+     * @param customer
+     * @param reason
+     */
+    private void requestWaiver(Customer customer, String reason) {
+
+    }
+
     /**
      * In order to upload the users profile picture
      *
@@ -359,10 +362,6 @@ public class CustomerController {
      * @param id
      * @param response
      */
-    private void requestWaiver(Customer customer, String reason) {
-
-    }
-
     @RequestMapping(value = "/profileImage/{id}", method = RequestMethod.GET)
     public void getProfileImage(Model model, @PathVariable int id, HttpServletResponse response) {
         try {
@@ -373,7 +372,7 @@ public class CustomerController {
                 response.flushBuffer();
             }
         } catch (IOException ex) {
-            // Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
