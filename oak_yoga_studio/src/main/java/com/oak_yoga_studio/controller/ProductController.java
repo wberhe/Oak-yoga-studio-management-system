@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.oak_yoga_studio.controller;
 
 import com.oak_yoga_studio.domain.Product;
@@ -37,12 +36,10 @@ public class ProductController {
     @Autowired
     private IProductService productService;
 
-   
-
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String getAll(Model model) {
 
-        model.addAttribute("products",productService.getAllProducts() );
+        model.addAttribute("products", productService.getAllProducts());
         return "productList";
     }
 
@@ -71,13 +68,13 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-    public String addProduct(@Valid Product product, BindingResult result, RedirectAttributes re,@RequestParam("file") MultipartFile file) {
+    public String addProduct(@Valid Product product, BindingResult result, RedirectAttributes re, @RequestParam("file") MultipartFile file) {
         String view = "redirect:/products";
         if (!result.hasErrors()) {
             try {
                 product.setImage(file.getBytes());
                 product.setStatus("ACTIVE");
-            } catch (IOException ex){
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
             productService.addProduct(product);
@@ -87,73 +84,75 @@ public class ProductController {
         }
         return view;
     }
+
     /**
      * EDIT PRODUCT
+     *
      * @param prodid
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/productEdit/{id}", method = RequestMethod.GET)
-    public String getProduct(@ModelAttribute("product") Product product,@PathVariable int id) {
+    public String getProduct(@ModelAttribute("product") Product product, @PathVariable int id) {
         //model.addAttribute("product", productService.getProductDetailInfo(id));
-        
+
         return "editProduct";
     }
 
     @RequestMapping(value = "/productEdit", method = RequestMethod.POST)
-    public String updateProduct(@Valid Product product,BindingResult result,@RequestParam("file") MultipartFile file) {
-        
-          if (!result.hasErrors()) {
-              try {
+    public String updateProduct(@Valid Product product, BindingResult result, @RequestParam("file") MultipartFile file) {
+
+        if (!result.hasErrors()) {
+            try {
                 product.setImage(file.getBytes());
                 product.setStatus("ACTIVE");
                 productService.updateProduct(product);
-            } catch (IOException ex){
-               ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-               
-              return "redirect:/products";
-          } else{
-              for (FieldError err : result.getFieldErrors()) {
+
+            return "redirect:/products";
+        } else {
+            for (FieldError err : result.getFieldErrors()) {
                 System.out.println(err.getField() + ": " + err.getDefaultMessage());
-                
+
             }
-              return "editProduct";
-          }
-            
+            return "editProduct";
+        }
+
     }
-/**
- * 
- * @return 
- */
-    
-    
-    @RequestMapping(value="/productResult", method = RequestMethod.GET)
-    public String searchProductResult(){
+
+    /**
+     *
+     * @return
+     */
+
+    @RequestMapping(value = "/productResult", method = RequestMethod.GET)
+    public String searchProductResult() {
         return "productList";
     }
-    
-    @RequestMapping(value="/searchProduct", method = RequestMethod.POST)
-    public String searchProduct(RedirectAttributes re, Model model, String productName){
-      List<Product> products =  productService.getProductByName(productName);
-        
-        if(products.size()>0) {  //searched product found           
-          re.addFlashAttribute("products", products); 
-          return "redirect:/productResult";
-      }
-        else{
-            re.addFlashAttribute("msgs", "Product not found, please try again"); 
+
+    @RequestMapping(value = "/searchProduct", method = RequestMethod.POST)
+    public String searchProduct(RedirectAttributes re, Model model, String productName) {
+        List<Product> products = productService.getProductByName(productName);
+
+        if (products.size() > 0) {  //searched product found           
+            re.addFlashAttribute("products", products);
+            return "redirect:/productResult";
+        } else {
+            re.addFlashAttribute("msgs", "Product not found, please try again");
             return "notFound";
         }
     }
-    @RequestMapping(value="/searchProduct", method = RequestMethod.GET)
-    public String searchProductByName(){;      
+
+    @RequestMapping(value = "/searchProduct", method = RequestMethod.GET)
+    public String searchProductByName() {;
         return "searchProduct";
     }
-    
+
     /**
      * Image display
      */
-@RequestMapping(value = "/productImage/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/productImage/{id}", method = RequestMethod.GET)
     public void getProductImage(Model model, @PathVariable int id, HttpServletResponse response) {
         try {
             Product p = productService.getProduct(id);
@@ -167,4 +166,3 @@ public class ProductController {
         }
     }
 }
-
