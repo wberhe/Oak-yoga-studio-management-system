@@ -1,7 +1,7 @@
 <%-- 
     Document   : sectionList
     Created on : Oct 18, 2014, 4:31:59 PM
-    Author     : Weldino
+    Author     : Weldu
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib  prefix="sec" uri="http://www.springframework.org/security/tags" %>

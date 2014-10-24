@@ -1,7 +1,7 @@
 <%-- 
     Document   : AddCourse
     Created on : Sep 21, 2014, 11:00:52 AM
-    Author     : Weldino
+    Author     : weldu
 --%>
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>

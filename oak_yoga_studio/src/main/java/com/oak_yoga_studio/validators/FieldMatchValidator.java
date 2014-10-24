@@ -12,7 +12,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * @author Weldino
+ * @author Weldu
  * 
  * This class validates the match of the password with the confirm password 
  * Note the confirm password is not persisted in the database(transient)

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author priya
+ * @author Weldu
  */
 public interface INotificationService {
 

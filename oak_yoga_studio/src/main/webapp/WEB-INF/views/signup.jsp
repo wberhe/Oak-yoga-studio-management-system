@@ -1,7 +1,7 @@
 <%-- 
     Document   : signup
     Created on : Sep 20, 2014, 4:15:31 PM
-    Author     : Weldino
+    Author     : Weldu
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>

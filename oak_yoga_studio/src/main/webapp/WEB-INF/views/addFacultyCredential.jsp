@@ -1,7 +1,7 @@
 <%-- 
     Document   : AddFaculty
     Created on : Sep 21, 2014, 11:00:52 AM
-    Author     : Weldino
+    Author     : weldu
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>

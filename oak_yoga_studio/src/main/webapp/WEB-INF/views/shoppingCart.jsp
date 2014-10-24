@@ -1,7 +1,7 @@
 <%-- 
     Document   : productList
     Created on : Oct 19, 2014, 10:41:58 PM
-    Author     : Weldino
+    Author     : Weldu
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>

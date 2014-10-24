@@ -1,7 +1,7 @@
 <%-- 
     Document   : viewFaculties
     Created on : Oct 17, 2014, 11:26:52 AM
-    Author     : Weldino
+    Author     : Weldu
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

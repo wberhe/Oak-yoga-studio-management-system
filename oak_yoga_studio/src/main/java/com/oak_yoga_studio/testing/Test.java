@@ -17,7 +17,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
- * @author Weldino
+ * @author Weldu
  */
 public class Test {
 

@@ -42,10 +42,10 @@ public class MyFilter implements Filter {
             if (token != null) {
                 org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) token.getPrincipal();
                 ((HttpServletRequest) request).getSession().setAttribute("loggedUser", userService.getUserByUsername(user.getUsername()));
-//            System.out.println("Inside Filter Logged User(from db):" + ((HttpServletRequest) request).getSession().getAttribute("loggedUser"));
-//              System.out.println("Inside Filter Logged User(from request):" + user.getUsername());
+
             }
         } 
+        //re-attach the customer object to the session
         else {
             User customer = (User) ((HttpServletRequest) request).getSession().getAttribute("loggedUser");
             if (customer instanceof Customer) {

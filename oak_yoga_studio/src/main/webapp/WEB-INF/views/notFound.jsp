@@ -1,7 +1,7 @@
 <%-- 
     Document   : noFound
     Created on : Oct 17, 2014, 10:41:58 PM
-    Author     : Weldino
+    Author     : Weldu
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib  prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -15,6 +15,5 @@
     </head>
     <body>
         <h1>${msg}</h1>
-        <a href="index">Back</a>
     </body>
 </html>

@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author Somayeh
+ * @author Weldu
  */
 @Entity
 public class ShoppingCartItem {

@@ -1,7 +1,7 @@
 <%-- 
     Document   : allcustomers
     Created on : Sep 20, 2014, 8:02:03 PM
-    Author     : weldino
+    Author     : weldu
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>

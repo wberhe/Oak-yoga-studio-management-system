@@ -1,7 +1,7 @@
 <%-- 
     Document   : ViewSections
     Created on : Oct 15, 2014, 9:36:42 PM
-    Author     : weldino
+    Author     : weldu
 --%>
 <%@taglib  prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>

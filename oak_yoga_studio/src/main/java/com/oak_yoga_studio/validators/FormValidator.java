@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 
 /**
  *
- * @author weldino
+ * @author Weldu
  */
 public class FormValidator implements Validator{
 

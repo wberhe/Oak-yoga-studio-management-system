@@ -1,7 +1,7 @@
 <%-- 
     Document   : createSection
     Created on : Oct 17, 2014, 10:41:58 PM
-    Author     : Weldino
+    Author     : weldu
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>

@@ -14,10 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author Weldino
+ * @author Weldu
  * 
- * In-order to register with us you need to have a unique username
- * Its just our rule...I have a hard time to design this,,Thanks Ahamad for helping
+ * In-order to register in to the system you need to have a unique username
+ * Its just business rule...
  * 
  */
 public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserName, String> {

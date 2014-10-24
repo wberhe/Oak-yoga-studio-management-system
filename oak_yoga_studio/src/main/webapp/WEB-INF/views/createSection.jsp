@@ -1,7 +1,7 @@
 <%-- 
     Document   : createSection
     Created on : Oct 17, 2014, 10:41:58 PM
-    Author     : Weldino
+    Author     : weldu
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>

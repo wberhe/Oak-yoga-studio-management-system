@@ -16,7 +16,7 @@ import org.aspectj.lang.annotation.Aspect;
 
 /**
  *
- * @author Weldino
+ * @author Weldu
  */
 @Aspect
 public class EmailAdvice {

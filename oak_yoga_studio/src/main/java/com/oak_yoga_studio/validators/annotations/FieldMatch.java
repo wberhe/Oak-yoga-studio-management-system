@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 
 /**
- * author weldino
+ * author Weldu
  * 
  * Validation annotation to validate that 2 fields have the same value.
  * An array of fields and their matching confirmation fields can be supplied.

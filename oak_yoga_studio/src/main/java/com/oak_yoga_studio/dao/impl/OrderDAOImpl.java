@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Senai
+ * @author Weldu
  */
 public class OrderDAOImpl implements OrderDAO {
 

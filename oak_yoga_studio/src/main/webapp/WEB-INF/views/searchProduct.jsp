@@ -1,7 +1,7 @@
 <%-- 
     Document   : searchProduct
     Created on : Oct 17, 2014, 10:41:58 PM
-    Author     : Weldino
+    Author     : Weldu
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>

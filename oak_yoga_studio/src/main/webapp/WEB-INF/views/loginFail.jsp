@@ -1,7 +1,7 @@
 <%-- 
     Document   : login
     Created on : oct 17, 2014, 4:15:49 PM
-    Author     : Weldino
+    Author     : Weldu
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
